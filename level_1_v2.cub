@@ -7,14 +7,14 @@ S textures/sprite_1.xpm
 SC textures/sprite_3.xpm
 F 184,113,39
 C 51,198,227
-x x x x x x x x x x x x x x x x x x x x 1 1 1 1 1 1 x x x x x x x x x x x x x x                           
+x x x x x x x x x x x x x x x x x x x x 1 1 1 1 1 1 x x x x x x x x x x x x x x
 x x x x x x x x x x x x x x x x x x x 1 0 0 0 0 0 0 1 0 0 1 1 1 x x x x x x x x
 x x x x x x 1 1 1 1 x x x x x x x x x 1 0 0 0 0 0 0 0 0 1 0 1 0 0 1 x x x x x x
 x x x x x 1 0 0 0 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 1 x x x x x x
 x x x x	1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 x x x x x x
 x x x x	1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 x x x x x x
 x x x x	1 0 0 0 0 1 1 1 1 1 0 0 1 1 0 0 0 0 0 S 0 0 0 0 1 1 0 0 0 1 x x x x x x
-x x x 1 1 0 0 0 0 1 x x 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 x 1 0 0 1 x x x 1 1 x    									    
+x x x 1 1 0 0 0 0 1 x x 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 x 1 0 0 1 x x x 1 1 x
 x x 1 0 1 1 0 0 1 1 x x 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 1 1 1 0 0 1 1 1 1 0 0 1
 x 1 0 0 0 1 0 0 1 x 1 1 1 0 0 0 0 0 0 1 1 1 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 1
 1 0 0 0 0 1 0 0 1 1 0 0 1 0 0 0 0 0 0 1 x 1 0 0 1 x 1 0 0 0 0 0 0 0 0 0 0 0 0 1
@@ -31,6 +31,6 @@ x x x x x 1 0 0 0 1 1 0 0 1 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 x x x x x
 x x x x x x 1 1 1 1 1 0 0 1 0 0 1 1 0 0 0 0 0 0 1 1 0 0 1 1 0 0 0 1 x x x x x x
 x x x x x x x x x x 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 1 x x x x x x x
 x x x x x x x x x x 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 1 1 x x x x x x x x
-x x x x x x x x x x	1 1 1 1 1 1 1 1 0 0 0 0 0 0 1 1 0 0 1 x x x x x x x x x x x 
+x x x x x x x x x x	1 1 1 1 1 1 1 1 0 0 0 0 0 0 1 1 0 0 1 x x x x x x x x x x x
 x x x x x x x x x x x x x x x x x x 1 0 0 0 0 1 1 x 1 1 x x x x x x x x x x x x
 x x x x x x x x x x x x x x x x x x x 1 1 1 1 x x x x x x x x x x x x x x x x x
