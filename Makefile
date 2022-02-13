@@ -3,32 +3,45 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
+#    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/02/10 15:35:40 by utygett          ###   ########.fr        #
+#    Updated: 2022/02/13 18:52:32 by aarchiba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	cub3d
 
-SRC		=	main.c 
+SRC		=	parser/p_main.c 
+
+FTDIR	= 	./libft/
+
+LIBFT	= 	libft.a
+
+# MLXDIR
+
+# LIBMLX
 			
 OBJ_M	=	$(SRC:%.c=%.o)
 
 DEP		=	$(SRC:%.c=%.d)
 
 CFLAGS	=	-MD -Imlx
+#			-Werror -Wall -Wextra
 
 CC		=	gcc
 
 RM		=	rm -f
 
-all		:	$(NAME)
+all		:	libmake $(NAME)
 
 $(NAME)	:	$(OBJ_M)
-			$(CC) $(CFLAGS) $(OBJ_M) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-	
+			@cp $(FTDIR)$(LIBFT) .
+			$(CC) $(CFLAGS) $(OBJ_M) libft.a -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+
+libmake	:	
+			@make -C $(FTDIR)
+
 %.o		:	%.c
 			$(CC) $(CFLAGS) -c $< -o $@
 

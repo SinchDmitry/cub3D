@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 17:31:29 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/12 23:17:16 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/13 18:53:30 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 char	**get_line_file(int fd)
 {
-	long	byte;
 	char	ch;
 	char	*res;
 	char	**string;
@@ -34,20 +33,4 @@ char	**get_line_file(int fd)
 	}
 	error_end(5);
 	return (NULL);
-}
-
-int	main(int argc, char **argv)
-{
-	char	**res;
-	int		fd;
-	int		i;
-
-	res = NULL;
-	i = -1;
-	fd = open(argv[1], O_RDONLY);
-	printf("%d\n", fd);
-	res = get_line_file(fd);
-	while (res[++i])
-		printf("#%d : %s\n", i, res[i]);
-	return (0);
 }

@@ -14,7 +14,8 @@ SRCS	=	ft_atoi.c 		ft_memset.c		ft_strlcpy.c	\
 			ft_memcpy.c     ft_strjoin.c    ft_toupper.c	\
 			ft_memmove.c    ft_strlcat.c    ft_substr.c		\
 			ft_tolower.c	get_next_line.c	ft_chrjoin.c	\
-			ft_strcmp.c		ft_error_end	ft_garbage_c.c
+			ft_strcmp.c		ft_error_end.c	ft_garbage_c.c	\
+			get_line_file.c
 
 BONUS_SRCS 	= 	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
 				ft_lstdelone.c   ft_lstiter.c      ft_lstlast.c \

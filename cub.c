@@ -6,13 +6,13 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 18:13:00 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/12 18:13:38 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/13 17:30:41 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	main(int argc, char **argv)
-{
-	return (0);
-}
+// int	main(int argc, char **argv)
+// {
+// 	return (0);
+// }

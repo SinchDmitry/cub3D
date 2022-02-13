@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:21:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/12 23:16:27 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/13 18:41:36 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdio.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 10000
 # endif
 
 typedef struct s_list
@@ -139,16 +139,18 @@ int			ft_toupper(int c);
 
 char		*get_next_line(int fd);
 
+char		**get_line_file(int fd);
+
 void		add_back_n(t_gnl **lst, void *content, int fd);
 
 int			ft_strcmp_rev(char *s1, char *s2);
 
 /* free */
 
+void		error_end(int flag);
+
 t_malloc_c	*save_point(void *mal_p, int flag);
 
 void		clear_point(t_malloc_c *malloc_h);
-
-void		error_end(int flag);
 
 #endif

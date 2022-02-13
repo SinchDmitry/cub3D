@@ -6,11 +6,11 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:58:18 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/07 16:39:25 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/13 17:45:22 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
 char	*ft_strjoin(char *s1, char const *s2)
 {
