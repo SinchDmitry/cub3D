@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:58:38 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/05 17:46:00 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/12 16:16:42 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,24 @@ int	ft_strcmp(const char *s1, const char *s2)
 	while (tmps1[++i] || tmps2[i])
 		if (tmps1[i] != tmps2[i])
 			return (tmps1[i] - tmps2[i]);
+	return (0);
+}
+
+int	ft_strcmp_rev(char *s1, char *s2)
+{
+	int	i;
+	int	j;
+
+	i = ft_strlen(s1) - 1;
+	j = ft_strlen(s2) - 1;
+	while (j > -1)
+	{
+		if (i == -1)
+			return (-1);
+		if (s1[i] != s2[j])
+			return (s1[i] - s2[j]);
+		i--;
+		j--;
+	}
 	return (0);
 }

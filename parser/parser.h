@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:47 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/12 15:01:08 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/12 18:27:50 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 # define PARSER_H
 
 # include "../cub.h"
+
+# define BUFFER_SIZE 10000;
 
 #endif
