@@ -6,13 +6,13 @@
 #    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/02/14 19:51:21 by aarchiba         ###   ########.fr        #
+#    Updated: 2022/02/14 22:46:55 by aarchiba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	cub3d
 
-SRC		=	cub.c	parser/p_main.c parser/p_par.c
+SRC		=	cub.c	parser/p_main.c parser/p_par.c	parser/p_map.c
 
 FTDIR	= 	./libft/
 

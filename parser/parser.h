@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:47 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/14 22:02:40 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/14 22:45:46 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define P_FRONT 1
 
 // # define BUFFER_SIZE 10000;
+
 struct						s_info;
 struct						s_texture;
 struct						s_rgb;
@@ -36,6 +37,8 @@ typedef struct s_texture	t_texture;
 typedef struct s_rgb		t_rgb;
 
 t_info	*parser(int argc, char **argv, int fd);
-void	param_info(t_info *map, char **map_str);
+void	map_info(t_info *map, char **map_str);
+char	**param_map(t_info *map, char **map_str);
+void	map_struct(t_info *map, char **map_str);
 
 #endif

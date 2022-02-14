@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:45:10 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/14 22:09:30 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/14 22:40:14 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static int	key_compare(t_info *map, char **arg, char *map_str)
 	return (flag);
 }
 
-static void	param_map(t_info *map, char **map_str)
+char	**param_map(t_info *map, char **map_str)
 {
 	char	**tmp;
 	int		prm;
@@ -106,6 +106,7 @@ static void	param_map(t_info *map, char **map_str)
 	while (map_str[++i])
 	{
 		tmp = ft_space_split(map_str[i]);
+		// pointer
 		prm = key_compare(map, tmp, map_str[i]);
 		if (prm == -1)
 			map->height--;
@@ -114,22 +115,5 @@ static void	param_map(t_info *map, char **map_str)
 		else if (prm == -2)
 			break ;
 	}
-}
-
-void	param_info(t_info *map, char **map_str)
-{
-	int	i;
-	int	j;
-
-	while (map_str[map->height])
-	{
-		i = 0;
-		j = -1;
-		while (map_str[map->height][++j])
-			i++;
-		if (i > map->width)
-			map->width = i;
-		map->height++;
-	}
-	param_map(map, map_str);
+	return (map_str + i);
 }
