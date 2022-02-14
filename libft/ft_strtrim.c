@@ -6,18 +6,11 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:58:50 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/13 17:44:48 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/14 17:42:49 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int	space(char sym)
-{
-	if ((sym >= 9 && sym <= 13) || sym == 32)
-		return (1);
-	return (0);
-}
 
 char	*ft_strtrim(char *s1, char const *set)
 {

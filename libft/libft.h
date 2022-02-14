@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:21:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/13 18:41:36 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/14 17:45:15 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int			ft_atoi(const char *str);
 void		ft_bzero(void	*s, size_t	n);
 
 void		*ft_calloc(size_t count, size_t size);
+
+int			space(char sym);
 
 int			ft_isalnum(int c);
 
@@ -96,6 +98,8 @@ void		ft_putnbr_fd(int n, int fd);
 void		ft_putstr_fd(char *s, int fd);
 
 char		**ft_split(char const *s, char c);
+
+char		**ft_space_split(char const *s);
 
 char		*ft_strchr(const char *s, int c);
 

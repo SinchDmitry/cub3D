@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_space_split.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:58:02 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/14 17:40:30 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/14 20:25:45 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	to_malloc_big(char const *s, char c)
+static size_t	to_malloc_big(char const *s)
 {
 	size_t	i;
 	size_t	f;
 
 	i = 0;
 	f = 0;
-	if (s[0] && s[0] != c)
+	if (s[0] && !space(s[0]))
 	{
 		f++;
 		i++;
 	}
 	while (s[i + 1])
 	{
-		if (s[i] == c && s[i + 1] != c)
+		if (space(s[i]) && !space(s[i + 1]))
 			f++;
 		i++;
 	}
@@ -43,7 +43,7 @@ static void	delall(char	**res, size_t a)
 	free (res);
 }
 
-static char	**to_malloc_str(char **res, char const *s, char c, long i)
+static char	**to_malloc_str(char **res, char const *s, long i)
 {
 	size_t	a;
 	long	j;
@@ -53,13 +53,13 @@ static char	**to_malloc_str(char **res, char const *s, char c, long i)
 	a = 0;
 	while (s[++i] && s[i + 1])
 	{
-		if ((s[i] == c && s[i + 1] != c) || (s[i] && s[i] != c && i == 0))
+		if ((space(s[i]) && !space(s[i + 1])) || (s[i] && !space(s[i]) && !i))
 		{
 			j = i++;
-			if (s[i - 1] && s[i - 1] != c && i == 1)
+			if (s[i - 1] && !space(s[i - 1]) && i == 1)
 				j--;
 			f = 0;
-			while (s[i] && s[i] != c)
+			while (s[i] && !space(s[i]))
 				i++;
 			res[a] = malloc (sizeof(char) * ((i--) - j));
 			if (!res[a])
@@ -72,7 +72,7 @@ static char	**to_malloc_str(char **res, char const *s, char c, long i)
 	return (res);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_space_split(char const *s)
 {
 	size_t	i;
 	size_t	f;
@@ -81,12 +81,12 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	if (s && *s)
 	{
-		f = to_malloc_big(s, c);
+		f = to_malloc_big(s);
 		res = malloc(sizeof(char *) * f);
 		if (!res)
 			return (NULL);
 		res[f - 1] = NULL;
-		return (to_malloc_str(res, s, c, i));
+		return (to_malloc_str(res, s, i));
 	}
 	res = malloc(sizeof(char *));
 	if (!res)

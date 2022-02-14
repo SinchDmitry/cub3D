@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:47 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/13 18:50:49 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/14 22:02:40 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,28 @@
 # define PARSER_H
 
 # include "../cub.h"
-# include "../libft/libft.h"
+// # include "../libft/libft.h"
+
+# define RGB 101
+# define TEXTURE 102
+# define FLOOR 111
+# define SKY 112
+# define NORTH 113
+# define SOUTH 114
+# define EAST 115
+# define WEST 116
+# define P_BACK 2
+# define P_FRONT 1
 
 // # define BUFFER_SIZE 10000;
+struct						s_info;
+struct						s_texture;
+struct						s_rgb;
+typedef struct s_info		t_info;
+typedef struct s_texture	t_texture;
+typedef struct s_rgb		t_rgb;
+
+t_info	*parser(int argc, char **argv, int fd);
+void	param_info(t_info *map, char **map_str);
 
 #endif

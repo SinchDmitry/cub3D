@@ -6,45 +6,43 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:20 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/13 20:56:38 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/14 22:11:09 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	param_info(t_info *map, char **map_str)
+static void	init_map_data(t_info **map, int fd)
 {
-	int	i;
-	int	j;
-
-	while (map_str[map->height])
-	{
-		i = 0;
-		j = -1;
-		while (map_str[map->height][++j])
-			i++;
-		if (i > map->width)
-			map->width = i;
-		map->height++;
-	}
+	*map = malloc(sizeof(t_info));
+	if (!map)
+		error_end(3);
+	save_point(*map, P_BACK);
+	**map = (t_info){};
+	(*map)->texture = malloc(sizeof(t_texture));
+	if (!(*map)->texture)
+		error_end(3);
+	save_point((*map)->texture, P_FRONT);
+	(*map)->floor = malloc(sizeof(t_rgb));
+	if (!(*map)->floor)
+		error_end(3);
+	save_point((*map)->floor, P_FRONT);
+	(*map)->sky = malloc(sizeof(t_rgb));
+	if (!(*map)->sky)
+		error_end(3);
+	save_point((*map)->sky, P_FRONT);
+	(*map)->fd = fd;
 }
 
-// void	arg_init(t_info *map, char **map_str)
-// {
-// 	while (1)
-// 	{
-// 	}
-// }
-
-t_info	*parser(int argc, char **argv)
+t_info	*parser(int argc, char **argv, int fd)
 {
 	t_info	*map;
 	char	**map_str;
 
-	*map = (t_info){};
-	map->fd = open(argv[1], O_RDONLY);
-	if (argc != 2 || ft_strcmp_rev(argv[1], ".cub") || map->fd < 2)
+	if (argc != 2 || ft_strcmp_rev(argv[1], ".cub") || fd < 2)
 		error_end(1);
+	init_map_data(&map, fd);
+	printf("here %d\n", map->fd);
 	map_str = get_line_file(map->fd);
 	if (!map_str)
 		error_end(3);
@@ -52,18 +50,4 @@ t_info	*parser(int argc, char **argv)
 	param_info(map, map_str);
 	printf ("h : %d\nw : %d\n", map->height, map->width);
 	return (map);
-}
-
-int	main(int argc, char **argv)
-{
-	char	**res;
-	int		fd;
-	int		i;
-
-	res = NULL;
-	i = -1;
-	fd = open(argv[1], O_RDONLY);
-	printf("fd : %d\n", fd);
-	parser(argc, argv);
-	return (0);
 }

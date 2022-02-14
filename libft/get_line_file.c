@@ -6,12 +6,11 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 17:31:29 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/13 18:53:30 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/14 19:39:39 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../cub.h"
 
 char	**get_line_file(int fd)
 {
