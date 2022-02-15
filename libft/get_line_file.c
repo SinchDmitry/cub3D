@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 17:31:29 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/14 19:39:39 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/15 17:16:01 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ char	**get_line_file(int fd)
 	char	ch;
 	char	*res;
 	char	**string;
+	int		i;
 
+	i = -1;
 	res = NULL;
 	string = NULL;
 	if (fd >= 0)
@@ -27,9 +29,13 @@ char	**get_line_file(int fd)
 		res = ft_chrjoin(res, '\0');
 		string = ft_split(res, '\n');
 		if (!string)
-			error_end(5);
+			error_end(1);
+		save_point(string, 2);
+		save_point(res, 2);
+		while (string[++i])
+			save_point(string[i], 2);
 		return (string);
 	}
-	error_end(5);
+	error_end(1);
 	return (NULL);
 }

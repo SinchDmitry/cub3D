@@ -6,11 +6,11 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:47 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/14 22:45:46 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/15 17:04:20 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H 
+#ifndef PARSER_H
 # define PARSER_H
 
 # include "../cub.h"
@@ -38,7 +38,7 @@ typedef struct s_rgb		t_rgb;
 
 t_info	*parser(int argc, char **argv, int fd);
 void	map_info(t_info *map, char **map_str);
-char	**param_map(t_info *map, char **map_str);
+int		param_map(t_info *map, char **map_str);
 void	map_struct(t_info *map, char **map_str);
 
 #endif

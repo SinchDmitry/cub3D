@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:45:10 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/14 22:40:14 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/15 17:17:12 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,23 @@ static void	rgb_parse(t_rgb *str, char *arg)
 	char	**rgb;
 	char	*rgb_str;
 
+	rgb_str = NULL;
 	i = -1;
 	while (arg[++i])
 		if (!space(arg[i]))
 			rgb_str = ft_chrjoin(rgb_str, arg[i]);
+	save_point(rgb_str, P_FRONT);
 	i = -1;
 	while (rgb_str[++i + 1])
 		if (rgb_str[i] == ',' && rgb_str[i + 1] == ',')
 			error_end(2);
 	rgb = ft_split((const char *)arg, ',');
-	i = 0;
-	while (rgb[i])
-		i++;
+	if (!rgb)
+		error_end(3);
+	save_point(rgb, P_BACK);
+	i = -1;
+	while (rgb[++i])
+		save_point(rgb[i], P_FRONT);
 	if (i != 3)
 		error_end(2);
 	str->r = ft_atoi(rgb[0]);
@@ -56,13 +61,13 @@ static void	param_parse(t_info *map, char **arg, int mode, int val)
 		if (i != 2)
 			error_end(2);
 		if (val == NORTH)
-			map->texture->north = ft_strdup(arg[1]);
+			map->texture->north = ft_strdup_error_end(arg[1]);
 		else if (val == SOUTH)
-			map->texture->south = ft_strdup(arg[1]);
+			map->texture->south = ft_strdup_error_end(arg[1]);
 		else if (val == WEST)
-			map->texture->west = ft_strdup(arg[1]);
+			map->texture->west = ft_strdup_error_end(arg[1]);
 		else if (val == EAST)
-			map->texture->east = ft_strdup(arg[1]);
+			map->texture->east = ft_strdup_error_end(arg[1]);
 	}
 }
 
@@ -72,7 +77,7 @@ static int	key_compare(t_info *map, char **arg, char *map_str)
 	int	i;
 
 	flag = -1;
-	i = -1; 
+	i = -1;
 	if (!ft_strcmp(arg[0], "C"))
 		param_parse(map, &map_str, RGB, SKY);
 	else if (!ft_strcmp(arg[0], "F"))
@@ -95,18 +100,24 @@ static int	key_compare(t_info *map, char **arg, char *map_str)
 	return (flag);
 }
 
-char	**param_map(t_info *map, char **map_str)
+int	param_map(t_info *map, char **map_str)
 {
 	char	**tmp;
 	int		prm;
 	int		i;
+	int		j;
 
 	i = -1;
 	prm = 0;
 	while (map_str[++i])
 	{
+		j = -1;
 		tmp = ft_space_split(map_str[i]);
-		// pointer
+		if (!tmp)
+			error_end(3);
+		save_point(tmp, P_BACK);
+		while (tmp[++j])
+			save_point(tmp[j], P_FRONT);
 		prm = key_compare(map, tmp, map_str[i]);
 		if (prm == -1)
 			map->height--;
@@ -115,5 +126,5 @@ char	**param_map(t_info *map, char **map_str)
 		else if (prm == -2)
 			break ;
 	}
-	return (map_str + i);
+	return (i);
 }

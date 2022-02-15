@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:21:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/14 17:45:15 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/15 15:01:15 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ char		**ft_space_split(char const *s);
 char		*ft_strchr(const char *s, int c);
 
 char		*ft_strdup(const char *s1);
+
+char		*ft_strdup_error_end(const char *s1);
 
 void		ft_striteri(char *s, void (*f)(unsigned int, char*));
 
