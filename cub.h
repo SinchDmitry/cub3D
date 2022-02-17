@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/17 16:13:19 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/17 16:51:07 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+
+typedef struct	s_player {
+	float	x;
+	float	y;
+	char	dir;
+}				t_player;
 
 typedef struct s_data
 {
@@ -50,6 +56,7 @@ typedef struct s_info
 	int			fd;
 	int			width;
 	int			height;
+	t_player	player;
 	t_rgb		*sky;
 	t_rgb		*floor;
 	t_texture	*texture;

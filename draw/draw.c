@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/17 16:44:51 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/17 17:00:26 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ void draw_map(t_data_mlx *data)
 void	ft_mlx(t_data_mlx *data)
 {
 	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_length,
-			&data->endian);
+	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, 
+		&data->line_length, &data->endian);
 	draw_map(data);
-	draw_player(&data->player, data);
+	draw_player(&data->map->player, data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 }
 
@@ -97,13 +97,13 @@ void	ft_mlx(t_data_mlx *data)
 int	key_h(int keycode, t_data_mlx *data)
 {	
 	if (keycode == 126)
-		data->player.y -= MOVE_SPEED;
+		data->map->player.y -= MOVE_SPEED;
 	if (keycode == 125)
-		data->player.y += MOVE_SPEED;
+		data->map->player.y += MOVE_SPEED;
 	if (keycode == 124)
-		data->player.x += MOVE_SPEED;
+		data->map->player.x += MOVE_SPEED;
 	if (keycode == 123)
-		data->player.x -= MOVE_SPEED;
+		data->map->player.x -= MOVE_SPEED;
 	if (keycode == 53)
 		exit(0);
 	ft_mlx(data);
@@ -116,8 +116,6 @@ int	draw(t_info *map)
 	t_data_mlx data;
 
 	data.map = map;
-	data.player.x = 15;
-	data.player.y = 15;
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Hello world!");
 

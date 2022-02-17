@@ -6,11 +6,18 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/15 17:03:57 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:52:52 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+static int	ft_iscompas(char ch)
+{
+	if (ch == 'S' || ch == 'N' || ch == 'W' || ch == 'E')
+		return (1);
+	return (0);
+}
 
 void	map_info(t_info *map, char **map_str)
 {
@@ -43,6 +50,12 @@ static void	map_create(t_info *map, char **map_str)
 		{
 			if (space(map_str[i][j]))
 				map->mapa[i][j].sym = 'e';
+			else if (ft_iscompas(map_str[i][j]))
+			{
+				map->player.dir = map_str[i][j];
+				map->player.x = j;
+				map->player.x = i;
+			}
 			else
 				map->mapa[i][j].sym = map_str[i][j];
 			printf ("%c ", map->mapa[i][j].sym);
