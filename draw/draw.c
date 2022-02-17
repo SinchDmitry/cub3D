@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/17 16:26:35 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/17 16:44:51 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void draw_square(int x, int y, t_data_mlx *data, int color)
 		j = 0;
 		while (y + j <  y + TEXTURESIZE)
 		{
-			my_mlx_pixel_put(data, x, y, color);
+			my_mlx_pixel_put(data, x + i, y + j, color);
 			j++;
 		}
 		i++;
@@ -72,13 +72,9 @@ void draw_map(t_data_mlx *data)
 	i = 0;
 	while (i < data->map->height)
 	{
-		printf("draw map h = %d\n", data->map->height);
-		printf("draw map i = %d\n", i);
 		j = 0;
 		while (j < data->map->width)
 		{
-			printf("draw map w = %d\n", data->map->width);
-			printf("draw map j = %d\n", j);
 			j++;
 			draw_field(i, j, data);
 		}

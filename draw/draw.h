@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/17 16:26:56 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/17 16:45:15 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include "../cub.h"
 #define WIDTH 2000
-#define HEIGHT 2000
+#define HEIGHT 1300
 #define PLAYERCOL 0x00FFFFFF
 #define WALLCOL 0x0000FFFF
 #define FLOORCOL 0x000000FF
