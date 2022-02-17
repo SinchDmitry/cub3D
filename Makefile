@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
+#    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/02/15 16:21:31 by aarchiba         ###   ########.fr        #
+#    Updated: 2022/02/17 14:52:26 by utygett          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	cub3d
 
-SRC		=	cub.c	parser/p_main.c parser/p_par.c	parser/p_map.c
+SRC		=	cub.c	parser/p_main.c parser/p_par.c	parser/p_map.c draw/draw.c
 
 FTDIR	= 	./libft/
 

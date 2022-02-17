@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/14 22:44:08 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:13:19 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,7 @@ typedef struct s_info
 	t_rgb		*floor;
 	t_texture	*texture;
 }	t_info;
+
+int		draw(t_info *map);
 
 #endif
