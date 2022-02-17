@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/17 16:26:35 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/17 16:33:48 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ void draw_map(t_data_mlx *data)
 void	ft_mlx(t_data_mlx *data)
 {
 	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_length,
-			&data->endian);
+	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, 
+		&data->line_length, &data->endian);
 	draw_map(data);
 	draw_player(&data->player, data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
