@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/17 16:55:53 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/17 17:22:27 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #define WALLCOL 0x0000FFFF
 #define FLOORCOL 0x000000FF
 #define TEXTURESIZE 32
+#define MOVE_SPEED 0.1
+
 
 typedef struct	s_data_mlx {
 	void	*mlx;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_map.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/17 17:00:15 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/17 17:15:27 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static void	map_create(t_info *map, char **map_str)
 			else if (ft_iscompas(map_str[i][j]))
 			{
 				map->player.dir = map_str[i][j];
-				map->player.x = j;
-				map->player.x = i;
+				map->player.x = (float)j;
+				map->player.y = (float)i;
 				map->mapa[i][j].sym = '0';
 			}
 			else

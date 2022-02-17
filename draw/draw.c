@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/17 17:00:26 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/17 17:22:24 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,15 @@ void	my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color)
 
 void draw_player(t_player *player , t_data_mlx *data)
 {
-	float x = player->x;
-	float y = player->y;
-	while (x < player->x + 10)
+	player->x_textu = player->x * TEXTURESIZE;
+	player->y_textu = player->y * TEXTURESIZE;
+	float x = player->x_textu;
+	float y = player->y_textu;
+
+	while (x < player->x_textu + 10)
 	{
-		y = player->y;
-		while (y < player->y + 10)
+		y = player->y_textu;
+		while (y < player->y_textu + 10)
 		{
 			my_mlx_pixel_put(data, x - 5, y - 5, PLAYERCOL);
 			y++;
@@ -59,9 +62,9 @@ void draw_square(int x, int y, t_data_mlx *data, int color)
 void draw_field(int x, int y, t_data_mlx *data)
 {
 	if(data->map->mapa[x][y].sym == '1')
-		draw_square(x * TEXTURESIZE, y * TEXTURESIZE, data, WALLCOL);
+		draw_square(y * TEXTURESIZE, x * TEXTURESIZE, data, WALLCOL);
 	else if(data->map->mapa[x][y].sym == '0')
-		draw_square(x * TEXTURESIZE, y * TEXTURESIZE, data, FLOORCOL);
+		draw_square(y * TEXTURESIZE, x * TEXTURESIZE, data, FLOORCOL);
 }
 
 void draw_map(t_data_mlx *data)
@@ -75,8 +78,8 @@ void draw_map(t_data_mlx *data)
 		j = 0;
 		while (j < data->map->width)
 		{
-			j++;
 			draw_field(i, j, data);
+			j++;
 		}
 		i++;
 	}
@@ -93,7 +96,6 @@ void	ft_mlx(t_data_mlx *data)
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 }
 
-#define MOVE_SPEED 5
 int	key_h(int keycode, t_data_mlx *data)
 {	
 	if (keycode == 126)
@@ -116,6 +118,7 @@ int	draw(t_info *map)
 	t_data_mlx data;
 
 	data.map = map;
+	printf("here x = %f y = %f\n",map->player.x, map->player.y);
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Hello world!");
 
