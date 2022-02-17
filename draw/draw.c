@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/17 19:27:25 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/17 20:31:25 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,26 @@ void draw_square(int x, int y, t_data_mlx *data, int color)
 	
 }
 
+void	line_math(t_data_mlx *data)
+{
+	float	c;
+	float	ray_x;
+	float	ray_y;
+
+	c = 0;
+	while (c < VIEW_RANGE)
+	{
+		ray_x = data->map->player.x + c * cos(data->map->player.a);
+		ray_y = data->map->player.y + c * sin(data->map->player.a);
+		if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
+			break ;
+		ray_x *= TEXTURESIZE;
+		ray_y *= TEXTURESIZE;
+		c = c + 0.1;
+		my_mlx_pixel_put(data, ray_x, ray_y, PLAYERCOL);
+	}
+}
+
 void draw_field(int x, int y, t_data_mlx *data)
 {
 	if(data->map->mapa[x][y].sym == '1')
@@ -83,6 +103,7 @@ void draw_map(t_data_mlx *data)
 		i++;
 	}
 	draw_player(&data->map->player, data);
+	line_math(data);
 }
 
 void	ft_mlx(t_data_mlx *data)
@@ -113,36 +134,35 @@ int check_move(t_data_mlx *data)
 
 int	key_h(int keycode, t_data_mlx *data)
 {	
-	if (keycode == 126)
+	if (keycode == DOWN_KEY)
 	{
-		data->map->player.y -= MOVE_SPEED;
+		data->map->player.x -= MOVE_SPEED * cos(data->map->player.a);
+		data->map->player.y -= MOVE_SPEED * sin(data->map->player.a);
 		if(check_move(data))
-			data->map->player.y += MOVE_SPEED;
+		{
+			data->map->player.x += MOVE_SPEED * cos(data->map->player.a);
+			data->map->player.y += MOVE_SPEED * sin(data->map->player.a);
+		}
 	}
-	if (keycode == 125)
+	if (keycode == UP_KEY)
 	{
-		data->map->player.y += MOVE_SPEED;
+		data->map->player.x += MOVE_SPEED * cos(data->map->player.a);
+		data->map->player.y += MOVE_SPEED * sin(data->map->player.a);
 		if(check_move(data))
-			data->map->player.y -= MOVE_SPEED;
+		{
+			data->map->player.x -= MOVE_SPEED * cos(data->map->player.a);
+			data->map->player.y -= MOVE_SPEED * sin(data->map->player.a);
+		}
 	}
-	if (keycode == 124)
-	{
-		data->map->player.x += MOVE_SPEED;
-		if(check_move(data))
-			data->map->player.x -= MOVE_SPEED;
-	}
-	if (keycode == 123)
-	{
-		data->map->player.x -= MOVE_SPEED;
-		if(check_move(data))
-			data->map->player.x += MOVE_SPEED;
-	}
+	if (keycode == RIGHT_KEY)
+		data->map->player.a += MOVE_ANGLE;
+	if (keycode == LEFT_KEY)
+		data->map->player.a -= MOVE_ANGLE;
 	if (keycode == 53)
 		exit(0);
 	ft_mlx(data);
 	return (0);
 }
-
 
 int	draw(t_info *map)
 {
