@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/17 16:52:52 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/17 17:00:15 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void	map_create(t_info *map, char **map_str)
 				map->player.dir = map_str[i][j];
 				map->player.x = j;
 				map->player.x = i;
+				map->mapa[i][j].sym = '0';
 			}
 			else
 				map->mapa[i][j].sym = map_str[i][j];
