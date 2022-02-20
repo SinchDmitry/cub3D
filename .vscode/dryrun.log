@@ -1,0 +1,13 @@
+make: Entering directory `/Users/utygett/study/Cube3d'
+make -C ./libft/
+ 
+gcc -MD -Imlx -g -c cub.c -o cub.o
+gcc -MD -Imlx -g -c parser/p_main.c -o parser/p_main.o
+gcc -MD -Imlx -g -c parser/p_par.c -o parser/p_par.o
+gcc -MD -Imlx -g -c parser/p_map.c -o parser/p_map.o
+gcc -MD -Imlx -g -c draw/draw.c -o draw/draw.o
+gcc -MD -Imlx -g -c draw/draw_move.c -o draw/draw_move.o
+cp ./libft/libft.a .
+gcc -MD -Imlx -g cub.o parser/p_main.o parser/p_par.o parser/p_map.o draw/draw.o draw/draw_move.o libft.a -lmlx -framework OpenGL -framework AppKit -o cub3d
+make: Leaving directory `/Users/utygett/study/Cube3d'
+ 

@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/20 17:39:00 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/20 18:25:40 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,11 +208,6 @@ void draw_fvp(t_data_mlx *data)
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, 
 		&data->line_length, &data->endian);
 	float i = 500;
-	while (i < 800)
-	{
-		draw_ray_catsing(data, i, i / 2);
-		i++;
-	}
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	mlx_destroy_image(data->mlx,data->img);
 }
