@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/20 16:31:03 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/20 17:32:45 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,11 @@ void draw_map(t_data_mlx *data)
 		i++;
 	}
 	draw_player(&data->map->player, data);
-	float a = - 0.75f;
-	while (a < 0.75f)
+	float a = ANG_START;
+	while (a < FOV)
 	{
 		line_math(data, a);
-		a = a + 0.03f;
+		a = a + ANG_STEP;
 	}
 	
 }
@@ -189,6 +189,7 @@ int	key_h(int keycode, t_data_mlx *data)
 	// ft_mlx(data);
 	return (0);
 }
+
 int	render_next_frame(t_data_mlx *data){
 	int img_h;
 	int img_w;
