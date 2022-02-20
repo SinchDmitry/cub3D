@@ -3,19 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   p_map.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/17 17:00:15 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/19 14:13:24 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int	ft_iscompas(char ch)
+static int	ft_iscompas(t_info *map, char ch)
 {
 	if (ch == 'S' || ch == 'N' || ch == 'W' || ch == 'E')
+	{
+		if (ch == 'N')
+			map->player.a = 4.7124f;
+		if (ch == 'E')
+			map->player.a = 0;
+		if (ch == 'S')
+			map->player.a = 1.5708f;
+		if (ch == 'W')
+			map->player.a = 3.1415f;
 		return (1);
+	}
 	return (0);
 }
 
@@ -50,11 +60,11 @@ static void	map_create(t_info *map, char **map_str)
 		{
 			if (space(map_str[i][j]))
 				map->mapa[i][j].sym = 'e';
-			else if (ft_iscompas(map_str[i][j]))
+			else if (ft_iscompas(map, map_str[i][j]))
 			{
 				map->player.dir = map_str[i][j];
-				map->player.x = j;
-				map->player.x = i;
+				map->player.x = (float)j;
+				map->player.y = (float)i;
 				map->mapa[i][j].sym = '0';
 			}
 			else
