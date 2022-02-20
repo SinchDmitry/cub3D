@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/17 16:33:48 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:58:29 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@ void	my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color)
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
 void draw_player(t_player *player , t_data_mlx *data)
 {
-	float x = player->x;
-	float y = player->y;
+	float	x;
+	float	y;
+
+	x = player->x;
+	y = player->y;
 	while (x < player->x + 10)
 	{
 		y = player->y;
@@ -34,7 +37,6 @@ void draw_player(t_player *player , t_data_mlx *data)
 		}
 		x++;
 	}
-		
 }
 
 void draw_square(int x, int y, t_data_mlx *data, int color)
@@ -52,8 +54,7 @@ void draw_square(int x, int y, t_data_mlx *data, int color)
 			j++;
 		}
 		i++;
-	}
-	
+	}	
 }
 
 void draw_field(int x, int y, t_data_mlx *data)
@@ -66,8 +67,8 @@ void draw_field(int x, int y, t_data_mlx *data)
 
 void draw_map(t_data_mlx *data)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < data->map->height)
@@ -84,7 +85,6 @@ void draw_map(t_data_mlx *data)
 		}
 		i++;
 	}
-	
 }
 
 void	ft_mlx(t_data_mlx *data)
