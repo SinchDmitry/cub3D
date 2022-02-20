@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/20 17:32:45 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/20 19:23:25 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,56 @@ int	key_h(int keycode, t_data_mlx *data)
 	return (0);
 }
 
+void	draw_ray_catsing(t_data_mlx *data, float x, float height, int color)
+{
+	float i;
+	i = 0 - height / 2;
+	while (i < height / 2)
+	{
+		my_mlx_pixel_put(data, x, HEIGHT / 2 + i, color);
+		++i;
+	}
+}
+
+void ray_analys(t_data_mlx *data, int c, int x)
+{
+	float 	y; 
+	int		i;
+	int 	k;
+	float	delta;
+	float	step;
+
+	k = 20;
+	i = -1;
+	step = WIDTH / ((FOV - ANG_START) / ANG_STEP);
+	delta = (data->sector[c + 1] - data->sector[c]) / step;
+	while (++i < step)
+	{
+		y = HEIGHT / 2 - (data->sector[c] + i * delta) * k;
+		if(delta)
+			draw_ray_catsing(data, x + i, y, FLOORCOL);
+		else
+			draw_ray_catsing(data, x + i, y, WHITE_COL);
+	}
+}
+
+void draw_fvp(t_data_mlx *data)
+{
+	int i;
+
+	i = -1;
+	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, 
+		&data->line_length, &data->endian);
+	while (++i < ((FOV - ANG_START) / ANG_STEP))
+	{
+		ray_analys(data, i, i * WIDTH / ((FOV - ANG_START) / ANG_STEP));
+	}
+	
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
+	mlx_destroy_image(data->mlx,data->img);
+}
+
 int	render_next_frame(t_data_mlx *data){
 	int img_h;
 	int img_w;
@@ -197,7 +247,6 @@ int	render_next_frame(t_data_mlx *data){
 	if(data->map->player.f_map)
 	{
 		
-
 		data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 		data->img = mlx_xpm_file_to_image(data->mlx, "./textures/backgroundmap.xpm", &img_h, &img_w);
 		data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, 
@@ -220,6 +269,7 @@ int	render_next_frame(t_data_mlx *data){
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->image.mm_space[i], 0, 0);
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 		mlx_destroy_image(data->mlx,data->img);
+		draw_fvp(data);
 	}
 	// draw map
 	

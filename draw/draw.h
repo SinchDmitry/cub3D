@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/20 17:30:04 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/20 19:21:36 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 // #define HEIGHT 720
 # define WIDTH 2000
 # define HEIGHT 1000
+# define WHITE_COL 0x00FFFFFF
 # define MINIMAPWIDTH 300
 # define MINIMAPHEIGHT 300
 # define STATUS_BAR_HEIGHT 100
@@ -36,7 +37,7 @@
 # define MMTEXTURESIZE 20
 # define MOVE_SPEED 0.2
 # define MOVE_ANGLE 0.2
-# define VIEW_RANGE 15
+# define VIEW_RANGE 40
 # define LEFT_KEY 123
 # define RIGHT_KEY 124
 # define DOWN_KEY 125
@@ -57,12 +58,15 @@ typedef struct	s_data_mlx {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		sector[(int)((FOV - ANG_START) / ANG_STEP) + 1];
 	t_images	image;
 	t_info  *map;
 }				t_data_mlx;
 
 void	draw_map_with_move(t_data_mlx *data);
 void	my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color);
+// void draw_fvp(t_data_mlx *data);
+
 
 #endif
 
