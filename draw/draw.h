@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/20 16:29:51 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/20 17:34:41 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 // #define HEIGHT 720
 # define WIDTH 2000
 # define HEIGHT 1000
+# define WHITE_COL 0x00FFFFFF
 # define MINIMAPWIDTH 300
 # define MINIMAPHEIGHT 300
 # define STATUS_BAR_HEIGHT 100
@@ -60,6 +61,8 @@ typedef struct	s_data_mlx {
 
 void	draw_map_with_move(t_data_mlx *data);
 void	my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color);
+// void draw_fvp(t_data_mlx *data);
+
 
 #endif
 

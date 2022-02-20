@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/20 16:31:03 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/20 17:39:00 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,34 @@ int	key_h(int keycode, t_data_mlx *data)
 	// ft_mlx(data);
 	return (0);
 }
+
+void	draw_ray_catsing(t_data_mlx *data, float x, float height)
+{
+	float i;
+	i = 0 - height / 2;
+	while (i < height / 2)
+	{
+		my_mlx_pixel_put(data, x, HEIGHT / 2 + i, WHITE_COL);
+		++i;
+	}
+}
+
+
+void draw_fvp(t_data_mlx *data)
+{
+	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, 
+		&data->line_length, &data->endian);
+	float i = 500;
+	while (i < 800)
+	{
+		draw_ray_catsing(data, i, i / 2);
+		i++;
+	}
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
+	mlx_destroy_image(data->mlx,data->img);
+}
+
 int	render_next_frame(t_data_mlx *data){
 	int img_h;
 	int img_w;
@@ -196,7 +224,6 @@ int	render_next_frame(t_data_mlx *data){
 	if(data->map->player.f_map)
 	{
 		
-
 		data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 		data->img = mlx_xpm_file_to_image(data->mlx, "./textures/backgroundmap.xpm", &img_h, &img_w);
 		data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, 
@@ -211,6 +238,7 @@ int	render_next_frame(t_data_mlx *data){
 		if(i > 39)
 			i = 0;
 		
+		draw_fvp(data);
 		data->img = mlx_new_image(data->mlx, MINIMAPWIDTH, MINIMAPHEIGHT);
 		// data->image.mm_space[i] = mlx_xpm_file_to_image(data->mlx, xpm_path, &img_h, &img_w);
 		data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, 
