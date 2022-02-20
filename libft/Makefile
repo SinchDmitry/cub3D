@@ -32,7 +32,7 @@ CC = cc
 
 RM = rm -f
 
-FLAGS = -Wall -Wextra -Werror -MD
+FLAGS = -Wall -Wextra -Werror -MMD -g
 
 all: $(NAMES) 
 
