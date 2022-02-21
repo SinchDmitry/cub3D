@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/20 21:26:39 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/21 13:43:59 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # define INVERSE 2.35f
 # define FOV 0.75f
 # define ANG_START -0.75f
-# define ANG_STEP 0.004f
+# define ANG_STEP 0.00075f
 typedef struct	s_data_mlx {
 	void	*mlx;
 	void	*mlx_win;
@@ -58,7 +58,12 @@ typedef struct	s_data_mlx {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int		sector[(int)((FOV - ANG_START) / ANG_STEP) + 1];
+	void	*img1;
+	char	*addr1;
+	int		bits_per_pixel1;
+	int		line_length1;
+	int		endian1;
+	float	sector[(int)((FOV - ANG_START) / ANG_STEP) + 1];
 	t_images	image;
 	t_info  *map;
 }				t_data_mlx;

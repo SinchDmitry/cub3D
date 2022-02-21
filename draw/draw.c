@@ -6,11 +6,13 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/20 21:22:17 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/21 13:46:00 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
+
+int	render_next_frame(t_data_mlx *data);
 
 void	my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color)
 {
@@ -21,6 +23,16 @@ void	my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 	}
 }
+
+// void	my_mlx_pixel_put1(t_data_mlx *data, int x, int y, int color)
+// {
+// 	char	*dst;
+// 	if(x < WIDTH && x >= 0 && y < HEIGHT && y >= 0){
+
+// 	dst = data->addr1 + (y * data->line_length + x * (data->bits_per_pixel / 8));
+// 	*(unsigned int*)dst = color;
+// 	}
+// }
 
 void draw_player(t_player *player , t_data_mlx *data)
 {
@@ -186,7 +198,7 @@ int	key_h(int keycode, t_data_mlx *data)
 		data->map->player.a -= MOVE_ANGLE;
 	if (keycode == 53)
 		exit(0);
-	// ft_mlx(data);
+	render_next_frame(data);
 	return (0);
 }
 
@@ -204,26 +216,9 @@ void	draw_ray_catsing(t_data_mlx *data, float x, float height, int color)
 void ray_analys(t_data_mlx *data, int c, int x)
 {
 	float 	y; 
-	int		i;
-	int 	k;
-	float	delta;
-	float	delta_next;
-	float	step;
 
-	k = 10;
-	i = -1;
-	step = WIDTH / ((FOV - ANG_START) / ANG_STEP);
-	delta = (data->sector[c + 1] - data->sector[c]) / step;
-	delta_next = (data->sector[c + 2] - data->sector[c + 1]) / step;
-	while (++i < step)
-	{
-		y = (HEIGHT / 3 - (data->sector[c] + i * delta) * k);
-		draw_ray_catsing(data, x + i, y, WHITE_COL);
-		// if(delta * delta_next <= 0 && (delta || delta_next))
-		// 	draw_ray_catsing(data, x + i, y, WHITE_COL);
-		// else
-		// 	draw_ray_catsing(data, x + i, y, WHITE_COL - data->sector[c] * k);
-	}
+	y = (HEIGHT / 2 - data->sector[c] * 10);
+	draw_ray_catsing(data, x, y, WHITE_COL);
 }
 
 void draw_fvp(t_data_mlx *data)
@@ -243,7 +238,8 @@ void draw_fvp(t_data_mlx *data)
 	mlx_destroy_image(data->mlx,data->img);
 }
 
-int	render_next_frame(t_data_mlx *data){
+int	render_next_frame(t_data_mlx *data)
+{
 	int img_h;
 	int img_w;
 	static int i;
@@ -265,7 +261,6 @@ int	render_next_frame(t_data_mlx *data){
 			i = 0;
 		
 		data->img = mlx_new_image(data->mlx, MINIMAPWIDTH, MINIMAPHEIGHT);
-		// data->image.mm_space[i] = mlx_xpm_file_to_image(data->mlx, xpm_path, &img_h, &img_w);
 		data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, 
 			&data->line_length, &data->endian);
 		draw_map_with_move(data);
@@ -312,7 +307,8 @@ int	draw(t_info *map)
 	data.mlx_win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Hello world!");
 	init_images(&data);
 	ft_mlx(&data);
-	mlx_loop_hook(data.mlx, render_next_frame, &data);
+	render_next_frame(&data);
+	// mlx_loop_hook(data.mlx, render_next_frame, &data);
 	mlx_hook(data.mlx_win, 02, (1L << 0), &key_h, &data);
 	mlx_loop(data.mlx);
 	return (0);
