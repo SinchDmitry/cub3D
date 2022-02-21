@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_move.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 11:50:19 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/20 16:39:12 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/20 18:15:51 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void draw_player_move(t_player *player , t_data_mlx *data)
 	}
 }
 
-void	line_math_move(t_data_mlx *data, float rad)
+void	line_math_move(t_data_mlx *data, float rad, int i)
 {
 	float	c;
 	float	ray_x;
@@ -124,11 +124,12 @@ void	line_math_move(t_data_mlx *data, float rad)
 			break ;
 		ray_x *= MMTEXTURESIZE;
 		ray_y *= MMTEXTURESIZE;
-		c = c + 0.1;
+		c = c + 0.1f;
 		pixel_put_map_move(ray_x, ray_y, data, PLAYERCOL);
 
 		// my_mlx_pixel_put(data, ray_x + MOVEX, ray_y + MOVEY, PLAYERCOL);
 	}
+	data->sector[i] = c;
 }
 
 void draw_invis_background(t_data_mlx *data, int height, int width)
@@ -186,12 +187,14 @@ void draw_map_with_move(t_data_mlx *data)
 		i++;
 	}
 	draw_player_move(&data->map->player, data);
-	float a = -0.75f;
-	while (a <= 0.75f)
+	float a = ANG_START;
+	i = 0;
+	while (a <= FOV)
 	{
-		line_math_move(data, a);
+		line_math_move(data, a, i);
 		// a = a + 0.015f;
-		a = a + 0.03f;
+		a = a + ANG_STEP;
+		i++;
 	}
 	draw_board(data);
 }
