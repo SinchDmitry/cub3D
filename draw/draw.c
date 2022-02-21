@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/20 19:23:25 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/20 21:22:17 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,19 +207,22 @@ void ray_analys(t_data_mlx *data, int c, int x)
 	int		i;
 	int 	k;
 	float	delta;
+	float	delta_next;
 	float	step;
 
-	k = 20;
+	k = 10;
 	i = -1;
 	step = WIDTH / ((FOV - ANG_START) / ANG_STEP);
 	delta = (data->sector[c + 1] - data->sector[c]) / step;
+	delta_next = (data->sector[c + 2] - data->sector[c + 1]) / step;
 	while (++i < step)
 	{
-		y = HEIGHT / 2 - (data->sector[c] + i * delta) * k;
-		if(delta)
-			draw_ray_catsing(data, x + i, y, FLOORCOL);
-		else
-			draw_ray_catsing(data, x + i, y, WHITE_COL);
+		y = (HEIGHT / 3 - (data->sector[c] + i * delta) * k);
+		draw_ray_catsing(data, x + i, y, WHITE_COL);
+		// if(delta * delta_next <= 0 && (delta || delta_next))
+		// 	draw_ray_catsing(data, x + i, y, WHITE_COL);
+		// else
+		// 	draw_ray_catsing(data, x + i, y, WHITE_COL - data->sector[c] * k);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 11:50:19 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/20 18:15:51 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/20 21:16:20 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	line_math_move(t_data_mlx *data, float rad, int i)
 
 		// my_mlx_pixel_put(data, ray_x + MOVEX, ray_y + MOVEY, PLAYERCOL);
 	}
-	data->sector[i] = c;
+	data->sector[i] = c; // * cos(data->map->player.a + rad)
 }
 
 void draw_invis_background(t_data_mlx *data, int height, int width)
@@ -192,7 +192,6 @@ void draw_map_with_move(t_data_mlx *data)
 	while (a <= FOV)
 	{
 		line_math_move(data, a, i);
-		// a = a + 0.015f;
 		a = a + ANG_STEP;
 		i++;
 	}

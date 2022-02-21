@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/20 19:21:36 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/20 21:26:39 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # define INVERSE 2.35f
 # define FOV 0.75f
 # define ANG_START -0.75f
-# define ANG_STEP 0.0075f
+# define ANG_STEP 0.004f
 typedef struct	s_data_mlx {
 	void	*mlx;
 	void	*mlx_win;
