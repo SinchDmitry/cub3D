@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 11:50:19 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/20 21:16:20 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/21 20:55:14 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,27 +109,33 @@ void draw_player_move(t_player *player , t_data_mlx *data)
 	}
 }
 
-void	line_math_move(t_data_mlx *data, float rad, int i)
+void	line_math_move(t_data_mlx *data, int i)
 {
 	float	c;
+	float	ang;
 	float	ray_x;
 	float	ray_y;
 
 	c = 0;
+	ang = data->map->player.a + data->ray_a;
 	while (c < VIEW_RANGE)
 	{
-		ray_x = data->map->player.x + c * cos(data->map->player.a + rad);
-		ray_y = data->map->player.y + c * sin(data->map->player.a + rad);
+		ray_x = data->map->player.x + c * cos(ang);
+		ray_y = data->map->player.y + c * sin(ang);
 		if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
 			break ;
 		ray_x *= MMTEXTURESIZE;
 		ray_y *= MMTEXTURESIZE;
-		c = c + 0.1f;
+		c = c + 0.01f;
 		pixel_put_map_move(ray_x, ray_y, data, PLAYERCOL);
 
 		// my_mlx_pixel_put(data, ray_x + MOVEX, ray_y + MOVEY, PLAYERCOL);
 	}
-	data->sector[i] = c; // * cos(data->map->player.a + rad)
+	// if (ang < 0)
+	// 	ang = 6.28f - ang; 
+	data->ray[i] = data->ray_a;
+	data->sector[i] = c;
+	// printf ("%d : %f\n", i, data->sector[i]);
 }
 
 void draw_invis_background(t_data_mlx *data, int height, int width)
@@ -187,12 +193,12 @@ void draw_map_with_move(t_data_mlx *data)
 		i++;
 	}
 	draw_player_move(&data->map->player, data);
-	float a = ANG_START;
+	data->ray_a = ANG_START;
 	i = 0;
-	while (a <= FOV)
+	while (data->ray_a <= FOV)
 	{
-		line_math_move(data, a, i);
-		a = a + ANG_STEP;
+		line_math_move(data, i);
+		data->ray_a = data->ray_a + ANG_STEP;
 		i++;
 	}
 	draw_board(data);

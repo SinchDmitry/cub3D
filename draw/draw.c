@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/21 13:46:00 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/21 20:47:55 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,9 +216,29 @@ void	draw_ray_catsing(t_data_mlx *data, float x, float height, int color)
 void ray_analys(t_data_mlx *data, int c, int x)
 {
 	float 	y; 
+	// int		i;
+	int 	k;
+	// float	delta;
+	// float	delta_next;
+	// float	step;
 
-	y = (HEIGHT / 2 - data->sector[c] * 10);
-	draw_ray_catsing(data, x, y, WHITE_COL);
+	k = 20;
+	// i = -1;
+	// step = WIDTH / ((FOV - ANG_START) / ANG_STEP);
+	// delta = (data->sector[c + 1] - data->sector[c]) / step;
+	// delta_next = (data->sector[c + 2] - data->sector[c + 1]) / step;
+	// while (++i < step)
+	// {
+		y = HEIGHT / (data->sector[c]); // + i * delta
+		// draw_ray_catsing(data, x + i, y, WHITE_COL);
+		if (data->sector[c] < VIEW_RANGE)
+		{
+			// if (delta * delta_next <= 0 && (delta || delta_next))
+				draw_ray_catsing(data, x, y, WHITE_COL); // + i;
+			// else
+			//	draw_ray_catsing(data, x + i, y, WHITE_COL - data->sector[c] * k);
+		}
+	// }
 }
 
 void draw_fvp(t_data_mlx *data)

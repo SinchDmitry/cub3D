@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/21 13:43:59 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/21 20:46:56 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 # define TEXTURESIZE 36 // need auto size map after parse file
 # define MMTEXTURESIZE 20
 # define MOVE_SPEED 0.2
-# define MOVE_ANGLE 0.2
-# define VIEW_RANGE 40
+# define MOVE_ANGLE 0.1
+# define VIEW_RANGE 15.0f
 # define LEFT_KEY 123
 # define RIGHT_KEY 124
 # define DOWN_KEY 125
@@ -50,6 +50,7 @@
 # define FOV 0.75f
 # define ANG_START -0.75f
 # define ANG_STEP 0.00075f
+
 typedef struct	s_data_mlx {
 	void	*mlx;
 	void	*mlx_win;
@@ -63,6 +64,8 @@ typedef struct	s_data_mlx {
 	int		bits_per_pixel1;
 	int		line_length1;
 	int		endian1;
+	float	ray_a;
+	float	ray[(int)((FOV - ANG_START) / ANG_STEP) + 1];
 	float	sector[(int)((FOV - ANG_START) / ANG_STEP) + 1];
 	t_images	image;
 	t_info  *map;
