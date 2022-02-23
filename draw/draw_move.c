@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 11:50:19 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/21 15:47:04 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/22 18:46:27 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,27 +109,97 @@ void draw_player_move(t_player *player , t_data_mlx *data)
 	}
 }
 
-void	line_math_move(t_data_mlx *data, float rad, int i)
+void	line_math_move(t_data_mlx *data, int i)
 {
 	float	c;
+	float	ang;
 	float	ray_x;
 	float	ray_y;
+	float	step;
 
+	step = 0.1f;
 	c = 0;
-	while (c < VIEW_RANGE)
+	ang = data->map->player.a + data->ray_a;
+	while (step > 0.00001f)
 	{
-		ray_x = data->map->player.x + c * cos(data->map->player.a + rad);
-		ray_y = data->map->player.y + c * sin(data->map->player.a + rad);
-		if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
-			break ;
-		ray_x *= MMTEXTURESIZE;
-		ray_y *= MMTEXTURESIZE;
-		c = c + 0.1f;
-		pixel_put_map_move(ray_x, ray_y, data, PLAYERCOL);
-
-		// my_mlx_pixel_put(data, ray_x + MOVEX, ray_y + MOVEY, PLAYERCOL);
+		while (c < VIEW_RANGE)
+		{
+			ray_x = data->map->player.x + c * cos(ang);
+			ray_y = data->map->player.y + c * sin(ang);
+			if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
+				break ;
+			c = c + step;
+		}
+		c -= step;
+		step /= 2;
 	}
-	data->sector[i] = c;
+	c = c + step;
+	// while (c < VIEW_RANGE)
+	// {
+	// 	ray_x = data->map->player.x + c * cos(ang);
+	// 	ray_y = data->map->player.y + c * sin(ang);
+	// 	if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
+	// 		break ;
+	// 	// ray_x *= MMTEXTURESIZE;
+	// 	// ray_y *= MMTEXTURESIZE;
+	// 	c = c + 0.1f;
+	// 	// pixel_put_map_move(ray_x, ray_y, data, PLAYERCOL);
+
+	// 	// my_mlx_pixel_put(data, ray_x + MOVEX, ray_y + MOVEY, PLAYERCOL);
+	// }
+	// c -= 0.1f;
+	// while (c < VIEW_RANGE)
+	// {
+	// 	ray_x = data->map->player.x + c * cos(ang);
+	// 	ray_y = data->map->player.y + c * sin(ang);
+	// 	if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
+	// 		break ;
+	// 	c = c + 0.05f;
+	// }
+	// c -= 0.05f;
+	// while (c < VIEW_RANGE)
+	// {
+	// 	ray_x = data->map->player.x + c * cos(ang);
+	// 	ray_y = data->map->player.y + c * sin(ang);
+	// 	if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
+	// 		break ;
+	// 	c = c + 0.05f;
+	// }
+	// c -= 0.05f;
+	// while (c < VIEW_RANGE)
+	// {
+	// 	ray_x = data->map->player.x + c * cos(ang);
+	// 	ray_y = data->map->player.y + c * sin(ang);
+	// 	if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
+	// 		break ;
+	// 	c = c + 0.01f;
+	// }
+	// c -= 0.01f;
+	// while (c < VIEW_RANGE)
+	// {
+	// 	ray_x = data->map->player.x + c * cos(ang);
+	// 	ray_y = data->map->player.y + c * sin(ang);
+	// 	if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
+	// 		break ;
+	// 	c = c + 0.001f;
+	// }
+	// c -= 0.001f;
+	// while (c < VIEW_RANGE)
+	// {
+	// 	ray_x = data->map->player.x + c * cos(ang);
+	// 	ray_y = data->map->player.y + c * sin(ang);
+	// 	if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
+	// 		break ;
+	// 	c = c + 0.0001f;
+	// }
+
+	// if (ang < 0)
+	// 	ang = 6.28f - ang; 
+	data->ray[i] = data->ray_a;
+	data->sector[i] = c * cos(data->ray_a);
+	data->sector_x[i] = ray_x;
+	data->sector_y[i] = ray_y;
+	// printf ("%d : %f\n", i, data->sector[i]);
 }
 
 void draw_invis_background(t_data_mlx *data, int height, int width)
@@ -187,13 +257,12 @@ void draw_map_with_move(t_data_mlx *data)
 		i++;
 	}
 	draw_player_move(&data->map->player, data);
-	float a = ANG_START;
+	data->ray_a = ANG_START;
 	i = 0;
-	while (a <= FOV)
+	while (data->ray_a <= FOV)
 	{
-		line_math_move(data, a, i);
-		// a = a + 0.015f;
-		a = a + ANG_STEP;
+		line_math_move(data, i);
+		data->ray_a = data->ray_a + ANG_STEP;
 		i++;
 	}
 	draw_board(data);

@@ -6,11 +6,21 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/21 13:20:23 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/23 13:40:41 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
+
+int	render_next_frame(t_data_mlx *data);
+
+unsigned int	my_mlx_get_pixel(t_data_mlx *data, int x, int y, int wall)
+{	
+	if(wall == 1)
+		return (*(unsigned int *)
+			(data->addr1 + (x * data->bits_per_pixel1 / 8 + y * data->line_length1)));
+
+}
 
 void	my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color)
 {
@@ -71,22 +81,48 @@ void draw_square(int x, int y, t_data_mlx *data, int color)
 
 void	line_math(t_data_mlx *data, float rad)
 {
+	// float	c;
+	// float	ray_x;
+	// float	ray_y;
+
+	// c = 0;
+	// while (c < VIEW_RANGE)
+	// {
+	// 	ray_x = data->map->player.x + c * cos(data->map->player.a + rad);
+	// 	ray_y = data->map->player.y + c * sin(data->map->player.a + rad);
+	// 	if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
+	// 		break ;
+	// 	ray_x *= TEXTURESIZE;
+	// 	ray_y *= TEXTURESIZE;
+	// 	c = c + 0.1;
+	// 	my_mlx_pixel_put(data, ray_x, ray_y, PLAYERCOL);
+	// }
 	float	c;
+	float	ang;
 	float	ray_x;
 	float	ray_y;
+	float	step;
 
+	step = 0.1f;
 	c = 0;
-	while (c < VIEW_RANGE)
+	ang = data->map->player.a + data->ray_a;
+	while (step > 0.00001f)
 	{
-		ray_x = data->map->player.x + c * cos(data->map->player.a + rad);
-		ray_y = data->map->player.y + c * sin(data->map->player.a + rad);
-		if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
-			break ;
-		ray_x *= TEXTURESIZE;
-		ray_y *= TEXTURESIZE;
-		c = c + 0.1;
-		my_mlx_pixel_put(data, ray_x, ray_y, PLAYERCOL);
+		while (c < VIEW_RANGE)
+		{
+			ray_x = data->map->player.x + c * cos(ang);
+			ray_y = data->map->player.y + c * sin(ang);
+			if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
+				break ;
+			c = c + step;
+			ray_x *= TEXTURESIZE;
+			ray_y *= TEXTURESIZE;
+			my_mlx_pixel_put(data, ray_x, ray_y, PLAYERCOL);
+		}
+		c -= step;
+		step /= 2;
 	}
+	c = c + step;
 }
 
 void draw_field(int x, int y, t_data_mlx *data)
@@ -200,37 +236,85 @@ int	key_h(int keycode, t_data_mlx *data)
 	return (0);
 }
 
-void	draw_ray_catsing(t_data_mlx *data, float x, float height, int color)
+int step_counter_texture(float step, float value)
+{
+	int		i;
+	float step_buf;
+
+	step_buf = step;
+	i = 0;
+	while (step < value)
+	{
+		step += step_buf;
+		++i;
+	}
+	if(i > 256)
+		printf("SOMETHING WRONG\n"); // dont forget erase
+	return (i);
+}
+
+void	draw_ray_catsing(t_data_mlx *data, float x, float height, int w_pixel)
 {
 	float i;
+	int j;
+
+	j = 0;
 	i = 0 - height / 2;
 	while (i < height / 2)
 	{
-		my_mlx_pixel_put(data, x, HEIGHT / 2 + i, color);
+		my_mlx_pixel_put(data, x, HEIGHT / 2 + i, my_mlx_get_pixel(data, w_pixel,  step_counter_texture(height / 256, height / 2 + i), 1));
 		++i;
 	}
 }
 
+
+
 void ray_analys(t_data_mlx *data, int c, int x)
 {
 	float 	y; 
-	int		i;
+	// int		i;
 	int 	k;
-	float	delta;
-	float	step;
+	// float	delta;
+	// float	delta_next;
+	// float	step;
 
 	k = 20;
-	i = -1;
-	step = WIDTH / ((FOV - ANG_START) / ANG_STEP);
-	delta = (data->sector[c + 1] - data->sector[c]) / step;
-	while (++i < step)
-	{
-		y = HEIGHT / 2 - (data->sector[c] + i * delta) * k;
-		if(delta)
-			draw_ray_catsing(data, x + i, y, FLOORCOL);
-		else
-			draw_ray_catsing(data, x + i, y, WHITE_COL);
-	}
+	// i = -1;
+	// step = WIDTH / ((FOV - ANG_START) / ANG_STEP);
+	// delta = (data->sector[c + 1] - data->sector[c]) / step;
+	// delta_next = (data->sector[c + 2] - data->sector[c + 1]) / step;
+	// while (++i < step)
+	// {
+		
+		y = HEIGHT / (data->sector[c]); // + i * delta
+		// draw_ray_catsing(data, x + i, y, WHITE_COL);
+		if (data->sector[c] < VIEW_RANGE)
+		{
+			// printf("x = %d, y = %d",(int)data->sector_x[c],(int)data->sector_y[c]);
+			if (data->sector_y[c] - (int)data->sector_y[c] <= 0.0001f && data->sector_x[c] - (int)data->sector_x[c] <= 1)
+			{
+				draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, data->sector_x[c] - (int)data->sector_x[c]));
+				// printf("WHITE");
+			}
+			else if (data->sector_y[c] - (int)data->sector_y[c] <= 1 && data->sector_x[c] - (int)data->sector_x[c] < 0.0001f)
+			{
+				draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, data->sector_y[c] - (int)data->sector_y[c]));
+				// printf("RED  ");
+			}
+			else if (data->sector_y[c] - (int)data->sector_y[c] >= 0.9999f && data->sector_x[c] - (int)data->sector_x[c] >= 0.0001f)
+			{
+				draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, data->sector_x[c] - (int)data->sector_x[c]));
+				// printf("GREEN");
+			}
+			else 
+			{
+				draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, data->sector_y[c] - (int)data->sector_y[c]));
+				// draw_ray_catsing(data, x, y, BLUE_COL);
+				// printf("BLUE ");
+			}
+			// printf("i = %d dist = %f x = %f y = %f\n", c, data->sector[c], data->sector_x[c] - (int)data->sector_x[c], data->sector_y[c] - (int)data->sector_y[c]);
+		}
+	// }
 }
 
 void draw_fvp(t_data_mlx *data)
@@ -245,12 +329,12 @@ void draw_fvp(t_data_mlx *data)
 	{
 		ray_analys(data, i, i * WIDTH / ((FOV - ANG_START) / ANG_STEP));
 	}
-	
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	mlx_destroy_image(data->mlx,data->img);
 }
 
-int	render_next_frame(t_data_mlx *data){
+int	render_next_frame(t_data_mlx *data)
+{
 	int img_h;
 	int img_w;
 	static int i;
@@ -306,6 +390,9 @@ void init_images(t_data_mlx *data)
 		data->image.mm_space[i] = mlx_xpm_file_to_image(data->mlx, xpm_path, &img_h, &img_w);
 		i++;
 	}
+	data->img1 = mlx_xpm_file_to_image(data->mlx, "./textures/wall1.xpm", &img_h, &img_w);
+	data->addr1 = mlx_get_data_addr(data->img1, &data->bits_per_pixel1, 
+		&data->line_length1, &data->endian1);
 }
 
 int	draw(t_info *map)
@@ -316,6 +403,7 @@ int	draw(t_info *map)
 	printf("here x = %f y = %f\n",map->player.x, map->player.y);
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Hello world!");
+	
 	init_images(&data);
 	ft_mlx(&data);
 	render_next_frame(&data);
