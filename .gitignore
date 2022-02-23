@@ -54,3 +54,4 @@ dkms.conf
 # user
 .DS_Store
 a.out
+test*

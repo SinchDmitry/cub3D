@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:47 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/15 17:04:20 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/23 21:47:58 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,15 @@
 # define SOUTH 114
 # define EAST 115
 # define WEST 116
-# define P_BACK 2
-# define P_FRONT 1
 
 // # define BUFFER_SIZE 10000;
 
-struct						s_info;
-struct						s_texture;
-struct						s_rgb;
-typedef struct s_info		t_info;
-typedef struct s_texture	t_texture;
-typedef struct s_rgb		t_rgb;
+// struct						s_info;
+// struct						s_texture;
+// struct						s_rgb;
+// typedef struct s_info		t_info;
+// typedef struct s_texture	t_texture;
+// typedef struct s_rgb		t_rgb;
 
 t_info	*parser(int argc, char **argv, int fd);
 void	map_info(t_info *map, char **map_str);

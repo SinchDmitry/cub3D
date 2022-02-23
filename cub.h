@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/20 17:56:11 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/23 21:49:05 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,15 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include "libft/libft.h"
-# include "parser/parser.h"
+// # include "parser/parser.h"
+// # include "draw/draw.h"
 # include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+
+# define P_BACK 2
+# define P_FRONT 1
 
 typedef struct	s_player {
 	float	x;
@@ -73,6 +77,6 @@ typedef struct s_info
 }	t_info;
 
 int		draw(t_info *map);
-
+t_info	*parser(int argc, char **argv, int fd);
 
 #endif
