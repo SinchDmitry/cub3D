@@ -6,13 +6,11 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/25 18:41:11 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/25 22:31:03 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
-
-int	render_next_frame(t_data_mlx *data);
 
 unsigned int	my_mlx_get_pixel(t_data_mlx *data, int x, int y, int wall)
 {	
@@ -42,63 +40,6 @@ int	check_move(t_data_mlx *data)
 	else
 		return (0);
 }
-
-int	key_h(int keycode, t_data_mlx *data)
-{	
-	if (keycode == MINIMAP_KEY)
-	{
-		if (data->map->player.f_minimap)
-		{
-			mlx_clear_window(data->mlx, data->mlx_win);
-			data->map->player.f_minimap = 0;
-		}
-		else
-			data->map->player.f_minimap = 1;
-	}
-	if (keycode == MAP_KEY)
-	{
-		if (data->map->player.f_map)
-		{
-			mlx_clear_window(data->mlx, data->mlx_win);
-			data->map->player.f_map = 0;
-		}
-		else
-		{
-			data->map->player.f_map = 1;
-			mlx_clear_window(data->mlx, data->mlx_win);
-		}
-	}
-	if (keycode == DOWN_KEY)
-	{
-		data->map->player.x -= MOVE_SPEED * cos(data->map->player.a);
-		data->map->player.y -= MOVE_SPEED * sin(data->map->player.a);
-		if (check_move(data))
-		{
-			data->map->player.x += MOVE_SPEED * cos(data->map->player.a);
-			data->map->player.y += MOVE_SPEED * sin(data->map->player.a);
-		}
-	}
-	if (keycode == UP_KEY)
-	{
-		data->map->player.x += MOVE_SPEED * cos(data->map->player.a);
-		data->map->player.y += MOVE_SPEED * sin(data->map->player.a);
-		if (check_move(data))
-		{
-			data->map->player.x -= MOVE_SPEED * cos(data->map->player.a);
-			data->map->player.y -= MOVE_SPEED * sin(data->map->player.a);
-		}
-	}
-	if (keycode == RIGHT_KEY)
-		data->map->player.a += MOVE_ANGLE;
-	if (keycode == LEFT_KEY)
-		data->map->player.a -= MOVE_ANGLE;
-	if (keycode == 53)
-		exit(0);
-	render_next_frame(data);
-	return (0);
-}
-
-
 
 int	render_next_frame(t_data_mlx *data)
 {

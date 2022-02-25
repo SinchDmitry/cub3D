@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/25 17:57:26 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/25 22:40:42 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,28 +94,29 @@ void	ray_analys(t_data_mlx *data, int c, int x)
 	int		k;
 
 	k = 20;
-	y = HEIGHT / (data->sector[c] * cos(data->ray[c]));
+	y = HEIGHT / (data->sector[c]);
 	if (data->sector[c] < VIEW_RANGE)
 	{
-		if (data->sector_y[c] - (int)data->sector_y[c] <= 0.0001f && \
-			data->sector_x[c] - (int)data->sector_x[c] <= 1)
-			draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, \
-				data->sector_x[c] - (int)data->sector_x[c]));
-			// printf("WHITE");
-		else if (data->sector_y[c] - (int)data->sector_y[c] <= 1 && \
-			data->sector_x[c] - (int)data->sector_x[c] < 0.0001f)
-			draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, \
-				data->sector_y[c] - (int)data->sector_y[c]));
-			// printf("RED  ");
-		else if (data->sector_y[c] - (int)data->sector_y[c] >= 0.9999f \
-			&& data->sector_x[c] - (int)data->sector_x[c] >= 0.0001f)
-			draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, \
-				data->sector_x[c] - (int)data->sector_x[c]));
-			// printf("GREEN");
-		else
-			draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, \
-				data->sector_y[c] - (int)data->sector_y[c]));
-			// printf("BLUE ");
+			draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, 0));
+		// if (data->sector_y[c] - (int)data->sector_y[c] <= 0.0001f && \
+		// 	data->sector_x[c] - (int)data->sector_x[c] <= 1)
+		// 	draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, \
+		// 		data->sector_x[c] - (int)data->sector_x[c]));
+		// 	// printf("WHITE");
+		// else if (data->sector_y[c] - (int)data->sector_y[c] <= 1 && \
+		// 	data->sector_x[c] - (int)data->sector_x[c] < 0.0001f)
+		// 	draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, \
+		// 		data->sector_y[c] - (int)data->sector_y[c]));
+		// 	// printf("RED  ");
+		// else if (data->sector_y[c] - (int)data->sector_y[c] >= 0.9999f \
+		// 	&& data->sector_x[c] - (int)data->sector_x[c] >= 0.0001f)
+		// 	draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, \
+		// 		data->sector_x[c] - (int)data->sector_x[c]));
+		// 	// printf("GREEN");
+		// else
+		// 	draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, \
+		// 		data->sector_y[c] - (int)data->sector_y[c]));
+		// 	// printf("BLUE ");
 	}
 }
 
@@ -127,13 +128,14 @@ void	draw_fvp(t_data_mlx *data)
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
 		&data->line_length, &data->endian);
 	data->ray_a = ANG_START;
-	i = 0;
-	while (data->ray_a <= FOV)
-	{
-		line_math_move(data, i);
-		data->ray_a = data->ray_a + ANG_STEP;
-		i++;
-	}
+	// i = 0;
+	// while (data->ray_a <= FOV)
+	// {
+	// 	line_math_move(data, i);
+	// 	data->ray_a = data->ray_a + ANG_STEP;
+	// 	i++;
+	// }
+	ray_player(data);
 	i = -1;
 	while (++i < ((FOV - ANG_START) / ANG_STEP))
 	{
