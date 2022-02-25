@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_key.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 22:43:17 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/25 22:25:44 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/25 22:50:36 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-void	ws_case(int keycode, t_data_mlx *data)
+static void	ws_case(int keycode, t_data_mlx *data)
 {
 	if (keycode == S_KEY)
 	{
@@ -36,7 +36,7 @@ void	ws_case(int keycode, t_data_mlx *data)
 	}
 }
 
-void	ad_case(int keycode, t_data_mlx *data)
+static void	ad_case(int keycode, t_data_mlx *data)
 {
 	int	ang;
 
@@ -63,7 +63,7 @@ void	ad_case(int keycode, t_data_mlx *data)
 	}
 }
 
-void	rl_case(int keycode, t_data_mlx *data, float dir_x, float plane_x)
+static void	rl_case(int keycode, t_data_mlx *data, float dir_x, float plane_x)
 {
 	dir_x = data->map->player.dir_x;
 	plane_x = data->map->camera.pl_x;
@@ -91,11 +91,8 @@ void	rl_case(int keycode, t_data_mlx *data, float dir_x, float plane_x)
 	}
 }
 
-int	key_h(int keycode, t_data_mlx *data)
+static void	map_exit_case(int keycode, t_data_mlx *data)
 {
-	float	dir_x;
-	float	plane_x;
-
 	if (keycode == MINIMAP_KEY)
 	{
 		if (data->map->player.f_minimap)
@@ -116,11 +113,19 @@ int	key_h(int keycode, t_data_mlx *data)
 		else
 			data->map->player.f_map = 1;
 	}
+	if (keycode == 53)
+		exit(0);
+}
+
+int	key_h(int keycode, t_data_mlx *data)
+{
+	float	dir_x;
+	float	plane_x;
+
+	map_exit_case(keycode, data);
 	ws_case(keycode, data);
 	ad_case(keycode, data);
 	rl_case(keycode, data, dir_x, plane_x);
-	if (keycode == 53)
-		exit(0);
 	render_next_frame(data);
 	return (0);
 }

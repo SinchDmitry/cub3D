@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/25 22:40:42 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/25 23:04:32 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,9 @@ void	draw_fvp(t_data_mlx *data)
 	// 	i++;
 	// }
 	ray_player(data);
+	i = -1;
+	// while (data->sector[++i])
+	// 	printf("#%2d : %f\n", i, data->sector[i]);
 	i = -1;
 	while (++i < ((FOV - ANG_START) / ANG_STEP))
 	{
