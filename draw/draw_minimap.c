@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_move.c                                        :+:      :+:    :+:   */
+/*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 11:50:19 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/23 22:06:13 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/25 19:45:50 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,57 +76,26 @@ void	draw_field_move(int x, int y, t_data_mlx *data)
 		draw_square_move(y * MMTEXTURESIZE, x * MMTEXTURESIZE, data, FLOORCOL);
 }
 
-void	draw_player_move(t_player *player, t_data_mlx *data)
-{
-	float	x;
-	float	y;
-
-	player->x_textu = player->x * MMTEXTURESIZE;
-	player->y_textu = player->y * MMTEXTURESIZE;
-	x = player->x_textu;
-	y = player->y_textu;
-	while (x < player->x_textu + (MMTEXTURESIZE / 2))
-	{
-		y = player->y_textu;
-		while (y < player->y_textu + (MMTEXTURESIZE / 2))
-		{
-			pixel_put_map_move(x - (MMTEXTURESIZE / 4), \
-				y - (MMTEXTURESIZE / 4), data, PLAYERCOL);
-			y++;
-		}
-		x++;
-	}
-}
-
-void	line_math_move(t_data_mlx *data, int i)
+void	line_math_minimap(t_data_mlx *data, float rad)
 {
 	float	c;
 	float	ang;
 	float	ray_x;
 	float	ray_y;
-	float	step;
 
-	step = 0.1f;
-	c = 0;
-	ang = data->map->player.a + data->ray_a;
-	while (step > 0.00001f)
-	{
-		while (c < VIEW_RANGE)
+	ang = data->map->player.a + rad;
+		c = 0;
+		while (c < 2)
 		{
 			ray_x = data->map->player.x + c * cos(ang);
 			ray_y = data->map->player.y + c * sin(ang);
 			if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
 				break ;
-			c = c + step;
+			ray_x *= MMTEXTURESIZE;
+			ray_y *= MMTEXTURESIZE;
+			c = c + 0.1f;
+			pixel_put_map_move(ray_x, ray_y, data, PLAYERCOL);
 		}
-		c -= step;
-		step /= 2;
-	}
-	c = c + step;
-	data->ray[i] = data->ray_a;
-	data->sector[i] = c;
-	data->sector_x[i] = ray_x;
-	data->sector_y[i] = ray_y;
 }
 
 void	draw_invis_background(t_data_mlx *data, int height, int width)
@@ -147,6 +116,20 @@ void	draw_invis_background(t_data_mlx *data, int height, int width)
 	}
 }
 
+int	in_circle(float x, float y, int r)
+{
+	float	distance;
+
+	distance = sqrtf(powf(x - MOVEX, 2.0f) + powf(y -  MOVEY, 2.0f));
+	if (distance <= r)
+	{
+		if ((r - distance) < 1.0f)
+			return (2);
+		return (1);
+	}
+	return (0);
+}
+
 void	draw_board(t_data_mlx *data)
 {
 	int	i;
@@ -158,10 +141,13 @@ void	draw_board(t_data_mlx *data)
 		j = 0;
 		while (j < MINIMAPWIDTH)
 		{	
-			if (i <= MM_BOARD_SIZE || i >= MINIMAPHEIGHT - MM_BOARD_SIZE)
-				my_mlx_pixel_put(data, i , j , MM_BOARD_COL);
-			else if (j <= MM_BOARD_SIZE || j >= MINIMAPWIDTH - MM_BOARD_SIZE)
-				my_mlx_pixel_put(data, i , j , MM_BOARD_COL);
+
+			if (!in_circle(j, i, 100))
+				my_mlx_pixel_put(data, i , j , INVISIBLE_COL);
+			if (in_circle(j, i, 100) == 2)
+				my_mlx_pixel_put(data, i , j , WHITE_COL);
+			if (in_circle(j, i, MMTEXTURESIZE / 4) == 1)
+				my_mlx_pixel_put(data, i , j , WHITE_COL);
 			j++;
 		}
 		i++;
@@ -172,6 +158,7 @@ void	draw_map_with_move(t_data_mlx *data)
 {
 	int	i;
 	int	j;
+	float	a;
 
 	i = 0;
 	draw_invis_background(data, MINIMAPHEIGHT, MINIMAPWIDTH);
@@ -185,14 +172,11 @@ void	draw_map_with_move(t_data_mlx *data)
 		}
 		i++;
 	}
-	draw_player_move(&data->map->player, data);
-	data->ray_a = ANG_START;
-	i = 0;
-	while (data->ray_a <= FOV)
+	a = MMANG_START;
+	while (a < MMFOV)
 	{
-		line_math_move(data, i);
-		data->ray_a = data->ray_a + ANG_STEP;
-		i++;
+		line_math_minimap(data, a);
+		a = a + MMANG_STEP;
 	}
 	draw_board(data);
 }

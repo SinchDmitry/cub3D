@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/23 21:49:05 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/24 21:48:37 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct	s_player {
 	float	y_textu;
 	char	dir;
 	int		f_map;
+	int		f_minimap;
 }				t_player;
 
 typedef struct s_images

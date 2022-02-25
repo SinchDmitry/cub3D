@@ -6,13 +6,19 @@
 #    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/02/19 22:29:55 by utygett          ###   ########.fr        #
+#    Updated: 2022/02/25 15:05:29 by utygett          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	cub3d
 
-SRC		=	cub.c	parser/p_main.c parser/p_par.c	parser/p_map.c draw/draw.c draw/draw_move.c
+SRC		=	cub.c	parser/p_main.c \
+					parser/p_par.c	\
+					parser/p_map.c \
+					draw/draw.c \
+					draw/draw_minimap.c\
+					draw/draw_scene.c \
+					draw/draw_map.c 
 
 FTDIR	= 	./libft/
 
