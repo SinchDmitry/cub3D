@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:47 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/23 21:47:58 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/26 21:16:39 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 # include "../cub.h"
 // # include "../libft/libft.h"
 
-# define RGB 101
-# define TEXTURE 102
-# define FLOOR 111
-# define SKY 112
-# define NORTH 113
-# define SOUTH 114
-# define EAST 115
-# define WEST 116
-
+# define RGB 		101
+# define TEXTURE 	102
+# define FLOOR 		111
+# define SKY 		112
+# define NORTH 		113
+# define SOUTH 		114
+# define EAST 		115
+# define WEST 		116
+# define FOV		1.571f
 // # define BUFFER_SIZE 10000;
 
 // struct						s_info;

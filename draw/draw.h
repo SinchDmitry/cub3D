@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/26 15:45:26 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/26 21:16:53 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@
 # define MOVEY				100
 # define ROTATE_MOV			3.1415f
 # define INVERSE			2.35f
-# define FOV				0.75f
-# define ANG_START			-0.75f
-# define ANG_STEP			0.0015f
+# define FOV				1.571f
+// # define ANG_START			-0.75f
+// # define ANG_STEP			0.0015f
 # define MMFOV				0.55f
 # define MMANG_START		-0.55f
 # define MMANG_STEP			0.02f
@@ -77,10 +77,7 @@ typedef struct s_data_mlx {
 	int			endian1;
 	int			map_zoom;
 	float		ray_a;
-	float		ray[(int)((FOV - ANG_START) / ANG_STEP) + 1];
-	float		sector[(int)((FOV - ANG_START) / ANG_STEP) + 1];
-	float		sector_x[(int)((FOV - ANG_START) / ANG_STEP) + 1];
-	float		sector_y[(int)((FOV - ANG_START) / ANG_STEP) + 1];
+	float		sector;
 	t_images	image;
 	t_info		*map;
 }				t_data_mlx;
@@ -95,10 +92,7 @@ int				check_move(t_data_mlx *data);
 int				render_next_frame(t_data_mlx *data);
 void			ray_player(t_data_mlx *data);
 void			draw_invis_background(t_data_mlx *data, int height, int width);
-
-
-
-
-
+void			draw_ray_catsing(t_data_mlx *data, float x, float height, int w_pixel);
+int				step_counter_texture(float step, float value);
 
 #endif

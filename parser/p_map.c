@@ -3,30 +3,80 @@
 /*                                                        :::      ::::::::   */
 /*   p_map.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/19 14:13:24 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/26 21:43:46 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int	ft_iscompas(t_info *map, char ch)
+// static int	ft_iscompas(t_info *map, char ch)
+// {
+// 	if (ch == 'S' || ch == 'N' || ch == 'W' || ch == 'E')
+// 	{
+// 		if (ch == 'N')
+// 			map->player.a = 4.7124f;
+// 		if (ch == 'E')
+// 			map->player.a = 0;
+// 		if (ch == 'S')
+// 			map->player.a = 1.5708f;
+// 		if (ch == 'W')
+// 			map->player.a = 3.1415f;
+// 		return (1);
+// 	}
+// 	return (0);
+// }
+
+static void	select_dir(t_info *map, char ch)
+{
+	if (ch == 'N')
+	{
+		map->camera.pl_x = tan(FOV / 2);
+		map->camera.pl_y = 0;
+		map->player.dir_x = 0;
+		map->player.dir_y = tan(-FOV / 2);
+		map->player.a = 4.7124f;
+	}
+	else if (ch == 'S')
+	{
+		map->camera.pl_x = tan(-FOV / 2);
+		map->camera.pl_y = 0;
+		map->player.dir_x = 0;
+		map->player.dir_y = tan(FOV / 2);
+		map->player.a = 1.5708f;
+	}
+	else if (ch == 'E')
+	{
+		map->camera.pl_x = 0;
+		map->camera.pl_y = tan(FOV / 2);
+		map->player.dir_x = tan(FOV / 2);
+		map->player.dir_y = 0;
+		map->player.a = 0;
+	}
+	else if (ch == 'W')
+	{
+		map->camera.pl_x = 0;
+		map->camera.pl_y = tan(-FOV / 2);
+		map->player.dir_x = tan(-FOV / 2);
+		map->player.dir_y = 0;
+		map->player.a = 3.1415f;
+	}
+}
+
+static int	ft_iscompas(t_info *map, char ch, int *first_in)
 {
 	if (ch == 'S' || ch == 'N' || ch == 'W' || ch == 'E')
 	{
-		if (ch == 'N')
-			map->player.a = 4.7124f;
-		if (ch == 'E')
-			map->player.a = 0;
-		if (ch == 'S')
-			map->player.a = 1.5708f;
-		if (ch == 'W')
-			map->player.a = 3.1415f;
+		if (*first_in)
+			error_end(2);
+		select_dir(map, ch);
+		*first_in = 1;
 		return (1);
 	}
-	return (0);
+	else
+		return (0);
 }
 
 void	map_info(t_info *map, char **map_str)
@@ -51,8 +101,10 @@ static void	map_create(t_info *map, char **map_str)
 {
 	int	i;
 	int	j;
+	int f;
 
 	i = -1;
+	f = 0;
 	while (map_str[++i])
 	{
 		j = -1;
@@ -60,7 +112,7 @@ static void	map_create(t_info *map, char **map_str)
 		{
 			if (space(map_str[i][j]))
 				map->mapa[i][j].sym = 'e';
-			else if (ft_iscompas(map, map_str[i][j]))
+			else if (ft_iscompas(map, map_str[i][j], &f)) // only once in map bleat
 			{
 				map->player.dir = map_str[i][j];
 				map->player.x = (float)j;
