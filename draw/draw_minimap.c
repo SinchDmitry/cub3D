@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 11:50:19 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/26 13:33:14 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/26 18:49:51 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void	line_math_minimap(t_data_mlx *data, float rad)
 				break ;
 			ray_x *= MMTEXTURESIZE;
 			ray_y *= MMTEXTURESIZE;
-			c = c + 0.1f;
-			pixel_put_map_move(ray_x, ray_y, data, PLAYERCOL);
+			c = c + 0.01f;
+			pixel_put_map_move(ray_x, ray_y, data, create_trgb(0, 255 - (c * 70), 255 - (c * 70), 255 - (c * 70)));
 		}
 }
 

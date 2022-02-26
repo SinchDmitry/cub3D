@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/26 15:45:26 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/26 18:28:32 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,6 @@ int				check_move(t_data_mlx *data);
 int				render_next_frame(t_data_mlx *data);
 void			ray_player(t_data_mlx *data);
 void			draw_invis_background(t_data_mlx *data, int height, int width);
-
-
-
-
-
+int				create_trgb(int t, int r, int g, int b);
 
 #endif

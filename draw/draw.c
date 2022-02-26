@@ -6,11 +6,16 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/26 14:07:51 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/26 18:28:18 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
 
 unsigned int	my_mlx_get_pixel(t_data_mlx *data, int x, int y, int wall)
 {	
@@ -49,22 +54,12 @@ int	render_next_frame(t_data_mlx *data)
 	
 	if (data->map->player.f_map)
 	{
-		
 		draw_fvp(data);
-		if (data->map->player.f_minimap)
-		{	
-			
-			data->img = mlx_new_image(data->mlx, MINIMAPWIDTH, MINIMAPHEIGHT);
-			data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
-				&data->line_length, &data->endian);
-			draw_map_with_move(data);
-			mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
-			mlx_destroy_image(data->mlx, data->img);
-		}
 		
 	}
 	if (!data->map->player.f_map)
 	{	
+		
 		++i;
 		if (i > 39)
 			i = 0;
@@ -76,6 +71,16 @@ int	render_next_frame(t_data_mlx *data)
 			data->image.mm_space[i], 0, 0);
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, WIDTH / 2 - data->map->width * TEXTURESIZE / 2, HEIGHT / 2 - data->map->height * TEXTURESIZE / 2);
 		mlx_destroy_image(data->mlx, data->img);
+		if (data->map->player.f_minimap)
+		{	
+			
+			data->img = mlx_new_image(data->mlx, MINIMAPWIDTH, MINIMAPHEIGHT);
+			data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
+				&data->line_length, &data->endian);
+			draw_map_with_move(data);
+			mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
+			mlx_destroy_image(data->mlx, data->img);
+		}
 	}
 	// draw map
 	return (0);
