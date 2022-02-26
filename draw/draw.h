@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/25 22:39:32 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/26 15:45:26 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@
 # define STATUS_BAR_HEIGHT	100
 # define INVISIBLE_COL		0xFF000000
 # define PLAYERCOL			0x00FFFFFF
-# define WALLCOL			0x0000FFFF
-# define FLOORCOL			0x000000FF
+# define WALLCOL			0x00708090
+# define FLOORCOL			0x00aab8c4
 # define RAYCOL				0x0000000F
 # define MM_BOARD_COL		0x00FFFFF0
 # define MM_BOARD_SIZE		5
-# define TEXTURESIZE		20 // need auto size map after parse file
+# define TEXTURESIZE		15 // need auto size map after parse file
 # define MMTEXTURESIZE		20
 # define MOVE_SPEED			0.2
 # define MOVE_ANGLE			0.05
@@ -46,6 +46,8 @@
 # define MAP_KEY			48
 # define UP_KEY				126
 # define MINIMAP_KEY		46
+# define ADD_PAD_KEY		69
+# define SUB_PAD_KEY		78
 # define MOVEX				100
 # define MOVEY				100
 # define ROTATE_MOV			3.1415f
@@ -73,6 +75,7 @@ typedef struct s_data_mlx {
 	int			bits_per_pixel1;
 	int			line_length1;
 	int			endian1;
+	int			map_zoom;
 	float		ray_a;
 	float		ray[(int)((FOV - ANG_START) / ANG_STEP) + 1];
 	float		sector[(int)((FOV - ANG_START) / ANG_STEP) + 1];
@@ -91,6 +94,8 @@ void			draw_map(t_data_mlx *data);
 int				check_move(t_data_mlx *data);
 int				render_next_frame(t_data_mlx *data);
 void			ray_player(t_data_mlx *data);
+void			draw_invis_background(t_data_mlx *data, int height, int width);
+
 
 
 

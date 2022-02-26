@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/25 22:31:03 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/26 14:07:51 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,12 @@ int	render_next_frame(t_data_mlx *data)
 		if (i > 39)
 			i = 0;
 		data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-		data->img = mlx_xpm_file_to_image(data->mlx, \
-			"./textures/backgroundmap.xpm", &img_h, &img_w);
 		data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
 			&data->line_length, &data->endian);
 		draw_map(data);
-		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 		mlx_put_image_to_window(data->mlx, data->mlx_win, \
 			data->image.mm_space[i], 0, 0);
+		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, WIDTH / 2 - data->map->width * TEXTURESIZE / 2, HEIGHT / 2 - data->map->height * TEXTURESIZE / 2);
 		mlx_destroy_image(data->mlx, data->img);
 	}
 	// draw map

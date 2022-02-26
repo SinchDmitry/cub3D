@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 22:43:17 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/25 22:25:44 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/26 14:27:54 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,16 @@ void	rl_case(int keycode, t_data_mlx *data, float dir_x, float plane_x)
 	}
 }
 
+void map_zoom()
+{
+	
+}
+
 int	key_h(int keycode, t_data_mlx *data)
 {
 	float	dir_x;
 	float	plane_x;
-
+	printf("%d\n", keycode);
 	if (keycode == MINIMAP_KEY)
 	{
 		if (data->map->player.f_minimap)

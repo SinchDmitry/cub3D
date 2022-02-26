@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/25 22:40:42 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/26 12:34:41 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,13 +128,7 @@ void	draw_fvp(t_data_mlx *data)
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
 		&data->line_length, &data->endian);
 	data->ray_a = ANG_START;
-	// i = 0;
-	// while (data->ray_a <= FOV)
-	// {
-	// 	line_math_move(data, i);
-	// 	data->ray_a = data->ray_a + ANG_STEP;
-	// 	i++;
-	// }
+	
 	ray_player(data);
 	i = -1;
 	while (++i < ((FOV - ANG_START) / ANG_STEP))

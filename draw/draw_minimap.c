@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 11:50:19 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/25 19:45:50 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/26 13:33:14 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,6 @@ void	draw_board(t_data_mlx *data)
 		j = 0;
 		while (j < MINIMAPWIDTH)
 		{	
-
 			if (!in_circle(j, i, 100))
 				my_mlx_pixel_put(data, i , j , INVISIBLE_COL);
 			if (in_circle(j, i, 100) == 2)

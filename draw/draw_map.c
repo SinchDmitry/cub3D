@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:04:49 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/25 18:58:40 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/26 13:52:59 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,24 @@ void	draw_field(int x, int y, t_data_mlx *data)
 		draw_square(y * TEXTURESIZE, x * TEXTURESIZE, data, FLOORCOL);
 }
 
+// void draw_invis_background(t_data_mlx *data, int w, int h)
+// {
+// 	int	y;
+// 	int	x;
+
+// 	y = 0;
+// 	while(y <= h)
+// 	{
+// 		x = 0;
+// 		while (x <= w)
+// 		{
+// 			my_mlx_pixel_put(data, x, y, INVISIBLE_COL);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
+
 void	draw_map(t_data_mlx *data)
 {
 	int		i;
@@ -90,6 +108,7 @@ void	draw_map(t_data_mlx *data)
 	float	a;
 
 	i = 0;
+	draw_invis_background(data, WIDTH, HEIGHT);
 	while (i < data->map->height)
 	{
 		j = 0;
