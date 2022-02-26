@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/25 22:30:13 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/25 22:57:50 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-
-void	camera_line(t_data_mlx *data)
+static void	camera_line(t_data_mlx *data)
 {
 	if (data->map->player.dir == 'S')
 	{
@@ -52,7 +51,7 @@ void	init_camera(t_data_mlx *data, int x)
 	data->map->camera.ray_pos_y = (int)data->map->player.y;
 }
 
-void	init_camera_move(t_data_mlx *data)
+static void	init_camera_move(t_data_mlx *data)
 {
 	if (data->map->player.dir_x < 0)
 	{
@@ -80,7 +79,7 @@ void	init_camera_move(t_data_mlx *data)
 	}
 }
 
-void	ray_calc(t_data_mlx *data)
+static void	ray_calc(t_data_mlx *data)
 {
 	if (data->map->camera.side_dist_x < data->map->camera.side_dist_y)
 	{
@@ -98,8 +97,6 @@ void	ray_calc(t_data_mlx *data)
 
 void	ray_player(t_data_mlx *data)
 {
-	// float	old_time;
-	// float	time;
 	int		x;
 	int		i;
 
@@ -117,6 +114,7 @@ void	ray_player(t_data_mlx *data)
 					[data->map->camera.ray_pos_y].sym != '0')
 				break ;
 		}
+		printf("#%2d\n", i);
 		if (data->map->camera.wall_dir)
 			data->sector[x] = (data->map->camera.side_dist_y - \
 				data->map->camera.delta_dir_y);

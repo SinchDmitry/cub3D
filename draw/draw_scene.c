@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/26 12:34:41 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/26 15:47:02 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,9 @@ void	draw_fvp(t_data_mlx *data)
 	data->ray_a = ANG_START;
 	
 	ray_player(data);
+	i = -1;
+	// while (data->sector[++i])
+	// 	printf("#%2d : %f\n", i, data->sector[i]);
 	i = -1;
 	while (++i < ((FOV - ANG_START) / ANG_STEP))
 	{
