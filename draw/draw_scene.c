@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/26 21:26:58 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/02/26 23:18:24 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	step_counter_texture(float step, float value)
 	while (step <= value && step_div > 1)
 	{
 		while (step <= value)
+		// printf ("%d | ray : %f\n", x, data->sector);
 		{
 			step += step_buf * step_div;
 			i = i + step_div;
@@ -94,14 +95,6 @@ void	draw_fvp(t_data_mlx *data)
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
 		&data->line_length, &data->endian);
 	ray_player(data);
-	// i = -1;
-	// while (data->sector[++i])
-	// 	printf("#%2d : %f\n", i, data->sector[i]);
-	// i = -1;
-	// while (++i < WIDTH)
-	// {
-	// ray_analys(data, i, i);
-	// }
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img);
 }

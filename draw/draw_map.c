@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:04:49 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/26 13:52:59 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/26 23:17:22 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,17 @@ void	line_math(t_data_mlx *data, float rad)
 
 	c = 0;
 	ang = data->map->player.a + rad;
-	
-		while (c < 2)
-		{
-			ray_x = data->map->player.x + c * cos(ang);
-			ray_y = data->map->player.y + c * sin(ang);
-			if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
-				break ;
-			c += 0.01;
-			ray_x *= TEXTURESIZE;
-			ray_y *= TEXTURESIZE;
-			my_mlx_pixel_put(data, ray_x, ray_y, PLAYERCOL);
-		}
+	while (c < 2)
+	{
+		ray_x = data->map->player.x + c * cos(ang);
+		ray_y = data->map->player.y + c * sin(ang);
+		if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
+			break ;
+		c += 0.01;
+		ray_x *= TEXTURESIZE;
+		ray_y *= TEXTURESIZE;
+		my_mlx_pixel_put(data, ray_x, ray_y, PLAYERCOL);
+	}
 }
 
 void	draw_field(int x, int y, t_data_mlx *data)
@@ -82,24 +81,6 @@ void	draw_field(int x, int y, t_data_mlx *data)
 	else if (data->map->mapa[x][y].sym == '0')
 		draw_square(y * TEXTURESIZE, x * TEXTURESIZE, data, FLOORCOL);
 }
-
-// void draw_invis_background(t_data_mlx *data, int w, int h)
-// {
-// 	int	y;
-// 	int	x;
-
-// 	y = 0;
-// 	while(y <= h)
-// 	{
-// 		x = 0;
-// 		while (x <= w)
-// 		{
-// 			my_mlx_pixel_put(data, x, y, INVISIBLE_COL);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
 
 void	draw_map(t_data_mlx *data)
 {

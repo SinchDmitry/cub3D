@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 11:50:19 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/26 13:33:14 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/26 23:17:31 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,18 @@ void	line_math_minimap(t_data_mlx *data, float rad)
 	float	ray_y;
 
 	ang = data->map->player.a + rad;
-		c = 0;
-		while (c < 2)
-		{
-			ray_x = data->map->player.x + c * cos(ang);
-			ray_y = data->map->player.y + c * sin(ang);
-			if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
-				break ;
-			ray_x *= MMTEXTURESIZE;
-			ray_y *= MMTEXTURESIZE;
-			c = c + 0.1f;
-			pixel_put_map_move(ray_x, ray_y, data, PLAYERCOL);
-		}
+	c = 0;
+	while (c < 2)
+	{
+		ray_x = data->map->player.x + c * cos(ang);
+		ray_y = data->map->player.y + c * sin(ang);
+		if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
+			break ;
+		ray_x *= MMTEXTURESIZE;
+		ray_y *= MMTEXTURESIZE;
+		c = c + 0.1f;
+		pixel_put_map_move(ray_x, ray_y, data, PLAYERCOL);
+	}
 }
 
 void	draw_invis_background(t_data_mlx *data, int height, int width)
