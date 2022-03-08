@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/26 23:10:29 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/08 19:37:44 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	ray_calc(t_data_mlx *data)
 	}
 }
 
-void	ray_player(t_data_mlx *data)
+void	ray_player(t_data_mlx *data, int flag)
 {
 	int		x;
 	int		i;
@@ -87,13 +87,17 @@ void	ray_player(t_data_mlx *data)
 				[data->map->camera.ray_pos_x].sym != '0')
 				break ;
 		}
+		if (!flag)
+			my_mlx_pixel_put(data, data->map->camera.ray_pos_x * TEXSIZE, \
+				data->map->camera.ray_pos_y * TEXSIZE, GREEN_COL);
 		if (data->map->camera.wall_dir)
 			data->sector = (data->map->camera.side_dist_y - \
 				data->map->camera.delta_dir_y);
 		else
 			data->sector = (data->map->camera.side_dist_x - \
 				data->map->camera.delta_dir_x);
-		draw_ray_catsing(data, x, HEIGHT / (data->sector), \
-			step_counter_texture(0.00390625f, 0));
+		if (flag)
+			draw_ray_cast(data, x, HEIGHT / (data->sector), \
+				step_counter_texture(0.00390625f, 0));
 	}
 }

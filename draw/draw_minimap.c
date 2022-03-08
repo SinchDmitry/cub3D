@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 11:50:19 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/26 23:17:31 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/08 19:27:30 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	pixel_put_map_move(int x, int y, t_data_mlx *data, int color)
 
 	x1 = x;
 	y1 = y;
-	h = ((data->map->player.x) * MMTEXTURESIZE);
-	w = ((data->map->player.y) * MMTEXTURESIZE);
+	h = ((data->map->player.x) * MMTEXSIZE);
+	w = ((data->map->player.y) * MMTEXSIZE);
 	x = ((x1 - h) * sin(data->map->player.a + ROTATE_MOV) - (y1 - w) * \
 		cos(data->map->player.a + ROTATE_MOV));
 	y = ((x1 - h) * cos(data->map->player.a + ROTATE_MOV) + (y1 - w) * \
@@ -38,10 +38,10 @@ void	draw_square_move(int x, int y, t_data_mlx *data, int color)
 	int	j;
 
 	i = 0;
-	while (x + i < x + MMTEXTURESIZE)
+	while (x + i < x + MMTEXSIZE)
 	{
 		j = 0;
-		while (y + j < y + MMTEXTURESIZE)
+		while (y + j < y + MMTEXSIZE)
 		{	
 			pixel_put_map_move(x + i, y + j, data, color);
 			j++;
@@ -56,10 +56,10 @@ void	draw_invis_square(int x, int y, t_data_mlx *data, int color)
 	int	j;
 
 	i = 0;
-	while (x + i < x + MMTEXTURESIZE)
+	while (x + i < x + MMTEXSIZE)
 	{
 		j = 0;
-		while (y + j < y + MMTEXTURESIZE)
+		while (y + j < y + MMTEXSIZE)
 		{	
 			my_mlx_pixel_put(data, y, x, color);
 			j++;
@@ -71,9 +71,9 @@ void	draw_invis_square(int x, int y, t_data_mlx *data, int color)
 void	draw_field_move(int x, int y, t_data_mlx *data)
 {
 	if (data->map->mapa[x][y].sym == '1')
-		draw_square_move(y * MMTEXTURESIZE, x * MMTEXTURESIZE, data, WALLCOL);
+		draw_square_move(y * MMTEXSIZE, x * MMTEXSIZE, data, WALLCOL);
 	else if (data->map->mapa[x][y].sym == '0')
-		draw_square_move(y * MMTEXTURESIZE, x * MMTEXTURESIZE, data, FLOORCOL);
+		draw_square_move(y * MMTEXSIZE, x * MMTEXSIZE, data, FLOORCOL);
 }
 
 void	line_math_minimap(t_data_mlx *data, float rad)
@@ -91,8 +91,8 @@ void	line_math_minimap(t_data_mlx *data, float rad)
 		ray_y = data->map->player.y + c * sin(ang);
 		if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
 			break ;
-		ray_x *= MMTEXTURESIZE;
-		ray_y *= MMTEXTURESIZE;
+		ray_x *= MMTEXSIZE;
+		ray_y *= MMTEXSIZE;
 		c = c + 0.1f;
 		pixel_put_map_move(ray_x, ray_y, data, PLAYERCOL);
 	}
@@ -145,7 +145,7 @@ void	draw_board(t_data_mlx *data)
 				my_mlx_pixel_put(data, i , j , INVISIBLE_COL);
 			if (in_circle(j, i, 100) == 2)
 				my_mlx_pixel_put(data, i , j , WHITE_COL);
-			if (in_circle(j, i, MMTEXTURESIZE / 4) == 1)
+			if (in_circle(j, i, MMTEXSIZE / 4) == 1)
 				my_mlx_pixel_put(data, i , j , WHITE_COL);
 			j++;
 		}

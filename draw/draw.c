@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/26 16:14:39 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/08 19:27:30 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	render_next_frame(t_data_mlx *data)
 		draw_map(data);
 		mlx_put_image_to_window(data->mlx, data->mlx_win, \
 			data->image.mm_space[i], 0, 0);
-		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, WIDTH / 2 - data->map->width * TEXTURESIZE / 2, HEIGHT / 2 - data->map->height * TEXTURESIZE / 2);
+		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, WIDTH / 2 - data->map->width * TEXSIZE / 2, HEIGHT / 2 - data->map->height * TEXSIZE / 2);
 		mlx_destroy_image(data->mlx, data->img);
 	}
 	// draw map
