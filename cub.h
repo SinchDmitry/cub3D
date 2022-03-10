@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/25 22:27:29 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/26 16:10:49 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_camera
 	int		step_x;
 	int		step_y;
 	float	wall_dir;
+	float	cam_dir_x;
+	float	cam_dir_y;
 	int		ray_pos_x;
 	int		ray_pos_y;
 	float	side_dist_x;

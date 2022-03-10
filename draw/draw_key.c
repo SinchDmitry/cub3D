@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_key.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 22:43:17 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/26 15:47:53 by utygett          ###   ########.fr       */
+/*   Updated: 2022/02/26 21:42:33 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	rl_case(int keycode, t_data_mlx *data, float dir_x, float plane_x)
 {
 	dir_x = data->map->player.dir_x;
 	plane_x = data->map->camera.pl_x;
-	if (keycode == RIGHT_KEY)
+	if (keycode == LEFT_KEY)
 	{
 		data->map->player.dir_x = data->map->player.dir_x * cos(-MOVE_ANGLE) - \
 			data->map->player.dir_y * sin(-MOVE_ANGLE);
@@ -78,7 +78,7 @@ static void	rl_case(int keycode, t_data_mlx *data, float dir_x, float plane_x)
 		data->map->camera.pl_y = plane_x * sin(-MOVE_ANGLE) + \
 			data->map->camera.pl_y * cos(-MOVE_ANGLE);
 	}
-	if (keycode == LEFT_KEY)
+	if (keycode == RIGHT_KEY)
 	{
 		data->map->player.dir_x = data->map->player.dir_x * cos(MOVE_ANGLE) - \
 			data->map->player.dir_y * sin(MOVE_ANGLE);
