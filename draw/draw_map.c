@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:04:49 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/08 20:09:49 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/10 18:32:41 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,6 @@ void	draw_map(t_data_mlx *data)
 		i++;
 	}
 	draw_player(&data->map->player, data);
-	// a = MMANG_START;
-	// while (a < MMFOV)
-	// {
-	// 	line_math(data, a);
-	// 	a = a + MMANG_STEP;
-	// }	
-	ray_player(data, 0);
 }
 
 /**********************************************/
@@ -136,14 +129,14 @@ static void	init_list(t_line *line, t_vls *xyz)
 	line->error = line->delta_x - line->delta_y;
 }
 
-void	draw_line(t_data_mlx *data, t_vls xyz, t_data *img)
+void	draw_line(t_data_mlx *data, t_vls xyz)
 {
 	t_line	line_w;
 
 	init_list(&line_w, &xyz);
 	while ((int)(xyz.x1 - xyz.x2) || (int)(xyz.y1 - xyz.y2))
 	{
-		my_mlx_pixel_put(img, xyz.y1, xyz.x1, GREEN_COL);
+		my_mlx_pixel_put(data, xyz.x1, xyz.y1, GREEN_COL);
 		line_w.error2 = line_w.error * 2;
 		if (line_w.error2 > -line_w.delta_y)
 		{

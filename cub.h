@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/26 16:10:49 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/10 20:57:35 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,29 @@ typedef struct s_rgb
 	int	b;
 }	t_rgb;
 
+typedef struct s_tex_data
+{
+	int		p_x;
+	int		p_y;
+	int		j;
+}	t_tex_data;
+
+typedef struct s_tex
+{
+	char			side;
+	struct s_tex	*next;
+	int				pixel_x;
+	int				pixel_y;
+	int				ray_counter;
+}	t_tex;
+
 typedef struct s_texture
 {
-	char	*north;
-	char	*south;
 	char	*east;
 	char	*west;
+	char	*north;
+	char	*south;
+	t_tex	*ture;
 }	t_texture;
 
 typedef struct s_info

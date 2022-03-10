@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/08 20:03:40 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/10 20:03:12 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_data_mlx {
 	int			endian1;
 	int			map_zoom;
 	float		ray_a;
-	float		sector;
+	float		sector[WIDTH];
 	t_images	image;
 	t_info		*map;
 }				t_data_mlx;
@@ -118,5 +118,6 @@ void			ray_player(t_data_mlx *data, int flag);
 void			draw_invis_background(t_data_mlx *data, int height, int width);
 void			draw_ray_cast(t_data_mlx *data, float x, float h, int w_pix);
 int				step_counter_texture(float step, float value);
+void			draw_line(t_data_mlx *data, t_vls xyz);
 
 #endif
