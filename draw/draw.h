@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/27 13:58:03 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/10 17:56:22 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # define RAYCOL				0x0000000F
 # define MM_BOARD_COL		0x00FFFFF0
 # define MM_BOARD_SIZE		5
-# define TEXTURESIZE		15 // need auto size map after parse file
-# define MMTEXTURESIZE		20
+# define TEXSIZE		15 // need auto size map after parse file
+# define MMTEXSIZE		20
 # define MOVE_SPEED			0.2
 # define MOVE_ANGLE			0.05
 # define VIEW_RANGE			35.0f
@@ -82,6 +82,30 @@ typedef struct s_data_mlx {
 	t_info		*map;
 }				t_data_mlx;
 
+typedef struct s_line
+{
+	float	delta_x;
+	float	delta_y;
+	float	tmp_delta;
+	float	sign_x;
+	float	sign_y;
+	float	error;
+	float	error2;
+	int		flag;
+	float	st_x1;
+	float	st_x2;
+	float	st_y1;
+	float	st_y2;
+}	t_line;
+
+typedef struct s_vls
+{
+	float	x1;
+	float	x2;
+	float	y1;
+	float	y2;
+}	t_vls;
+
 void			draw_map_with_move(t_data_mlx *data);
 void			my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color);
 unsigned int	my_mlx_get_pixel(t_data_mlx *data, int x, int y, int wall);
@@ -90,10 +114,9 @@ int				key_h(int keycode, t_data_mlx *data);
 void			draw_map(t_data_mlx *data);
 int				check_move(t_data_mlx *data);
 int				render_next_frame(t_data_mlx *data);
-void			ray_player(t_data_mlx *data);
+void			ray_player(t_data_mlx *data, int flag);
 void			draw_invis_background(t_data_mlx *data, int height, int width);
-int				create_trgb(int t, int r, int g, int b);
-void			draw_ray_catsing(t_data_mlx *data, float x, float height, int w_pixel);
+void			draw_ray_cast(t_data_mlx *data, float x, float h, int w_pix);
 int				step_counter_texture(float step, float value);
 
 #endif

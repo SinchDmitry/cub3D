@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_key.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 22:43:17 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/26 21:42:33 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/10 18:17:19 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,24 @@ static void	ws_case(int keycode, t_data_mlx *data)
 
 static void	ad_case(int keycode, t_data_mlx *data)
 {
-	int	ang;
-
-	ang = tan(1.571f / 2);
-	if (keycode == A_KEY)
-	{
-		data->map->player.x -= MOVE_SPEED * (data->map->player.dir_x - ang);
-		data->map->player.y -= MOVE_SPEED * (data->map->player.dir_y - ang);
-		if (check_move(data))
-		{
-			data->map->player.x += MOVE_SPEED * (data->map->player.dir_x - ang);
-			data->map->player.y += MOVE_SPEED * (data->map->player.dir_y - ang);
-		}
-	}
 	if (keycode == D_KEY)
 	{
-		data->map->player.x += MOVE_SPEED * (data->map->player.dir_x - ang);
-		data->map->player.y += MOVE_SPEED * (data->map->player.dir_y - ang);
+		data->map->player.x -= MOVE_SPEED * (data->map->player.dir_y);
+		data->map->player.y += MOVE_SPEED * (data->map->player.dir_x);
 		if (check_move(data))
 		{
-			data->map->player.x -= MOVE_SPEED * (data->map->player.dir_x - ang);
-			data->map->player.y -= MOVE_SPEED * (data->map->player.dir_y - ang);
+			data->map->player.x += MOVE_SPEED * (data->map->player.dir_y);
+			data->map->player.y += MOVE_SPEED * (data->map->player.dir_x);
+		}
+	}
+	if (keycode == A_KEY)
+	{
+		data->map->player.x += MOVE_SPEED * (data->map->player.dir_y);
+		data->map->player.y -= MOVE_SPEED * (data->map->player.dir_x);
+		if (check_move(data))
+		{
+			data->map->player.x -= MOVE_SPEED * (data->map->player.dir_y);
+			data->map->player.y -= MOVE_SPEED * (data->map->player.dir_x);
 		}
 	}
 }
@@ -77,6 +74,7 @@ static void	rl_case(int keycode, t_data_mlx *data, float dir_x, float plane_x)
 			data->map->camera.pl_y * sin(-MOVE_ANGLE);
 		data->map->camera.pl_y = plane_x * sin(-MOVE_ANGLE) + \
 			data->map->camera.pl_y * cos(-MOVE_ANGLE);
+		data->map->player.a += -MOVE_ANGLE;
 	}
 	if (keycode == RIGHT_KEY)
 	{
@@ -88,6 +86,7 @@ static void	rl_case(int keycode, t_data_mlx *data, float dir_x, float plane_x)
 			data->map->camera.pl_y * sin(MOVE_ANGLE);
 		data->map->camera.pl_y = plane_x * sin(MOVE_ANGLE) + \
 			data->map->camera.pl_y * cos(MOVE_ANGLE);
+		data->map->player.a += MOVE_ANGLE;
 	}
 }
 

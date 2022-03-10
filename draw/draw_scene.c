@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/02/27 15:18:39 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/10 17:56:46 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,18 @@ int	step_counter_texture(float step, float value)
 	return (i);
 }
 
-void	draw_ray_catsing(t_data_mlx *data, float x, float height, int w_pixel)
+void	draw_ray_cast(t_data_mlx *data, float x, float h, int w_pix)
 {
 	float	i;
 	int		j;
 
 	j = 0;
-	i = 0 - height / 2;
-	while (i < height / 2)
+	i = 0 - h / 2;
+	while (i < h / 2)
 	{
-		my_mlx_pixel_put(data, x, HEIGHT / 2 + i, WHITE_COL); \
-			// my_mlx_get_pixel(data, w_pixel,  \
-			// step_counter_texture(height / 256, height / 2 + i), 1));
+		my_mlx_pixel_put(data, x, HEIGHT / 2 + i, \
+			my_mlx_get_pixel(data, w_pix, \
+			step_counter_texture(h / 256, h / 2 + i), 1));
 		++i;
 	}
 }
@@ -93,15 +93,7 @@ void	draw_fvp(t_data_mlx *data)
 	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
 		&data->line_length, &data->endian);
-	ray_player(data);
-	// i = -1;
-	// while (data->sector[++i])
-	// 	printf("#%2d : %f\n", i, data->sector[i]);
-	// i = -1;
-	// while (++i < WIDTH)
-	// {
-	// ray_analys(data, i, i);
-	// }
+	ray_player(data, 1);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img);
 }
