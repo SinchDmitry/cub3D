@@ -11,6 +11,7 @@ gcc -MD -Imlx -g -c draw/draw_minimap.c -o draw/draw_minimap.o
  
 gcc -MD -Imlx -g -c draw/draw_scene.c -o draw/draw_scene.o
 gcc -MD -Imlx -g -c draw/draw_map.c -o draw/draw_map.o
+ 
 gcc -MD -Imlx -g -c draw/draw_ray.c -o draw/draw_ray.o
 gcc -MD -Imlx -g -c draw/draw_key.c -o draw/draw_key.o
 cp ./libft/libft.a .

@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:04:49 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/10 17:59:57 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/11 16:05:06 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,43 @@ void	draw_player(t_player *player, t_data_mlx *data)
 {
 	float	x;
 	float	y;
+	int     player_draw[10][10] = 
+	{ 
+	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
+	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
+	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
+	{0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
+	{0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
+	{0, 0, 1, 1, 1, 1, 1, 1, 0, 0},
+	{0, 0, 1, 1, 1, 1, 1, 1, 0, 0},
+	{0, 1, 1, 1, 0, 0, 1, 1, 1, 0},
+	{0, 1, 1, 0, 0, 0, 0, 1, 1, 0},
+	{1, 1, 0, 0, 0, 0, 0, 0, 1, 1},
+	};
 
 	player->x_textu = player->x * TEXSIZE;
 	player->y_textu = player->y * TEXSIZE;
 	x = player->x_textu;
 	y = player->y_textu;
-	while (x < player->x_textu + (TEXSIZE / 2))
+	// while (x < player->x_textu + (TEXSIZE / 2))
+	// {
+	// 	y = player->y_textu;
+	// 	while (y < player->y_textu + (TEXSIZE / 2))
+	// 	{
+	// 		my_mlx_pixel_put(data, x - (TEXSIZE / 4), \
+	// 			y - (TEXSIZE / 4), PLAYERCOL);
+	// 		y++;
+	// 	}
+	// 	x++;
+	// }
+	while (x < player->x_textu + 10)
 	{
 		y = player->y_textu;
-		while (y < player->y_textu + (TEXSIZE / 2))
-		{
-			my_mlx_pixel_put(data, x - (TEXSIZE / 4), \
-				y - (TEXSIZE / 4), PLAYERCOL);
+		while (y < player->y_textu + 10)
+		{	
+			if(player_draw[(int)(x - player->x_textu)][(int)(y - player->y_textu)] == 1)
+				my_mlx_pixel_put(data, x - 5, \
+					y - 5, PLAYERCOL);
 			y++;
 		}
 		x++;
@@ -101,13 +126,6 @@ void	draw_map(t_data_mlx *data)
 		i++;
 	}
 	draw_player(&data->map->player, data);
-	// a = MMANG_START;
-	// while (a < MMFOV)
-	// {
-	// 	line_math(data, a);
-	// 	a = a + MMANG_STEP;
-	// }	
-	ray_player(data, 0);
 }
 
 /**********************************************/
@@ -136,14 +154,14 @@ static void	init_list(t_line *line, t_vls *xyz)
 	line->error = line->delta_x - line->delta_y;
 }
 
-void	draw_line(t_data_mlx *data, t_vls xyz, t_data *img)
+void	draw_line(t_data_mlx *data, t_vls xyz)
 {
 	t_line	line_w;
 
 	init_list(&line_w, &xyz);
 	while ((int)(xyz.x1 - xyz.x2) || (int)(xyz.y1 - xyz.y2))
 	{
-		my_mlx_pixel_put(data, xyz.y1, xyz.x1, GREEN_COL);
+		my_mlx_pixel_put(data, xyz.x1, xyz.y1, GREEN_COL);
 		line_w.error2 = line_w.error * 2;
 		if (line_w.error2 > -line_w.delta_y)
 		{

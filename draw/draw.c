@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/10 20:59:35 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/11 13:24:31 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,7 @@ int	render_next_frame(t_data_mlx *data)
 		draw_fvp(data);
 		if (data->map->player.f_minimap)
 		{	
-			
-			data->img = mlx_new_image(data->mlx, MINIMAPWIDTH, MINIMAPHEIGHT);
-			data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
-				&data->line_length, &data->endian);
-			draw_map_with_move(data);
-			mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
-			mlx_destroy_image(data->mlx, data->img);
+			draw_minimap(data);
 		}
 	}
 	if (!data->map->player.f_map)
@@ -115,12 +109,12 @@ void	init_images(t_data_mlx *data)
 	//init cpmpas
 	data->image.compas[0] = mlx_xpm_file_to_image(data->mlx, "./textures/N.xpm", \
 			&img_h, &img_w);
-	data->image.compas[1] = mlx_xpm_file_to_image(data->mlx, "./textures/E.xpm", \
-			&img_h, &img_w);
-	data->image.compas[2] = mlx_xpm_file_to_image(data->mlx, "./textures/W.xpm", \
-			&img_h, &img_w);
-	data->image.compas[3] = mlx_xpm_file_to_image(data->mlx, "./textures/S.xpm", \
-			&img_h, &img_w);
+	// data->image.compas[1] = mlx_xpm_file_to_image(data->mlx, "./textures/E.xpm", \
+	// 		&img_h, &img_w);
+	// data->image.compas[2] = mlx_xpm_file_to_image(data->mlx, "./textures/W.xpm", \
+	// 		&img_h, &img_w);
+	// data->image.compas[3] = mlx_xpm_file_to_image(data->mlx, "./textures/S.xpm", \
+	// 		&img_h, &img_w);
 }
 
 int	draw(t_info *map)
