@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:45:10 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/15 17:17:12 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/11 22:36:48 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int	param_map(t_info *map, char **map_str)
 		if (prm == -1)
 			map->height--;
 		else if (!prm)
-			error_end(1);
+			error_end(2);
 		else if (prm == -2)
 			break ;
 	}

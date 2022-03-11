@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/11 14:43:06 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/11 20:26:44 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DRAW_H
 # define DRAW_H
 # include "../cub.h"
-// #define WIDTH 1280
-// #define HEIGHT 720
 # define WIDTH 				1000
 # define HEIGHT				700
 # define WHITE_COL			0x00FFFFFF
@@ -31,8 +29,8 @@
 # define RAYCOL				0x0000000F
 # define MM_BOARD_COL		0x00FFFFF0
 # define MM_BOARD_SIZE		5
-# define TEXSIZE		15 // need auto size map after parse file
-# define MMTEXSIZE		20
+# define TEXSIZE			15 // need auto size map after parse file
+# define MMTEXSIZE			20
 # define MOVE_SPEED			0.2
 # define MOVE_ANGLE			0.05
 # define VIEW_RANGE			35.0f
@@ -120,6 +118,5 @@ void			draw_ray_cast(t_data_mlx *data, float x, float h, int w_pix);
 int				step_counter_texture(float step, float value);
 void			draw_line(t_data_mlx *data, t_vls xyz);
 void			draw_minimap(t_data_mlx *data);
-
 
 #endif

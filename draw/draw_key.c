@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_key.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 22:43:17 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/10 18:17:19 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/11 17:36:27 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	rl_case(int keycode, t_data_mlx *data, float dir_x, float plane_x)
 			data->map->camera.pl_y * sin(-MOVE_ANGLE);
 		data->map->camera.pl_y = plane_x * sin(-MOVE_ANGLE) + \
 			data->map->camera.pl_y * cos(-MOVE_ANGLE);
-		data->map->player.a += -MOVE_ANGLE;
+		data->map->player.a -= MOVE_ANGLE;
 	}
 	if (keycode == RIGHT_KEY)
 	{
