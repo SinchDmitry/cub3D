@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/11 13:24:31 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/11 21:58:00 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	render_next_frame(t_data_mlx *data)
 	int			img_h;
 	int			img_w;
 	static int	i;
-	
 	if (data->map->player.f_map)
 	{
 		draw_fvp(data);
@@ -129,7 +128,7 @@ int	draw(t_info *map)
 	data.mlx_win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Hello world!");
 	init_images(&data);
 	render_next_frame(&data);
-	mlx_loop_hook(data.mlx, render_next_frame, &data);
+	// mlx_loop_hook(data.mlx, render_next_frame, &data);
 	mlx_hook(data.mlx_win, 02, (1L << 0), &key_h, &data);
 	mlx_loop(data.mlx);
 	return (0);

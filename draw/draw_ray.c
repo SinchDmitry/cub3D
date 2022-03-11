@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/10 21:18:17 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/11 22:40:33 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,17 +154,28 @@ void	ray_player(t_data_mlx *data, int flag)
 		// 	step_counter_texture(0.00390625f, 0));
 	}
 	add_back(data, &data->map->texture->ture, &xyj);
-	while (data->map->texture->ture->next)
-	{
-		printf("<<<<<<<<<>>>>>>>>>>\n");
-		printf("x : %5d | y : %5d | num : %5d | side : %c\n", data->map->texture->ture->pixel_x, data->map->texture->ture->pixel_y, data->map->texture->ture->ray_counter, data->map->texture->ture->side);
-		data->map->texture->ture = data->map->texture->ture->next;
-	}
+	// while (data->map->texture->ture)
+	// {
+	// 	printf("x : %5d | y : %5d | num : %5d | side : %c\n", data->map->texture->ture->pixel_x, data->map->texture->ture->pixel_y, data->map->texture->ture->ray_counter, data->map->texture->ture->side);
+	// 	data->map->texture->ture = data->map->texture->ture->next;
+	// }
+	printf("<<<<<<<<<>>>>>>>>>>\n");
 	x = -1;
+	int num = data->map->texture->ture->ray_counter;
+	int j = 0;
+		printf("x : %5d | y : %5d | num : %5d | side : %c\n", data->map->texture->ture->pixel_x, data->map->texture->ture->pixel_y, data->map->texture->ture->ray_counter, data->map->texture->ture->side);
 	while (++x < WIDTH)
 	{
-		draw_ray_cast(data, x, HEIGHT / data->sector[x], \
-			step_counter_texture(0.00390625f, 0));
+		if(x > num && data->map->texture->ture)
+		{
+			printf("x : %5d | y : %5d | num : %5d | side : %c\n", data->map->texture->ture->pixel_x, data->map->texture->ture->pixel_y, data->map->texture->ture->ray_counter, data->map->texture->ture->side);
+			data->map->texture->ture = data->map->texture->ture->next;
+			num += data->map->texture->ture->ray_counter;
+			j = 0;
+		}
+		j++;
+		// draw_ray_cast(data, x, HEIGHT / data->sector[x], step_counter_texture(256 / data->map->texture->ture->ray_counter, j));
+		draw_ray_cast(data, x, HEIGHT / data->sector[x], j);
 	}
 }
 
