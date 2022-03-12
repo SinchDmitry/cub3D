@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:04:49 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/11 16:05:06 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/11 19:38:14 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,33 @@ void	draw_player(t_player *player, t_data_mlx *data)
 {
 	float	x;
 	float	y;
-	int     player_draw[10][10] = 
-	{ 
-	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-	{0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
-	{0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
-	{0, 0, 1, 1, 1, 1, 1, 1, 0, 0},
-	{0, 0, 1, 1, 1, 1, 1, 1, 0, 0},
-	{0, 1, 1, 1, 0, 0, 1, 1, 1, 0},
-	{0, 1, 1, 0, 0, 0, 0, 1, 1, 0},
+	float	point_x;
+	float	point_y;
+	int		player_draw[10][10] = 
+	// { 
+	// {0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
+	// {0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
+	// {0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
+	// {0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
+	// {0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
+	// {0, 0, 1, 1, 1, 1, 1, 1, 0, 0},
+	// {0, 0, 1, 1, 1, 1, 1, 1, 0, 0},
+	// {0, 1, 1, 1, 0, 0, 1, 1, 1, 0},
+	// {0, 1, 1, 0, 0, 0, 0, 1, 1, 0},
+	// {1, 1, 0, 0, 0, 0, 0, 0, 1, 1}
+	// };
+	{
 	{1, 1, 0, 0, 0, 0, 0, 0, 1, 1},
+	{0, 1, 1, 0, 0, 0, 0, 1, 1, 0},
+	{0, 1, 1, 1, 0, 0, 1, 1, 1, 0},
+	{0, 0, 1, 1, 1, 1, 1, 1, 0, 0},
+	{0, 0, 1, 1, 1, 1, 1, 1, 0, 0},
+	{0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
+	{0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
+	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
+	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
+	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0}
 	};
-
 	player->x_textu = player->x * TEXSIZE;
 	player->y_textu = player->y * TEXSIZE;
 	x = player->x_textu;
@@ -49,10 +62,14 @@ void	draw_player(t_player *player, t_data_mlx *data)
 	{
 		y = player->y_textu;
 		while (y < player->y_textu + 10)
-		{	
-			if(player_draw[(int)(x - player->x_textu)][(int)(y - player->y_textu)] == 1)
-				my_mlx_pixel_put(data, x - 5, \
-					y - 5, PLAYERCOL);
+		{
+			point_x = (x - player->x_textu - 5) * cos(data->map->player.a) - \
+				(y - player->y_textu - 5) * sin(data->map->player.a);
+			point_y = (x - player->x_textu - 5) * sin(data->map->player.a) + \
+				(y - player->y_textu - 5) * cos(data->map->player.a);
+			if (player_draw[(int)(x - player->x_textu)] \
+				[(int)(y - player->y_textu)] == 1)
+				my_mlx_pixel_put(data, point_x + player->x_textu, point_y + player->y_textu, GREEN_COL);
 			y++;
 		}
 		x++;

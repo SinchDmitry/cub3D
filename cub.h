@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/10 21:15:58 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/12 18:26:20 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_camera
 	float	delta_dir_x;
 	float	delta_dir_y;
 	float	correct_dist;
+	int		vertilcal_pos; // up and down camera
 }	t_camera;
 
 typedef struct s_images

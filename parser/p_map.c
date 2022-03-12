@@ -6,28 +6,11 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/26 21:43:46 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/11 22:34:41 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-// static int	ft_iscompas(t_info *map, char ch)
-// {
-// 	if (ch == 'S' || ch == 'N' || ch == 'W' || ch == 'E')
-// 	{
-// 		if (ch == 'N')
-// 			map->player.a = 4.7124f;
-// 		if (ch == 'E')
-// 			map->player.a = 0;
-// 		if (ch == 'S')
-// 			map->player.a = 1.5708f;
-// 		if (ch == 'W')
-// 			map->player.a = 3.1415f;
-// 		return (1);
-// 	}
-// 	return (0);
-// }
 
 static void	select_dir(t_info *map, char ch)
 {
@@ -72,7 +55,7 @@ static int	ft_iscompas(t_info *map, char ch, int *first_in)
 		if (*first_in)
 			error_end(2);
 		select_dir(map, ch);
-		*first_in = 1;
+		*first_in += 1;
 		return (1);
 	}
 	else
@@ -97,6 +80,39 @@ void	map_info(t_info *map, char **map_str)
 	map_struct(map, map_str + (param_map(map, map_str)));
 }
 
+static void map_check(t_info *map, int max_i, int max_j)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < max_i)
+	{
+		j = -1;
+		while (++j < max_j)
+		{
+			if (map->mapa[i][j].sym == 'e')
+			{
+				if (i > 0)
+					if (map->mapa[i - 1][j].sym == '0')
+						error_end(2);
+				if (i < max_i - 1)
+					if (map->mapa[i + 1][j].sym == '0')
+						error_end(2);
+				if (j > 0)
+					if (map->mapa[i][j - 1].sym == '0')
+						error_end(2);
+				if (j < max_j - 1)
+					if (map->mapa[i][j + 1].sym == '0')
+						error_end(2);
+			}
+			else if (((!i || i == (max_i - 1)) && map->mapa[i][j].sym == '0') \
+				|| ((!j || j == (max_j - 1)) && map->mapa[i][j].sym == '0'))
+				error_end(2);
+		}
+	}
+}
+
 static void	map_create(t_info *map, char **map_str)
 {
 	int	i;
@@ -112,19 +128,20 @@ static void	map_create(t_info *map, char **map_str)
 		{
 			if (space(map_str[i][j]))
 				map->mapa[i][j].sym = 'e';
-			else if (ft_iscompas(map, map_str[i][j], &f)) // only once in map bleat
+			else if (ft_iscompas(map, map_str[i][j], &f))
 			{
-				map->player.dir = map_str[i][j];
-				map->player.x = (float)j;
-				map->player.y = (float)i;
-				map->mapa[i][j].sym = '0';
+					map->player.dir = map_str[i][j];
+					map->player.x = (float)j;
+					map->player.y = (float)i;
+					map->mapa[i][j].sym = '0';
 			}
 			else
 				map->mapa[i][j].sym = map_str[i][j];
-			printf ("%c ", map->mapa[i][j].sym);
+			// printf ("%c ", map->mapa[i][j].sym);
 		}
-		printf ("\n");
+		// printf ("\n");
 	}
+	map_check(map, i, j);
 }
 
 void	map_struct(t_info *map, char **map_str)

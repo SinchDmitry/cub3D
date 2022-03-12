@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/11 21:58:00 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/12 20:13:32 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,21 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-unsigned int	my_mlx_get_pixel(t_data_mlx *data, int x, int y, int wall)
+unsigned int	my_mlx_get_pixel(t_data_mlx *data, int x, int y, char side)
 {	
-	if (wall == 1)
-		return (*(unsigned int *)(data->addr1 + (x * data->bits_per_pixel1 / 8 \
-			+ y * data->line_length1)));
-	return (0); // in process
+	int	wall;
+
+	wall = 0;
+	if (side == 'W')
+		wall = 0;
+	if (side == 'E')
+		wall = 1;
+	if (side == 'N')
+		wall = 2;
+	if (side == 'S')
+		wall = 3;
+	return (*(unsigned int *)(data->addr1[wall] + (x * data->bits_per_pixel1[wall] / 8 \
+			+ y * data->line_length1[wall])));
 }
 
 void	my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color)
@@ -51,6 +60,7 @@ int	render_next_frame(t_data_mlx *data)
 	int			img_h;
 	int			img_w;
 	static int	i;
+	key_h(data);
 	if (data->map->player.f_map)
 	{
 		draw_fvp(data);
@@ -101,10 +111,25 @@ void	init_images(t_data_mlx *data)
 			&img_h, &img_w);
 	}
 	//init texure wall
-	data->img1 = mlx_xpm_file_to_image(data->mlx, "./textures/wall1.xpm", \
+	data->img1[0] = mlx_xpm_file_to_image(data->mlx, "./textures/wall0.xpm", \
 		&img_h, &img_w);
-	data->addr1 = mlx_get_data_addr(data->img1, &data->bits_per_pixel1, \
-		&data->line_length1, &data->endian1);
+	data->addr1[0] = mlx_get_data_addr(data->img1[0], &data->bits_per_pixel1[0], \
+		&data->line_length1[0], &data->endian1[0]);
+	data->img1[1] = mlx_xpm_file_to_image(data->mlx, "./textures/wall1.xpm", \
+		&img_h, &img_w);
+	data->addr1[1] = mlx_get_data_addr(data->img1[1], &data->bits_per_pixel1[1], \
+		&data->line_length1[1], &data->endian1[1]);
+	data->img1[2] = mlx_xpm_file_to_image(data->mlx, "./textures/wall2.xpm", \
+		&img_h, &img_w);
+	data->addr1[2] = mlx_get_data_addr(data->img1[2], &data->bits_per_pixel1[2], \
+		&data->line_length1[2], &data->endian1[2]);
+	data->img1[3] = mlx_xpm_file_to_image(data->mlx, "./textures/wall3.xpm", \
+		&img_h, &img_w);
+	data->addr1[3] = mlx_get_data_addr(data->img1[3], &data->bits_per_pixel1[3], \
+		&data->line_length1[3], &data->endian1[3]);
+
+
+	
 	//init cpmpas
 	data->image.compas[0] = mlx_xpm_file_to_image(data->mlx, "./textures/N.xpm", \
 			&img_h, &img_w);
@@ -116,20 +141,39 @@ void	init_images(t_data_mlx *data)
 	// 		&img_h, &img_w);
 }
 
+int	key_press(int keycode, t_data_mlx *data)
+{
+	map_exit_case(keycode, data);
+	data->keycode[keycode] = PRESS;
+	return (0);
+}
+int	key_unpress(int keycode, t_data_mlx *data)
+{
+	data->keycode[keycode] = UNPRESS;
+	return (0);
+}
 int	draw(t_info *map)
 {
 	t_data_mlx	data;
+	int i;
 
+	i = 0;
 	map->player.f_map = 0;
 	map->player.f_minimap = 0;
 	data.map = map;
+	data.map->camera.vertilcal_pos = 0;
+	while(i < 250)
+		data.keycode[i++] = UNPRESS; //init unpress keys
 	printf("here x = %f y = %f\n", map->player.x, map->player.y);
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Hello world!");
 	init_images(&data);
 	render_next_frame(&data);
-	// mlx_loop_hook(data.mlx, render_next_frame, &data);
-	mlx_hook(data.mlx_win, 02, (1L << 0), &key_h, &data);
+	mlx_hook(data.mlx_win, 3, 0, &key_press, &data);
+	mlx_hook(data.mlx_win, 2, 0, &key_unpress, &data);
+	mlx_mouse_hook(data.mlx_win, &ft_mouse, &data);
+	mlx_loop_hook(data.mlx, render_next_frame, &data);
+	// mlx_hook(data.mlx_win, 02, (1L << 0), &key_h, &data);
 	mlx_loop(data.mlx);
 	return (0);
 }

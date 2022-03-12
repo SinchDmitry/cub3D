@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/11 21:34:42 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/12 18:31:27 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,26 @@ void	draw_ray_cast(t_data_mlx *data, float x, float h, int w_pix)
 void	draw_fvp(t_data_mlx *data)
 {
 	int	i;
-	
+	int x;
+	int y;
 	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
 		&data->line_length, &data->endian);
+	y = 0;
+	// ground and sky
+	while (y < HEIGHT)
+	{	
+		x = 0;
+		while (x < WIDTH)
+		{
+			if(y < HEIGHT / 2 + data->map->camera.vertilcal_pos)
+				my_mlx_pixel_put(data,x,y,SKY_COL);
+			else
+				my_mlx_pixel_put(data,x,y,GROUND_COL);
+			x++;
+		}
+		y++;
+	}
 	ray_player(data, 1);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img);

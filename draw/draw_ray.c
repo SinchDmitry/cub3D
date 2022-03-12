@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/11 22:40:33 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/12 19:24:15 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,45 +69,45 @@ static void	ray_calc(t_data_mlx *data)
 	}
 }
 
-void	side_calc(t_data_mlx *data, t_tex *last)
-{
-	if (!data->map->camera.wall_dir)
-	{
-		if (data->map->camera.step_x == -1)
-			last->side = 'W';
-		else
-			last->side = 'E';
-	}
-	else
-	{
-		if (data->map->camera.step_y == -1)
-			last->side = 'N';
-		else
-			last->side = 'S';
-	}
-}
+// void	side_calc(t_data_mlx *data, t_tex *last)
+// {
+// 	if (!data->map->camera.wall_dir)
+// 	{
+// 		if (data->map->camera.step_x == -1)
+// 			last->side = 'W';
+// 		else
+// 			last->side = 'E';
+// 	}
+// 	else
+// 	{
+// 		if (data->map->camera.step_y == -1)
+// 			last->side = 'N';
+// 		else
+// 			last->side = 'S';
+// 	}
+// }
 
-void	add_back(t_data_mlx *data, t_tex **lst, t_tex_data *xyj)
-{
-	t_tex	*last;
-	t_tex	*tmp;
+// void	add_back(t_data_mlx *data, t_tex **lst, t_tex_data *xyj)
+// {
+// 	t_tex	*last;
+// 	t_tex	*tmp;
 
-	tmp = *lst;
-	last = malloc (sizeof(t_tex));
-	side_calc(data, last);
-	last->next = NULL;
-	last->pixel_x = xyj->p_x;
-	last->pixel_y = xyj->p_y;
-	last->ray_counter = xyj->j;
-	if (!(*lst))
-		*lst = last;
-	else
-	{
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = last;
-	}
-}
+// 	tmp = *lst;
+// 	last = malloc (sizeof(t_tex));
+// 	side_calc(data, last);
+// 	last->next = NULL;
+// 	last->pixel_x = xyj->p_x;
+// 	last->pixel_y = xyj->p_y;
+// 	last->ray_counter = xyj->j;
+// 	if (!(*lst))
+// 		*lst = last;
+// 	else
+// 	{
+// 		while (tmp->next)
+// 			tmp = tmp->next;
+// 		tmp->next = last;
+// 	}
+// }
 
 void	ray_player(t_data_mlx *data, int flag)
 {
@@ -137,7 +137,7 @@ void	ray_player(t_data_mlx *data, int flag)
 		{
 			if (xyj.p_y != -1 && xyj.p_x != -1)
 			{
-				add_back(data, &data->map->texture->ture, &xyj);
+				// add_back(data, &data->map->texture->ture, &xyj);
 				xyj.j = 0;
 			}
 			xyj.p_x = data->map->camera.ray_pos_x;
@@ -150,33 +150,115 @@ void	ray_player(t_data_mlx *data, int flag)
 		else
 			data->sector[x] = (data->map->camera.side_dist_x - \
 				data->map->camera.delta_dir_x);
-		// draw_ray_cast(data, x, HEIGHT / data->sector, \
-		// 	step_counter_texture(0.00390625f, 0));
+
+		////////////////////// draw
+		int lineHeight = (int)(HEIGHT / data->sector[x]);
+		 // up and down camera
+		int drawStart = -lineHeight / 2 + HEIGHT / 2 + data->map->camera.vertilcal_pos;
+		
+     	if(drawStart < 0)
+			drawStart = 0;
+
+		int drawEnd = lineHeight / 2 + HEIGHT / 2 + data->map->camera.vertilcal_pos;
+		
+    	if(drawEnd >= HEIGHT) 
+			drawEnd = HEIGHT - 1;
+			
+		// x cordinate for wall side or front
+		double wallX;
+		if(!data->map->camera.wall_dir)
+			wallX = data->map->player.y + data->sector[x] * data->map->camera.cam_dir_y;
+		else
+			wallX = data->map->player.x + data->sector[x] * data->map->camera.cam_dir_x;
+		wallX = wallX - floor(wallX);
+		//x coordinate on the texture
+		int texX = (int)(wallX * (double)256);
+		
+		// if(data->map->camera.wall_dir == 0 && data->map->camera.cam_dir_x > 0)
+		// 	texX = 256 - texX - 1;
+		// if(data->map->camera.wall_dir == 1 && data->map->camera.cam_dir_y > 0) //for what that need?
+			texX = 256 - texX - 1;
+		double step = 1.0 * 256 / lineHeight;
+		double texPos = (drawStart - data->map->camera.vertilcal_pos - HEIGHT / 2 + lineHeight / 2) * step;
+		unsigned int col;
+		// side of wall
+		char sym;
+		sym = 'W';
+		if (!data->map->camera.wall_dir)
+		{
+			
+			if (data->map->camera.step_x == -1)
+				sym = 'W';
+			else
+				sym = 'S';
+		}
+		else
+		{
+			if (data->map->camera.step_y == -1)
+				sym = 'E';
+			else
+				sym = 'N';
+		}
+		//draw vertical line
+     	for(int y = drawStart; y < drawEnd; y++)
+     	{
+			int texY = (int)texPos & (256 - 1);
+       		texPos += step;
+			col = my_mlx_get_pixel(data, texX, texY, sym);
+			// if(data->map->camera.wall_dir == 1) // make shadow
+			// 	col = (col >> 1) & 8355711;
+		
+			if (!data->map->camera.wall_dir)
+			{
+				if (data->map->camera.step_x == -1)
+					col = (col >> 1) & 8355711;
+			}
+			else
+			{
+				// if (data->map->camera.step_y == -1)
+					col = (col >> 1) & 8355711;
+				// else
+					// col = (col >> 1) & 8355711;
+			}
+
+			my_mlx_pixel_put(data, x, y, col);
+		}
+		// draw_ray_cast(data, x, HEIGHT / data->sector[x], texX);
 	}
-	add_back(data, &data->map->texture->ture, &xyj);
+	// printf("y : %f x : %f\n", data->map->player.y, data->map->player.x );
+	// add_back(data, &data->map->texture->ture, &xyj);
 	// while (data->map->texture->ture)
 	// {
 	// 	printf("x : %5d | y : %5d | num : %5d | side : %c\n", data->map->texture->ture->pixel_x, data->map->texture->ture->pixel_y, data->map->texture->ture->ray_counter, data->map->texture->ture->side);
 	// 	data->map->texture->ture = data->map->texture->ture->next;
 	// }
-	printf("<<<<<<<<<>>>>>>>>>>\n");
-	x = -1;
-	int num = data->map->texture->ture->ray_counter;
-	int j = 0;
-		printf("x : %5d | y : %5d | num : %5d | side : %c\n", data->map->texture->ture->pixel_x, data->map->texture->ture->pixel_y, data->map->texture->ture->ray_counter, data->map->texture->ture->side);
-	while (++x < WIDTH)
-	{
-		if(x > num && data->map->texture->ture)
-		{
-			printf("x : %5d | y : %5d | num : %5d | side : %c\n", data->map->texture->ture->pixel_x, data->map->texture->ture->pixel_y, data->map->texture->ture->ray_counter, data->map->texture->ture->side);
-			data->map->texture->ture = data->map->texture->ture->next;
-			num += data->map->texture->ture->ray_counter;
-			j = 0;
-		}
-		j++;
-		// draw_ray_cast(data, x, HEIGHT / data->sector[x], step_counter_texture(256 / data->map->texture->ture->ray_counter, j));
-		draw_ray_cast(data, x, HEIGHT / data->sector[x], j);
-	}
+	// printf("<<<<<<<<<>>>>>>>>>>\n");
+	// x = -1;
+	// int num = data->map->texture->ture->ray_counter;
+	// int j = 0;
+	// 	printf("x : %5d | y : %5d | num : %5d | side : %c\n", data->map->texture->ture->pixel_x, data->map->texture->ture->pixel_y, data->map->texture->ture->ray_counter, data->map->texture->ture->side);
+
+	
+	// while (++x < WIDTH)
+	// {
+	// 		double wallX;
+	// 	if(data->map->camera.wall_dir)
+	// 		wallX = data->map->camera.ray_pos_y + data->sector[x] * data->map->camera.cam_dir_y;
+	// 	else
+	// 		wallX = data->map->camera.ray_pos_x + data->sector[x] * data->map->camera.cam_dir_x;
+	// 	wallX -= floor((wallX));
+	// 	if(x > num && data->map->texture->ture)
+	// 	{
+	// 		printf("x : %5d | y : %5d | num : %5d | side : %c\n", data->map->texture->ture->pixel_x, data->map->texture->ture->pixel_y, data->map->texture->ture->ray_counter, data->map->texture->ture->side);
+	// 		data->map->texture->ture = data->map->texture->ture->next;
+	// 		num += data->map->texture->ture->ray_counter;
+	// 		j = 0;
+	// 	}
+	// 	j++;
+	// 	printf("x :%d wallx : %f\n",x, wallX);
+	// 	draw_ray_cast(data, x, HEIGHT / data->sector[x], step_counter_texture(1 / 256, wallX));
+	// 	// draw_ray_cast(data, x, HEIGHT / data->sector[x], j);
+	// }
 }
 
 /*
