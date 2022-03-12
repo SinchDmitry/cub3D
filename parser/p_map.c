@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/11 22:34:41 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/12 22:20:00 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,9 +137,7 @@ static void	map_create(t_info *map, char **map_str)
 			}
 			else
 				map->mapa[i][j].sym = map_str[i][j];
-			// printf ("%c ", map->mapa[i][j].sym);
 		}
-		// printf ("\n");
 	}
 	map_check(map, i, j);
 }

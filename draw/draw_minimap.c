@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 11:50:19 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/11 14:39:22 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/12 22:09:33 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	image_put_map_move(int x, int y, t_data_mlx *data, int num)
 		sin(data->map->player.a + ROTATE_MOV));
 	if (x + MOVEX < MINIMAPHEIGHT && y + MOVEY < MINIMAPWIDTH && \
 		x + MOVEX > 0 && y + MOVEY > 0)
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->image.compas[num], x + MOVEX - 4, y + MOVEY - 4);
-
+		mlx_put_image_to_window(data->mlx, data->mlx_win, \
+			data->image.compas[num], x + MOVEX - 4, y + MOVEY - 4);
 }
 
 void	draw_square_move(int x, int y, t_data_mlx *data, int color)
@@ -96,8 +96,6 @@ void	draw_field_move(int x, int y, t_data_mlx *data)
 	else if (data->map->mapa[x][y].sym == '0')
 		draw_square_move(y * MMTEXSIZE, x * MMTEXSIZE, data, FLOORCOL);
 }
-
-
 
 void	line_math_minimap(t_data_mlx *data, float rad)
 {
@@ -202,7 +200,6 @@ void	draw_map_with_move(t_data_mlx *data)
 	float	a;
 
 	i = 0;
-	// draw_invis_background(data, MINIMAPHEIGHT, MINIMAPWIDTH);
 	while (i < data->map->height)
 	{
 		j = 0;
@@ -220,8 +217,6 @@ void	draw_map_with_move(t_data_mlx *data)
 		a = a + MMANG_STEP;
 	}
 	draw_board(data);
-	// image_put_map_move(15, 15, data, 0);
-	// mlx_put_image_to_window(data->mlx, data->mlx_win, data->image.compas[0], 100, 100);
 }
 
 void draw_minimap(t_data_mlx *data)

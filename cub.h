@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/12 18:26:20 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/12 22:15:53 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,6 @@ typedef struct s_rgb
 	int	g;
 	int	b;
 }	t_rgb;
-
-typedef struct s_tex_data
-{
-	int		p_x;
-	int		p_y;
-	int		j;
-}	t_tex_data;
 
 typedef struct s_tex
 {
