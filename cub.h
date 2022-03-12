@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/12 22:15:53 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/12 22:21:56 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include "libft/libft.h"
-// # include "parser/parser.h"
-// # include "draw/draw.h"
 # include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -39,7 +37,6 @@ typedef struct s_player
 	int		f_map;
 	float	x_textu;
 	float	y_textu;
-	// char	dir;
 	int		f_minimap;
 }	t_player;
 
