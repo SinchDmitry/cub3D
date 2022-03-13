@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/13 15:12:04 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/13 15:24:48 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,7 @@ int	draw(t_info *map)
 	mlx_hook(data.mlx_win, 3, 0, &key_unpress, &data);
 	mlx_mouse_hook(data.mlx_win, &ft_mouse, &data);
 	mlx_loop_hook(data.mlx, render_next_frame, &data);
+	
 	// mlx_hook(data.mlx_win, 02, (1L << 0), &key_h, &data);
 	mlx_loop(data.mlx);
 	return (0);
