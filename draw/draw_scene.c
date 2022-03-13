@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/13 14:15:43 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/13 15:11:42 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,21 @@
 
 int	step_counter_texture(float step, float value)
 {
-	int		i;
-	float	step_buf;
-	int		step_div;
-	static float old_value;
-	static int res;
+	int				i;
+	float			step_buf;
+	int				step_div;
+	static float	old_value;
+	static int		res;
 
-	if(res * step < value && (res + 1) * step > value)
-		return(res);
+	if (res * step < value && (res + 1) * step > value)
+		return (res);
 	step_div = 128;
 	step_buf = step + 0.1f;
-	i = 0; 
+	i = 0;
 	while (step <= value && step_div > 1)
 	{
 		while (step <= value)
 		{
-			// printf("step : %f buf : %f value : %f\n", step, step_buf, value);
 			step += step_buf * step_div;
 			i = i + step_div;
 		}
@@ -43,8 +42,6 @@ int	step_counter_texture(float step, float value)
 		printf("SOMETHING WRONG\n"); // dont forget erase
 	old_value = value;
 	res = i;
-	// if (value > 256)
-		// printf("i : %d\n", i);
 	return (i);
 }
 

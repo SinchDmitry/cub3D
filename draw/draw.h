@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/13 14:16:56 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/13 15:12:09 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@
 # define ROTATE_MOV			3.1415f
 # define INVERSE			2.35f
 # define FOV				1.571f
-// # define ANG_START			-0.75f
-// # define ANG_STEP			0.0015f
 # define MMFOV				0.55f
 # define MMANG_START		-0.55f
 # define MMANG_STEP			0.02f

@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:04:49 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/11 19:38:14 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/12 22:10:16 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,7 @@ void	draw_player(t_player *player, t_data_mlx *data)
 	float	y;
 	float	point_x;
 	float	point_y;
-	int		player_draw[10][10] = 
-	// { 
-	// {0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-	// {0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-	// {0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-	// {0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
-	// {0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
-	// {0, 0, 1, 1, 1, 1, 1, 1, 0, 0},
-	// {0, 0, 1, 1, 1, 1, 1, 1, 0, 0},
-	// {0, 1, 1, 1, 0, 0, 1, 1, 1, 0},
-	// {0, 1, 1, 0, 0, 0, 0, 1, 1, 0},
-	// {1, 1, 0, 0, 0, 0, 0, 0, 1, 1}
-	// };
+	int		player_draw[10][10] =
 	{
 	{1, 1, 0, 0, 0, 0, 0, 0, 1, 1},
 	{0, 1, 1, 0, 0, 0, 0, 1, 1, 0},
@@ -47,17 +35,6 @@ void	draw_player(t_player *player, t_data_mlx *data)
 	player->y_textu = player->y * TEXSIZE;
 	x = player->x_textu;
 	y = player->y_textu;
-	// while (x < player->x_textu + (TEXSIZE / 2))
-	// {
-	// 	y = player->y_textu;
-	// 	while (y < player->y_textu + (TEXSIZE / 2))
-	// 	{
-	// 		my_mlx_pixel_put(data, x - (TEXSIZE / 4), \
-	// 			y - (TEXSIZE / 4), PLAYERCOL);
-	// 		y++;
-	// 	}
-	// 	x++;
-	// }
 	while (x < player->x_textu + 10)
 	{
 		y = player->y_textu;
@@ -69,7 +46,8 @@ void	draw_player(t_player *player, t_data_mlx *data)
 				(y - player->y_textu - 5) * cos(data->map->player.a);
 			if (player_draw[(int)(x - player->x_textu)] \
 				[(int)(y - player->y_textu)] == 1)
-				my_mlx_pixel_put(data, point_x + player->x_textu, point_y + player->y_textu, GREEN_COL);
+				my_mlx_pixel_put(data, point_x + player->x_textu, point_y + \
+					player->y_textu, GREEN_COL);
 			y++;
 		}
 		x++;
@@ -93,28 +71,6 @@ void	draw_square(int x, int y, t_data_mlx *data, int color)
 		i++;
 	}	
 }
-
-// void	line_math(t_data_mlx *data, float rad)
-// {
-// 	float	c;
-// 	float	ang;
-// 	float	ray_x;
-// 	float	ray_y;
-
-// 	c = 0;
-// 	ang = data->map->player.a + rad;
-// 	while (c < 2)
-// 	{
-// 		ray_x = data->map->player.x + c * cos(ang);
-// 		ray_y = data->map->player.y + c * sin(ang);
-// 		if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
-// 			break ;
-// 		c += 0.01;
-// 		ray_x *= TEXSIZE;
-// 		ray_y *= TEXSIZE;
-// 		my_mlx_pixel_put(data, ray_x, ray_y, PLAYERCOL);
-// 	}
-// }
 
 void	draw_field(int x, int y, t_data_mlx *data)
 {

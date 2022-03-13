@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/13 13:04:07 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/13 15:12:18 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_player
 	int		f_map;
 	float	x_textu;
 	float	y_textu;
-	// char	dir;
 	int		f_minimap;
 }	t_player;
 
@@ -83,13 +82,6 @@ typedef struct s_rgb
 	int	g;
 	int	b;
 }	t_rgb;
-
-typedef struct s_tex_data
-{
-	int		p_x;
-	int		p_y;
-	int		j;
-}	t_tex_data;
 
 typedef struct s_tex
 {
