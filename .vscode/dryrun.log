@@ -1,6 +1,21 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/utygett/study/cub3d'
 make -C ./libft/
  
+gcc -MD -Imlx -g -c cub.c -o cub.o
+gcc -MD -Imlx -g -c parser/p_main.c -o parser/p_main.o
+gcc -MD -Imlx -g -c parser/p_par.c -o parser/p_par.o
+gcc -MD -Imlx -g -c parser/p_map.c -o parser/p_map.o
+gcc -MD -Imlx -g -c draw/draw.c -o draw/draw.o
+gcc -MD -Imlx -g -c draw/draw_minimap.c -o draw/draw_minimap.o
+gcc -MD -Imlx -g -c draw/draw_scene.c -o draw/draw_scene.o
+gcc -MD -Imlx -g -c draw/draw_map.c -o draw/draw_map.o
+gcc -MD -Imlx -g -c draw/draw_ray.c -o draw/draw_ray.o
+gcc -MD -Imlx -g -c draw/draw_key.c -o draw/draw_key.o
+ 
+gcc -MD -Imlx -g -c draw/draw_mouse.c -o draw/draw_mouse.o
+cp ./libft/libft.a .
+gcc -MD -Imlx -g cub.o parser/p_main.o parser/p_par.o parser/p_map.o draw/draw.o draw/draw_minimap.o draw/draw_scene.o draw/draw_map.o draw/draw_ray.o draw/draw_key.o draw/draw_mouse.o libft.a -Lmlx/ -lmlx -framework OpenGL -framework AppKit -o cub3d
+make -s -C mlx/	
 make: Leaving directory `/Users/utygett/study/cub3d'
  

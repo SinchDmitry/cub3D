@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 22:43:17 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/12 20:22:56 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/13 13:26:45 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,11 @@ static void	qe_case(t_data_mlx *data)
 {
 	if (data->keycode[Q_KEY] == PRESS)
 	{
-		data->map->camera.vertilcal_pos += 5;
+		data->map->camera.vertilcal_pos += 25;
 	}
 	if (data->keycode[E_KEY] == PRESS)
 	{
-		data->map->camera.vertilcal_pos -= 5;
+		data->map->camera.vertilcal_pos -= 25;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/12 18:31:27 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/13 14:15:43 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,43 @@ void	draw_ray_cast(t_data_mlx *data, float x, float h, int w_pix)
 // 	}
 // }
 
+void	draw_aim(t_data_mlx *data)
+{
+	int x;
+	int y;
+	int aim_size;
+	int	aim_width;
+
+	aim_size = AIM_SIZE;
+	x = WIDTH / 2;
+	y = HEIGHT / 2 + AIM_SIZE / 2;
+	while(aim_size--)
+	{
+		if(y > (HEIGHT / 2 + AIM_SIZE / 2) - AIM_SIZE / 3 || y < (HEIGHT / 2 + AIM_SIZE / 2) - AIM_SIZE + AIM_SIZE / 3)
+		{
+			aim_width = AIM_WIDTH;
+			while (aim_width-- != -AIM_WIDTH)
+				my_mlx_pixel_put(data, x - aim_width, y, GREEN_COL);
+		}
+		y--;
+	}
+	aim_size = AIM_SIZE;
+	
+	x = WIDTH / 2 + AIM_SIZE / 2;
+	y = HEIGHT / 2;
+	while(aim_size--)
+	{
+		if(x > (WIDTH / 2 + AIM_SIZE / 2) - AIM_SIZE / 3 || x < (WIDTH / 2 + AIM_SIZE / 2) - AIM_SIZE + AIM_SIZE / 3)
+		{
+			aim_width = AIM_WIDTH;
+			while (aim_width-- != -AIM_WIDTH)
+				my_mlx_pixel_put(data, x, y - aim_width, GREEN_COL);
+		}
+		x--;
+	}
+}
+
+
 void	draw_fvp(t_data_mlx *data)
 {
 	int	i;
@@ -124,6 +161,7 @@ void	draw_fvp(t_data_mlx *data)
 		y++;
 	}
 	ray_player(data, 1);
+	draw_aim(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img);
 }

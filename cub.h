@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/12 18:26:20 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/13 13:04:07 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 # include "libft/libft.h"
 // # include "parser/parser.h"
 // # include "draw/draw.h"
-# include <mlx.h>
+// # include <mlx.h>
+# include "../mlx/mlx.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>

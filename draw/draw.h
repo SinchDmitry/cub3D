@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/12 20:22:43 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/13 14:16:56 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@
 # define MMFOV				0.55f
 # define MMANG_START		-0.55f
 # define MMANG_STEP			0.02f
+# define AIM_SIZE			40
+# define AIM_WIDTH			1
 
 struct					s_images;
 typedef struct s_images	t_images;
@@ -83,6 +85,10 @@ typedef struct s_data_mlx {
 	float		ray_a;
 	float		sector[WIDTH];
 	int			keycode[250];
+	int			mouse_x;
+	int			mouse_y;
+	int			prev_mouse_x;
+	int			prev_mouse_y;
 	t_images	image;
 	t_info		*map;
 }				t_data_mlx;

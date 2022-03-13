@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/12 20:13:32 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/13 13:38:47 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,48 @@ int	check_move(t_data_mlx *data)
 		return (0);
 }
 
+void	mouse_move(t_data_mlx *data)
+{
+	data->prev_mouse_x = data->mouse_x;
+	data->prev_mouse_y = data->mouse_y;
+	mlx_mouse_get_pos(data->mlx_win, &data->mouse_x, &data->mouse_y);
+	if(data->prev_mouse_x > data->mouse_x)
+	{
+		data->keycode[LEFT_KEY] = PRESS;
+	}
+	else if(data->prev_mouse_x < data->mouse_x)
+	{
+		data->keycode[RIGHT_KEY] = PRESS;
+	}
+	else
+	{
+		data->keycode[LEFT_KEY] = UNPRESS;
+		data->keycode[RIGHT_KEY] = UNPRESS;
+	}
+	if(data->prev_mouse_y > data->mouse_y)
+	{
+		data->keycode[Q_KEY] = PRESS;
+	}
+	else if(data->prev_mouse_y < data->mouse_y)
+	{
+		data->keycode[E_KEY] = PRESS;
+	}
+	else
+	{
+		data->keycode[Q_KEY] = UNPRESS;
+		data->keycode[E_KEY] = UNPRESS;
+	}
+}
+
 int	render_next_frame(t_data_mlx *data)
 {
 	int			img_h;
 	int			img_w;
 	static int	i;
+
+	mouse_move(data);
 	key_h(data);
+	mlx_mouse_hide();
 	if (data->map->player.f_map)
 	{
 		draw_fvp(data);
@@ -83,6 +119,7 @@ int	render_next_frame(t_data_mlx *data)
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, WIDTH / 2 - data->map->width * TEXSIZE / 2, HEIGHT / 2 - data->map->height * TEXSIZE / 2);
 		mlx_destroy_image(data->mlx, data->img);
 	}
+	printf("x : %d y : %d\n", data->mouse_x, data->mouse_y);
 	// draw map
 	return (0);
 }
@@ -144,12 +181,14 @@ void	init_images(t_data_mlx *data)
 int	key_press(int keycode, t_data_mlx *data)
 {
 	map_exit_case(keycode, data);
-	data->keycode[keycode] = PRESS;
+	if (keycode >= 0 && keycode < 250)
+		data->keycode[keycode] = PRESS;
 	return (0);
 }
 int	key_unpress(int keycode, t_data_mlx *data)
 {
-	data->keycode[keycode] = UNPRESS;
+	if (keycode >= 0 && keycode < 250)
+		data->keycode[keycode] = UNPRESS;
 	return (0);
 }
 int	draw(t_info *map)
@@ -164,13 +203,15 @@ int	draw(t_info *map)
 	data.map->camera.vertilcal_pos = 0;
 	while(i < 250)
 		data.keycode[i++] = UNPRESS; //init unpress keys
+	data.mouse_x = WIDTH / 2;
+	data.mouse_y = HEIGHT / 2;
 	printf("here x = %f y = %f\n", map->player.x, map->player.y);
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Hello world!");
 	init_images(&data);
 	render_next_frame(&data);
-	mlx_hook(data.mlx_win, 3, 0, &key_press, &data);
-	mlx_hook(data.mlx_win, 2, 0, &key_unpress, &data);
+	mlx_hook(data.mlx_win, 2, 0, &key_press, &data);
+	mlx_hook(data.mlx_win, 3, 0, &key_unpress, &data);
 	mlx_mouse_hook(data.mlx_win, &ft_mouse, &data);
 	mlx_loop_hook(data.mlx, render_next_frame, &data);
 	// mlx_hook(data.mlx_win, 02, (1L << 0), &key_h, &data);
