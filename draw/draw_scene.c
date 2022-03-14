@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/13 15:11:42 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/14 20:33:21 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,37 +66,6 @@ void	draw_ray_cast(t_data_mlx *data, float x, float h, int w_pix)
 	}
 }
 
-// void	ray_analys(t_data_mlx *data, int c, int x)
-// {
-// 	float	y;
-
-// 	y = HEIGHT / (data->sector[c]);
-// 	if (data->sector[c] < VIEW_RANGE)
-// 	{
-// 		// printf ("%3d : %f\n", c, data->sector[c]);
-// 		draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, 0));
-// 		// if (data->sector_y[c] - (int)data->sector_y[c] <= 0.0001f && \
-// 		// 	data->sector_x[c] - (int)data->sector_x[c] <= 1)
-// 		// 	draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, \
-// 		// 		data->sector_x[c] - (int)data->sector_x[c]));
-// 		// 	// printf("WHITE");
-// 		// else if (data->sector_y[c] - (int)data->sector_y[c] <= 1 && \
-// 		// 	data->sector_x[c] - (int)data->sector_x[c] < 0.0001f)
-// 		// 	draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, \
-// 		// 		data->sector_y[c] - (int)data->sector_y[c]));
-// 		// 	// printf("RED  ");
-// 		// else if (data->sector_y[c] - (int)data->sector_y[c] >= 0.9999f \
-// 		// 	&& data->sector_x[c] - (int)data->sector_x[c] >= 0.0001f)
-// 		// 	draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, \
-// 		// 		data->sector_x[c] - (int)data->sector_x[c]));
-// 		// 	// printf("GREEN");
-// 		// else
-// 		// 	draw_ray_catsing(data, x, y, step_counter_texture(0.00390625f, \
-// 		// 		data->sector_y[c] - (int)data->sector_y[c]));
-// 		// 	// printf("BLUE ");
-// 	}
-// }
-
 void	draw_aim(t_data_mlx *data)
 {
 	int x;
@@ -104,12 +73,18 @@ void	draw_aim(t_data_mlx *data)
 	int aim_size;
 	int	aim_width;
 
-	aim_size = AIM_SIZE;
+	if(data->keycode[SHIFT_KEY] == PRESS && (data->keycode[W_KEY] == PRESS || data->keycode[S_KEY] == PRESS))
+		data->aim_size = AIM_SIZE + 10;
+	else
+		data->aim_size = AIM_SIZE;
+	if(data->keycode[W_KEY] == PRESS || data->keycode[S_KEY] == PRESS)
+		data->aim_size += 10;
+	aim_size = data->aim_size;
 	x = WIDTH / 2;
-	y = HEIGHT / 2 + AIM_SIZE / 2;
+	y = HEIGHT / 2 + data->aim_size / 2;
 	while(aim_size--)
 	{
-		if(y > (HEIGHT / 2 + AIM_SIZE / 2) - AIM_SIZE / 3 || y < (HEIGHT / 2 + AIM_SIZE / 2) - AIM_SIZE + AIM_SIZE / 3)
+		if(y > (HEIGHT / 2 + data->aim_size / 2) - data->aim_size / 3 || y < (HEIGHT / 2 + data->aim_size / 2) - data->aim_size + data->aim_size / 3)
 		{
 			aim_width = AIM_WIDTH;
 			while (aim_width-- != -AIM_WIDTH)
@@ -117,13 +92,12 @@ void	draw_aim(t_data_mlx *data)
 		}
 		y--;
 	}
-	aim_size = AIM_SIZE;
-	
-	x = WIDTH / 2 + AIM_SIZE / 2;
+	aim_size = data->aim_size;
+	x = WIDTH / 2 + data->aim_size / 2;
 	y = HEIGHT / 2;
 	while(aim_size--)
 	{
-		if(x > (WIDTH / 2 + AIM_SIZE / 2) - AIM_SIZE / 3 || x < (WIDTH / 2 + AIM_SIZE / 2) - AIM_SIZE + AIM_SIZE / 3)
+		if(x > (WIDTH / 2 + data->aim_size / 2) - data->aim_size / 3 || x < (WIDTH / 2 + data->aim_size / 2) - data->aim_size + data->aim_size / 3)
 		{
 			aim_width = AIM_WIDTH;
 			while (aim_width-- != -AIM_WIDTH)

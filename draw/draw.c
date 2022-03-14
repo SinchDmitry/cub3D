@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/13 15:24:48 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/14 21:24:50 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,8 @@ int	create_trgb(int t, int r, int g, int b)
 
 unsigned int	my_mlx_get_pixel(t_data_mlx *data, int x, int y, char side)
 {	
-	int	wall;
-
-	wall = 0;
-	if (side == 'W')
-		wall = 0;
-	if (side == 'E')
-		wall = 1;
-	if (side == 'N')
-		wall = 2;
-	if (side == 'S')
-		wall = 3;
-	return (*(unsigned int *)(data->addr1[wall] + \
-		(x * data->bits_per_pixel1[wall] / 8 + y * data->line_length1[wall])));
+	return (*(unsigned int *)(data->wall[side].addr + \
+		(x * data->wall[side].bits_per_pixel / 8 + y * data->wall[side].line_length)));
 }
 
 void	my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color)
@@ -57,34 +46,63 @@ int	check_move(t_data_mlx *data)
 
 void	mouse_move(t_data_mlx *data)
 {
+	float	dir_x;
+	float	plane_x;
+	float	move_angle_x;
+	float	move_angle_y;
+	
+	dir_x = data->map->player.dir_x;
+	plane_x = data->map->camera.pl_x;
+	if(data->mouse_x <= 0 || data->mouse_x >= WIDTH)
+	{
+		mlx_mouse_move(data->mlx_win, WIDTH / 2, HEIGHT / 2);
+		data->mouse_x = WIDTH / 2;
+	}
+	if(data->mouse_y <= 0 || data->mouse_y >= HEIGHT)
+	{
+		mlx_mouse_move(data->mlx_win, WIDTH / 2, HEIGHT / 2);
+		data->mouse_y = HEIGHT / 2;
+	}
 	data->prev_mouse_x = data->mouse_x;
 	data->prev_mouse_y = data->mouse_y;
+	
 	mlx_mouse_get_pos(data->mlx_win, &data->mouse_x, &data->mouse_y);
-	if(data->prev_mouse_x > data->mouse_x)
+	move_angle_x = data->prev_mouse_x - data->mouse_x;
+	move_angle_y = data->prev_mouse_y - data->mouse_y;
+	move_angle_x *= 0.01f;
+	move_angle_y *= 6;
+	if(move_angle_x > 0)
 	{
-		data->keycode[LEFT_KEY] = PRESS;
+		data->map->player.dir_x = data->map->player.dir_x * cos(-move_angle_x) - \
+			data->map->player.dir_y * sin(-move_angle_x);
+		data->map->player.dir_y = dir_x * sin(-move_angle_x) + \
+			data->map->player.dir_y * cos(-move_angle_x);
+		data->map->camera.pl_x = data->map->camera.pl_x * cos(-move_angle_x) - \
+			data->map->camera.pl_y * sin(-move_angle_x);
+		data->map->camera.pl_y = plane_x * sin(-move_angle_x) + \
+			data->map->camera.pl_y * cos(-move_angle_x);
+		data->map->player.a += -move_angle_x;
 	}
-	else if(data->prev_mouse_x < data->mouse_x)
+	else if(move_angle_x < 0)
 	{
-		data->keycode[RIGHT_KEY] = PRESS;
+		data->map->player.dir_x = data->map->player.dir_x * cos(-move_angle_x) - \
+			data->map->player.dir_y * sin(-move_angle_x);
+		data->map->player.dir_y = dir_x * sin(-move_angle_x) + \
+			data->map->player.dir_y * cos(-move_angle_x);
+		data->map->camera.pl_x = data->map->camera.pl_x * cos(-move_angle_x) - \
+			data->map->camera.pl_y * sin(-move_angle_x);
+		data->map->camera.pl_y = plane_x * sin(-move_angle_x) + \
+			data->map->camera.pl_y * cos(-move_angle_x);
+		data->map->player.a += -move_angle_x;
 	}
-	else
+	if(move_angle_y > 0)
 	{
-		data->keycode[LEFT_KEY] = UNPRESS;
-		data->keycode[RIGHT_KEY] = UNPRESS;
+		if(data->map->camera.vertilcal_pos)
+			data->map->camera.vertilcal_pos += move_angle_y;
 	}
-	if(data->prev_mouse_y > data->mouse_y)
+	else if(move_angle_y < 0)
 	{
-		data->keycode[Q_KEY] = PRESS;
-	}
-	else if(data->prev_mouse_y < data->mouse_y)
-	{
-		data->keycode[E_KEY] = PRESS;
-	}
-	else
-	{
-		data->keycode[Q_KEY] = UNPRESS;
-		data->keycode[E_KEY] = UNPRESS;
+		data->map->camera.vertilcal_pos += move_angle_y;
 	}
 }
 
@@ -119,7 +137,7 @@ int	render_next_frame(t_data_mlx *data)
 			HEIGHT / 2 - data->map->height * TEXSIZE / 2);
 		mlx_destroy_image(data->mlx, data->img);
 	}
-	printf("x : %d y : %d\n", data->mouse_x, data->mouse_y);
+	// printf("x : %d y : %d\n", data->mouse_x, data->mouse_y);
 	// draw map
 	return (0);
 }
@@ -139,47 +157,60 @@ void	init_images(t_data_mlx *data)
 	while (++i < 40)
 	{
 		xpm_path[0] = '\0';
-		ft_strlcat(xpm_path, space_dir, 1024);
+		ft_strlcat(xpm_path, space_dir, 1023);
 		img_num = ft_itoa(i);
-		ft_strlcat(xpm_path, img_num, 1024);
+		ft_strlcat(xpm_path, img_num, 1023);
 		free(img_num);
-		ft_strlcat(xpm_path, ".xpm", 1024);
+		ft_strlcat(xpm_path, ".xpm", 1023);
 		data->image.mm_space[i] = mlx_xpm_file_to_image(data->mlx, xpm_path, \
 			&img_h, &img_w);
 	}
 	//init texure wall
-	data->img1[0] = mlx_xpm_file_to_image(data->mlx, "./textures/wall0.xpm", \
-		&img_h, &img_w);
-	data->addr1[0] = mlx_get_data_addr(data->img1[0], &data->bits_per_pixel1[0], \
-		&data->line_length1[0], &data->endian1[0]);
-	data->img1[1] = mlx_xpm_file_to_image(data->mlx, "./textures/wall1.xpm", \
-		&img_h, &img_w);
-	data->addr1[1] = mlx_get_data_addr(data->img1[1], &data->bits_per_pixel1[1], \
-		&data->line_length1[1], &data->endian1[1]);
-	data->img1[2] = mlx_xpm_file_to_image(data->mlx, "./textures/wall2.xpm", \
-		&img_h, &img_w);
-	data->addr1[2] = mlx_get_data_addr(data->img1[2], &data->bits_per_pixel1[2], \
-		&data->line_length1[2], &data->endian1[2]);
-	data->img1[3] = mlx_xpm_file_to_image(data->mlx, "./textures/wall3.xpm", \
-		&img_h, &img_w);
-	data->addr1[3] = mlx_get_data_addr(data->img1[3], &data->bits_per_pixel1[3], \
-		&data->line_length1[3], &data->endian1[3]);
+	data->wall[0].img = mlx_xpm_file_to_image(data->mlx, "./textures/wall0.xpm", \
+		&data->wall[0].img_h, &data->wall[0].img_w);
+	data->wall[0].addr = mlx_get_data_addr(data->wall[0].img, &data->wall[0].bits_per_pixel, \
+		&data->wall[0].line_length, &data->wall[0].endian);
+	data->wall[1].img = mlx_xpm_file_to_image(data->mlx, "./textures/wall1.xpm", \
+		&data->wall[1].img_h, &data->wall[1].img_w);
+	data->wall[1].addr = mlx_get_data_addr(data->wall[1].img, &data->wall[1].bits_per_pixel, \
+		&data->wall[1].line_length, &data->wall[1].endian);
+	data->wall[2].img = mlx_xpm_file_to_image(data->mlx, "./textures/wall2.xpm", \
+		&data->wall[2].img_h, &data->wall[2].img_w);
+	data->wall[2].addr = mlx_get_data_addr(data->wall[2].img, &data->wall[2].bits_per_pixel, \
+		&data->wall[2].line_length, &data->wall[2].endian);
+	data->wall[3].img = mlx_xpm_file_to_image(data->mlx, "./textures/wall3.xpm", \
+		&data->wall[3].img_h, &data->wall[3].img_w);
+	data->wall[3].addr = mlx_get_data_addr(data->wall[3].img, &data->wall[3].bits_per_pixel, \
+		&data->wall[3].line_length, &data->wall[3].endian);
+		/////
+	// data->img1[1] = mlx_xpm_file_to_image(data->mlx, "./textures/wall1.xpm", \
+	// 	&img_h, &img_w);
+	// data->addr1 = mlx_get_data_addr(data->img1[1], &data->bits_per_pixel1[1], \
+	// 	&data->line_length1[1], &data->endian1[1]);
+	// data->img1[2] = mlx_xpm_file_to_image(data->mlx, "./textures/wall2.xpm", \
+	// 	&img_h, &img_w);
+	// data->addr1[2] = mlx_get_data_addr(data->img1[2], &data->bits_per_pixel1[2], \
+	// 	&data->line_length1[2], &data->endian1[2]);
+	// data->img1[3] = mlx_xpm_file_to_image(data->mlx, "./textures/wall3.xpm", \
+	// 	&img_h, &img_w);
+	// data->addr1[3] = mlx_get_data_addr(data->img1[3], &data->bits_per_pixel1[3], \
+	// 	&data->line_length1[3], &data->endian1[3]);
 
 	//init cpmpas
-	data->image.compas[0] = mlx_xpm_file_to_image(data->mlx, "./textures/N.xpm", \
+	data->image.compas = mlx_xpm_file_to_image(data->mlx, "./textures/N.xpm", \
 			&img_h, &img_w);
 }
 
 int	key_press(int keycode, t_data_mlx *data)
 {
 	map_exit_case(keycode, data);
-	if (keycode >= 0 && keycode < 250)
+	if (keycode >= 0 && keycode < MAX_KEYS_NUM)
 		data->keycode[keycode] = PRESS;
 	return (0);
 }
 int	key_unpress(int keycode, t_data_mlx *data)
 {
-	if (keycode >= 0 && keycode < 250)
+	if (keycode >= 0 && keycode < MAX_KEYS_NUM)
 		data->keycode[keycode] = UNPRESS;
 	return (0);
 }
@@ -193,7 +224,7 @@ int	draw(t_info *map)
 	map->player.f_minimap = 0;
 	data.map = map;
 	data.map->camera.vertilcal_pos = 0;
-	while(i < 250)
+	while(i < MAX_KEYS_NUM)
 		data.keycode[i++] = UNPRESS; //init unpress keys
 	data.mouse_x = WIDTH / 2;
 	data.mouse_y = HEIGHT / 2;

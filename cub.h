@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/13 15:12:18 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/14 19:58:22 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_camera
 typedef struct s_images
 {
 	void	*mm_space[40];
-	void	*compas[4];
+	void	*compas;
 }	t_images;
 
 typedef struct s_data

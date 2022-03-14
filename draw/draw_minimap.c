@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 11:50:19 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/12 22:09:33 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/14 20:05:42 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	image_put_map_move(int x, int y, t_data_mlx *data, int num)
 	if (x + MOVEX < MINIMAPHEIGHT && y + MOVEY < MINIMAPWIDTH && \
 		x + MOVEX > 0 && y + MOVEY > 0)
 		mlx_put_image_to_window(data->mlx, data->mlx_win, \
-			data->image.compas[num], x + MOVEX - 4, y + MOVEY - 4);
+			data->image.compas, x + MOVEX - 4, y + MOVEY - 4);
 }
 
 void	draw_square_move(int x, int y, t_data_mlx *data, int color)

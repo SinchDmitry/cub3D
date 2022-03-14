@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/13 15:11:48 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/14 20:40:56 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,13 @@ void	ray_player(t_data_mlx *data, int flag)
 		////////////////////// draw
 		int lineHeight = (int)(HEIGHT / data->sector[x]);
 		 // up and down camera
-		int drawStart = -lineHeight / 2 + HEIGHT / 2 + data->map->camera.vertilcal_pos;
+		float	abc = 2;
+		int drawStart = -lineHeight / abc + HEIGHT / abc + data->map->camera.vertilcal_pos;
 		
      	if(drawStart < 0)
 			drawStart = 0;
 
-		int drawEnd = lineHeight / 2 + HEIGHT / 2 + data->map->camera.vertilcal_pos;
+		int drawEnd = lineHeight / abc + HEIGHT / abc + data->map->camera.vertilcal_pos;
 		
     	if(drawEnd >= HEIGHT) 
 			drawEnd = HEIGHT - 1;
@@ -116,37 +117,37 @@ void	ray_player(t_data_mlx *data, int flag)
 			wallX = data->map->player.x + data->sector[x] * data->map->camera.cam_dir_x;
 		wallX = wallX - floor(wallX);
 		//x coordinate on the texture
-		int texX = (int)(wallX * (double)256);
-		
-		// if(data->map->camera.wall_dir == 0 && data->map->camera.cam_dir_x > 0)
-		// 	texX = 256 - texX - 1;
-		// if(data->map->camera.wall_dir == 1 && data->map->camera.cam_dir_y > 0) //for what that need?
-			texX = 256 - texX - 1;
-		double step = 1.0 * 256 / lineHeight;
-		double texPos = (drawStart - data->map->camera.vertilcal_pos - HEIGHT / 2 + lineHeight / 2) * step;
-		unsigned int col;
-		// side of wall
 		char sym;
-		sym = 'W';
+		sym = 0;
 		if (!data->map->camera.wall_dir)
 		{
 			
 			if (data->map->camera.step_x == -1)
-				sym = 'W';
+				sym = 0;
 			else
-				sym = 'S';
+				sym = 1;
 		}
 		else
 		{
 			if (data->map->camera.step_y == -1)
-				sym = 'E';
+				sym = 2;
 			else
-				sym = 'N';
+				sym = 3;
 		}
+
+		int texX = (int)(wallX * (double)data->wall[sym].img_w);
+		
+
+			texX = data->wall[sym].img_w - texX - 1;
+		double step = 1.0 * data->wall[sym].img_w / lineHeight;
+		double texPos = (drawStart - data->map->camera.vertilcal_pos - HEIGHT / 2 + lineHeight / 2) * step;
+		unsigned int col;
+		// side of wall
+		
 		//draw vertical line
      	for(int y = drawStart; y < drawEnd; y++)
      	{
-			int texY = (int)texPos & (256 - 1);
+			int texY = (int)texPos & (data->wall[sym].img_h - 1);
        		texPos += step;
 			col = my_mlx_get_pixel(data, texX, texY, sym);
 			// if(data->map->camera.wall_dir == 1) // make shadow
