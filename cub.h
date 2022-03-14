@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/13 15:12:18 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/14 17:51:41 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ typedef struct s_images
 	void	*compas[4];
 }	t_images;
 
-typedef struct s_data
+typedef struct s_slot
 {
 	char	sym;
-}	t_data;
+}	t_slot;
 
 typedef struct s_rgb
 {
@@ -103,14 +103,14 @@ typedef struct s_texture
 
 typedef struct s_info
 {
-	t_data		**mapa;
 	int			fd;
 	int			width;
 	int			height;
-	t_player	player;
-	t_camera	camera;
 	t_rgb		*sky;
 	t_rgb		*floor;
+	t_slot		**mapa;
+	t_player	player;
+	t_camera	camera;
 	t_texture	*texture;
 }	t_info;
 

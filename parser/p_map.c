@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/12 22:20:00 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/14 17:51:19 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,13 +147,13 @@ void	map_struct(t_info *map, char **map_str)
 	int	i;
 
 	i = -1;
-	map->mapa = malloc(sizeof(t_data *) * (map->height + 1));
+	map->mapa = malloc(sizeof(t_slot *) * (map->height + 1));
 	if (!map->mapa)
 		error_end(3);
 	save_point(map->mapa, P_FRONT);
 	while (++i < map->height)
 	{
-		map->mapa[i] = malloc(sizeof(t_data) * (map->width));
+		map->mapa[i] = malloc(sizeof(t_slot) * (map->width));
 		if (!map->mapa[i])
 			error_end(3);
 		save_point(map->mapa[i], P_FRONT);

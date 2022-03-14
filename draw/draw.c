@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/13 15:12:04 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/13 16:58:59 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ void	mouse_move(t_data_mlx *data)
 	data->prev_mouse_x = data->mouse_x;
 	data->prev_mouse_y = data->mouse_y;
 	mlx_mouse_get_pos(data->mlx_win, &data->mouse_x, &data->mouse_y);
-	if(data->prev_mouse_x > data->mouse_x)
+	if (data->prev_mouse_x > data->mouse_x)
 	{
 		data->keycode[LEFT_KEY] = PRESS;
 	}
-	else if(data->prev_mouse_x < data->mouse_x)
+	else if (data->prev_mouse_x < data->mouse_x)
 	{
 		data->keycode[RIGHT_KEY] = PRESS;
 	}
@@ -73,11 +73,11 @@ void	mouse_move(t_data_mlx *data)
 		data->keycode[LEFT_KEY] = UNPRESS;
 		data->keycode[RIGHT_KEY] = UNPRESS;
 	}
-	if(data->prev_mouse_y > data->mouse_y)
+	if (data->prev_mouse_y > data->mouse_y)
 	{
 		data->keycode[Q_KEY] = PRESS;
 	}
-	else if(data->prev_mouse_y < data->mouse_y)
+	else if (data->prev_mouse_y < data->mouse_y)
 	{
 		data->keycode[E_KEY] = PRESS;
 	}

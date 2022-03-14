@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/13 15:12:09 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/14 21:12:51 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DRAW_H
 # define DRAW_H
+
 # include "../cub.h"
 # define WIDTH 				1000
 # define HEIGHT				700
@@ -62,9 +63,21 @@
 # define MMANG_STEP			0.02f
 # define AIM_SIZE			40
 # define AIM_WIDTH			1
+# define AM_SPRITE_NUM		4
 
 struct					s_images;
 typedef struct s_images	t_images;
+
+typedef struct s_spr
+{
+	float	x;
+	float	y;
+	float	x_ray;
+	float	y_ray;
+	int		id;
+	int		num;
+	float	dist;
+}	t_spr;
 
 typedef struct s_data_mlx {
 	void		*mlx;
@@ -89,7 +102,8 @@ typedef struct s_data_mlx {
 	int			prev_mouse_y;
 	t_images	image;
 	t_info		*map;
-}				t_data_mlx;
+	t_spr		*am_s;
+}	t_data_mlx;
 
 typedef struct s_line
 {
