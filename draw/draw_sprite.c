@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/14 21:24:09 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/14 22:07:30 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ void	draw_sprite(t_data_mlx *data)
 	int		dr_f_x;
 	int		dr_f_y;
 	int		i;
+	int		j;
+	int 	tex_x;
+	int 	tex_y;
+	int		d;
 
 	am_s = malloc(sizeof(t_spr));
 	if (!am_s)
@@ -95,9 +99,22 @@ void	draw_sprite(t_data_mlx *data)
 	i = dr_st_x - 1;
 	while (++i < dr_f_x)
 	{
-		tex_x = int(256 * (i - (-w_spr / 2 + pos_spr_x)) * \
-			TEXSIZE / w_spr) / 256;
-		
+		tex_x = (int)(256 * (i - (-w_spr / 2 + pos_spr_x)) * \
+			am_s->spr_img.img_w / w_spr) / 256;
+		if (t_y > 0 && i > 0 && i < WIDTH && t_y < data->sector[i]) // ?
+		{
+			j = dr_st_y - 1;
+			while (++j < dr_f_y)
+			{
+				d = j * 256 - HEIGHT * 128 + h_spr * 128;
+				tex_y = ((d * am_s->spr_img.img_h) / h_spr) / 256;
+				/* че ? */
+				// long int color = texture[sprite[spriteOrder[i]].texture][am_s->spr_img.img_w * tex_y + tex_x]; // get current color from the texture
+				long int color = my_mlx_get_pixel(data, i, j, 4);
+          		// if((color & 0x00FFFFFF) != 0) 
+				// 	buffer[j][i] = color; // buffer ?
+			}
+		}
 	}
 	
 	// for(int stripe = drawStartX; stripe < drawEndX; stripe++)

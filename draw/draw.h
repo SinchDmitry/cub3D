@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/14 21:12:51 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/14 21:30:48 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # define DOWN_KEY			125
 # define MAP_KEY			48
 # define UP_KEY				126
+# define SHIFT_KEY			257
 # define MINIMAP_KEY		46
 # define ADD_PAD_KEY		69
 # define SUB_PAD_KEY		78
@@ -64,22 +65,36 @@
 # define AIM_SIZE			40
 # define AIM_WIDTH			1
 # define AM_SPRITE_NUM		4
+# define MAX_KEYS_NUM		260
 
 struct					s_images;
 typedef struct s_images	t_images;
 
 typedef struct s_spr
 {
-	float	x;
-	float	y;
-	float	x_ray;
-	float	y_ray;
-	int		id;
-	int		num;
-	float	dist;
+	float		x;
+	float		y;
+	float		x_ray;
+	float		y_ray;
+	int			id;
+	int			num;
+	float		dist;
+	t_wall_tex	spr_img;
 }	t_spr;
 
-typedef struct s_data_mlx {
+typedef struct s_wall_texture
+{
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			img_h;
+	int			img_w;
+}	t_wall_tex;
+
+typedef struct s_data_mlx
+{
 	void		*mlx;
 	void		*mlx_win;
 	void		*img;
@@ -87,19 +102,16 @@ typedef struct s_data_mlx {
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-	void		*img1[4];
-	char		*addr1[4];
-	int			bits_per_pixel1[4];
-	int			line_length1[4];
-	int			endian1[4];
 	int			map_zoom;
 	float		ray_a;
 	float		sector[WIDTH];
-	int			keycode[250];
+	int			keycode[MAX_KEYS_NUM];
+	int			aim_size;
 	int			mouse_x;
 	int			mouse_y;
 	int			prev_mouse_x;
 	int			prev_mouse_y;
+	t_wall_tex	wall[4];
 	t_images	image;
 	t_info		*map;
 	t_spr		*am_s;
