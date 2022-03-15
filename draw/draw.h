@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/14 21:30:48 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/15 13:22:38 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,17 @@
 struct					s_images;
 typedef struct s_images	t_images;
 
+typedef struct s_wall_tex
+{
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			img_h;
+	int			img_w;
+}	t_wall_tex;
+
 typedef struct s_spr
 {
 	float		x;
@@ -81,17 +92,6 @@ typedef struct s_spr
 	float		dist;
 	t_wall_tex	spr_img;
 }	t_spr;
-
-typedef struct s_wall_texture
-{
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-	int			img_h;
-	int			img_w;
-}	t_wall_tex;
 
 typedef struct s_data_mlx
 {
