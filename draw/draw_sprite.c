@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/15 18:50:58 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/16 18:10:23 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ void	draw_sprite(t_data_mlx *data)
 	pos_spr_x = (int)((WIDTH / 2) * (1 + t_x / t_y));
 	
 	h_spr = abs((int)(HEIGHT / t_y));
-	dr_st_y = -(h_spr / 2) + HEIGHT / 2 + data->map->camera.vertilcal_pos;
+	dr_st_y = -(h_spr / 2) + HEIGHT / 2; // - data->map->camera.vertilcal_pos;
 	if (dr_st_y < 0)
 		dr_st_y = 0;
-	dr_f_y = h_spr / 2 + HEIGHT / 2 + data->map->camera.vertilcal_pos;
+	dr_f_y = h_spr / 2 + HEIGHT / 2; // - data->map->camera.vertilcal_pos;
 	if (dr_f_y > HEIGHT)
 		dr_f_y = HEIGHT - 1;
 		
@@ -92,19 +92,21 @@ void	draw_sprite(t_data_mlx *data)
 	dr_f_x = w_spr / 2 + pos_spr_x;
 	if (dr_f_x >= WIDTH)
 		dr_f_x = WIDTH - 1;
+	// i = (dr_st_x + dr_f_x) / 2 - 1;
 	i = dr_st_x - 1;
 	while (++i < dr_f_x)
 	{
-		tex_x = (int)(256 * (i - (-w_spr / 2 + pos_spr_x)) * \
-			data->am_s->spr_img.img_w / w_spr) / 256;
+		tex_x = ((int)(256 * (i - (-w_spr / 2 + pos_spr_x)) * \
+			data->am_s->spr_img.img_w / w_spr) / 256);
 		if (t_y > 0 && i > 0 && i < WIDTH && t_y < data->sector[i]) // ?
 		{
+			// j = (dr_st_y + dr_f_y) / 2 - 1;
 			j = dr_st_y - 1;
 			while (++j < dr_f_y)
 			{
 				d = j * 256 - HEIGHT * 128 + h_spr * 128;
-				tex_y = ((d * data->am_s->spr_img.img_h) / h_spr) / 256;
-				my_mlx_pixel_put(data, i, j, my_mlx_get_pixel(data, tex_x, tex_y, 4));
+				tex_y = (((d * data->am_s->spr_img.img_h) / h_spr) / 256);
+				my_mlx_pixel_put(data, i , j + data->map->camera.vertilcal_pos, my_mlx_get_pixel(data, tex_x, tex_y, 4));
           		// if((color & 0x00FFFFFF) != 0) 
 				// 	buffer[j][i] = color; // buffer ?
 			}
