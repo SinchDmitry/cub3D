@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/14 21:24:50 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/15 14:38:20 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ void	mouse_move(t_data_mlx *data)
 	
 	dir_x = data->map->player.dir_x;
 	plane_x = data->map->camera.pl_x;
-	if(data->mouse_x <= 0 || data->mouse_x >= WIDTH)
+	if (data->mouse_x <= 5 || data->mouse_x >= WIDTH - 5)
 	{
 		mlx_mouse_move(data->mlx_win, WIDTH / 2, HEIGHT / 2);
 		data->mouse_x = WIDTH / 2;
 	}
-	if(data->mouse_y <= 0 || data->mouse_y >= HEIGHT)
+	if (data->mouse_y <= 5 || data->mouse_y >= HEIGHT - 5)
 	{
 		mlx_mouse_move(data->mlx_win, WIDTH / 2, HEIGHT / 2);
 		data->mouse_y = HEIGHT / 2;
@@ -165,6 +165,13 @@ void	init_images(t_data_mlx *data)
 		data->image.mm_space[i] = mlx_xpm_file_to_image(data->mlx, xpm_path, \
 			&img_h, &img_w);
 	}
+	//ini weapon texture
+	data->weapon.img = mlx_xpm_file_to_image(data->mlx, "./textures/blaster1.xpm", \
+		&data->weapon.img_w, &data->weapon.img_h);
+	printf("w : %d h : %d\n", data->weapon.img_w, data->weapon.img_h);
+	data->weapon.addr = mlx_get_data_addr(data->weapon.img, &data->weapon.bits_per_pixel, \
+		&data->weapon.line_length, &data->weapon.endian);
+
 	//init texure wall
 	data->wall[0].img = mlx_xpm_file_to_image(data->mlx, "./textures/wall0.xpm", \
 		&data->wall[0].img_h, &data->wall[0].img_w);

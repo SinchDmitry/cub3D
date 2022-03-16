@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:04:49 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/12 22:10:16 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/15 15:51:13 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,14 +127,14 @@ static void	init_list(t_line *line, t_vls *xyz)
 	line->error = line->delta_x - line->delta_y;
 }
 
-void	draw_line(t_data_mlx *data, t_vls xyz)
+void	draw_line(t_data_mlx *data, t_vls xyz, int color)
 {
 	t_line	line_w;
 
 	init_list(&line_w, &xyz);
 	while ((int)(xyz.x1 - xyz.x2) || (int)(xyz.y1 - xyz.y2))
 	{
-		my_mlx_pixel_put(data, xyz.x1, xyz.y1, GREEN_COL);
+		my_mlx_pixel_put(data, xyz.x1, xyz.y1, color);
 		line_w.error2 = line_w.error * 2;
 		if (line_w.error2 > -line_w.delta_y)
 		{

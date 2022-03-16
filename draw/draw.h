@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/14 21:17:46 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/15 15:51:22 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@
 # define MINIMAP_KEY		46
 # define ADD_PAD_KEY		69
 # define SUB_PAD_KEY		78
+# define MOUSE_RIGHT_KEY	1
 # define PRESS				1
 # define UNPRESS			0
 # define MOVEX				100
@@ -64,11 +65,12 @@
 # define AIM_SIZE			40
 # define AIM_WIDTH			1
 # define MAX_KEYS_NUM		260
+# define LASER_WIDTH		3
 
 struct					s_images;
 typedef struct s_images	t_images;
 
-typedef struct s_wall_texture 
+typedef struct s_wall_tex 
 {
 	void		*img;
 	char		*addr;
@@ -77,7 +79,7 @@ typedef struct s_wall_texture
 	int			endian;
 	int			img_h;
 	int			img_w;
-}	t_wall_texture;
+}	t_wall_tex;
 
 typedef struct s_data_mlx 
 {
@@ -92,12 +94,14 @@ typedef struct s_data_mlx
 	float		ray_a;
 	float		sector[WIDTH];
 	int			keycode[MAX_KEYS_NUM];
+	int			mouse_code[10];
 	int			aim_size;
 	int			mouse_x;
 	int			mouse_y;
 	int			prev_mouse_x;
 	int			prev_mouse_y;
-	t_wall_texture	wall[4];
+	t_wall_tex	weapon;
+	t_wall_tex	wall[4];
 	t_images	image;
 	t_info		*map;
 }				t_data_mlx;
@@ -138,7 +142,7 @@ void			ray_player(t_data_mlx *data, int flag);
 void			draw_invis_background(t_data_mlx *data, int height, int width);
 void			draw_ray_cast(t_data_mlx *data, float x, float h, int w_pix);
 int				step_counter_texture(float step, float value);
-void			draw_line(t_data_mlx *data, t_vls xyz);
+void			draw_line(t_data_mlx *data, t_vls xyz, int color);
 void			draw_minimap(t_data_mlx *data);
 int				ft_mouse(int keycode, int x, int y, t_data_mlx *data);
 void			map_exit_case(int keycode, t_data_mlx *data);

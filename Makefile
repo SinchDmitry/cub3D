@@ -6,7 +6,7 @@
 #    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/03/13 13:18:34 by utygett          ###   ########.fr        #
+#    Updated: 2022/03/16 10:39:59 by utygett          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ CFLAGS	=	-MD -Imlx -g
 # -fsanitize=address
 #			-Werror -Wall -Wextra
 
-CC		=	gcc
+CC		=	gcc -O2
 
 RM		=	rm -f
 

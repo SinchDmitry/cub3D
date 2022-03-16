@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/14 20:33:21 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/15 15:58:07 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,43 @@ void	draw_aim(t_data_mlx *data)
 	}
 }
 
+void	laser_width(t_data_mlx *data ,t_vls *bullet, int width_step)
+{
+	bullet->x1 = 40 + (WIDTH / 2 + WIDTH / 20) + width_step;
+	bullet->y1 = 40 + (HEIGHT - data->weapon.img_h);
+	bullet->x2 = WIDTH / 2 + width_step;
+	bullet->y2 = HEIGHT / 2;
+}
+
+void	attack_weapon(t_data_mlx *data)
+{
+	t_vls	bullet;
+	int		i;
+	
+	i = LASER_WIDTH;
+	while (i >= 0)
+	{
+		laser_width(data, &bullet, i--);
+		draw_line(data, bullet, RED_COL);
+	}
+}
+
+void	put_weapon_image(t_data_mlx *data)
+{
+	static int	frame;
+	int	a;
+	// if (data->mouse_code[MOUSE_RIGHT_KEY] == PRESS)
+	if (data->mouse_code[MOUSE_RIGHT_KEY] == PRESS || frame > 0)
+	{
+		if (data->mouse_code[MOUSE_RIGHT_KEY] == PRESS)
+			data->mouse_code[MOUSE_RIGHT_KEY] = UNPRESS;
+		frame += 5;
+		if (frame > 24)
+			frame = 0;
+	}
+	a = frame % 25;
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->weapon.img, (WIDTH / 2 + WIDTH / 20) + a, (HEIGHT - data->weapon.img_h) + a);
+}
 
 void	draw_fvp(t_data_mlx *data)
 {
@@ -124,15 +161,18 @@ void	draw_fvp(t_data_mlx *data)
 		while (x < WIDTH)
 		{
 			if(y < HEIGHT / 2 + data->map->camera.vertilcal_pos)
-				my_mlx_pixel_put(data,x,y,SKY_COL);
+				my_mlx_pixel_put(data ,x, y, SKY_COL);
 			else
-				my_mlx_pixel_put(data,x,y,GROUND_COL);
+				my_mlx_pixel_put(data, x, y, GROUND_COL);
 			x++;
 		}
 		y++;
 	}
 	ray_player(data, 1);
 	draw_aim(data);
+	if (data->mouse_code[MOUSE_RIGHT_KEY] == PRESS)
+		attack_weapon(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
+	put_weapon_image(data);
 	mlx_destroy_image(data->mlx, data->img);
 }

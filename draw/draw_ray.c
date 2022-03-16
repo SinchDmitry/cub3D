@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/14 20:40:56 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/16 10:38:58 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ void	ray_player(t_data_mlx *data, int flag)
 		sym = 0;
 		if (!data->map->camera.wall_dir)
 		{
-			
 			if (data->map->camera.step_x == -1)
 				sym = 0;
 			else
