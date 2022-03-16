@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/14 22:06:30 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/15 17:31:23 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ int	render_next_frame(t_data_mlx *data)
 	if (data->map->player.f_map)
 	{
 		draw_fvp(data);
+		draw_objects(data);
 		if (data->map->player.f_minimap)
 			draw_minimap(data);
 	}
@@ -174,6 +175,7 @@ void	init_images(t_data_mlx *data)
 		data->image.mm_space[i] = mlx_xpm_file_to_image(data->mlx, xpm_path, \
 			&img_h, &img_w);
 	}
+	
 	//init texure wall
 	data->wall[0].img = mlx_xpm_file_to_image(data->mlx, "./textures/wall0.xpm", \
 		&data->wall[0].img_h, &data->wall[0].img_w);
@@ -208,6 +210,15 @@ void	init_images(t_data_mlx *data)
 	//init cpmpas
 	data->image.compas = mlx_xpm_file_to_image(data->mlx, "./textures/N.xpm", \
 			&img_h, &img_w);
+	// init sprite
+	data->am_s = malloc(sizeof(t_spr));
+	if (!data->am_s)
+		error_end(3); // move it
+	data->am_s->spr_img.img = mlx_xpm_file_to_image(data->mlx, "./textures/1.xpm", \
+		&data->am_s->spr_img.img_h, &data->am_s->spr_img.img_w);
+	data->am_s->spr_img.addr = mlx_get_data_addr(data->am_s->spr_img.img, &data->am_s->spr_img.bits_per_pixel, \
+		&data->am_s->spr_img.line_length, &data->am_s->spr_img.endian);
+		
 }
 
 int	key_press(int keycode, t_data_mlx *data)
@@ -241,7 +252,7 @@ int	draw(t_info *map)
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Hello world!");
 	init_images(&data);
-	render_next_frame(&data);
+	// render_next_frame(&data);
 	mlx_hook(data.mlx_win, 2, 0, &key_press, &data);
 	mlx_hook(data.mlx_win, 3, 0, &key_unpress, &data);
 	mlx_mouse_hook(data.mlx_win, &ft_mouse, &data);

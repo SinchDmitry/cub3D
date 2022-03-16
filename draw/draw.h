@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/15 13:22:38 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/15 17:26:59 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,5 +157,7 @@ void			draw_line(t_data_mlx *data, t_vls xyz);
 void			draw_minimap(t_data_mlx *data);
 int				ft_mouse(int keycode, int x, int y, t_data_mlx *data);
 void			map_exit_case(int keycode, t_data_mlx *data);
+// void			draw_sprite(t_data_mlx *data);
+void			draw_objects(t_data_mlx *data);
 
 #endif

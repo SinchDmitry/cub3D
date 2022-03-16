@@ -6,7 +6,7 @@
 #    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/03/13 15:49:34 by aarchiba         ###   ########.fr        #
+#    Updated: 2022/03/15 16:54:55 by aarchiba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC		=	cub.c	parser/p_main.c \
 					draw/draw_map.c \
 					draw/draw_ray.c \
 					draw/draw_key.c \
+					draw/draw_sprite.c \
 					draw/draw_mouse.c
 
 FTDIR	= 	./libft/
