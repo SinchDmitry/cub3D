@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/15 15:58:07 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/17 15:57:55 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,10 +169,7 @@ void	draw_fvp(t_data_mlx *data)
 		y++;
 	}
 	ray_player(data, 1);
-	draw_aim(data);
-	if (data->mouse_code[MOUSE_RIGHT_KEY] == PRESS)
-		attack_weapon(data);
+	
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
-	put_weapon_image(data);
 	mlx_destroy_image(data->mlx, data->img);
 }

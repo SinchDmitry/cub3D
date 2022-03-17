@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/17 15:16:43 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/17 15:54:32 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,5 +163,7 @@ int				ft_mouse(int keycode, int x, int y, t_data_mlx *data);
 void			map_exit_case(int keycode, t_data_mlx *data);
 // void			draw_sprite(t_data_mlx *data);
 void			draw_objects(t_data_mlx *data);
+void			draw_aim(t_data_mlx *data);
+void			put_weapon_image(t_data_mlx *data);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/16 18:10:23 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/17 15:58:04 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,10 @@ void	draw_objects(t_data_mlx *data)
 		&data->line_length, &data->endian);
 	draw_invis_background(data, WIDTH, HEIGHT);
 	draw_sprite(data);
+	draw_aim(data);
+	if (data->mouse_code[MOUSE_RIGHT_KEY] == PRESS)
+		attack_weapon(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
+	put_weapon_image(data);
 	mlx_destroy_image(data->mlx, data->img);
 }

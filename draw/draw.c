@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/17 15:28:52 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/17 15:54:59 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	render_next_frame(t_data_mlx *data)
 
 	mouse_move(data);
 	key_h(data);
-	// mlx_mouse_hide();
+	mlx_mouse_hide();
 	if (data->map->player.f_map)
 	{
 		draw_fvp(data);
