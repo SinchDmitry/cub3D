@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/17 15:17:00 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/17 17:10:21 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,7 @@ void	init_images(t_data_mlx *data)
 	data->am_s = malloc(sizeof(t_spr));
 	if (!data->am_s)
 		error_end(3); // move it
-	data->am_s->spr_img.img = mlx_xpm_file_to_image(data->mlx, "./textures/1.xpm", \
+	data->am_s->spr_img.img = mlx_xpm_file_to_image(data->mlx, "./textures/orange/alive.xpm", \
 		&data->am_s->spr_img.img_h, &data->am_s->spr_img.img_w);
 	data->am_s->spr_img.addr = mlx_get_data_addr(data->am_s->spr_img.img, &data->am_s->spr_img.bits_per_pixel, \
 		&data->am_s->spr_img.line_length, &data->am_s->spr_img.endian);
