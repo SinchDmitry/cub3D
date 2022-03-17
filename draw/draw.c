@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/17 15:17:00 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/17 15:28:52 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,11 @@ void	mouse_move(t_data_mlx *data)
 	{
 		mlx_mouse_move(data->mlx_win, WIDTH / 2, data->mouse_y);
 		data->mouse_x = WIDTH / 2;
-		// return ;
 	}
 	if (data->mouse_y < 0 || data->mouse_y > HEIGHT )
 	{
 		mlx_mouse_move(data->mlx_win, data->mouse_x, HEIGHT / 2);
 		data->mouse_y = HEIGHT / 2;
-		// return ;
 	}
 	data->prev_mouse_x = data->mouse_x;
 	data->prev_mouse_y = data->mouse_y;
@@ -107,14 +105,9 @@ void	mouse_move(t_data_mlx *data)
 		data->map->player.a += -move_angle_x;
 	}
 	if(move_angle_y > 0)
-	{
-		if(data->map->camera.vertilcal_pos)
-			data->map->camera.vertilcal_pos += move_angle_y;
-	}
-	else if(move_angle_y < 0)
-	{
 		data->map->camera.vertilcal_pos += move_angle_y;
-	}
+	else if(move_angle_y < 0)
+		data->map->camera.vertilcal_pos += move_angle_y;
 }
 
 int	render_next_frame(t_data_mlx *data)
