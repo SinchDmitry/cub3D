@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/17 11:22:03 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/17 15:16:43 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@
 struct					s_images;
 typedef struct s_images	t_images;
 
-typedef struct s_wall_texture
+typedef struct s_wall_tex
 {
 	void		*img;
 	char		*addr;
@@ -94,7 +94,6 @@ typedef struct s_spr
 	float		dist;
 	t_wall_tex	spr_img;
 }	t_spr;
-
 
 typedef struct s_data_mlx
 {
@@ -162,5 +161,7 @@ void			draw_line(t_data_mlx *data, t_vls xyz, int color);
 void			draw_minimap(t_data_mlx *data);
 int				ft_mouse(int keycode, int x, int y, t_data_mlx *data);
 void			map_exit_case(int keycode, t_data_mlx *data);
+// void			draw_sprite(t_data_mlx *data);
+void			draw_objects(t_data_mlx *data);
 
 #endif

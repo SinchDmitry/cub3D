@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/14 22:07:30 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/16 18:10:23 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@
 
 void	draw_sprite(t_data_mlx *data)
 {
-	t_spr 	*am_s;
 	float	inv;
 	float	t_x;
 	float	t_y;
@@ -64,53 +63,50 @@ void	draw_sprite(t_data_mlx *data)
 	int 	tex_y;
 	int		d;
 
-	am_s = malloc(sizeof(t_spr));
-	if (!am_s)
-		error_end(3);
-	am_s->x = 22.5;
-	am_s->y = 4.5;
-	am_s->id = 1;
+	data->am_s->x = 22.5;
+	data->am_s->y = 4.5;
+	data->am_s->id = 1;
 	
-	am_s->x_ray = am_s->x - data->map->player.x;
-	am_s->y_ray = am_s->y - data->map->player.y;
-	inv = 1.0 / (data->map->camera.pl_x * data->map->camera.cam_dir_y - \
-		data->map->camera.cam_dir_x * data->map->camera.pl_y);
-	t_x = inv * (data->map->camera.cam_dir_y * am_s->x_ray - \
-		data->map->camera.cam_dir_x * am_s->y_ray);
-	t_y = inv * (-data->map->camera.pl_y * am_s->x_ray + \
-		data->map->camera.pl_x * am_s->y_ray);
-	pos_spr_x = ((WIDTH / 2) * (1 + t_x / t_y));
+	data->am_s->x_ray = data->am_s->x - data->map->player.x;
+	data->am_s->y_ray = data->am_s->y - data->map->player.y;
+	inv = 1.0 / (data->map->camera.pl_x * data->map->player.dir_y - \
+		data->map->player.dir_x * data->map->camera.pl_y);
+	t_x = inv * (data->map->player.dir_y * data->am_s->x_ray - \
+		data->map->player.dir_x * data->am_s->y_ray);
+	t_y = inv * (-data->map->camera.pl_y * data->am_s->x_ray + \
+		data->map->camera.pl_x * data->am_s->y_ray);
+	pos_spr_x = (int)((WIDTH / 2) * (1 + t_x / t_y));
 	
-	h_spr = abs(HEIGHT / t_y);
-	dr_st_y = -h_spr / 2 + HEIGHT / 2;
+	h_spr = abs((int)(HEIGHT / t_y));
+	dr_st_y = -(h_spr / 2) + HEIGHT / 2; // - data->map->camera.vertilcal_pos;
 	if (dr_st_y < 0)
 		dr_st_y = 0;
-	dr_f_y = h_spr / 2 + HEIGHT / 2;
+	dr_f_y = h_spr / 2 + HEIGHT / 2; // - data->map->camera.vertilcal_pos;
 	if (dr_f_y > HEIGHT)
 		dr_f_y = HEIGHT - 1;
 		
-	w_spr = abs(HEIGHT / t_y); // w_spr = abs(WIDTH / t_x) ?
+	w_spr = abs((int)(HEIGHT / t_y)); 
 	dr_st_x = -w_spr / 2 + pos_spr_x;
 	if (dr_st_x < 0)
 		dr_st_x = 0;
 	dr_f_x = w_spr / 2 + pos_spr_x;
-	if (dr_f_x > WIDTH)
+	if (dr_f_x >= WIDTH)
 		dr_f_x = WIDTH - 1;
+	// i = (dr_st_x + dr_f_x) / 2 - 1;
 	i = dr_st_x - 1;
 	while (++i < dr_f_x)
 	{
-		tex_x = (int)(256 * (i - (-w_spr / 2 + pos_spr_x)) * \
-			am_s->spr_img.img_w / w_spr) / 256;
+		tex_x = ((int)(256 * (i - (-w_spr / 2 + pos_spr_x)) * \
+			data->am_s->spr_img.img_w / w_spr) / 256);
 		if (t_y > 0 && i > 0 && i < WIDTH && t_y < data->sector[i]) // ?
 		{
+			// j = (dr_st_y + dr_f_y) / 2 - 1;
 			j = dr_st_y - 1;
 			while (++j < dr_f_y)
 			{
 				d = j * 256 - HEIGHT * 128 + h_spr * 128;
-				tex_y = ((d * am_s->spr_img.img_h) / h_spr) / 256;
-				/* че ? */
-				// long int color = texture[sprite[spriteOrder[i]].texture][am_s->spr_img.img_w * tex_y + tex_x]; // get current color from the texture
-				long int color = my_mlx_get_pixel(data, i, j, 4);
+				tex_y = (((d * data->am_s->spr_img.img_h) / h_spr) / 256);
+				my_mlx_pixel_put(data, i , j + data->map->camera.vertilcal_pos, my_mlx_get_pixel(data, tex_x, tex_y, 4));
           		// if((color & 0x00FFFFFF) != 0) 
 				// 	buffer[j][i] = color; // buffer ?
 			}
@@ -134,4 +130,15 @@ void	draw_sprite(t_data_mlx *data)
     //       if((color & 0x00FFFFFF) != 0) buffer[y][stripe] = color; //paint pixel if it isn't black, black is the invisible color
     //     }
     //   }
+}
+
+void	draw_objects(t_data_mlx *data)
+{
+	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
+		&data->line_length, &data->endian);
+	draw_invis_background(data, WIDTH, HEIGHT);
+	draw_sprite(data);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
+	mlx_destroy_image(data->mlx, data->img);
 }

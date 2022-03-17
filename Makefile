@@ -6,7 +6,7 @@
 #    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/03/17 11:21:13 by utygett          ###   ########.fr        #
+#    Updated: 2022/03/17 15:17:05 by utygett          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC		=	cub.c	parser/p_main.c \
 					draw/draw_map.c \
 					draw/draw_ray.c \
 					draw/draw_key.c \
+					draw/draw_sprite.c \
 					draw/draw_mouse.c
 
 FTDIR	= 	./libft/
