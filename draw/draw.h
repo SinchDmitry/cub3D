@@ -6,12 +6,13 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/15 15:51:22 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/17 11:22:03 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DRAW_H
 # define DRAW_H
+
 # include "../cub.h"
 # define WIDTH 				1000
 # define HEIGHT				700
@@ -64,13 +65,14 @@
 # define MMANG_STEP			0.02f
 # define AIM_SIZE			40
 # define AIM_WIDTH			1
+# define AM_SPRITE_NUM		4
 # define MAX_KEYS_NUM		260
 # define LASER_WIDTH		3
 
 struct					s_images;
 typedef struct s_images	t_images;
 
-typedef struct s_wall_tex 
+typedef struct s_wall_texture
 {
 	void		*img;
 	char		*addr;
@@ -81,7 +83,20 @@ typedef struct s_wall_tex
 	int			img_w;
 }	t_wall_tex;
 
-typedef struct s_data_mlx 
+typedef struct s_spr
+{
+	float		x;
+	float		y;
+	float		x_ray;
+	float		y_ray;
+	int			id;
+	int			num;
+	float		dist;
+	t_wall_tex	spr_img;
+}	t_spr;
+
+
+typedef struct s_data_mlx
 {
 	void		*mlx;
 	void		*mlx_win;
@@ -104,7 +119,8 @@ typedef struct s_data_mlx
 	t_wall_tex	wall[4];
 	t_images	image;
 	t_info		*map;
-}				t_data_mlx;
+	t_spr		*am_s;
+}	t_data_mlx;
 
 typedef struct s_line
 {

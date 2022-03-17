@@ -6,7 +6,7 @@
 #    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/03/16 10:39:59 by utygett          ###   ########.fr        #
+#    Updated: 2022/03/17 11:21:13 by utygett          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ FTDIR	= 	./libft/
 LIBFT	= 	libft.a
 
 MLX_PATH	=		mlx/
+
 MLX			=		$(MLX_PATH)libmlx.a
 # MLXDIR
 
@@ -45,17 +46,17 @@ CC		=	gcc -O2
 
 RM		=	rm -f
 
-all		:	libmake $(NAME) $(MLX)
+all		:	libmake $(NAME)
 
 $(NAME)	:	$(OBJ_M)
 			@cp $(FTDIR)$(LIBFT) .
-			$(CC) $(CFLAGS) $(OBJ_M) libft.a -L$(MLX_PATH) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+			$(CC) $(CFLAGS) $(OBJ_M) libft.a -L$(MLX_PATH) -lmlx -framework \
+				OpenGL -framework AppKit -o $(NAME)
 
-$(MLX)	:
-			make -s -C $(MLX_PATH)	
 libmake	:	
 			@make -C $(FTDIR)
-
+			@make -C $(MLX_PATH)	
+ 
 %.o		:	%.c
 			$(CC) $(CFLAGS) -c $< -o $@
 

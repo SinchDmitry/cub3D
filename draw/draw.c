@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/15 14:38:20 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/17 11:31:22 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,17 @@ int	create_trgb(int t, int r, int g, int b)
 
 unsigned int	my_mlx_get_pixel(t_data_mlx *data, int x, int y, char side)
 {	
-	return (*(unsigned int *)(data->wall[side].addr + \
+	if (side > 3)
+	{
+		return (*(unsigned int *)(data->am_s->spr_img.addr + \
+		(x * data->am_s->spr_img.bits_per_pixel / 8 + y * data->am_s->spr_img.line_length)));
+	}
+	else
+	{
+		return (*(unsigned int *)(data->wall[side].addr + \
 		(x * data->wall[side].bits_per_pixel / 8 + y * data->wall[side].line_length)));
+	}
+	
 }
 
 void	my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color)
@@ -53,15 +62,17 @@ void	mouse_move(t_data_mlx *data)
 	
 	dir_x = data->map->player.dir_x;
 	plane_x = data->map->camera.pl_x;
-	if (data->mouse_x <= 5 || data->mouse_x >= WIDTH - 5)
+	if (data->mouse_x < 0 || data->mouse_x > WIDTH)
 	{
-		mlx_mouse_move(data->mlx_win, WIDTH / 2, HEIGHT / 2);
+		mlx_mouse_move(data->mlx_win, WIDTH / 2, data->mouse_y);
 		data->mouse_x = WIDTH / 2;
+		// return ;
 	}
-	if (data->mouse_y <= 5 || data->mouse_y >= HEIGHT - 5)
+	if (data->mouse_y < 0 || data->mouse_y > HEIGHT )
 	{
-		mlx_mouse_move(data->mlx_win, WIDTH / 2, HEIGHT / 2);
+		mlx_mouse_move(data->mlx_win, data->mouse_x, HEIGHT / 2);
 		data->mouse_y = HEIGHT / 2;
+		// return ;
 	}
 	data->prev_mouse_x = data->mouse_x;
 	data->prev_mouse_y = data->mouse_y;
@@ -114,7 +125,7 @@ int	render_next_frame(t_data_mlx *data)
 
 	mouse_move(data);
 	key_h(data);
-	mlx_mouse_hide();
+	// mlx_mouse_hide();
 	if (data->map->player.f_map)
 	{
 		draw_fvp(data);
