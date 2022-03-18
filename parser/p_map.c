@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/14 17:51:19 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/18 20:00:31 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,35 @@ static void	select_dir(t_info *map, char ch)
 {
 	if (ch == 'N')
 	{
-		map->camera.pl_x = tan(FOV / 2);
-		map->camera.pl_y = 0;
-		map->player.dir_x = 0;
-		map->player.dir_y = tan(-FOV / 2);
-		map->player.a = 4.7124f;
+		map->cam.pl_x = tan(FOV / 2);
+		map->cam.pl_y = 0;
+		map->play.dir_x = 0;
+		map->play.dir_y = tan(-FOV / 2);
+		map->play.a = 4.7124f;
 	}
 	else if (ch == 'S')
 	{
-		map->camera.pl_x = tan(-FOV / 2);
-		map->camera.pl_y = 0;
-		map->player.dir_x = 0;
-		map->player.dir_y = tan(FOV / 2);
-		map->player.a = 1.5708f;
+		map->cam.pl_x = tan(-FOV / 2);
+		map->cam.pl_y = 0;
+		map->play.dir_x = 0;
+		map->play.dir_y = tan(FOV / 2);
+		map->play.a = 1.5708f;
 	}
 	else if (ch == 'E')
 	{
-		map->camera.pl_x = 0;
-		map->camera.pl_y = tan(FOV / 2);
-		map->player.dir_x = tan(FOV / 2);
-		map->player.dir_y = 0;
-		map->player.a = 0;
+		map->cam.pl_x = 0;
+		map->cam.pl_y = tan(FOV / 2);
+		map->play.dir_x = tan(FOV / 2);
+		map->play.dir_y = 0;
+		map->play.a = 0;
 	}
 	else if (ch == 'W')
 	{
-		map->camera.pl_x = 0;
-		map->camera.pl_y = tan(-FOV / 2);
-		map->player.dir_x = tan(-FOV / 2);
-		map->player.dir_y = 0;
-		map->player.a = 3.1415f;
+		map->cam.pl_x = 0;
+		map->cam.pl_y = tan(-FOV / 2);
+		map->play.dir_x = tan(-FOV / 2);
+		map->play.dir_y = 0;
+		map->play.a = 3.1415f;
 	}
 }
 
@@ -130,9 +130,9 @@ static void	map_create(t_info *map, char **map_str)
 				map->mapa[i][j].sym = 'e';
 			else if (ft_iscompas(map, map_str[i][j], &f))
 			{
-					map->player.dir = map_str[i][j];
-					map->player.x = (float)j;
-					map->player.y = (float)i;
+					map->play.dir = map_str[i][j];
+					map->play.x = (float)j;
+					map->play.y = (float)i;
 					map->mapa[i][j].sym = '0';
 			}
 			else

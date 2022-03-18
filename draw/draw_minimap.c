@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 11:50:19 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/14 20:05:42 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/18 20:00:31 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	pixel_put_map_move(int x, int y, t_data_mlx *data, int color)
 
 	x1 = x;
 	y1 = y;
-	h = ((data->map->player.x) * MMTEXSIZE);
-	w = ((data->map->player.y) * MMTEXSIZE);
-	x = ((x1 - h) * sin(data->map->player.a + ROTATE_MOV) - (y1 - w) * \
-		cos(data->map->player.a + ROTATE_MOV));
-	y = ((x1 - h) * cos(data->map->player.a + ROTATE_MOV) + (y1 - w) * \
-		sin(data->map->player.a + ROTATE_MOV));
+	h = ((data->map->play.x) * MMTEXSIZE);
+	w = ((data->map->play.y) * MMTEXSIZE);
+	x = ((x1 - h) * sin(data->map->play.a + ROTATE_MOV) - (y1 - w) * \
+		cos(data->map->play.a + ROTATE_MOV));
+	y = ((x1 - h) * cos(data->map->play.a + ROTATE_MOV) + (y1 - w) * \
+		sin(data->map->play.a + ROTATE_MOV));
 	if (x + MOVEX < MINIMAPHEIGHT && y + MOVEY < MINIMAPWIDTH && \
 		x + MOVEX > 0 && y + MOVEY > 0)
 		my_mlx_pixel_put(data, x + MOVEX, y + MOVEY, color);
@@ -41,12 +41,12 @@ void	image_put_map_move(int x, int y, t_data_mlx *data, int num)
 
 	x1 = x;
 	y1 = y;
-	h = ((data->map->player.x) * MMTEXSIZE);
-	w = ((data->map->player.y) * MMTEXSIZE);
-	x = ((x1 - h) * sin(data->map->player.a + ROTATE_MOV) - (y1 - w) * \
-		cos(data->map->player.a + ROTATE_MOV));
-	y = ((x1 - h) * cos(data->map->player.a + ROTATE_MOV) + (y1 - w) * \
-		sin(data->map->player.a + ROTATE_MOV));
+	h = ((data->map->play.x) * MMTEXSIZE);
+	w = ((data->map->play.y) * MMTEXSIZE);
+	x = ((x1 - h) * sin(data->map->play.a + ROTATE_MOV) - (y1 - w) * \
+		cos(data->map->play.a + ROTATE_MOV));
+	y = ((x1 - h) * cos(data->map->play.a + ROTATE_MOV) + (y1 - w) * \
+		sin(data->map->play.a + ROTATE_MOV));
 	if (x + MOVEX < MINIMAPHEIGHT && y + MOVEY < MINIMAPWIDTH && \
 		x + MOVEX > 0 && y + MOVEY > 0)
 		mlx_put_image_to_window(data->mlx, data->mlx_win, \
@@ -105,18 +105,18 @@ void	line_math_minimap(t_data_mlx *data, float rad)
 	float	ray_y;
 
 
-	ang = data->map->player.a + rad;
+	ang = data->map->play.a + rad;
 	c = 0;
 	while (c < MMTEXSIZE / 10)
 	{
-		ray_x = data->map->player.x + c * cos(ang);
-		ray_y = data->map->player.y + c * sin(ang);
+		ray_x = data->map->play.x + c * cos(ang);
+		ray_y = data->map->play.y + c * sin(ang);
 		if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
 			break ;
 		ray_x *= MMTEXSIZE;
 		ray_y *= MMTEXSIZE;
 		c = c + 0.1f;
-		pixel_put_map_move(ray_x, ray_y, data, PLAYERCOL);
+		pixel_put_map_move(ray_x, ray_y, data, playCOL);
 	}
 }
 
@@ -184,8 +184,8 @@ void mimimap_sym(t_data_mlx *data)
 	c = 0;
 	while (c < MMTEXSIZE / 4)
 	{
-		ray_x = data->map->player.x + c * cos(4.71f);
-		ray_y = data->map->player.y + c * sin(4.71f);
+		ray_x = data->map->play.x + c * cos(4.71f);
+		ray_y = data->map->play.y + c * sin(4.71f);
 		ray_x *= MMTEXSIZE;
 		ray_y *= MMTEXSIZE;
 		c = c + 0.1f;

@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/18 13:39:10 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/18 20:00:31 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define P_BACK 2
 # define P_FRONT 1
 
-typedef struct s_player
+typedef struct s_play
 {
 	float	x;
 	float	y;
@@ -41,9 +41,9 @@ typedef struct s_player
 	float	x_textu;
 	float	y_textu;
 	int		f_minimap;
-}	t_player;
+}	t_play;
 
-typedef struct s_camera
+typedef struct s_cam
 {
 	float	x;
 	float	y;
@@ -62,8 +62,8 @@ typedef struct s_camera
 	float	delta_dir_x;
 	float	delta_dir_y;
 	float	correct_dist;
-	int		vertilcal_pos; // up and down camera
-}	t_camera;
+	int		vertilcal_pos; // up and down cam
+}	t_cam;
 
 typedef struct s_images
 {
@@ -99,8 +99,8 @@ typedef struct s_info
 	t_rgb		*sky;
 	t_rgb		*floor;
 	t_slot		**mapa;
-	t_player	player;
-	t_camera	camera;
+	t_play	play;
+	t_cam	cam;
 	t_texture	*texture;
 }	t_info;
 

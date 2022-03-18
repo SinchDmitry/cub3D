@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/18 15:20:08 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/18 20:11:55 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ unsigned int	my_mlx_get_pixel(t_data_mlx *data, int x, int y, char side)
 {	
 	if (side > 3)
 	{
-		return (*(unsigned int *)(data->am_s->spr_img[0][0].addr + \
-		(x * data->am_s->spr_img[0][0].bits_per_pixel / 8 + y * data->am_s->spr_img[0][0].line_length)));
+		return (*(unsigned int *)(data->am_s->spr_img[side - 10].costumes[data->am_s->spr_img[side - 10].c_num].addr + \
+			(x * data->am_s->spr_img[side - 10].costumes[data->am_s->spr_img[side - 10].c_num].bits_per_pixel / 8 + \
+			y * data->am_s->spr_img[side - 10].costumes[data->am_s->spr_img[side - 10].c_num].line_length)));
 	}
 	else
 	{
@@ -46,8 +47,8 @@ void	my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color)
 
 int	check_move(t_data_mlx *data)
 {
-	if (data->map->mapa[(int)data->map->player.y] \
-		[(int)data->map->player.x].sym == '1')
+	if (data->map->mapa[(int)data->map->play.y] \
+		[(int)data->map->play.x].sym == '1')
 		return (1);
 	else
 		return (0);
@@ -60,8 +61,8 @@ void	mouse_move(t_data_mlx *data)
 	float	move_angle_x;
 	float	move_angle_y;
 	
-	dir_x = data->map->player.dir_x;
-	plane_x = data->map->camera.pl_x;
+	dir_x = data->map->play.dir_x;
+	plane_x = data->map->cam.pl_x;
 	if (data->mouse_x < 0 || data->mouse_x > WIDTH)
 	{
 		mlx_mouse_move(data->mlx_win, WIDTH / 2, data->mouse_y);
@@ -82,32 +83,32 @@ void	mouse_move(t_data_mlx *data)
 	move_angle_y *= 6;
 	if(move_angle_x > 0)
 	{
-		data->map->player.dir_x = data->map->player.dir_x * cos(-move_angle_x) - \
-			data->map->player.dir_y * sin(-move_angle_x);
-		data->map->player.dir_y = dir_x * sin(-move_angle_x) + \
-			data->map->player.dir_y * cos(-move_angle_x);
-		data->map->camera.pl_x = data->map->camera.pl_x * cos(-move_angle_x) - \
-			data->map->camera.pl_y * sin(-move_angle_x);
-		data->map->camera.pl_y = plane_x * sin(-move_angle_x) + \
-			data->map->camera.pl_y * cos(-move_angle_x);
-		data->map->player.a += -move_angle_x;
+		data->map->play.dir_x = data->map->play.dir_x * cos(-move_angle_x) - \
+			data->map->play.dir_y * sin(-move_angle_x);
+		data->map->play.dir_y = dir_x * sin(-move_angle_x) + \
+			data->map->play.dir_y * cos(-move_angle_x);
+		data->map->cam.pl_x = data->map->cam.pl_x * cos(-move_angle_x) - \
+			data->map->cam.pl_y * sin(-move_angle_x);
+		data->map->cam.pl_y = plane_x * sin(-move_angle_x) + \
+			data->map->cam.pl_y * cos(-move_angle_x);
+		data->map->play.a += -move_angle_x;
 	}
 	else if(move_angle_x < 0)
 	{
-		data->map->player.dir_x = data->map->player.dir_x * cos(-move_angle_x) - \
-			data->map->player.dir_y * sin(-move_angle_x);
-		data->map->player.dir_y = dir_x * sin(-move_angle_x) + \
-			data->map->player.dir_y * cos(-move_angle_x);
-		data->map->camera.pl_x = data->map->camera.pl_x * cos(-move_angle_x) - \
-			data->map->camera.pl_y * sin(-move_angle_x);
-		data->map->camera.pl_y = plane_x * sin(-move_angle_x) + \
-			data->map->camera.pl_y * cos(-move_angle_x);
-		data->map->player.a += -move_angle_x;
+		data->map->play.dir_x = data->map->play.dir_x * cos(-move_angle_x) - \
+			data->map->play.dir_y * sin(-move_angle_x);
+		data->map->play.dir_y = dir_x * sin(-move_angle_x) + \
+			data->map->play.dir_y * cos(-move_angle_x);
+		data->map->cam.pl_x = data->map->cam.pl_x * cos(-move_angle_x) - \
+			data->map->cam.pl_y * sin(-move_angle_x);
+		data->map->cam.pl_y = plane_x * sin(-move_angle_x) + \
+			data->map->cam.pl_y * cos(-move_angle_x);
+		data->map->play.a += -move_angle_x;
 	}
 	if(move_angle_y > 0)
-		data->map->camera.vertilcal_pos += move_angle_y;
+		data->map->cam.vertilcal_pos += move_angle_y;
 	else if(move_angle_y < 0)
-		data->map->camera.vertilcal_pos += move_angle_y;
+		data->map->cam.vertilcal_pos += move_angle_y;
 }
 
 int	render_next_frame(t_data_mlx *data)
@@ -119,14 +120,14 @@ int	render_next_frame(t_data_mlx *data)
 	mouse_move(data);
 	key_h(data);
 	mlx_mouse_hide();
-	if (data->map->player.f_map)
+	if (data->map->play.f_map)
 	{
 		draw_fvp(data);
 		draw_objects(data);
-		if (data->map->player.f_minimap)
+		if (data->map->play.f_minimap)
 			draw_minimap(data);
 	}
-	if (!data->map->player.f_map)
+	if (!data->map->play.f_map)
 	{	
 		++i_space;
 		if (i_space > 39)
@@ -160,7 +161,9 @@ void	init_images(t_data_mlx *data)
 
 	data->am_s = malloc(sizeof(t_spr));
 	if (!data->am_s)
-		error_end(3); // move it
+		error_end(3); // move it && save pointer
+	data->am_s->spr_img[0].dead = 0;
+	data->am_s->spr_img[0].shot = 0;
 	//init animated space
 	i = -1;
 	space_dir = "./textures/space_fly/space2/space_fly";
@@ -188,11 +191,11 @@ void	init_images(t_data_mlx *data)
 		ft_strlcat(xpm_path_among, ".xpm", 1023);
 		printf ("%s\n", xpm_path_among);
 		// data->am_s->spr_img[0][i].img = xpm_path_among;
-		data->am_s->spr_img[0][i].img = \
-			mlx_xpm_file_to_image(data->mlx, xpm_path_among, &data->am_s->spr_img[0][i].img_h, &data->am_s->spr_img[0][i].img_w);
+		data->am_s->spr_img[0].costumes[i].img = \
+			mlx_xpm_file_to_image(data->mlx, xpm_path_among, &data->am_s->spr_img[0].costumes[i].img_h, &data->am_s->spr_img[0].costumes[i].img_w);
 		// printf("w : %d h : %d\n", data->am_s->spr_img[0][i].img_w, data->am_s->spr_img[0][i].img_h);
-		data->am_s->spr_img[0][i].addr = mlx_get_data_addr(data->am_s->spr_img[0][i].img, &data->am_s->spr_img[0][i].bits_per_pixel, \
-			&data->am_s->spr_img[0][i].line_length, &data->am_s->spr_img[0][i].endian);
+		data->am_s->spr_img[0].costumes[i].addr = mlx_get_data_addr(data->am_s->spr_img[0].costumes[i].img, &data->am_s->spr_img[0].costumes[i].bits_per_pixel, \
+			&data->am_s->spr_img[0].costumes[i].line_length, &data->am_s->spr_img[0].costumes[i].endian);
 	}
 	
 	//ini weapon texture
@@ -245,15 +248,15 @@ int	draw(t_info *map)
 	int i;
 
 	i = 0;
-	map->player.f_map = 0;
-	map->player.f_minimap = 0;
+	map->play.f_map = 0;
+	map->play.f_minimap = 0;
 	data.map = map;
-	data.map->camera.vertilcal_pos = 0;
+	data.map->cam.vertilcal_pos = 0;
 	while(i < MAX_KEYS_NUM)
 		data.keycode[i++] = UNPRESS; //init unpress keys
 	data.mouse_x = WIDTH / 2;
 	data.mouse_y = HEIGHT / 2;
-	printf("here x = %f y = %f\n", map->player.x, map->player.y);
+	printf("here x = %f y = %f\n", map->play.x, map->play.y);
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Hello world!");
 	init_images(&data);
