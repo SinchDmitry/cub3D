@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/18 20:55:36 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/18 21:33:05 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,23 +87,26 @@ typedef struct s_tex
 
 typedef struct s_spr_tex
 {
-	float		x;
-	float		y;
-	float		t_x;
-	float		t_y;
-	int			shot;
-	int			dead;
-	float		x_ray;
-	float		y_ray;
-	int			h_spr;
-	int			w_spr;
-	int			c_num;
-	int			dr_f_x;
-	int			dr_f_y;
-	int			dr_st_x;
-	int			dr_st_y;
-	int			pos_spr_x;
-	t_tex		costumes[SPR_COSTUME];
+	float	x;
+	float	y;
+	int		d;
+	float	t_x;
+	float	t_y;
+	int		shot;
+	int		dead;
+	int		tex_x;
+	int		tex_y;
+	float	x_ray;
+	float	y_ray;
+	int		h_spr;
+	int		w_spr;
+	int		c_num;
+	int		dr_f_x;
+	int		dr_f_y;
+	int		dr_st_x;
+	int		dr_st_y;
+	int		pos_spr_x;
+	t_tex	costumes[SPR_COSTUME];
 }	t_spr_tex;
 
 typedef struct s_spr

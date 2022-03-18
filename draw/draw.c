@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/18 20:11:55 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/18 21:52:19 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,12 +236,26 @@ int	key_press(int keycode, t_data_mlx *data)
 		data->keycode[keycode] = PRESS;
 	return (0);
 }
+
 int	key_unpress(int keycode, t_data_mlx *data)
 {
 	if (keycode >= 0 && keycode < MAX_KEYS_NUM)
 		data->keycode[keycode] = UNPRESS;
 	return (0);
 }
+
+static void	init_sprite_data(t_data_mlx *data)
+{
+	data->am_s->spr_img[0].x = 22.5;
+	data->am_s->spr_img[0].y = 4.5;
+	data->am_s->spr_img[1].x = 11.5;
+	data->am_s->spr_img[1].y = 10.5;
+	data->am_s->spr_img[2].x = 26.5;
+	data->am_s->spr_img[2].y = 15.5;
+	data->am_s->spr_img[3].y = 23.5;
+	data->am_s->spr_img[3].x = 23.5;
+}
+
 int	draw(t_info *map)
 {
 	t_data_mlx	data;
@@ -260,6 +274,7 @@ int	draw(t_info *map)
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Hello world!");
 	init_images(&data);
+	init_sprite_data(&data);
 	// render_next_frame(&data);
 	mlx_hook(data.mlx_win, 2, 0, &key_press, &data);
 	mlx_hook(data.mlx_win, 3, 0, &key_unpress, &data);
