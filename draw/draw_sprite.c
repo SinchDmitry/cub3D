@@ -6,43 +6,36 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/18 21:00:06 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/18 21:11:19 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-void	init_sprite(t_data_mlx *data)
+void	init_sprite_data(t_data_mlx *data, int num)
 {
 	data->am_s->spr_img[0].x = 22.5;
 	data->am_s->spr_img[0].y = 4.5;
-	data->am_s->spr_img[0].x_ray = data->am_s->spr_img[0].x - data->map->play.x;
-	data->am_s->spr_img[0].y_ray = data->am_s->spr_img[0].y - data->map->play.y;
 	data->am_s->spr_img[1].x = 11.5;
 	data->am_s->spr_img[1].y = 10.5;
-	data->am_s->spr_img[1].x_ray = data->am_s->spr_img[1].x - data->map->play.x;
-	data->am_s->spr_img[1].y_ray = data->am_s->spr_img[1].y - data->map->play.y;
 	data->am_s->spr_img[2].x = 26.5;
 	data->am_s->spr_img[2].y = 15.5;
-	data->am_s->spr_img[2].x_ray = data->am_s->spr_img[2].x - data->map->play.x;
-	data->am_s->spr_img[2].y_ray = data->am_s->spr_img[2].y - data->map->play.y;
-	data->am_s->spr_img[3].x = 23.5;
 	data->am_s->spr_img[3].y = 23.5;
-	data->am_s->spr_img[3].x_ray = data->am_s->spr_img[3].x - data->map->play.x;
-	data->am_s->spr_img[3].y_ray = data->am_s->spr_img[3].y - data->map->play.y;
 	data->am_s->inv = 1.0 / (data->map->cam.pl_x * data->map->play.dir_y - \
 		data->map->play.dir_x * data->map->cam.pl_y);
 }
 
-void	draw_sprite(t_data_mlx *data, int num, int cost)
+void	init_sprite_data(t_data_mlx *data, int num)
 {
-	int	i;
-	int	j;
-	int	tex_x;
-	int	tex_y;
-	int	d;
-
-	init_sprite(data);
+	data->am_s->spr_img[0].x_ray = data->am_s->spr_img[0].x - data->map->play.x;
+	data->am_s->spr_img[0].y_ray = data->am_s->spr_img[0].y - data->map->play.y;
+	data->am_s->spr_img[1].x_ray = data->am_s->spr_img[1].x - data->map->play.x;
+	data->am_s->spr_img[1].y_ray = data->am_s->spr_img[1].y - data->map->play.y;
+	data->am_s->spr_img[2].x_ray = data->am_s->spr_img[2].x - data->map->play.x;
+	data->am_s->spr_img[2].y_ray = data->am_s->spr_img[2].y - data->map->play.y;
+	data->am_s->spr_img[3].x_ray = data->am_s->spr_img[3].x - data->map->play.x;
+	data->am_s->spr_img[3].y_ray = data->am_s->spr_img[3].y - data->map->play.y;
+	data->am_s->spr_img[3].x = 23.5;
 	data->am_s->spr_img[num].t_x = data->am_s->inv * (data->map->play.dir_y * \
 		data->am_s->spr_img[num].x_ray - data->map->play.dir_x * \
 		data->am_s->spr_img[num].y_ray);
@@ -55,6 +48,18 @@ void	draw_sprite(t_data_mlx *data, int num, int cost)
 		abs((int)(HEIGHT / data->am_s->spr_img[num].t_y));
 	data->am_s->spr_img[num].dr_st_y = -(data->am_s->spr_img[num].h_spr / 2) \
 		+ HEIGHT / 2;
+}
+
+void	draw_sprite(t_data_mlx *data, int num, int cost)
+{
+	int	i;
+	int	j;
+	int	tex_x;
+	int	tex_y;
+	int	d;
+
+	init_sprite_data(data);
+	init_sprite_param(data);
 	if (data->am_s->spr_img[num].dr_st_y < 0)
 		data->am_s->spr_img[num].dr_st_y = 0;
 	data->am_s->spr_img[num].dr_f_y = data->am_s->spr_img[num].h_spr / 2 + \
