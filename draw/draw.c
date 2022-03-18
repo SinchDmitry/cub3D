@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/17 19:29:09 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/18 15:20:08 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	render_next_frame(t_data_mlx *data)
 {
 	int			img_h;
 	int			img_w;
-	static int	i;
+	static int	i_space;
 
 	mouse_move(data);
 	key_h(data);
@@ -128,15 +128,15 @@ int	render_next_frame(t_data_mlx *data)
 	}
 	if (!data->map->player.f_map)
 	{	
-		++i;
-		if (i > 39)
-			i = 0;
+		++i_space;
+		if (i_space > 39)
+			i_space = 0;
 		data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 		data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
 			&data->line_length, &data->endian);
 		draw_map(data);
 		mlx_put_image_to_window(data->mlx, data->mlx_win, \
-			data->image.mm_space[i], 0, 0);
+			data->image.mm_space[i_space], 0, 0);
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, \
 			WIDTH / 2 - data->map->width * TEXSIZE / 2, \
 			HEIGHT / 2 - data->map->height * TEXSIZE / 2);
@@ -158,6 +158,9 @@ void	init_images(t_data_mlx *data)
 	int		img_h;
 	int		img_w;
 
+	data->am_s = malloc(sizeof(t_spr));
+	if (!data->am_s)
+		error_end(3); // move it
 	//init animated space
 	i = -1;
 	space_dir = "./textures/space_fly/space2/space_fly";
@@ -172,10 +175,10 @@ void	init_images(t_data_mlx *data)
 		data->image.mm_space[i] = \
 			mlx_xpm_file_to_image(data->mlx, xpm_path_space, &img_h, &img_w);
 	}
-	//init animated among dead
+	// init animated among dead
 	i = -1;
 	among_dir = "./textures/among/0";
-	while (++i < 11)
+	while (++i < SPR_COSTUME)
 	{
 		xpm_path_among[0] = '\0';
 		ft_strlcat(xpm_path_among, among_dir, 1023);
@@ -184,9 +187,12 @@ void	init_images(t_data_mlx *data)
 		free(img_num);
 		ft_strlcat(xpm_path_among, ".xpm", 1023);
 		printf ("%s\n", xpm_path_among);
-		data->am_s->spr_img[0][i].img = xpm_path_among;
-		// data->image.mm_space[i] = \
-		// 	mlx_xpm_file_to_image(data->mlx, xpm_path_among, &img_h, &img_w);
+		// data->am_s->spr_img[0][i].img = xpm_path_among;
+		data->am_s->spr_img[0][i].img = \
+			mlx_xpm_file_to_image(data->mlx, xpm_path_among, &data->am_s->spr_img[0][i].img_h, &data->am_s->spr_img[0][i].img_w);
+		// printf("w : %d h : %d\n", data->am_s->spr_img[0][i].img_w, data->am_s->spr_img[0][i].img_h);
+		data->am_s->spr_img[0][i].addr = mlx_get_data_addr(data->am_s->spr_img[0][i].img, &data->am_s->spr_img[0][i].bits_per_pixel, \
+			&data->am_s->spr_img[0][i].line_length, &data->am_s->spr_img[0][i].endian);
 	}
 	
 	//ini weapon texture
@@ -213,31 +219,10 @@ void	init_images(t_data_mlx *data)
 		&data->wall[3].img_h, &data->wall[3].img_w);
 	data->wall[3].addr = mlx_get_data_addr(data->wall[3].img, &data->wall[3].bits_per_pixel, \
 		&data->wall[3].line_length, &data->wall[3].endian);
-		/////
-	// data->img1[1] = mlx_xpm_file_to_image(data->mlx, "./textures/wall1.xpm", \
-	// 	&img_h, &img_w);
-	// data->addr1 = mlx_get_data_addr(data->img1[1], &data->bits_per_pixel1[1], \
-	// 	&data->line_length1[1], &data->endian1[1]);
-	// data->img1[2] = mlx_xpm_file_to_image(data->mlx, "./textures/wall2.xpm", \
-	// 	&img_h, &img_w);
-	// data->addr1[2] = mlx_get_data_addr(data->img1[2], &data->bits_per_pixel1[2], \
-	// 	&data->line_length1[2], &data->endian1[2]);
-	// data->img1[3] = mlx_xpm_file_to_image(data->mlx, "./textures/wall3.xpm", \
-	// 	&img_h, &img_w);
-	// data->addr1[3] = mlx_get_data_addr(data->img1[3], &data->bits_per_pixel1[3], \
-	// 	&data->line_length1[3], &data->endian1[3]);
 
 	//init cpmpas
 	data->image.compas = mlx_xpm_file_to_image(data->mlx, "./textures/N.xpm", \
 			&img_h, &img_w);
-	// init sprite
-	data->am_s = malloc(sizeof(t_spr));
-	if (!data->am_s)
-		error_end(3); // move it
-	data->am_s->spr_img[0][0].img = mlx_xpm_file_to_image(data->mlx, "./textures/among/00.xpm", \
-		&data->am_s->spr_img[0][0].img_h, &data->am_s->spr_img[0][0].img_w);
-	data->am_s->spr_img[0][0].addr = mlx_get_data_addr(data->am_s->spr_img[0][0].img, &data->am_s->spr_img[0][0].bits_per_pixel, \
-		&data->am_s->spr_img[0][0].line_length, &data->am_s->spr_img[0][0].endian);
 		
 }
 

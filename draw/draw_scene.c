@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/17 19:41:58 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/18 13:20:23 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ void	attack_weapon(t_data_mlx *data)
 		draw_line(data, bullet, RED_COL);
 		printf ("x : %d < %d < %d \n", data->am_s->dr_st_x, WIDTH / 2, data->am_s->dr_f_x);
 		printf ("y : %d < %d < %d \n", data->am_s->dr_st_y, HEIGHT / 2, data->am_s->dr_f_y);
-		if (WIDTH / 2 > data->am_s->dr_st_x && WIDTH / 2 < data->am_s->dr_f_x)
-			if (HEIGHT / 2 > data->am_s->dr_st_y && HEIGHT / 2 < data->am_s->dr_f_y)
+		// if (WIDTH / 2 > data->am_s->dr_st_x && WIDTH / 2 < data->am_s->dr_f_x)
+		// 	if (HEIGHT / 2 > data->am_s->dr_st_y && HEIGHT / 2 < data->am_s->dr_f_y)
 				
 	}
 }
