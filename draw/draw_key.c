@@ -6,11 +6,25 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 22:43:17 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/14 18:04:30 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/18 15:31:39 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
+
+void	wall_slide(t_data_mlx *data)
+{
+	printf("a : %f\n", fabsf(fmodf(data->map->player.a, 6.28f)));
+	if (data->map->player.a >= 0 && data->map->player.a < 1.57f)
+		data->map->player.x += MOVE_SPEED;
+	else if (data->map->player.a >=  1.57f && data->map->player.a < 3.14f)
+		data->map->player.x += MOVE_SPEED;
+	// else if (data->map->player.a > 0 && data->map->player.a < 1.57f)
+	// 	data->map->player.y
+	// else if (data->map->player.a > 0 && data->map->player.a < 1.57f)
+	// 	data->map->player.y
+}	
+
 
 static void	ws_case(t_data_mlx *data)
 {
@@ -37,6 +51,7 @@ static void	ws_case(t_data_mlx *data)
 		{
 			data->map->player.x -= move_speed * data->map->player.dir_x;
 			data->map->player.y -= move_speed * data->map->player.dir_y;
+			wall_slide(data);
 		}
 	}
 }
@@ -50,7 +65,7 @@ static void	ad_case(t_data_mlx *data)
 		if (check_move(data))
 		{
 			data->map->player.x += MOVE_SPEED * (data->map->player.dir_y);
-			data->map->player.y += MOVE_SPEED * (data->map->player.dir_x);
+			data->map->player.y -= MOVE_SPEED * (data->map->player.dir_x);
 		}
 	}
 	if (data->keycode[A_KEY] == PRESS)
@@ -60,7 +75,7 @@ static void	ad_case(t_data_mlx *data)
 		if (check_move(data))
 		{
 			data->map->player.x -= MOVE_SPEED * (data->map->player.dir_y);
-			data->map->player.y -= MOVE_SPEED * (data->map->player.dir_x);
+			data->map->player.y += MOVE_SPEED * (data->map->player.dir_x);
 		}
 	}
 }
@@ -83,6 +98,8 @@ static void	rl_case(t_data_mlx *data)
 		data->map->camera.pl_y = plane_x * sin(-MOVE_ANGLE) + \
 			data->map->camera.pl_y * cos(-MOVE_ANGLE);
 		data->map->player.a -= MOVE_ANGLE;
+		// data->map->player.a = fmod(data->map->player.a, 6.28f);
+
 	}
 	if (data->keycode[RIGHT_KEY] == PRESS)
 	{
@@ -95,6 +112,7 @@ static void	rl_case(t_data_mlx *data)
 		data->map->camera.pl_y = plane_x * sin(MOVE_ANGLE) + \
 			data->map->camera.pl_y * cos(MOVE_ANGLE);
 		data->map->player.a += MOVE_ANGLE;
+		// data->map->player.a = fmod(data->map->player.a, 6.28f);
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/17 19:42:27 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/18 12:39:44 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ typedef struct s_spr
 	int			dr_f_y;
 	int			dr_st_x;
 	int			dr_st_y;
-	int			
 	t_wall_tex	spr_img[SPR_NUM][SPR_COSTUME];
 }	t_spr;
 
