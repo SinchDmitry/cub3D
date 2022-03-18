@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/16 10:38:58 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/18 17:16:44 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	ray_player(t_data_mlx *data, int flag)
 	int			i;
 
 	x = -1;
-	data->map->texture->ture = NULL;
 	while (++x < WIDTH)
 	{
 		init_camera(data, x);
@@ -94,7 +93,6 @@ void	ray_player(t_data_mlx *data, int flag)
 		else
 			data->sector[x] = (data->map->camera.side_dist_x - \
 				data->map->camera.delta_dir_x);
-
 		////////////////////// draw
 		int lineHeight = (int)(HEIGHT / data->sector[x]);
 		 // up and down camera
@@ -134,6 +132,9 @@ void	ray_player(t_data_mlx *data, int flag)
 				sym = 3;
 		}
 
+		if(x == WIDTH / 2)
+			data->map->player.side_for_move = sym; 
+
 		int texX = (int)(wallX * (double)data->wall[sym].img_w);
 		
 
@@ -142,7 +143,6 @@ void	ray_player(t_data_mlx *data, int flag)
 		double texPos = (drawStart - data->map->camera.vertilcal_pos - HEIGHT / 2 + lineHeight / 2) * step;
 		unsigned int col;
 		// side of wall
-		
 		//draw vertical line
      	for(int y = drawStart; y < drawEnd; y++)
      	{

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
+#    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/03/17 15:17:05 by utygett          ###   ########.fr        #
+#    Updated: 2022/03/18 13:11:13 by aarchiba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ OBJ_M	=	$(SRC:%.c=%.o)
 
 DEP		=	$(SRC:%.c=%.d)
 
-CFLAGS	=	-MD -Imlx -g
+CFLAGS	=	-MD -Imlx -g 
 # -fsanitize=address
 #			-Werror -Wall -Wextra
 

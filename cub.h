@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/14 21:28:27 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/18 17:13:48 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_player
 	float	x_textu;
 	float	y_textu;
 	int		f_minimap;
+	int		side_for_move;
 }	t_player;
 
 typedef struct s_camera
@@ -83,22 +84,12 @@ typedef struct s_rgb
 	int	b;
 }	t_rgb;
 
-typedef struct s_tex
-{
-	char			side;
-	struct s_tex	*next;
-	int				pixel_x;
-	int				pixel_y;
-	int				ray_counter;
-}	t_tex;
-
 typedef struct s_texture
 {
 	char	*east;
 	char	*west;
 	char	*north;
 	char	*south;
-	t_tex	*ture;
 }	t_texture;
 
 typedef struct s_info

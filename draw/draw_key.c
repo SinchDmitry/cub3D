@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 22:43:17 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/18 15:31:39 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/18 19:17:06 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,35 @@
 
 void	wall_slide(t_data_mlx *data)
 {
-	printf("a : %f\n", fabsf(fmodf(data->map->player.a, 6.28f)));
-	if (data->map->player.a >= 0 && data->map->player.a < 1.57f)
+	// data->map->player.a = fabsf(fmodf(data->map->player.a, 6.28f));
+	// float player_angle = fabsf(fmodf(data->map->player.a, 6.28f));
+	float player_angle = data->map->player.a;
+
+	// printf("a : %f\n", data->map->player.a);
+	printf("a : %f\n", player_angle);
+	printf("side : %d\n", data->map->player.side_for_move);
+	if (player_angle >= 0 && player_angle < 1.57f && data->map->player.side_for_move == 1)
+		data->map->player.y += MOVE_SPEED;
+	if (player_angle >= 4.71f && player_angle < 6.28f && data->map->player.side_for_move == 1)
+		data->map->player.y -= MOVE_SPEED;
+	if (player_angle >= 1.57f && player_angle < 3.14f && data->map->player.side_for_move == 0)
+		data->map->player.y += MOVE_SPEED;
+	if (player_angle >= 3.14f  && player_angle < 4.71f && data->map->player.side_for_move == 0)
+		data->map->player.y -= MOVE_SPEED;
+	if (player_angle >= 0 && player_angle < 1.57f && data->map->player.side_for_move == 3)
 		data->map->player.x += MOVE_SPEED;
-	else if (data->map->player.a >=  1.57f && data->map->player.a < 3.14f)
+	if (player_angle >= 1.57f && player_angle < 3.14f && data->map->player.side_for_move == 3)
+		data->map->player.x -= MOVE_SPEED;
+	if (player_angle >= 4.71f && player_angle < 6.28f && data->map->player.side_for_move == 2)
 		data->map->player.x += MOVE_SPEED;
-	// else if (data->map->player.a > 0 && data->map->player.a < 1.57f)
-	// 	data->map->player.y
-	// else if (data->map->player.a > 0 && data->map->player.a < 1.57f)
-	// 	data->map->player.y
+	if (player_angle >= 3.14f && player_angle < 4.71f && data->map->player.side_for_move == 2)
+		data->map->player.x -= MOVE_SPEED;
+	// else if (player_angle >=  1.57f && player_angle < 3.14f)
+	// 	data->map->player.y -= MOVE_SPEED;
+	// else if (player_angle >= 3.14f && player_angle < 4.71f)
+	// 	data->map->player.y -= MOVE_SPEED;
+	// else if (player_angle >= 4.71f && player_angle < 6.28f)
+	// 	data->map->player.y += MOVE_SPEED;
 }	
 
 
@@ -98,8 +118,6 @@ static void	rl_case(t_data_mlx *data)
 		data->map->camera.pl_y = plane_x * sin(-MOVE_ANGLE) + \
 			data->map->camera.pl_y * cos(-MOVE_ANGLE);
 		data->map->player.a -= MOVE_ANGLE;
-		// data->map->player.a = fmod(data->map->player.a, 6.28f);
-
 	}
 	if (data->keycode[RIGHT_KEY] == PRESS)
 	{
@@ -112,7 +130,6 @@ static void	rl_case(t_data_mlx *data)
 		data->map->camera.pl_y = plane_x * sin(MOVE_ANGLE) + \
 			data->map->camera.pl_y * cos(MOVE_ANGLE);
 		data->map->player.a += MOVE_ANGLE;
-		// data->map->player.a = fmod(data->map->player.a, 6.28f);
 	}
 }
 
@@ -156,6 +173,10 @@ static void	qe_case(t_data_mlx *data)
 
 int	key_h(t_data_mlx *data)
 {
+	if (data->map->player.a < 0)
+		data->map->player.a = 6.28f;
+	else if (data->map->player.a > 6.28f)
+		data->map->player.a = 0;
 	ws_case(data);
 	ad_case(data);
 	rl_case(data);

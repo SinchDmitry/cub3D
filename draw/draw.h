@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/18 12:39:44 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/18 15:34:01 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@
 # define MAX_KEYS_NUM		260
 # define LASER_WIDTH		3
 # define SPR_NUM			1
-# define SPR_COSTUME		10
+# define SPR_COSTUME		11
 
 struct					s_images;
 typedef struct s_images	t_images;
@@ -83,6 +83,8 @@ typedef struct s_wall_tex
 	int			endian;
 	int			img_h;
 	int			img_w;
+	int			shot;
+	int			dead;
 }	t_wall_tex;
 
 typedef struct s_spr

@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/17 19:17:07 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/18 15:29:40 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 	
 // }
 
-void	draw_sprite(t_data_mlx *data)
+void	draw_sprite(t_data_mlx *data, int num, int costume)
 {
 	float	inv;
 	float	t_x;
@@ -96,14 +96,14 @@ void	draw_sprite(t_data_mlx *data)
 	while (++i < data->am_s->dr_f_x)
 	{
 		tex_x = ((int)(256 * (i - (-w_spr / 2 + pos_spr_x)) * \
-			data->am_s->spr_img[0][0].img_w / w_spr) / 256);
+			data->am_s->spr_img[num][costume].img_w / w_spr) / 256);
 		if (t_y > 0 && i > 0 && i < WIDTH && t_y < data->sector[i])
 		{
 			j = data->am_s->dr_st_y - 1;
 			while (++j < data->am_s->dr_f_y)
 			{
 				d = j * 256 - HEIGHT * 128 + h_spr * 128;
-				tex_y = (((d * data->am_s->spr_img[0][0].img_h) / h_spr) / 256);
+				tex_y = (((d * data->am_s->spr_img[num][costume].img_h) / h_spr) / 256);
 				my_mlx_pixel_put(data, i , j + data->map->camera.vertilcal_pos, my_mlx_get_pixel(data, tex_x, tex_y, 4));
           		// if((color & 0x00FFFFFF) != 0) 
 				// 	buffer[j][i] = color; // buffer ?
@@ -132,11 +132,25 @@ void	draw_sprite(t_data_mlx *data)
 
 void	draw_objects(t_data_mlx *data)
 {
+	static int	i_among;
+	int			spr_num;
+
+	spr_num = 0;
 	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
-		&data->line_length, &data->endian);
+			&data->line_length, &data->endian);
 	draw_invis_background(data, WIDTH, HEIGHT);
-	draw_sprite(data);
+	while (spr_num < SPR_NUM)
+	{
+		if (data->am_s->spr_img[spr_num][0].shot && !data->am_s->spr_img[spr_num][0].dead)
+		{
+			++i_among;
+			if (i_among = SPR_COSTUME - 1)
+				data->am_s->spr_img[spr_num][0].dead = 1;
+		}
+		draw_sprite(data, spr_num, i_among);
+		spr_num++;
+	}
 	draw_aim(data);
 	if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
 		attack_weapon(data);
