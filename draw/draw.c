@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/17 17:11:45 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/17 19:29:09 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ unsigned int	my_mlx_get_pixel(t_data_mlx *data, int x, int y, char side)
 {	
 	if (side > 3)
 	{
-		return (*(unsigned int *)(data->am_s->spr_img.addr + \
-		(x * data->am_s->spr_img.bits_per_pixel / 8 + y * data->am_s->spr_img.line_length)));
+		return (*(unsigned int *)(data->am_s->spr_img[0][0].addr + \
+		(x * data->am_s->spr_img[0][0].bits_per_pixel / 8 + y * data->am_s->spr_img[0][0].line_length)));
 	}
 	else
 	{
@@ -118,7 +118,7 @@ int	render_next_frame(t_data_mlx *data)
 
 	mouse_move(data);
 	key_h(data);
-	// mlx_mouse_hide();
+	mlx_mouse_hide();
 	if (data->map->player.f_map)
 	{
 		draw_fvp(data);
@@ -150,8 +150,10 @@ int	render_next_frame(t_data_mlx *data)
 void	init_images(t_data_mlx *data)
 {
 	int		i;
-	char	xpm_path[1024];
+	char	xpm_path_space[1024];
+	char	xpm_path_among[1024];
 	char	*space_dir;
+	char	*among_dir;
 	char	*img_num;
 	int		img_h;
 	int		img_w;
@@ -161,15 +163,32 @@ void	init_images(t_data_mlx *data)
 	space_dir = "./textures/space_fly/space2/space_fly";
 	while (++i < 40)
 	{
-		xpm_path[0] = '\0';
-		ft_strlcat(xpm_path, space_dir, 1023);
+		xpm_path_space[0] = '\0';
+		ft_strlcat(xpm_path_space, space_dir, 1023);
 		img_num = ft_itoa(i);
-		ft_strlcat(xpm_path, img_num, 1023);
+		ft_strlcat(xpm_path_space, img_num, 1023);
 		free(img_num);
-		ft_strlcat(xpm_path, ".xpm", 1023);
-		data->image.mm_space[i] = mlx_xpm_file_to_image(data->mlx, xpm_path, \
-			&img_h, &img_w);
+		ft_strlcat(xpm_path_space, ".xpm", 1023);
+		data->image.mm_space[i] = \
+			mlx_xpm_file_to_image(data->mlx, xpm_path_space, &img_h, &img_w);
 	}
+	//init animated among dead
+	i = -1;
+	among_dir = "./textures/among/0";
+	while (++i < 11)
+	{
+		xpm_path_among[0] = '\0';
+		ft_strlcat(xpm_path_among, among_dir, 1023);
+		img_num = ft_itoa(i);
+		ft_strlcat(xpm_path_among, img_num, 1023);
+		free(img_num);
+		ft_strlcat(xpm_path_among, ".xpm", 1023);
+		printf ("%s\n", xpm_path_among);
+		data->am_s->spr_img[0][i].img = xpm_path_among;
+		// data->image.mm_space[i] = \
+		// 	mlx_xpm_file_to_image(data->mlx, xpm_path_among, &img_h, &img_w);
+	}
+	
 	//ini weapon texture
 	data->weapon.img = mlx_xpm_file_to_image(data->mlx, "./textures/blaster1.xpm", \
 		&data->weapon.img_w, &data->weapon.img_h);
@@ -215,10 +234,10 @@ void	init_images(t_data_mlx *data)
 	data->am_s = malloc(sizeof(t_spr));
 	if (!data->am_s)
 		error_end(3); // move it
-	data->am_s->spr_img.img = mlx_xpm_file_to_image(data->mlx, "./textures/orange/alive.xpm", \
-		&data->am_s->spr_img.img_h, &data->am_s->spr_img.img_w);
-	data->am_s->spr_img.addr = mlx_get_data_addr(data->am_s->spr_img.img, &data->am_s->spr_img.bits_per_pixel, \
-		&data->am_s->spr_img.line_length, &data->am_s->spr_img.endian);
+	data->am_s->spr_img[0][0].img = mlx_xpm_file_to_image(data->mlx, "./textures/among/00.xpm", \
+		&data->am_s->spr_img[0][0].img_h, &data->am_s->spr_img[0][0].img_w);
+	data->am_s->spr_img[0][0].addr = mlx_get_data_addr(data->am_s->spr_img[0][0].img, &data->am_s->spr_img[0][0].bits_per_pixel, \
+		&data->am_s->spr_img[0][0].line_length, &data->am_s->spr_img[0][0].endian);
 		
 }
 

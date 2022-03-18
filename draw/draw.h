@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/17 15:16:43 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/17 19:42:27 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 # define MINIMAP_KEY		46
 # define ADD_PAD_KEY		69
 # define SUB_PAD_KEY		78
-# define MOUSE_RIGHT_KEY	1
+# define MOUSE_LEFT_KEY		1
 # define PRESS				1
 # define UNPRESS			0
 # define MOVEX				100
@@ -68,6 +68,8 @@
 # define AM_SPRITE_NUM		4
 # define MAX_KEYS_NUM		260
 # define LASER_WIDTH		3
+# define SPR_NUM			1
+# define SPR_COSTUME		10
 
 struct					s_images;
 typedef struct s_images	t_images;
@@ -87,12 +89,17 @@ typedef struct s_spr
 {
 	float		x;
 	float		y;
+	float		dist;
 	float		x_ray;
 	float		y_ray;
 	int			id;
 	int			num;
-	float		dist;
-	t_wall_tex	spr_img;
+	int			dr_f_x;
+	int			dr_f_y;
+	int			dr_st_x;
+	int			dr_st_y;
+	int			
+	t_wall_tex	spr_img[SPR_NUM][SPR_COSTUME];
 }	t_spr;
 
 typedef struct s_data_mlx
@@ -163,5 +170,7 @@ int				ft_mouse(int keycode, int x, int y, t_data_mlx *data);
 void			map_exit_case(int keycode, t_data_mlx *data);
 // void			draw_sprite(t_data_mlx *data);
 void			draw_objects(t_data_mlx *data);
+void			draw_aim(t_data_mlx *data);
+void			put_weapon_image(t_data_mlx *data);
 
 #endif

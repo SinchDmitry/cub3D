@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/15 15:58:07 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/17 19:41:58 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,11 @@ void	attack_weapon(t_data_mlx *data)
 	{
 		laser_width(data, &bullet, i--);
 		draw_line(data, bullet, RED_COL);
+		printf ("x : %d < %d < %d \n", data->am_s->dr_st_x, WIDTH / 2, data->am_s->dr_f_x);
+		printf ("y : %d < %d < %d \n", data->am_s->dr_st_y, HEIGHT / 2, data->am_s->dr_f_y);
+		if (WIDTH / 2 > data->am_s->dr_st_x && WIDTH / 2 < data->am_s->dr_f_x)
+			if (HEIGHT / 2 > data->am_s->dr_st_y && HEIGHT / 2 < data->am_s->dr_f_y)
+				
 	}
 }
 
@@ -132,11 +137,11 @@ void	put_weapon_image(t_data_mlx *data)
 {
 	static int	frame;
 	int	a;
-	// if (data->mouse_code[MOUSE_RIGHT_KEY] == PRESS)
-	if (data->mouse_code[MOUSE_RIGHT_KEY] == PRESS || frame > 0)
+	// if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
+	if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS || frame > 0)
 	{
-		if (data->mouse_code[MOUSE_RIGHT_KEY] == PRESS)
-			data->mouse_code[MOUSE_RIGHT_KEY] = UNPRESS;
+		if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
+			data->mouse_code[MOUSE_LEFT_KEY] = UNPRESS;
 		frame += 5;
 		if (frame > 24)
 			frame = 0;
@@ -169,10 +174,7 @@ void	draw_fvp(t_data_mlx *data)
 		y++;
 	}
 	ray_player(data, 1);
-	draw_aim(data);
-	if (data->mouse_code[MOUSE_RIGHT_KEY] == PRESS)
-		attack_weapon(data);
+	
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
-	put_weapon_image(data);
 	mlx_destroy_image(data->mlx, data->img);
 }
