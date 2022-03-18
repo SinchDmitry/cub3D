@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/18 20:00:31 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/18 21:04:52 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,9 @@ void	ray_play(t_data_mlx *data, int flag)
 			else
 				sym = 3;
 		}
+
+		if(x == WIDTH / 2)
+			data->map->play.side_for_move = sym; 
 
 		int texX = (int)(wallX * (double)data->wall[sym].img_w);
 		

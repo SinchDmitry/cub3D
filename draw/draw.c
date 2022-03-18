@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/18 21:52:19 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/18 22:01:06 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ void	mouse_move(t_data_mlx *data)
 	mlx_mouse_get_pos(data->mlx_win, &data->mouse_x, &data->mouse_y);
 	move_angle_x = data->prev_mouse_x - data->mouse_x;
 	move_angle_y = data->prev_mouse_y - data->mouse_y;
+	if(move_angle_x > 10)
+		move_angle_x = 10;
+	if(move_angle_x < -10)
+		move_angle_x = -10;
 	move_angle_x *= 0.01f;
 	move_angle_y *= 6;
 	if(move_angle_x > 0)
@@ -117,9 +121,6 @@ int	render_next_frame(t_data_mlx *data)
 	int			img_w;
 	static int	i_space;
 
-	mouse_move(data);
-	key_h(data);
-	mlx_mouse_hide();
 	if (data->map->play.f_map)
 	{
 		draw_fvp(data);
@@ -143,6 +144,9 @@ int	render_next_frame(t_data_mlx *data)
 			HEIGHT / 2 - data->map->height * TEXSIZE / 2);
 		mlx_destroy_image(data->mlx, data->img);
 	}
+	mouse_move(data);
+	key_h(data);
+	mlx_mouse_hide();
 	// printf("x : %d y : %d\n", data->mouse_x, data->mouse_y);
 	// draw map
 	return (0);
@@ -273,6 +277,7 @@ int	draw(t_info *map)
 	printf("here x = %f y = %f\n", map->play.x, map->play.y);
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Hello world!");
+	mlx_mouse_move(data.mlx_win, WIDTH / 2, HEIGHT / 2);
 	init_images(&data);
 	init_sprite_data(&data);
 	// render_next_frame(&data);
