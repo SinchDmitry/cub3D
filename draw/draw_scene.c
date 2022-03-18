@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/18 15:34:10 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/18 21:02:40 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,11 +125,11 @@ void	attack_weapon(t_data_mlx *data)
 	{
 		laser_width(data, &bullet, i--);
 		draw_line(data, bullet, RED_COL);
-		printf ("x : %d < %d < %d \n", data->am_s->dr_st_x, WIDTH / 2, data->am_s->dr_f_x);
-		printf ("y : %d < %d < %d \n", data->am_s->dr_st_y, HEIGHT / 2, data->am_s->dr_f_y);
-		// if (WIDTH / 2 > data->am_s->dr_st_x && WIDTH / 2 < data->am_s->dr_f_x)
-		// 	if (HEIGHT / 2 > data->am_s->dr_st_y && HEIGHT / 2 < data->am_s->dr_f_y)
-				
+		// printf ("x : %d < %d < %d \n", data->am_s->spr_img[0][0].dr_st_x, WIDTH / 2, data->am_s->spr_img[0][0].dr_f_x);
+		// printf ("y : %d < %d < %d \n", data->am_s->spr_img[0][0].dr_st_y, HEIGHT / 2, data->am_s->spr_img[0][0].dr_f_y);
+		if (WIDTH / 2 > data->am_s->spr_img[0].dr_st_x + (data->am_s->spr_img[0].dr_f_y - data->am_s->spr_img[0].dr_st_y) / 3 && WIDTH / 2 < data->am_s->spr_img[0].dr_f_x - (data->am_s->spr_img[0].dr_f_y - data->am_s->spr_img[0].dr_st_y) / 3)
+			if (HEIGHT / 2 > data->am_s->spr_img[0].dr_st_y - data->map->cam.vertilcal_pos && HEIGHT / 2 < data->am_s->spr_img[0].dr_st_y + (data->am_s->spr_img[0].dr_f_y - data->am_s->spr_img[0].dr_st_y) / 2 - data->map->cam.vertilcal_pos)
+				data->am_s->spr_img[0].shot = 1;
 	}
 }
 
@@ -165,7 +165,7 @@ void	draw_fvp(t_data_mlx *data)
 		x = 0;
 		while (x < WIDTH)
 		{
-			if(y < HEIGHT / 2 + data->map->camera.vertilcal_pos)
+			if(y < HEIGHT / 2 + data->map->cam.vertilcal_pos)
 				my_mlx_pixel_put(data ,x, y, SKY_COL);
 			else
 				my_mlx_pixel_put(data, x, y, GROUND_COL);
@@ -173,7 +173,7 @@ void	draw_fvp(t_data_mlx *data)
 		}
 		y++;
 	}
-	ray_player(data, 1);
+	ray_play(data, 1);
 	
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img);

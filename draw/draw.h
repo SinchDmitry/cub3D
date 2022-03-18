@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/18 15:34:01 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/18 21:02:37 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define MINIMAPHEIGHT		200
 # define STATUS_BAR_HEIGHT	100
 # define INVISIBLE_COL		0xFF000000
-# define PLAYERCOL			0x00FFFFFF
+# define playCOL			0x00FFFFFF
 # define WALLCOL			0x00708090
 # define FLOORCOL			0x00aab8c4
 # define RAYCOL				0x0000000F
@@ -68,39 +68,50 @@
 # define AM_SPRITE_NUM		4
 # define MAX_KEYS_NUM		260
 # define LASER_WIDTH		3
-# define SPR_NUM			1
+# define SPR_NUM			4
 # define SPR_COSTUME		11
 
 struct					s_images;
 typedef struct s_images	t_images;
 
-typedef struct s_wall_tex
+typedef struct s_tex
 {
 	void		*img;
 	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
 	int			img_h;
 	int			img_w;
-	int			shot;
-	int			dead;
-}	t_wall_tex;
+	int			endian;
+	int			line_length;
+	int			bits_per_pixel;
+}	t_tex;
 
-typedef struct s_spr
+typedef struct s_spr_tex
 {
 	float		x;
 	float		y;
-	float		dist;
+	float		t_x;
+	float		t_y;
+	int			shot;
+	int			dead;
 	float		x_ray;
 	float		y_ray;
-	int			id;
-	int			num;
+	int			h_spr;
+	int			w_spr;
+	int			c_num;
 	int			dr_f_x;
 	int			dr_f_y;
 	int			dr_st_x;
 	int			dr_st_y;
-	t_wall_tex	spr_img[SPR_NUM][SPR_COSTUME];
+	int			pos_spr_x;
+	t_tex		costumes[SPR_COSTUME];
+}	t_spr_tex;
+
+typedef struct s_spr
+{
+	int			num;
+	float		inv;
+	float		dist;
+	t_spr_tex	spr_img[SPR_NUM];
 }	t_spr;
 
 typedef struct s_data_mlx
@@ -122,8 +133,8 @@ typedef struct s_data_mlx
 	int			mouse_y;
 	int			prev_mouse_x;
 	int			prev_mouse_y;
-	t_wall_tex	weapon;
-	t_wall_tex	wall[4];
+	t_tex		weapon;
+	t_tex		wall[4];
 	t_images	image;
 	t_info		*map;
 	t_spr		*am_s;
@@ -161,7 +172,7 @@ int				key_h(t_data_mlx *data);
 void			draw_map(t_data_mlx *data);
 int				check_move(t_data_mlx *data);
 int				render_next_frame(t_data_mlx *data);
-void			ray_player(t_data_mlx *data, int flag);
+void			ray_play(t_data_mlx *data, int flag);
 void			draw_invis_background(t_data_mlx *data, int height, int width);
 void			draw_ray_cast(t_data_mlx *data, float x, float h, int w_pix);
 int				step_counter_texture(float step, float value);

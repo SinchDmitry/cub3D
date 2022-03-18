@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:04:49 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/15 15:51:13 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/18 20:00:31 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-void	draw_player(t_player *player, t_data_mlx *data)
+void	draw_play(t_play *play, t_data_mlx *data)
 {
 	float	x;
 	float	y;
 	float	point_x;
 	float	point_y;
-	int		player_draw[10][10] =
+	int		play_draw[10][10] =
 	{
 	{1, 1, 0, 0, 0, 0, 0, 0, 1, 1},
 	{0, 1, 1, 0, 0, 0, 0, 1, 1, 0},
@@ -31,23 +31,23 @@ void	draw_player(t_player *player, t_data_mlx *data)
 	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
 	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0}
 	};
-	player->x_textu = player->x * TEXSIZE;
-	player->y_textu = player->y * TEXSIZE;
-	x = player->x_textu;
-	y = player->y_textu;
-	while (x < player->x_textu + 10)
+	play->x_textu = play->x * TEXSIZE;
+	play->y_textu = play->y * TEXSIZE;
+	x = play->x_textu;
+	y = play->y_textu;
+	while (x < play->x_textu + 10)
 	{
-		y = player->y_textu;
-		while (y < player->y_textu + 10)
+		y = play->y_textu;
+		while (y < play->y_textu + 10)
 		{
-			point_x = (x - player->x_textu - 5) * cos(data->map->player.a) - \
-				(y - player->y_textu - 5) * sin(data->map->player.a);
-			point_y = (x - player->x_textu - 5) * sin(data->map->player.a) + \
-				(y - player->y_textu - 5) * cos(data->map->player.a);
-			if (player_draw[(int)(x - player->x_textu)] \
-				[(int)(y - player->y_textu)] == 1)
-				my_mlx_pixel_put(data, point_x + player->x_textu, point_y + \
-					player->y_textu, GREEN_COL);
+			point_x = (x - play->x_textu - 5) * cos(data->map->play.a) - \
+				(y - play->y_textu - 5) * sin(data->map->play.a);
+			point_y = (x - play->x_textu - 5) * sin(data->map->play.a) + \
+				(y - play->y_textu - 5) * cos(data->map->play.a);
+			if (play_draw[(int)(x - play->x_textu)] \
+				[(int)(y - play->y_textu)] == 1)
+				my_mlx_pixel_put(data, point_x + play->x_textu, point_y + \
+					play->y_textu, GREEN_COL);
 			y++;
 		}
 		x++;
@@ -98,7 +98,7 @@ void	draw_map(t_data_mlx *data)
 		}
 		i++;
 	}
-	draw_player(&data->map->player, data);
+	draw_play(&data->map->play, data);
 }
 
 /**********************************************/
