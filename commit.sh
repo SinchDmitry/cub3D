@@ -1,4 +1,4 @@
-!/bin/bash
+!/bin/sh
 make fclean
 export VAR1
 VAR1=$(date | awk '{print $2, $3, $6}')
