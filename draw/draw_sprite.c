@@ -6,11 +6,37 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/18 22:00:05 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/19 13:42:32 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
+
+void	laser_width(t_data_mlx *data, t_vls *bullet, int width_step)
+{
+	bullet->x1 = 40 + (WIDTH / 2 + WIDTH / 20) + width_step;
+	bullet->y1 = 40 + (HEIGHT - data->weapon.img_h);
+	bullet->x2 = WIDTH / 2 + width_step;
+	bullet->y2 = HEIGHT / 2;
+}
+
+void	attack_weapon(t_data_mlx *data, int spr_n)
+{
+	t_vls	bullet;
+	int		i;
+
+	i = LASER_WIDTH;
+	while (i >= 0)
+	{
+		laser_width(data, &bullet, i--);
+		draw_line(data, bullet, RED_COL);
+		// printf ("x : %d < %d < %d \n", data->am_s->spr_img[0][0].dr_st_x, WIDTH / 2, data->am_s->spr_img[0][0].dr_f_x);
+		// printf ("y : %d < %d < %d \n", data->am_s->spr_img[0][0].dr_st_y, HEIGHT / 2, data->am_s->spr_img[0][0].dr_f_y);
+		if (WIDTH / 2 > data->am_s->spr_img[spr_n].dr_st_x + (data->am_s->spr_img[spr_n].dr_f_y - data->am_s->spr_img[spr_n].dr_st_y) / 3 && WIDTH / 2 < data->am_s->spr_img[spr_n].dr_f_x - (data->am_s->spr_img[spr_n].dr_f_y - data->am_s->spr_img[spr_n].dr_st_y) / 3)
+			if (HEIGHT / 2 > data->am_s->spr_img[spr_n].dr_st_y - data->map->cam.vertilcal_pos && HEIGHT / 2 < data->am_s->spr_img[spr_n].dr_st_y + (data->am_s->spr_img[spr_n].dr_f_y - data->am_s->spr_img[spr_n].dr_st_y) / 2 - data->map->cam.vertilcal_pos)
+				data->am_s->spr_img[spr_n].shot = 1;
+	}
+}
 
 static void	calc_sprite_param(t_data_mlx *data, int num)
 {
@@ -85,35 +111,41 @@ void	draw_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost)
 	}
 }
 
+void	check_costume(t_data_mlx *data)
+{
+	static int	i_among[SPR_NUM];
+	int			spr_n;
+
+	spr_n = 0;
+	while (spr_n < SPR_NUM)
+	{
+		if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
+			attack_weapon(data, spr_n);
+		if (data->am_s->spr_img[spr_n].shot \
+			&& !data->am_s->spr_img[spr_n].dead)
+		{
+			++i_among[spr_n];
+			if (i_among[spr_n] == SPR_COSTUME - 1)
+				data->am_s->spr_img[spr_n].dead = 1;
+		}
+		data->am_s->spr_img[spr_n].c_num = i_among[spr_n];
+		if (!data->am_s->spr_img[spr_n].dead)
+			draw_sprite(data, data->am_s->spr_img, spr_n, \
+				data->am_s->spr_img[spr_n].c_num);
+		else
+			draw_sprite(data, data->am_s->spr_img, spr_n, SPR_COSTUME - 1);
+		spr_n++;
+	}
+}
+
 void	draw_objects(t_data_mlx *data)
 {
-	static int	i_among;
-	int			spr_num;
-
-	spr_num = 0;
 	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
 			&data->line_length, &data->endian);
 	draw_invis_background(data, WIDTH, HEIGHT);
-	while (spr_num < SPR_NUM)
-	{
-		if (data->am_s->spr_img[spr_num].shot \
-			&& !data->am_s->spr_img[spr_num].dead)
-		{
-			++i_among;
-			if (i_among == SPR_COSTUME - 1)
-				data->am_s->spr_img[spr_num].dead = 1;
-		}
-		data->am_s->spr_img[spr_num].c_num = i_among;
-		if (!data->am_s->spr_img[spr_num].dead)
-			draw_sprite(data, data->am_s->spr_img, spr_num, data->am_s->spr_img[spr_num].c_num);
-		else
-			draw_sprite(data,  data->am_s->spr_img, spr_num, SPR_COSTUME - 1);
-		spr_num++;
-	}
+	check_costume(data);
 	draw_aim(data);
-	if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
-		attack_weapon(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	put_weapon_image(data);
 	mlx_destroy_image(data->mlx, data->img);
