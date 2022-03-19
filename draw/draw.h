@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/19 13:29:12 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/19 14:55:27 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ typedef struct s_spr_tex
 	int			dr_f_y;
 	int			dr_st_x;
 	int			dr_st_y;
+	int			fact_f_x;
+	int			fact_st_x;
 	int			pos_spr_x;
 	t_tex		costumes[SPR_COSTUME];
 }	t_spr_tex;

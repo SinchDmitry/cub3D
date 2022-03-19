@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/19 13:42:32 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/19 15:10:56 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@ void	laser_width(t_data_mlx *data, t_vls *bullet, int width_step)
 	bullet->y2 = HEIGHT / 2;
 }
 
-void	attack_weapon(t_data_mlx *data, int spr_n)
+void	attack_weapon(t_data_mlx *data, t_spr_tex *img, int spr_n)
 {
 	t_vls	bullet;
 	int		i;
+	int		left_x;
+	int		right_x;
+	int		tmp;
 
 	i = LASER_WIDTH;
 	while (i >= 0)
@@ -32,9 +35,22 @@ void	attack_weapon(t_data_mlx *data, int spr_n)
 		draw_line(data, bullet, RED_COL);
 		// printf ("x : %d < %d < %d \n", data->am_s->spr_img[0][0].dr_st_x, WIDTH / 2, data->am_s->spr_img[0][0].dr_f_x);
 		// printf ("y : %d < %d < %d \n", data->am_s->spr_img[0][0].dr_st_y, HEIGHT / 2, data->am_s->spr_img[0][0].dr_f_y);
-		if (WIDTH / 2 > data->am_s->spr_img[spr_n].dr_st_x + (data->am_s->spr_img[spr_n].dr_f_y - data->am_s->spr_img[spr_n].dr_st_y) / 3 && WIDTH / 2 < data->am_s->spr_img[spr_n].dr_f_x - (data->am_s->spr_img[spr_n].dr_f_y - data->am_s->spr_img[spr_n].dr_st_y) / 3)
-			if (HEIGHT / 2 > data->am_s->spr_img[spr_n].dr_st_y - data->map->cam.vertilcal_pos && HEIGHT / 2 < data->am_s->spr_img[spr_n].dr_st_y + (data->am_s->spr_img[spr_n].dr_f_y - data->am_s->spr_img[spr_n].dr_st_y) / 2 - data->map->cam.vertilcal_pos)
-				data->am_s->spr_img[spr_n].shot = 1;
+		tmp = img[spr_n].dr_st_x + (img[spr_n].dr_f_x - img[spr_n].dr_st_x) / 3;
+		left_x = tmp;
+		if (img[spr_n].fact_st_x > tmp)
+			left_x = img[spr_n].fact_st_x;
+		tmp = img[spr_n].dr_f_x - (img[spr_n].dr_f_x - img[spr_n].dr_st_x) / 3;
+		right_x = tmp;
+		if (img[spr_n].fact_f_x < tmp)
+			right_x = img[spr_n].fact_f_x;
+		if (WIDTH / 2 > left_x && WIDTH / 2 < right_x)
+			if (HEIGHT / 2 > img[spr_n].dr_st_y - data->map->cam.vertilcal_pos \
+				&& HEIGHT / 2 < img[spr_n].dr_st_y + (img[spr_n].dr_f_y - \
+				img[spr_n].dr_st_y) / 2 - data->map->cam.vertilcal_pos)
+				{
+					printf ("here\n");
+					data->am_s->spr_img[spr_n].shot = 1;
+				}
 	}
 }
 
@@ -86,10 +102,14 @@ void	draw_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost)
 {
 	int	i;
 	int	j;
+	int	f;
 
 	calc_sprite_param(data, n);
 	calc_sprite_sector(data->am_s, n);
 	i = img[n].dr_st_x - 1;
+	f = 0;
+	img[n].fact_st_x = 0;
+	img[n].fact_f_x = 0;
 	while (++i < img[n].dr_f_x)
 	{
 		img[n].tex_x = ((int)(256 * (i - (-img[n].w_spr / 2 + \
@@ -97,6 +117,12 @@ void	draw_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost)
 		if (img[n].t_y > 0 && i > 0 && i < WIDTH && \
 			img[n].t_y < data->sector[i])
 		{
+			if (!f)
+			{
+				img[n].fact_st_x = i;
+				f = 1;
+			}
+			img[n].fact_f_x = i;
 			j = img[n].dr_st_y - 1;
 			while (++j < img[n].dr_f_y)
 			{
@@ -119,8 +145,6 @@ void	check_costume(t_data_mlx *data)
 	spr_n = 0;
 	while (spr_n < SPR_NUM)
 	{
-		if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
-			attack_weapon(data, spr_n);
 		if (data->am_s->spr_img[spr_n].shot \
 			&& !data->am_s->spr_img[spr_n].dead)
 		{
@@ -134,6 +158,8 @@ void	check_costume(t_data_mlx *data)
 				data->am_s->spr_img[spr_n].c_num);
 		else
 			draw_sprite(data, data->am_s->spr_img, spr_n, SPR_COSTUME - 1);
+		if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
+			attack_weapon(data, data->am_s->spr_img, spr_n);
 		spr_n++;
 	}
 }
