@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/21 21:14:18 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/21 22:09:29 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,19 +169,17 @@ void	check_costume(t_data_mlx *data)
 void	check_computer(t_data_mlx *data)
 {
 	static int	i;
-	int			spr_n;
 
-	if (data->am_s->spr_img[spr_n].shot)
+	if (data->am_s->comp_img.shot)
 	{
 		if (i == COMP_COSTUME - 1)
 			i = 0;
 		++i;
 	}
 	data->am_s->comp_img.c_num = i;
-	draw_sprite(data, &data->am_s->comp_img, spr_n, \
-		data->am_s->comp_img.c_num);
+	draw_sprite(data, &data->am_s->comp_img, 0, data->am_s->comp_img.c_num);
 	if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
-		attack_weapon(data, &data->am_s->comp_img, spr_n);
+		attack_weapon(data, &data->am_s->comp_img, 1);
 }
 
 void	draw_objects(t_data_mlx *data)
@@ -191,6 +189,7 @@ void	draw_objects(t_data_mlx *data)
 			&data->line_length, &data->endian);
 	draw_invis_background(data, WIDTH, HEIGHT);
 	check_costume(data);
+	check_computer(data);
 	draw_aim(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	put_weapon_image(data);
