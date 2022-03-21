@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 22:43:17 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/21 20:55:18 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/21 22:21:34 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,13 @@
 
 void	wall_slide(t_data_mlx *data)
 {
-	// data->map->play.a = fabsf(fmodf(data->map->play.a, 6.28f));
-	// float player_angle = fabsf(fmodf(data->map->play.a, 6.28f));
 	float player_angle = data->map->play.a;
 
-	// printf("a : %f\n", data->map->play.a);
-	printf("a : %f side : %d x : %f y : %f\n", player_angle, data->map->play.side_for_move, data->map->play.x, data->map->play.y);
-	
-	
 	if (player_angle >= 0 && player_angle < 1.57f && data->map->play.side_for_move == 1)
 	{
 		data->map->play.y += MOVE_SPEED;
 		if (check_move(data))
 			data->map->play.y -= MOVE_SPEED;
-		
 	}
 	if (player_angle >= 4.71f && player_angle < 6.28f && data->map->play.side_for_move == 1)
 	{
@@ -44,12 +37,8 @@ void	wall_slide(t_data_mlx *data)
 	if (player_angle >= 3.14f  && player_angle < 4.71f && data->map->play.side_for_move == 0)
 	{
 		data->map->play.y -= MOVE_SPEED;
-		printf("forward\n");
 		if (check_move(data))
-		{
-			printf("back\n");
 			data->map->play.y += MOVE_SPEED;
-		}
 	}
 	if (player_angle >= 0 && player_angle < 1.57f && data->map->play.side_for_move == 3)
 	{
@@ -75,12 +64,6 @@ void	wall_slide(t_data_mlx *data)
 		if (check_move(data))
 			data->map->play.x += MOVE_SPEED;
 	}	
-	// else if (player_angle >=  1.57f && player_angle < 3.14f)
-	// 	data->map->play.y -= MOVE_SPEED;
-	// else if (player_angle >= 3.14f && player_angle < 4.71f)
-	// 	data->map->play.y -= MOVE_SPEED;
-	// else if (player_angle >= 4.71f && player_angle < 6.28f)
-	// 	data->map->play.y += MOVE_SPEED;
 }	
 
 

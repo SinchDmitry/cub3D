@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/21 18:34:45 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/21 22:24:19 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,40 @@ void	laser_width(t_data_mlx *data, t_vls *bullet, int width_step)
 	bullet->y2 = HEIGHT / 2;
 }
 
+void	action_among(t_data_mlx *data, t_spr_tex *img, int spr_n)
+{
+	int		left_x;
+	int		right_x;
+	int		tmp;
+
+	tmp = img[spr_n].dr_st_x + (img[spr_n].dr_f_x - img[spr_n].dr_st_x) / 3;
+	left_x = tmp;
+	if (img[spr_n].fact_st_x > tmp)
+		left_x = img[spr_n].fact_st_x;
+	tmp = img[spr_n].dr_f_x - (img[spr_n].dr_f_x - img[spr_n].dr_st_x) / 3;
+	right_x = tmp;
+	if (img[spr_n].fact_f_x < tmp)
+		right_x = img[spr_n].fact_f_x;
+	if (WIDTH / 2 > left_x && WIDTH / 2 < right_x)
+		if (HEIGHT / 2 > img[spr_n].dr_st_y - data->map->cam.vertilcal_pos \
+			&& HEIGHT / 2 < img[spr_n].dr_st_y + (img[spr_n].dr_f_y - \
+			img[spr_n].dr_st_y) / 2 - data->map->cam.vertilcal_pos)
+				img[spr_n].shot = 1;
+}
+
 void	attack_weapon(t_data_mlx *data, t_spr_tex *img, int spr_n)
 {
 	t_vls	bullet;
 	int		i;
-	int		left_x;
-	int		right_x;
-	int		tmp;
 
 	i = LASER_WIDTH;
 	while (i >= 0)
 	{
 		laser_width(data, &bullet, i--);
 		draw_line(data, bullet, RED_COL);
-		// printf ("x : %d < %d < %d \n", data->am_s->spr_img[0][0].dr_st_x, WIDTH / 2, data->am_s->spr_img[0][0].dr_f_x);
-		// printf ("y : %d < %d < %d \n", data->am_s->spr_img[0][0].dr_st_y, HEIGHT / 2, data->am_s->spr_img[0][0].dr_f_y);
-		tmp = img[spr_n].dr_st_x + (img[spr_n].dr_f_x - img[spr_n].dr_st_x) / 3;
-		left_x = tmp;
-		if (img[spr_n].fact_st_x > tmp)
-			left_x = img[spr_n].fact_st_x;
-		tmp = img[spr_n].dr_f_x - (img[spr_n].dr_f_x - img[spr_n].dr_st_x) / 3;
-		right_x = tmp;
-		if (img[spr_n].fact_f_x < tmp)
-			right_x = img[spr_n].fact_f_x;
-		if (WIDTH / 2 > left_x && WIDTH / 2 < right_x)
-			if (HEIGHT / 2 > img[spr_n].dr_st_y - data->map->cam.vertilcal_pos \
-				&& HEIGHT / 2 < img[spr_n].dr_st_y + (img[spr_n].dr_f_y - \
-				img[spr_n].dr_st_y) / 2 - data->map->cam.vertilcal_pos)
-				{
-					printf ("here\n");
-					data->am_s->spr_img[spr_n].shot = 1;
-				}
 	}
+	action_among(data, img, spr_n);
+	action_among(data, &data->am_s->comp_img, 0);
 }
 
 static void	calc_sprite_param(t_data_mlx *data, int num)
@@ -162,6 +164,24 @@ void	check_costume(t_data_mlx *data)
 			attack_weapon(data, data->am_s->spr_img, spr_n);
 		spr_n++;
 	}
+}
+
+void	check_computer(t_data_mlx *data)
+{
+	static int	i;
+	int			spr_n;
+
+	if (data->am_s->spr_img[spr_n].shot)
+	{
+		if (i == COMP_COSTUME - 1)
+			i = 0;
+		++i;
+	}
+	data->am_s->comp_img.c_num = i;
+	draw_sprite(data, &data->am_s->comp_img, spr_n, \
+		data->am_s->comp_img.c_num);
+	if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
+		attack_weapon(data, &data->am_s->comp_img, spr_n);
 }
 
 void	draw_objects(t_data_mlx *data)
