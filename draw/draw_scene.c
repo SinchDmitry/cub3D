@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/18 21:02:40 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/19 13:36:48 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,32 +104,6 @@ void	draw_aim(t_data_mlx *data)
 				my_mlx_pixel_put(data, x, y - aim_width, GREEN_COL);
 		}
 		x--;
-	}
-}
-
-void	laser_width(t_data_mlx *data ,t_vls *bullet, int width_step)
-{
-	bullet->x1 = 40 + (WIDTH / 2 + WIDTH / 20) + width_step;
-	bullet->y1 = 40 + (HEIGHT - data->weapon.img_h);
-	bullet->x2 = WIDTH / 2 + width_step;
-	bullet->y2 = HEIGHT / 2;
-}
-
-void	attack_weapon(t_data_mlx *data)
-{
-	t_vls	bullet;
-	int		i;
-	
-	i = LASER_WIDTH;
-	while (i >= 0)
-	{
-		laser_width(data, &bullet, i--);
-		draw_line(data, bullet, RED_COL);
-		// printf ("x : %d < %d < %d \n", data->am_s->spr_img[0][0].dr_st_x, WIDTH / 2, data->am_s->spr_img[0][0].dr_f_x);
-		// printf ("y : %d < %d < %d \n", data->am_s->spr_img[0][0].dr_st_y, HEIGHT / 2, data->am_s->spr_img[0][0].dr_f_y);
-		if (WIDTH / 2 > data->am_s->spr_img[0].dr_st_x + (data->am_s->spr_img[0].dr_f_y - data->am_s->spr_img[0].dr_st_y) / 3 && WIDTH / 2 < data->am_s->spr_img[0].dr_f_x - (data->am_s->spr_img[0].dr_f_y - data->am_s->spr_img[0].dr_st_y) / 3)
-			if (HEIGHT / 2 > data->am_s->spr_img[0].dr_st_y - data->map->cam.vertilcal_pos && HEIGHT / 2 < data->am_s->spr_img[0].dr_st_y + (data->am_s->spr_img[0].dr_f_y - data->am_s->spr_img[0].dr_st_y) / 2 - data->map->cam.vertilcal_pos)
-				data->am_s->spr_img[0].shot = 1;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/18 21:02:31 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/21 20:52:46 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ unsigned int	my_mlx_get_pixel(t_data_mlx *data, int x, int y, char side)
 		return (*(unsigned int *)(data->wall[side].addr + \
 		(x * data->wall[side].bits_per_pixel / 8 + y * data->wall[side].line_length)));
 	}
-	
 }
 
 void	my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color)
@@ -48,7 +47,8 @@ void	my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color)
 int	check_move(t_data_mlx *data)
 {
 	if (data->map->mapa[(int)data->map->play.y] \
-		[(int)data->map->play.x].sym == '1')
+		[(int)data->map->play.x].sym == '1' || data->map->mapa[(int)data->map->play.y] \
+		[(int)data->map->play.x].sym == 'e')
 		return (1);
 	else
 		return (0);
@@ -147,14 +147,13 @@ int	render_next_frame(t_data_mlx *data)
 	mouse_move(data);
 	key_h(data);
 	mlx_mouse_hide();
-	// printf("x : %d y : %d\n", data->mouse_x, data->mouse_y);
-	// draw map
 	return (0);
 }
 
 void	init_images(t_data_mlx *data)
 {
 	int		i;
+	int		j;
 	char	xpm_path_space[1024];
 	char	xpm_path_among[1024];
 	char	*space_dir;
@@ -166,8 +165,6 @@ void	init_images(t_data_mlx *data)
 	data->am_s = malloc(sizeof(t_spr));
 	if (!data->am_s)
 		error_end(3); // move it && save pointer
-	data->am_s->spr_img[0].dead = 0;
-	data->am_s->spr_img[0].shot = 0;
 	//init animated space
 	i = -1;
 	space_dir = "./textures/space_fly/space2/space_fly";
@@ -183,32 +180,32 @@ void	init_images(t_data_mlx *data)
 			mlx_xpm_file_to_image(data->mlx, xpm_path_space, &img_h, &img_w);
 	}
 	// init animated among dead
-	i = -1;
+	j = -1;
 	among_dir = "./textures/among/0";
-	while (++i < SPR_COSTUME)
+	while (++j < SPR_NUM)
 	{
-		xpm_path_among[0] = '\0';
-		ft_strlcat(xpm_path_among, among_dir, 1023);
-		img_num = ft_itoa(i);
-		ft_strlcat(xpm_path_among, img_num, 1023);
-		free(img_num);
-		ft_strlcat(xpm_path_among, ".xpm", 1023);
-		printf ("%s\n", xpm_path_among);
-		// data->am_s->spr_img[0][i].img = xpm_path_among;
-		data->am_s->spr_img[0].costumes[i].img = \
-			mlx_xpm_file_to_image(data->mlx, xpm_path_among, &data->am_s->spr_img[0].costumes[i].img_h, &data->am_s->spr_img[0].costumes[i].img_w);
-		// printf("w : %d h : %d\n", data->am_s->spr_img[0][i].img_w, data->am_s->spr_img[0][i].img_h);
-		data->am_s->spr_img[0].costumes[i].addr = mlx_get_data_addr(data->am_s->spr_img[0].costumes[i].img, &data->am_s->spr_img[0].costumes[i].bits_per_pixel, \
-			&data->am_s->spr_img[0].costumes[i].line_length, &data->am_s->spr_img[0].costumes[i].endian);
+		i = -1;
+		while (++i < SPR_COSTUME)
+		{
+			xpm_path_among[0] = '\0';
+			ft_strlcat(xpm_path_among, among_dir, 1023);
+			img_num = ft_itoa(i);
+			ft_strlcat(xpm_path_among, img_num, 1023);
+			free(img_num);
+			ft_strlcat(xpm_path_among, ".xpm", 1023);
+			printf ("%s\n", xpm_path_among);
+			data->am_s->spr_img[j].costumes[i].img = \
+				mlx_xpm_file_to_image(data->mlx, xpm_path_among, &data->am_s->spr_img[j].costumes[i].img_h, &data->am_s->spr_img[j].costumes[i].img_w);
+			data->am_s->spr_img[j].costumes[i].addr = mlx_get_data_addr(data->am_s->spr_img[j].costumes[i].img, &data->am_s->spr_img[j].costumes[i].bits_per_pixel, \
+				&data->am_s->spr_img[j].costumes[i].line_length, &data->am_s->spr_img[j].costumes[i].endian);
+		}
 	}
-	
-	//ini weapon texture
+	//init weapon texture
 	data->weapon.img = mlx_xpm_file_to_image(data->mlx, "./textures/blaster1.xpm", \
 		&data->weapon.img_w, &data->weapon.img_h);
 	printf("w : %d h : %d\n", data->weapon.img_w, data->weapon.img_h);
 	data->weapon.addr = mlx_get_data_addr(data->weapon.img, &data->weapon.bits_per_pixel, \
 		&data->weapon.line_length, &data->weapon.endian);
-
 	//init texure wall
 	data->wall[0].img = mlx_xpm_file_to_image(data->mlx, "./textures/wall0.xpm", \
 		&data->wall[0].img_h, &data->wall[0].img_w);
@@ -226,11 +223,9 @@ void	init_images(t_data_mlx *data)
 		&data->wall[3].img_h, &data->wall[3].img_w);
 	data->wall[3].addr = mlx_get_data_addr(data->wall[3].img, &data->wall[3].bits_per_pixel, \
 		&data->wall[3].line_length, &data->wall[3].endian);
-
 	//init cpmpas
 	data->image.compas = mlx_xpm_file_to_image(data->mlx, "./textures/N.xpm", \
 			&img_h, &img_w);
-		
 }
 
 int	key_press(int keycode, t_data_mlx *data)
@@ -240,12 +235,34 @@ int	key_press(int keycode, t_data_mlx *data)
 		data->keycode[keycode] = PRESS;
 	return (0);
 }
+
 int	key_unpress(int keycode, t_data_mlx *data)
 {
 	if (keycode >= 0 && keycode < MAX_KEYS_NUM)
 		data->keycode[keycode] = UNPRESS;
 	return (0);
 }
+
+static void	init_sprite_data(t_data_mlx *data)
+{
+	data->am_s->spr_img[0].x = 22.5;
+	data->am_s->spr_img[0].y = 4.5;
+	data->am_s->spr_img[1].x = 11.5;
+	data->am_s->spr_img[1].y = 10.5;
+	data->am_s->spr_img[2].x = 26.5;
+	data->am_s->spr_img[2].y = 15.5;
+	data->am_s->spr_img[3].y = 23.5;
+	data->am_s->spr_img[3].x = 23.5;
+	data->am_s->spr_img[0].dead = 0;
+	data->am_s->spr_img[0].shot = 0;
+	data->am_s->spr_img[1].dead = 0;
+	data->am_s->spr_img[1].shot = 0;
+	data->am_s->spr_img[2].dead = 0;
+	data->am_s->spr_img[2].shot = 0;
+	data->am_s->spr_img[3].dead = 0;
+	data->am_s->spr_img[3].shot = 0;
+}
+
 int	draw(t_info *map)
 {
 	t_data_mlx	data;
@@ -260,11 +277,12 @@ int	draw(t_info *map)
 		data.keycode[i++] = UNPRESS; //init unpress keys
 	data.mouse_x = WIDTH / 2;
 	data.mouse_y = HEIGHT / 2;
-	printf("here x = %f y = %f\n", map->play.x, map->play.y);
+	// printf("here x = %f y = %f\n", map->play.x, map->play.y);
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Hello world!");
 	mlx_mouse_move(data.mlx_win, WIDTH / 2, HEIGHT / 2);
 	init_images(&data);
+	init_sprite_data(&data);
 	// render_next_frame(&data);
 	mlx_hook(data.mlx_win, 2, 0, &key_press, &data);
 	mlx_hook(data.mlx_win, 3, 0, &key_unpress, &data);

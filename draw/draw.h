@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/18 21:02:37 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/21 21:52:49 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,13 @@ typedef struct s_spr_tex
 {
 	float		x;
 	float		y;
+	int			d;
 	float		t_x;
 	float		t_y;
 	int			shot;
 	int			dead;
+	int			tex_x;
+	int			tex_y;
 	float		x_ray;
 	float		y_ray;
 	int			h_spr;
@@ -102,6 +105,8 @@ typedef struct s_spr_tex
 	int			dr_f_y;
 	int			dr_st_x;
 	int			dr_st_y;
+	int			fact_f_x;
+	int			fact_st_x;
 	int			pos_spr_x;
 	t_tex		costumes[SPR_COSTUME];
 }	t_spr_tex;
