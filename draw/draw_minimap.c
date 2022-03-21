@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 11:50:19 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/18 20:00:31 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/21 20:53:35 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	line_math_minimap(t_data_mlx *data, float rad)
 	float	ray_x;
 	float	ray_y;
 
-
 	ang = data->map->play.a + rad;
 	c = 0;
 	while (c < MMTEXSIZE / 10)
@@ -116,7 +115,7 @@ void	line_math_minimap(t_data_mlx *data, float rad)
 		ray_x *= MMTEXSIZE;
 		ray_y *= MMTEXSIZE;
 		c = c + 0.1f;
-		pixel_put_map_move(ray_x, ray_y, data, playCOL);
+		pixel_put_map_move(ray_x, ray_y, data, PLAYERCOL);
 	}
 }
 

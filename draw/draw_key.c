@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_key.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 22:43:17 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/18 21:07:04 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/20 17:43:32 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	wall_slide(t_data_mlx *data)
 	float player_angle = data->map->play.a;
 
 	// printf("a : %f\n", data->map->play.a);
-	printf("a : %f\n", player_angle);
-	printf("side : %d\n", data->map->play.side_for_move);
+	// printf("a : %f\n", player_angle);
+	// printf("side : %d\n", data->map->play.side_for_move);
 	if (player_angle >= 0 && player_angle < 1.57f && data->map->play.side_for_move == 1)
 		data->map->play.y += MOVE_SPEED;
 	if (player_angle >= 4.71f && player_angle < 6.28f && data->map->play.side_for_move == 1)
