@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/18 21:00:06 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/18 21:35:34 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	draw_sprite(t_data_mlx *data, int num, int cost)
 			i < WIDTH && data->am_s->spr_img[num].t_y < data->sector[i])
 		{
 			j = data->am_s->spr_img[num].dr_st_y - 1;
-			while (++j < data->am_s->spr_img[num].dr_f_y)
+			while (++j  < data->am_s->spr_img[num].dr_f_y)
 			{
 				d = j * 256 - HEIGHT * 128 + \
 					data->am_s->spr_img[num].h_spr * 128;
