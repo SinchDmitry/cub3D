@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/21 22:50:29 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/22 16:54:26 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ void	my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color)
 int	check_move(t_data_mlx *data)
 {
 	if (data->map->mapa[(int)data->map->play.y] \
-		[(int)data->map->play.x].sym == '1' || data->map->mapa[(int)data->map->play.y] \
-		[(int)data->map->play.x].sym == 'e')
+		[(int)data->map->play.x].sym == '1')
 		return (1);
 	else
 		return (0);
@@ -181,8 +180,8 @@ void	init_images(t_data_mlx *data)
 	}
 	// init animated among dead
 	j = 0;
-	among_dir = "./textures/among/0";
 	i = -1;
+	among_dir = "./textures/among/0";
 	while (++i < SPR_COSTUME)
 	{
 		xpm_path[0] = '\0';
@@ -211,7 +210,6 @@ void	init_images(t_data_mlx *data)
 			data->am_s->spr_img[j].costumes[i].endian = data->am_s->spr_img[0].costumes[i].endian;
 		}
 	}
-
 	// init rickroll
 	i = -1;
 	comp_dir = "./textures/rick/";
