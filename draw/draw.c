@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/21 23:32:48 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/22 16:54:26 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,24 +179,35 @@ void	init_images(t_data_mlx *data)
 			mlx_xpm_file_to_image(data->mlx, xpm_path, &img_h, &img_w);
 	}
 	// init animated among dead
-	j = -1;
+	j = 0;
+	i = -1;
 	among_dir = "./textures/among/0";
+	while (++i < SPR_COSTUME)
+	{
+		xpm_path[0] = '\0';
+		ft_strlcat(xpm_path, among_dir, 1023);
+		img_num = ft_itoa(i);
+		ft_strlcat(xpm_path, img_num, 1023);
+		free(img_num);
+		ft_strlcat(xpm_path, ".xpm", 1023);
+		// printf ("%s\n", xpm_path_among);
+		data->am_s->spr_img[j].costumes[i].img = \
+			mlx_xpm_file_to_image(data->mlx, xpm_path, &data->am_s->spr_img[j].costumes[i].img_h, &data->am_s->spr_img[j].costumes[i].img_w);
+		data->am_s->spr_img[j].costumes[i].addr = mlx_get_data_addr(data->am_s->spr_img[j].costumes[i].img, &data->am_s->spr_img[j].costumes[i].bits_per_pixel, \
+			&data->am_s->spr_img[j].costumes[i].line_length, &data->am_s->spr_img[j].costumes[i].endian);
+	}
 	while (++j < SPR_NUM)
 	{
 		i = -1;
 		while (++i < SPR_COSTUME)
 		{
-			xpm_path[0] = '\0';
-			ft_strlcat(xpm_path, among_dir, 1023);
-			img_num = ft_itoa(i);
-			ft_strlcat(xpm_path, img_num, 1023);
-			free(img_num);
-			ft_strlcat(xpm_path, ".xpm", 1023);
-			// printf ("%s\n", xpm_path_among);
-			data->am_s->spr_img[j].costumes[i].img = \
-				mlx_xpm_file_to_image(data->mlx, xpm_path, &data->am_s->spr_img[j].costumes[i].img_h, &data->am_s->spr_img[j].costumes[i].img_w);
-			data->am_s->spr_img[j].costumes[i].addr = mlx_get_data_addr(data->am_s->spr_img[j].costumes[i].img, &data->am_s->spr_img[j].costumes[i].bits_per_pixel, \
-				&data->am_s->spr_img[j].costumes[i].line_length, &data->am_s->spr_img[j].costumes[i].endian);
+			data->am_s->spr_img[j].costumes[i].img = data->am_s->spr_img[0].costumes[i].img;
+			data->am_s->spr_img[j].costumes[i].addr = data->am_s->spr_img[0].costumes[i].addr;
+			data->am_s->spr_img[j].costumes[i].img_h = data->am_s->spr_img[0].costumes[i].img_h;
+			data->am_s->spr_img[j].costumes[i].img_w = data->am_s->spr_img[0].costumes[i].img_w;
+			data->am_s->spr_img[j].costumes[i].bits_per_pixel = data->am_s->spr_img[0].costumes[i].bits_per_pixel;
+			data->am_s->spr_img[j].costumes[i].line_length = data->am_s->spr_img[0].costumes[i].line_length;
+			data->am_s->spr_img[j].costumes[i].endian = data->am_s->spr_img[0].costumes[i].endian;
 		}
 	}
 	// init rickroll
@@ -280,16 +291,6 @@ static void	init_sprite_data(t_data_mlx *data)
 	data->am_s->comp_img.x = 11.5;
 	data->am_s->comp_img.y = 10.5;
 	data->am_s->comp_img.shot = 0;
-	data->am_s->spr_img[0].x_ray = data->am_s->spr_img[0].x - data->map->play.x;
-	data->am_s->spr_img[0].y_ray = data->am_s->spr_img[0].y - data->map->play.y;
-	data->am_s->spr_img[1].x_ray = data->am_s->spr_img[1].x - data->map->play.x;
-	data->am_s->spr_img[1].y_ray = data->am_s->spr_img[1].y - data->map->play.y;
-	data->am_s->spr_img[2].x_ray = data->am_s->spr_img[2].x - data->map->play.x;
-	data->am_s->spr_img[2].y_ray = data->am_s->spr_img[2].y - data->map->play.y;
-	data->am_s->spr_img[3].x_ray = data->am_s->spr_img[3].x - data->map->play.x;
-	data->am_s->spr_img[3].y_ray = data->am_s->spr_img[3].y - data->map->play.y;
-	data->am_s->comp_img.x_ray = data->am_s->comp_img.x - data->map->play.x;
-	data->am_s->comp_img.y_ray = data->am_s->comp_img.y - data->map->play.y;
 }
 
 int	draw(t_info *map)

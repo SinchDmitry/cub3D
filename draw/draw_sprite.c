@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/21 23:30:46 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/22 16:49:47 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,24 @@ void	attack_weapon(t_data_mlx *data, t_spr_tex *img, int spr_n)
 	action_among(data, &data->am_s->comp_img, 0);
 }
 
-static void	calc_sprite_param(t_data_mlx *data, t_spr_tex *img, int num)
+static void	init_ray_param(t_data_mlx *data)
 {
+	data->am_s->spr_img[0].x_ray = data->am_s->spr_img[0].x - data->map->play.x;
+	data->am_s->spr_img[0].y_ray = data->am_s->spr_img[0].y - data->map->play.y;
+	data->am_s->spr_img[1].x_ray = data->am_s->spr_img[1].x - data->map->play.x;
+	data->am_s->spr_img[1].y_ray = data->am_s->spr_img[1].y - data->map->play.y;
+	data->am_s->spr_img[2].x_ray = data->am_s->spr_img[2].x - data->map->play.x;
+	data->am_s->spr_img[2].y_ray = data->am_s->spr_img[2].y - data->map->play.y;
+	data->am_s->spr_img[3].x_ray = data->am_s->spr_img[3].x - data->map->play.x;
+	data->am_s->spr_img[3].y_ray = data->am_s->spr_img[3].y - data->map->play.y;
+	data->am_s->comp_img.x_ray = data->am_s->comp_img.x - data->map->play.x;
+	data->am_s->comp_img.y_ray = data->am_s->comp_img.y - data->map->play.y;
 	data->am_s->inv = 1.0 / (data->map->cam.pl_x * data->map->play.dir_y - \
 		data->map->play.dir_x * data->map->cam.pl_y);
+}
+
+static void	calc_sprite_param(t_data_mlx *data, t_spr_tex *img, int num)
+{
 	img[num].t_x = data->am_s->inv * (data->map->play.dir_y * \
 		img[num].x_ray - data->map->play.dir_x * img[num].y_ray);
 	img[num].t_y = data->am_s->inv * (-data->map->cam.pl_y * \
@@ -94,6 +108,7 @@ void	draw_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost)
 	int	j;
 	int	f;
 
+	init_ray_param(data);
 	calc_sprite_param(data, img, n);
 	calc_sprite_sector(img, n);
 	i = img[n].dr_st_x - 1;
@@ -177,7 +192,7 @@ void	draw_objects(t_data_mlx *data)
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
 			&data->line_length, &data->endian);
 	draw_invis_background(data, WIDTH, HEIGHT);
-	// check_costume(data);
+	check_costume(data);
 	check_computer(data);
 	draw_aim(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);

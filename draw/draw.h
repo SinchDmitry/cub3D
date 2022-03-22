@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/21 23:32:43 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/22 16:43:46 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@
 # define LASER_WIDTH		3
 # define SPR_NUM			4
 # define SPR_COSTUME		11
-# define COMP_COSTUME		22
+# define COMP_COSTUME		11 //22
 
 struct					s_images;
 typedef struct s_images	t_images;
