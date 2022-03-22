@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_key.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 22:43:17 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/20 17:43:32 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/21 22:21:34 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,56 @@
 
 void	wall_slide(t_data_mlx *data)
 {
-	// data->map->play.a = fabsf(fmodf(data->map->play.a, 6.28f));
-	// float player_angle = fabsf(fmodf(data->map->play.a, 6.28f));
 	float player_angle = data->map->play.a;
 
-	// printf("a : %f\n", data->map->play.a);
-	// printf("a : %f\n", player_angle);
-	// printf("side : %d\n", data->map->play.side_for_move);
 	if (player_angle >= 0 && player_angle < 1.57f && data->map->play.side_for_move == 1)
+	{
 		data->map->play.y += MOVE_SPEED;
+		if (check_move(data))
+			data->map->play.y -= MOVE_SPEED;
+	}
 	if (player_angle >= 4.71f && player_angle < 6.28f && data->map->play.side_for_move == 1)
+	{
 		data->map->play.y -= MOVE_SPEED;
+		if (check_move(data))
+			data->map->play.y += MOVE_SPEED;
+	}
 	if (player_angle >= 1.57f && player_angle < 3.14f && data->map->play.side_for_move == 0)
+	{
 		data->map->play.y += MOVE_SPEED;
+		if (check_move(data))
+			data->map->play.y -= MOVE_SPEED;
+	}
 	if (player_angle >= 3.14f  && player_angle < 4.71f && data->map->play.side_for_move == 0)
+	{
 		data->map->play.y -= MOVE_SPEED;
+		if (check_move(data))
+			data->map->play.y += MOVE_SPEED;
+	}
 	if (player_angle >= 0 && player_angle < 1.57f && data->map->play.side_for_move == 3)
+	{
 		data->map->play.x += MOVE_SPEED;
+		if (check_move(data))
+			data->map->play.x -= MOVE_SPEED;
+	}
 	if (player_angle >= 1.57f && player_angle < 3.14f && data->map->play.side_for_move == 3)
+	{
 		data->map->play.x -= MOVE_SPEED;
+		if (check_move(data))
+			data->map->play.x += MOVE_SPEED;
+	}
 	if (player_angle >= 4.71f && player_angle < 6.28f && data->map->play.side_for_move == 2)
+	{
 		data->map->play.x += MOVE_SPEED;
+		if (check_move(data))
+			data->map->play.x -= MOVE_SPEED;
+	}
 	if (player_angle >= 3.14f && player_angle < 4.71f && data->map->play.side_for_move == 2)
+	{
 		data->map->play.x -= MOVE_SPEED;
-	// else if (player_angle >=  1.57f && player_angle < 3.14f)
-	// 	data->map->play.y -= MOVE_SPEED;
-	// else if (player_angle >= 3.14f && player_angle < 4.71f)
-	// 	data->map->play.y -= MOVE_SPEED;
-	// else if (player_angle >= 4.71f && player_angle < 6.28f)
-	// 	data->map->play.y += MOVE_SPEED;
+		if (check_move(data))
+			data->map->play.x += MOVE_SPEED;
+	}	
 }	
 
 
@@ -85,7 +106,7 @@ static void	ad_case(t_data_mlx *data)
 		if (check_move(data))
 		{
 			data->map->play.x += MOVE_SPEED * (data->map->play.dir_y);
-			data->map->play.y += MOVE_SPEED * (data->map->play.dir_x);
+			data->map->play.y -= MOVE_SPEED * (data->map->play.dir_x);
 		}
 	}
 	if (data->keycode[A_KEY] == PRESS)
@@ -95,7 +116,7 @@ static void	ad_case(t_data_mlx *data)
 		if (check_move(data))
 		{
 			data->map->play.x -= MOVE_SPEED * (data->map->play.dir_y);
-			data->map->play.y -= MOVE_SPEED * (data->map->play.dir_x);
+			data->map->play.y += MOVE_SPEED * (data->map->play.dir_x);
 		}
 	}
 }

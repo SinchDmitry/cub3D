@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/21 22:02:17 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/21 23:32:48 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,6 +280,16 @@ static void	init_sprite_data(t_data_mlx *data)
 	data->am_s->comp_img.x = 11.5;
 	data->am_s->comp_img.y = 10.5;
 	data->am_s->comp_img.shot = 0;
+	data->am_s->spr_img[0].x_ray = data->am_s->spr_img[0].x - data->map->play.x;
+	data->am_s->spr_img[0].y_ray = data->am_s->spr_img[0].y - data->map->play.y;
+	data->am_s->spr_img[1].x_ray = data->am_s->spr_img[1].x - data->map->play.x;
+	data->am_s->spr_img[1].y_ray = data->am_s->spr_img[1].y - data->map->play.y;
+	data->am_s->spr_img[2].x_ray = data->am_s->spr_img[2].x - data->map->play.x;
+	data->am_s->spr_img[2].y_ray = data->am_s->spr_img[2].y - data->map->play.y;
+	data->am_s->spr_img[3].x_ray = data->am_s->spr_img[3].x - data->map->play.x;
+	data->am_s->spr_img[3].y_ray = data->am_s->spr_img[3].y - data->map->play.y;
+	data->am_s->comp_img.x_ray = data->am_s->comp_img.x - data->map->play.x;
+	data->am_s->comp_img.y_ray = data->am_s->comp_img.y - data->map->play.y;
 }
 
 int	draw(t_info *map)

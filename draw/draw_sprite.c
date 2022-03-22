@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/21 22:09:29 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/21 23:30:46 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,53 +51,41 @@ void	attack_weapon(t_data_mlx *data, t_spr_tex *img, int spr_n)
 	{
 		laser_width(data, &bullet, i--);
 		draw_line(data, bullet, RED_COL);
-		action_among(data, img, spr_n);
-		action_among(data, &data->am_s->comp_img, 0);
 	}
+	action_among(data, img, spr_n);
+	action_among(data, &data->am_s->comp_img, 0);
 }
 
-static void	calc_sprite_param(t_data_mlx *data, int num)
+static void	calc_sprite_param(t_data_mlx *data, t_spr_tex *img, int num)
 {
-	data->am_s->spr_img[0].x_ray = data->am_s->spr_img[0].x - data->map->play.x;
-	data->am_s->spr_img[0].y_ray = data->am_s->spr_img[0].y - data->map->play.y;
-	data->am_s->spr_img[1].x_ray = data->am_s->spr_img[1].x - data->map->play.x;
-	data->am_s->spr_img[1].y_ray = data->am_s->spr_img[1].y - data->map->play.y;
-	data->am_s->spr_img[2].x_ray = data->am_s->spr_img[2].x - data->map->play.x;
-	data->am_s->spr_img[2].y_ray = data->am_s->spr_img[2].y - data->map->play.y;
-	data->am_s->spr_img[3].x_ray = data->am_s->spr_img[3].x - data->map->play.x;
-	data->am_s->spr_img[3].y_ray = data->am_s->spr_img[3].y - data->map->play.y;
 	data->am_s->inv = 1.0 / (data->map->cam.pl_x * data->map->play.dir_y - \
 		data->map->play.dir_x * data->map->cam.pl_y);
-	data->am_s->spr_img[num].t_x = data->am_s->inv * (data->map->play.dir_y * \
-		data->am_s->spr_img[num].x_ray - data->map->play.dir_x * \
-		data->am_s->spr_img[num].y_ray);
-	data->am_s->spr_img[num].t_y = data->am_s->inv * (-data->map->cam.pl_y * \
-		data->am_s->spr_img[num].x_ray + data->map->cam.pl_x * \
-		data->am_s->spr_img[num].y_ray);
-	data->am_s->spr_img[num].pos_spr_x = (int)((WIDTH / 2) * (1 + \
-		data->am_s->spr_img[num].t_x / data->am_s->spr_img[num].t_y));
-	data->am_s->spr_img[num].h_spr = \
-		abs((int)(HEIGHT / data->am_s->spr_img[num].t_y));
-	data->am_s->spr_img[num].dr_st_y = -(data->am_s->spr_img[num].h_spr / 2) \
-		+ HEIGHT / 2;
+	img[num].t_x = data->am_s->inv * (data->map->play.dir_y * \
+		img[num].x_ray - data->map->play.dir_x * img[num].y_ray);
+	img[num].t_y = data->am_s->inv * (-data->map->cam.pl_y * \
+		img[num].x_ray + data->map->cam.pl_x * img[num].y_ray);
+	img[num].pos_spr_x = (int)((WIDTH / 2) * (1 + \
+		img[num].t_x / img[num].t_y));
+	img[num].h_spr = abs((int)(HEIGHT / img[num].t_y));
+	img[num].dr_st_y = -(img[num].h_spr / 2) + HEIGHT / 2;
 }
 
-static void	calc_sprite_sector(t_spr *am_s, int num)
+static void	calc_sprite_sector(t_spr_tex *img, int num)
 {
-	if (am_s->spr_img[num].dr_st_y < 0)
-		am_s->spr_img[num].dr_st_y = 0;
-	am_s->spr_img[num].dr_f_y = am_s->spr_img[num].h_spr / 2 + HEIGHT / 2;
-	if (am_s->spr_img[num].dr_f_y > HEIGHT)
-		am_s->spr_img[num].dr_f_y = HEIGHT - 1;
-	am_s->spr_img[num].w_spr = abs((int)(HEIGHT / am_s->spr_img[num].t_y));
-	am_s->spr_img[num].dr_st_x = -am_s->spr_img[num].w_spr / 2 + \
-		am_s->spr_img[num].pos_spr_x;
-	if (am_s->spr_img[num].dr_st_x < 0)
-		am_s->spr_img[num].dr_st_x = 0;
-	am_s->spr_img[num].dr_f_x = am_s->spr_img[num].w_spr / 2 + \
-		am_s->spr_img[num].pos_spr_x;
-	if (am_s->spr_img[num].dr_f_x >= WIDTH)
-		am_s->spr_img[num].dr_f_x = WIDTH - 1;
+	if (img[num].dr_st_y < 0)
+		img[num].dr_st_y = 0;
+	img[num].dr_f_y = img[num].h_spr / 2 + HEIGHT / 2;
+	if (img[num].dr_f_y > HEIGHT)
+		img[num].dr_f_y = HEIGHT - 1;
+	img[num].w_spr = abs((int)(HEIGHT / img[num].t_y));
+	img[num].dr_st_x = -img[num].w_spr / 2 + \
+		img[num].pos_spr_x;
+	if (img[num].dr_st_x < 0)
+		img[num].dr_st_x = 0;
+	img[num].dr_f_x = img[num].w_spr / 2 + \
+		img[num].pos_spr_x;
+	if (img[num].dr_f_x >= WIDTH)
+		img[num].dr_f_x = WIDTH - 1;
 }
 
 void	draw_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost)
@@ -106,12 +94,13 @@ void	draw_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost)
 	int	j;
 	int	f;
 
-	calc_sprite_param(data, n);
-	calc_sprite_sector(data->am_s, n);
+	calc_sprite_param(data, img, n);
+	calc_sprite_sector(img, n);
 	i = img[n].dr_st_x - 1;
 	f = 0;
 	img[n].fact_st_x = 0;
 	img[n].fact_f_x = 0;
+	printf("i : %d end : %d\n", i , img[n].dr_f_x);
 	while (++i < img[n].dr_f_x)
 	{
 		img[n].tex_x = ((int)(256 * (i - (-img[n].w_spr / 2 + \
@@ -188,7 +177,7 @@ void	draw_objects(t_data_mlx *data)
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
 			&data->line_length, &data->endian);
 	draw_invis_background(data, WIDTH, HEIGHT);
-	check_costume(data);
+	// check_costume(data);
 	check_computer(data);
 	draw_aim(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
