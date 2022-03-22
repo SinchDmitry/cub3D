@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/22 16:54:26 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/22 18:11:05 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,10 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-unsigned int	my_mlx_get_pixel(t_data_mlx *data, int x, int y, char side)
+unsigned int	my_mlx_get_pixel(t_tex costume, int x, int y)
 {	
-	if (side > 3)
-	{
-		return (*(unsigned int *)(data->am_s->spr_img[side - 10].costumes[data->am_s->spr_img[side - 10].c_num].addr + \
-			(x * data->am_s->spr_img[side - 10].costumes[data->am_s->spr_img[side - 10].c_num].bits_per_pixel / 8 + \
-			y * data->am_s->spr_img[side - 10].costumes[data->am_s->spr_img[side - 10].c_num].line_length)));
-	}
-	else
-	{
-		return (*(unsigned int *)(data->wall[side].addr + \
-		(x * data->wall[side].bits_per_pixel / 8 + y * data->wall[side].line_length)));
-	}
+	return (*(unsigned int *)(costume.addr + \
+		(x * costume.bits_per_pixel / 8 + y * costume.line_length)));
 }
 
 void	my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color)
@@ -221,7 +212,7 @@ void	init_images(t_data_mlx *data)
 		ft_strlcat(xpm_path, img_num, 1023);
 		free(img_num);
 		ft_strlcat(xpm_path, ".xpm", 1023);	
-		printf ("%s\n", xpm_path);
+		// printf ("%s\n", xpm_path);
 		data->am_s->comp_img.costumes[i].img = \
 			mlx_xpm_file_to_image(data->mlx, xpm_path, &data->am_s->comp_img.costumes[i].img_h, &data->am_s->comp_img.costumes[i].img_w);
 		data->am_s->comp_img.costumes[i].addr = mlx_get_data_addr(data->am_s->comp_img.costumes[i].img, &data->am_s->comp_img.costumes[i].bits_per_pixel, \

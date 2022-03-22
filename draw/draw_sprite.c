@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/22 16:49:47 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/22 18:10:36 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ void	draw_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost)
 	f = 0;
 	img[n].fact_st_x = 0;
 	img[n].fact_f_x = 0;
-	printf("i : %d end : %d\n", i , img[n].dr_f_x);
 	while (++i < img[n].dr_f_x)
 	{
 		img[n].tex_x = ((int)(256 * (i - (-img[n].w_spr / 2 + \
@@ -136,8 +135,8 @@ void	draw_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost)
 				img[n].tex_y = (((img[n].d * img[n].costumes[cost].img_h) \
 				/ img[n].h_spr) / 256);
 				my_mlx_pixel_put(data, i, j + data->map->cam.vertilcal_pos, \
-					my_mlx_get_pixel(data, img[n].tex_x, \
-					img[n].tex_y, n + 10));
+					my_mlx_get_pixel(img[n].costumes[cost], img[n].tex_x, \
+						img[n].tex_y));
 			}
 		}
 	}
@@ -173,17 +172,24 @@ void	check_costume(t_data_mlx *data)
 void	check_computer(t_data_mlx *data)
 {
 	static int	i;
+	static int	j;
 
 	if (data->am_s->comp_img.shot)
 	{
-		if (i == COMP_COSTUME - 1)
-			i = 0;
-		++i;
+		if (!j)
+		{
+			if (i == COMP_COSTUME - 1)
+				i = 0;
+			++i;
+		}
+		j++;
+		if (j == 4)
+			j = 0;
 	}
 	data->am_s->comp_img.c_num = i;
 	draw_sprite(data, &data->am_s->comp_img, 0, data->am_s->comp_img.c_num);
 	if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
-		attack_weapon(data, &data->am_s->comp_img, 1);
+		attack_weapon(data, &data->am_s->comp_img, 0);
 }
 
 void	draw_objects(t_data_mlx *data)

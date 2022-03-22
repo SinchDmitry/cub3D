@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/18 21:04:52 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/22 17:57:43 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void	ray_play(t_data_mlx *data, int flag)
      	{
 			int texY = (int)texPos & (data->wall[sym].img_h - 1);
        		texPos += step;
-			col = my_mlx_get_pixel(data, texX, texY, sym);
+			col = my_mlx_get_pixel(data->wall[sym], texX, texY);
 			// if(data->map->cam.wall_dir == 1) // make shadow
 			// 	col = (col >> 1) & 8355711;
 		

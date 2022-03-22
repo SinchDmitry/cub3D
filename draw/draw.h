@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/22 16:43:46 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/22 18:01:56 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@
 # define LASER_WIDTH		3
 # define SPR_NUM			4
 # define SPR_COSTUME		11
-# define COMP_COSTUME		11 //22
+# define COMP_COSTUME		22
 
 struct					s_images;
 typedef struct s_images	t_images;
@@ -173,7 +173,7 @@ typedef struct s_vls
 
 void			draw_map_with_move(t_data_mlx *data);
 void			my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color);
-unsigned int	my_mlx_get_pixel(t_data_mlx *data, int x, int y, char side);
+unsigned int	my_mlx_get_pixel(t_tex costume, int x, int y);
 void			draw_fvp(t_data_mlx *data);
 int				key_h(t_data_mlx *data);
 void			draw_map(t_data_mlx *data);
