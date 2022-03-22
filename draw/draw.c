@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/22 18:11:05 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/22 22:03:42 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	mouse_move(t_data_mlx *data)
 	float	plane_x;
 	float	move_angle_x;
 	float	move_angle_y;
-	
+
 	dir_x = data->map->play.dir_x;
 	plane_x = data->map->cam.pl_x;
 	if (data->mouse_x < 0 || data->mouse_x > WIDTH)
@@ -58,24 +58,23 @@ void	mouse_move(t_data_mlx *data)
 		mlx_mouse_move(data->mlx_win, WIDTH / 2, data->mouse_y);
 		data->mouse_x = WIDTH / 2;
 	}
-	if (data->mouse_y < 0 || data->mouse_y > HEIGHT )
+	if (data->mouse_y < 0 || data->mouse_y > HEIGHT)
 	{
 		mlx_mouse_move(data->mlx_win, data->mouse_x, HEIGHT / 2);
 		data->mouse_y = HEIGHT / 2;
 	}
 	data->prev_mouse_x = data->mouse_x;
 	data->prev_mouse_y = data->mouse_y;
-	
 	mlx_mouse_get_pos(data->mlx_win, &data->mouse_x, &data->mouse_y);
 	move_angle_x = data->prev_mouse_x - data->mouse_x;
 	move_angle_y = data->prev_mouse_y - data->mouse_y;
-	if(move_angle_x > 10)
+	if (move_angle_x > 10)
 		move_angle_x = 10;
-	if(move_angle_x < -10)
+	if (move_angle_x < -10)
 		move_angle_x = -10;
 	move_angle_x *= 0.01f;
 	move_angle_y *= 6;
-	if(move_angle_x > 0)
+	if (move_angle_x > 0)
 	{
 		data->map->play.dir_x = data->map->play.dir_x * cos(-move_angle_x) - \
 			data->map->play.dir_y * sin(-move_angle_x);
@@ -87,7 +86,7 @@ void	mouse_move(t_data_mlx *data)
 			data->map->cam.pl_y * cos(-move_angle_x);
 		data->map->play.a += -move_angle_x;
 	}
-	else if(move_angle_x < 0)
+	else if (move_angle_x < 0)
 	{
 		data->map->play.dir_x = data->map->play.dir_x * cos(-move_angle_x) - \
 			data->map->play.dir_y * sin(-move_angle_x);
@@ -99,9 +98,9 @@ void	mouse_move(t_data_mlx *data)
 			data->map->cam.pl_y * cos(-move_angle_x);
 		data->map->play.a += -move_angle_x;
 	}
-	if(move_angle_y > 0)
+	if (move_angle_y > 0)
 		data->map->cam.vertilcal_pos += move_angle_y;
-	else if(move_angle_y < 0)
+	else if (move_angle_y < 0)
 		data->map->cam.vertilcal_pos += move_angle_y;
 }
 
@@ -140,22 +139,63 @@ int	render_next_frame(t_data_mlx *data)
 	return (0);
 }
 
-void	init_images(t_data_mlx *data)
+static void	init_all_amongus(t_data_mlx *data,  t_spr_tex *img)
 {
 	int		i;
 	int		j;
-	char	xpm_path[1024];
-	char	*space_dir;
-	char	*among_dir;
-	char	*comp_dir;
+
+	j = 0;
+	while (++j < SPR_NUM)
+	{
+		i = -1;
+		while (++i < SPR_COSTUME)
+		{
+			img[j].costumes[i].img = img[0].costumes[i].img;
+			img[j].costumes[i].addr = img[0].costumes[i].addr;
+			img[j].costumes[i].img_h = img[0].costumes[i].img_h;
+			img[j].costumes[i].img_w = img[0].costumes[i].img_w;
+			img[j].costumes[i].bits_per_pixel = \
+				img[0].costumes[i].bits_per_pixel;
+			img[j].costumes[i].line_length = img[0].costumes[i].line_length;
+			img[j].costumes[i].endian = img[0].costumes[i].endian;
+		}
+	}
+}
+	
+static void	init_amongus(t_data_mlx *data, t_spr_tex *img, char *xpm_path)
+{
+	int		i;
 	char	*img_num;
+	char	*among_dir;
+	
+	among_dir = "./textures/among/0";
+	i = -1;
+	while (++i < SPR_COSTUME)
+	{
+		xpm_path[0] = '\0';
+		ft_strlcat(xpm_path, among_dir, 1023);
+		img_num = ft_itoa(i);
+		ft_strlcat(xpm_path, img_num, 1023);
+		free(img_num);
+		ft_strlcat(xpm_path, ".xpm", 1023);
+		img[0].costumes[i].img = mlx_xpm_file_to_image(data->mlx, xpm_path, \
+			&img[0].costumes[i].img_h, \
+			&img[0].costumes[i].img_w);
+		img[0].costumes[i].addr = mlx_get_data_addr(img[0].costumes[i].img, \
+			&img[0].costumes[i].bits_per_pixel, \
+			&img[0].costumes[i].line_length, &img[0].costumes[i].endian);
+	}
+	init_all_amongus(data, data->am_s->spr_img);
+}
+
+static void	init_space(t_data_mlx *data, char *xpm_path)
+{
+	int		i;
 	int		img_h;
 	int		img_w;
+	char	*img_num;
+	char	*space_dir;
 
-	data->am_s = malloc(sizeof(t_spr));
-	if (!data->am_s)
-		error_end(3); // move it && save pointer
-	//init animated space
 	i = -1;
 	space_dir = "./textures/space_fly/space2/space_fly";
 	while (++i < 40)
@@ -169,38 +209,23 @@ void	init_images(t_data_mlx *data)
 		data->image.mm_space[i] = \
 			mlx_xpm_file_to_image(data->mlx, xpm_path, &img_h, &img_w);
 	}
-	// init animated among dead
-	j = 0;
-	i = -1;
-	among_dir = "./textures/among/0";
-	while (++i < SPR_COSTUME)
-	{
-		xpm_path[0] = '\0';
-		ft_strlcat(xpm_path, among_dir, 1023);
-		img_num = ft_itoa(i);
-		ft_strlcat(xpm_path, img_num, 1023);
-		free(img_num);
-		ft_strlcat(xpm_path, ".xpm", 1023);
-		// printf ("%s\n", xpm_path_among);
-		data->am_s->spr_img[j].costumes[i].img = \
-			mlx_xpm_file_to_image(data->mlx, xpm_path, &data->am_s->spr_img[j].costumes[i].img_h, &data->am_s->spr_img[j].costumes[i].img_w);
-		data->am_s->spr_img[j].costumes[i].addr = mlx_get_data_addr(data->am_s->spr_img[j].costumes[i].img, &data->am_s->spr_img[j].costumes[i].bits_per_pixel, \
-			&data->am_s->spr_img[j].costumes[i].line_length, &data->am_s->spr_img[j].costumes[i].endian);
-	}
-	while (++j < SPR_NUM)
-	{
-		i = -1;
-		while (++i < SPR_COSTUME)
-		{
-			data->am_s->spr_img[j].costumes[i].img = data->am_s->spr_img[0].costumes[i].img;
-			data->am_s->spr_img[j].costumes[i].addr = data->am_s->spr_img[0].costumes[i].addr;
-			data->am_s->spr_img[j].costumes[i].img_h = data->am_s->spr_img[0].costumes[i].img_h;
-			data->am_s->spr_img[j].costumes[i].img_w = data->am_s->spr_img[0].costumes[i].img_w;
-			data->am_s->spr_img[j].costumes[i].bits_per_pixel = data->am_s->spr_img[0].costumes[i].bits_per_pixel;
-			data->am_s->spr_img[j].costumes[i].line_length = data->am_s->spr_img[0].costumes[i].line_length;
-			data->am_s->spr_img[j].costumes[i].endian = data->am_s->spr_img[0].costumes[i].endian;
-		}
-	}
+}
+
+void	init_images(t_data_mlx *data)
+{
+	int		i;
+	int		j;
+	int		img_h;
+	int		img_w;
+	char	xpm_path[1024];
+	char	*comp_dir;
+	char	*img_num;
+
+	data->am_s = malloc(sizeof(t_spr));
+	if (!data->am_s)
+		error_end(3); // move it && save pointer
+	init_space(data, xpm_path);
+	init_amongus(data, data->am_s->spr_img, xpm_path);
 	// init rickroll
 	i = -1;
 	comp_dir = "./textures/rick/";
@@ -267,7 +292,7 @@ static void	init_sprite_data(t_data_mlx *data)
 	data->am_s->spr_img[0].y = 4.5;
 	data->am_s->spr_img[1].x = 38.5;
 	data->am_s->spr_img[1].y = 10.5;
-	data->am_s->spr_img[2].x = 26.5;
+	data->am_s->spr_img[2].x = 26.5; 
 	data->am_s->spr_img[2].y = 15.5;
 	data->am_s->spr_img[3].y = 23.5;
 	data->am_s->spr_img[3].x = 23.5;
@@ -279,8 +304,8 @@ static void	init_sprite_data(t_data_mlx *data)
 	data->am_s->spr_img[2].shot = 0;
 	data->am_s->spr_img[3].dead = 0;
 	data->am_s->spr_img[3].shot = 0;
-	data->am_s->comp_img.x = 11.5;
-	data->am_s->comp_img.y = 10.5;
+	data->am_s->comp_img.x = 11;
+	data->am_s->comp_img.y = 11;
 	data->am_s->comp_img.shot = 0;
 }
 
@@ -298,19 +323,15 @@ int	draw(t_info *map)
 		data.keycode[i++] = UNPRESS; //init unpress keys
 	data.mouse_x = WIDTH / 2;
 	data.mouse_y = HEIGHT / 2;
-	// printf("here x = %f y = %f\n", map->play.x, map->play.y);
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Hello world!");
 	mlx_mouse_move(data.mlx_win, WIDTH / 2, HEIGHT / 2);
 	init_images(&data);
 	init_sprite_data(&data);
-	// render_next_frame(&data);
 	mlx_hook(data.mlx_win, 2, 0, &key_press, &data);
 	mlx_hook(data.mlx_win, 3, 0, &key_unpress, &data);
 	mlx_mouse_hook(data.mlx_win, &ft_mouse, &data);
 	mlx_loop_hook(data.mlx, render_next_frame, &data);
-	
-	// mlx_hook(data.mlx_win, 02, (1L << 0), &key_h, &data);
 	mlx_loop(data.mlx);
 	return (0);
 }
