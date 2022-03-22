@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/22 16:43:46 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/22 18:08:24 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,5 +191,6 @@ void			map_exit_case(int keycode, t_data_mlx *data);
 void			draw_objects(t_data_mlx *data);
 void			draw_aim(t_data_mlx *data);
 void			put_weapon_image(t_data_mlx *data);
+void			check_door(t_data_mlx *data);
 
 #endif

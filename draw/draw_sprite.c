@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/22 16:49:47 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/22 18:04:17 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	draw_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost)
 	f = 0;
 	img[n].fact_st_x = 0;
 	img[n].fact_f_x = 0;
-	printf("i : %d end : %d\n", i , img[n].dr_f_x);
+	// printf("i : %d end : %d\n", i , img[n].dr_f_x);
 	while (++i < img[n].dr_f_x)
 	{
 		img[n].tex_x = ((int)(256 * (i - (-img[n].w_spr / 2 + \
@@ -194,6 +194,7 @@ void	draw_objects(t_data_mlx *data)
 	draw_invis_background(data, WIDTH, HEIGHT);
 	check_costume(data);
 	check_computer(data);
+	check_door(data);
 	draw_aim(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	put_weapon_image(data);

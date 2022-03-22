@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/18 21:04:52 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/22 17:58:27 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ void	ray_play(t_data_mlx *data, int flag)
 			else
 				sym = 3;
 		}
-
 		if(x == WIDTH / 2)
 			data->map->play.side_for_move = sym; 
 
