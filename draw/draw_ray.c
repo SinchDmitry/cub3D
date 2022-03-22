@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/22 17:58:27 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/22 21:36:25 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,23 +147,7 @@ void	ray_play(t_data_mlx *data, int flag)
      	{
 			int texY = (int)texPos & (data->wall[sym].img_h - 1);
        		texPos += step;
-			col = my_mlx_get_pixel(data, texX, texY, sym);
-			// if(data->map->cam.wall_dir == 1) // make shadow
-			// 	col = (col >> 1) & 8355711;
-		
-			if (!data->map->cam.wall_dir)
-			{
-				// if (data->map->cam.step_x == -1)
-				// 	col = (col >> 1) & 8355711;
-			}
-			else
-			{
-				// if (data->map->cam.step_y == -1)
-					// col = (col >> 1) & 8355711;
-				// else
-					// col = (col >> 1) & 8355711;
-			}
-
+			col = my_mlx_get_pixel(data->wall[sym], texX, texY);
 			my_mlx_pixel_put(data, x, y, col);
 		}
 	}
