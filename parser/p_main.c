@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:20 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/15 17:18:39 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/23 11:35:28 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	init_map_data(t_info **map, int fd)
 	*map = malloc(sizeof(t_info));
 	if (!map)
 		error_end(3);
+	save_point(*map, P_BACK); // front or back ?
 	**map = (t_info){};
 	(*map)->texture = malloc(sizeof(t_texture));
 	if (!(*map)->texture)
