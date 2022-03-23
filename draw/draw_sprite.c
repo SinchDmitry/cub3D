@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/22 18:14:35 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/22 22:06:10 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,20 +86,20 @@ static void	calc_sprite_param(t_data_mlx *data, t_spr_tex *img, int num)
 
 static void	calc_sprite_sector(t_spr_tex *img, int num)
 {
-	if (img[num].dr_st_y < 0)
-		img[num].dr_st_y = 0;
+	// if (img[num].dr_st_y < 0)
+	// 	img[num].dr_st_y = 0;
 	img[num].dr_f_y = img[num].h_spr / 2 + HEIGHT / 2;
-	if (img[num].dr_f_y > HEIGHT)
-		img[num].dr_f_y = HEIGHT - 1;
+	// if (img[num].dr_f_y > HEIGHT)
+	// 	img[num].dr_f_y = HEIGHT - 1;
 	img[num].w_spr = abs((int)(HEIGHT / img[num].t_y));
 	img[num].dr_st_x = -img[num].w_spr / 2 + \
 		img[num].pos_spr_x;
-	if (img[num].dr_st_x < 0)
-		img[num].dr_st_x = 0;
+	// if (img[num].dr_st_x < 0)
+	// 	img[num].dr_st_x = 0;
 	img[num].dr_f_x = img[num].w_spr / 2 + \
 		img[num].pos_spr_x;
-	if (img[num].dr_f_x >= WIDTH)
-		img[num].dr_f_x = WIDTH - 1;
+	// if (img[num].dr_f_x >= WIDTH)
+	// 	img[num].dr_f_x = WIDTH - 1;
 }
 
 void	draw_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost)
