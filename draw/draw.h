@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/03/23 13:14:19 by aarchiba         ###   ########.fr       */
+=======
+/*   Updated: 2022/03/22 21:38:28 by utygett          ###   ########.fr       */
+>>>>>>> 48fa93f9598d81c6d66a11591dfd1579cc05cc2d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +146,7 @@ typedef struct s_data_mlx
 	int			prev_mouse_y;
 	t_tex		weapon;
 	t_tex		wall[4];
+	t_tex		door;
 	t_images	image;
 	t_info		*map;
 	t_spr		*am_s;
@@ -190,6 +195,7 @@ void			map_exit_case(int keycode, t_data_mlx *data);
 void			draw_objects(t_data_mlx *data);
 void			draw_aim(t_data_mlx *data);
 void			put_weapon_image(t_data_mlx *data);
+void			check_door(t_data_mlx *data);
 
 // image initiation
 void			init_images(t_data_mlx *data);
