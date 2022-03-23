@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:26:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/23 11:57:28 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:47:55 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,34 @@ static void	init_sprite_data(t_data_mlx *data)
 	data->am_s->comp_img.x = 11;
 	data->am_s->comp_img.y = 11;
 	data->am_s->comp_img.shot = 0;
+	data->am_s->spr_img->size = AMONG_SIZE;
+	data->am_s->spr_img->num_of_spr = SPR_NUM;
+	data->am_s->spr_img->num_of_cost = SPR_COSTUME;
+	data->am_s->comp_img.size = FULL_SIZE;
+	data->am_s->comp_img.num_of_spr = 0;
+	data->am_s->comp_img.num_of_cost = COMP_COSTUME;
+}
+
+static void	init_door_data(t_data_mlx *data)
+{
+	data->am_s->door_img[0].x = 8;
+	data->am_s->door_img[0].y = 12.5;
+	data->am_s->door_img[1].x = 6;
+	data->am_s->door_img[1].y = 12.5;
+	data->am_s->door_img[2].x = 14.5;
+	data->am_s->door_img[2].y = 22;
+	data->am_s->door_img[3].x = 24;
+	data->am_s->door_img[3].y = 14.5;
+	data->am_s->door_img[0].dead = 0;
+	data->am_s->door_img[0].shot = 0;
+	data->am_s->door_img[1].dead = 0;
+	data->am_s->door_img[1].shot = 0;
+	data->am_s->door_img[2].dead = 0;
+	data->am_s->door_img[2].shot = 0;
+	data->am_s->door_img[3].dead = 0;
+	data->am_s->door_img->size = FULL_SIZE;
+	data->am_s->door_img->num_of_spr = DOOR_NUM;
+	data->am_s->door_img->num_of_cost = DOOR_COSTUME;
 }
 
 void	init_images(t_data_mlx *data)
@@ -81,8 +109,9 @@ void	init_images(t_data_mlx *data)
 	if (!data->am_s)
 		error_end(3);
 	save_point(data->am_s, P_FRONT);
+	init_sprite_data(data);
+	init_door_data(data);
 	init_sprites(data);
 	init_wall(data);
 	init_map_gun(data);
-	init_sprite_data(data);
 }

@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/23 14:26:48 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:54:47 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_spr_tex
 	float		t_x;
 	float		t_y;
 	int			shot;
+	int			size;
 	int			dead;
 	int			tex_x;
 	int			tex_y;
@@ -113,6 +114,8 @@ typedef struct s_spr_tex
 	int			fact_f_x;
 	int			fact_st_x;
 	int			pos_spr_x;
+	int			num_of_spr;
+	int			num_of_cost;
 	t_tex		costumes[COMP_COSTUME];
 }	t_spr_tex;
 
@@ -196,7 +199,6 @@ void			map_exit_case(int keycode, t_data_mlx *data);
 void			draw_objects(t_data_mlx *data);
 void			draw_aim(t_data_mlx *data);
 void			put_weapon_image(t_data_mlx *data);
-void			check_door(t_data_mlx *data);
 
 // image initiation
 void			init_images(t_data_mlx *data);
