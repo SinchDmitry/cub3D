@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/23 14:14:30 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:58:50 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,14 @@ static void	init_ray_param(t_data_mlx *data)
 	data->am_s->spr_img[3].y_ray = data->am_s->spr_img[3].y - data->map->play.y;
 	data->am_s->comp_img.x_ray = data->am_s->comp_img.x - data->map->play.x;
 	data->am_s->comp_img.y_ray = data->am_s->comp_img.y - data->map->play.y;
+	data->am_s->door_img[0].x_ray = data->am_s->door_img[0].x - data->map->play.x;
+	data->am_s->door_img[0].y_ray = data->am_s->door_img[0].y - data->map->play.y;
+	data->am_s->door_img[1].x_ray = data->am_s->door_img[1].x - data->map->play.x;
+	data->am_s->door_img[1].y_ray = data->am_s->door_img[1].y - data->map->play.y;
+	data->am_s->door_img[2].x_ray = data->am_s->door_img[2].x - data->map->play.x;
+	data->am_s->door_img[2].y_ray = data->am_s->door_img[2].y - data->map->play.y;
+	data->am_s->door_img[3].x_ray = data->am_s->door_img[3].x - data->map->play.x;
+	data->am_s->door_img[3].y_ray = data->am_s->door_img[3].y - data->map->play.y;
 	data->am_s->inv = 1.0 / (data->map->cam.pl_x * data->map->play.dir_y - \
 		data->map->play.dir_x * data->map->cam.pl_y);
 }
@@ -148,29 +156,52 @@ void	draw_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost)
 	}
 }
 
-void	check_costume(t_data_mlx *data)
+void	check_costume(t_data_mlx *data, t_spr_tex *img)
 {
-	static int	i_among[SPR_NUM];
+	static int	i[SPR_NUM];
 	int			spr_n;
 
 	spr_n = 0;
-	while (spr_n < SPR_NUM)
+	while (spr_n < img[0].num_of_spr)
 	{
-		if (data->am_s->spr_img[spr_n].shot \
-			&& !data->am_s->spr_img[spr_n].dead)
+		if (img[spr_n].shot && !img[spr_n].dead)
 		{
-			++i_among[spr_n];
-			if (i_among[spr_n] == SPR_COSTUME - 1)
-				data->am_s->spr_img[spr_n].dead = 1;
+			++i[spr_n];
+			if (i[spr_n] == img[0].num_of_cost - 1)
+				img[spr_n].dead = 1;
 		}
-		data->am_s->spr_img[spr_n].c_num = i_among[spr_n];
-		if (!data->am_s->spr_img[spr_n].dead)
-			draw_sprite(data, data->am_s->spr_img, spr_n, \
-				data->am_s->spr_img[spr_n].c_num);
+		img[spr_n].c_num = i[spr_n];
+		if (!img[spr_n].dead)
+			draw_sprite(data, img, spr_n, img[spr_n].c_num);
 		else
-			draw_sprite(data, data->am_s->spr_img, spr_n, SPR_COSTUME - 1);
+			draw_sprite(data, img, spr_n, img[0].num_of_cost - 1);
 		if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
-			attack_weapon(data, data->am_s->spr_img, spr_n, AMONG_SIZE);
+			attack_weapon(data, img, spr_n, AMONG_SIZE);
+		spr_n++;
+	}
+}
+
+void	check_door(t_data_mlx *data, t_spr_tex *img)
+{
+	static int	i[DOOR_NUM];
+	int			spr_n;
+
+	spr_n = 0;
+	while (spr_n < img[0].num_of_spr)
+	{
+		if (img[spr_n].shot && !img[spr_n].dead)
+		{
+			++i[spr_n];
+			if (i[spr_n] == img[0].num_of_cost - 1)
+				img[spr_n].dead = 1;
+		}
+		img[spr_n].c_num = i[spr_n];
+		if (!img[spr_n].dead)
+			draw_sprite(data, img, spr_n, img[spr_n].c_num);
+		else
+			draw_sprite(data, img, spr_n, img[0].num_of_cost - 1);
+		if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
+			attack_weapon(data, img, spr_n, FULL_SIZE);
 		spr_n++;
 	}
 }
@@ -204,7 +235,8 @@ void	draw_objects(t_data_mlx *data)
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
 			&data->line_length, &data->endian);
 	draw_invis_background(data, WIDTH, HEIGHT);
-	check_costume(data);
+	check_costume(data, data->am_s->spr_img);
+	check_door(data, data->am_s->door_img); // + flag
 	check_computer(data);
 	// check_door(data);
 	draw_aim(data);
