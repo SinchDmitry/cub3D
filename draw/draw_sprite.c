@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/22 22:06:10 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/23 14:14:30 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,35 @@ void	laser_width(t_data_mlx *data, t_vls *bullet, int width_step)
 	bullet->y2 = HEIGHT / 2;
 }
 
-void	action_among(t_data_mlx *data, t_spr_tex *img, int spr_n)
+void	action_among(t_data_mlx *data, t_spr_tex *img, int spr_n, int flag)
 {
 	int		left_x;
 	int		right_x;
-	int		tmp;
+	int		tmp_x;
+	int		tmp_y;
 
-	tmp = img[spr_n].dr_st_x + (img[spr_n].dr_f_x - img[spr_n].dr_st_x) / 3;
-	left_x = tmp;
-	if (img[spr_n].fact_st_x > tmp)
+	tmp_x = img[spr_n].dr_st_x + (img[spr_n].dr_f_x - img[spr_n].dr_st_x) / 3;
+	if (flag == FULL_SIZE)
+		tmp_x = img[spr_n].dr_st_x;
+	left_x = tmp_x;
+	if (img[spr_n].fact_st_x > tmp_x)
 		left_x = img[spr_n].fact_st_x;
-	tmp = img[spr_n].dr_f_x - (img[spr_n].dr_f_x - img[spr_n].dr_st_x) / 3;
-	right_x = tmp;
-	if (img[spr_n].fact_f_x < tmp)
+	tmp_x = img[spr_n].dr_f_x - (img[spr_n].dr_f_x - img[spr_n].dr_st_x) / 3;
+	if (flag == FULL_SIZE)
+		tmp_x = img[spr_n].dr_f_x;
+	right_x = tmp_x;
+	if (img[spr_n].fact_f_x < tmp_x)
 		right_x = img[spr_n].fact_f_x;
+	tmp_y = img[spr_n].dr_st_y + (img[spr_n].dr_f_y - img[spr_n].dr_st_y) / 2;
+	if (flag == FULL_SIZE)
+		tmp_y = img[spr_n].dr_f_y;
 	if (WIDTH / 2 > left_x && WIDTH / 2 < right_x)
 		if (HEIGHT / 2 > img[spr_n].dr_st_y - data->map->cam.vertilcal_pos \
-			&& HEIGHT / 2 < img[spr_n].dr_st_y + (img[spr_n].dr_f_y - \
-			img[spr_n].dr_st_y) / 2 - data->map->cam.vertilcal_pos)
+			&& HEIGHT / 2 < tmp_y - data->map->cam.vertilcal_pos)
 				img[spr_n].shot = 1;
 }
 
-void	attack_weapon(t_data_mlx *data, t_spr_tex *img, int spr_n)
+void	attack_weapon(t_data_mlx *data, t_spr_tex *img, int spr_n, int size)
 {
 	t_vls	bullet;
 	int		i;
@@ -52,8 +59,7 @@ void	attack_weapon(t_data_mlx *data, t_spr_tex *img, int spr_n)
 		laser_width(data, &bullet, i--);
 		draw_line(data, bullet, RED_COL);
 	}
-	action_among(data, img, spr_n);
-	action_among(data, &data->am_s->comp_img, 0);
+	action_among(data, img, spr_n, size);
 }
 
 static void	init_ray_param(t_data_mlx *data)
@@ -84,22 +90,22 @@ static void	calc_sprite_param(t_data_mlx *data, t_spr_tex *img, int num)
 	img[num].dr_st_y = -(img[num].h_spr / 2) + HEIGHT / 2;
 }
 
-static void	calc_sprite_sector(t_spr_tex *img, int num)
+static void	calc_sprite_sector(t_data_mlx *data, t_spr_tex *img, int num)
 {
-	// if (img[num].dr_st_y < 0)
-	// 	img[num].dr_st_y = 0;
+	if (img[num].dr_st_y + data->map->cam.vertilcal_pos < 0)
+		img[num].dr_st_y = -data->map->cam.vertilcal_pos;
 	img[num].dr_f_y = img[num].h_spr / 2 + HEIGHT / 2;
-	// if (img[num].dr_f_y > HEIGHT)
-	// 	img[num].dr_f_y = HEIGHT - 1;
+	if (img[num].dr_f_y > HEIGHT - data->map->cam.vertilcal_pos)
+		img[num].dr_f_y = HEIGHT - data->map->cam.vertilcal_pos - 1;
 	img[num].w_spr = abs((int)(HEIGHT / img[num].t_y));
 	img[num].dr_st_x = -img[num].w_spr / 2 + \
 		img[num].pos_spr_x;
-	// if (img[num].dr_st_x < 0)
-	// 	img[num].dr_st_x = 0;
+	if (img[num].dr_st_x < 0)
+		img[num].dr_st_x = 0;
 	img[num].dr_f_x = img[num].w_spr / 2 + \
 		img[num].pos_spr_x;
-	// if (img[num].dr_f_x >= WIDTH)
-	// 	img[num].dr_f_x = WIDTH - 1;
+	if (img[num].dr_f_x >= WIDTH)
+		img[num].dr_f_x = WIDTH - 1;
 }
 
 void	draw_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost)
@@ -110,7 +116,7 @@ void	draw_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost)
 
 	init_ray_param(data);
 	calc_sprite_param(data, img, n);
-	calc_sprite_sector(img, n);
+	calc_sprite_sector(data, img, n);
 	i = img[n].dr_st_x - 1;
 	f = 0;
 	img[n].fact_st_x = 0;
@@ -164,7 +170,7 @@ void	check_costume(t_data_mlx *data)
 		else
 			draw_sprite(data, data->am_s->spr_img, spr_n, SPR_COSTUME - 1);
 		if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
-			attack_weapon(data, data->am_s->spr_img, spr_n);
+			attack_weapon(data, data->am_s->spr_img, spr_n, AMONG_SIZE);
 		spr_n++;
 	}
 }
@@ -189,7 +195,7 @@ void	check_computer(t_data_mlx *data)
 	data->am_s->comp_img.c_num = i;
 	draw_sprite(data, &data->am_s->comp_img, 0, data->am_s->comp_img.c_num);
 	if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
-		attack_weapon(data, &data->am_s->comp_img, 0);
+		attack_weapon(data, &data->am_s->comp_img, 0, FULL_SIZE);
 }
 
 void	draw_objects(t_data_mlx *data)
@@ -200,7 +206,7 @@ void	draw_objects(t_data_mlx *data)
 	draw_invis_background(data, WIDTH, HEIGHT);
 	check_costume(data);
 	check_computer(data);
-	check_door(data);
+	// check_door(data);
 	draw_aim(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	put_weapon_image(data);

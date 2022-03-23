@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
+#    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/03/22 18:15:15 by utygett          ###   ########.fr        #
+#    Updated: 2022/03/23 13:17:12 by aarchiba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ SRC		=	cub.c	parser/p_main.c \
 					parser/p_par.c	\
 					parser/p_map.c \
 					draw/draw.c \
+					draw/draw_init_1.c \
+					draw/draw_init_2.c \
 					draw/draw_minimap.c\
 					draw/draw_scene.c \
 					draw/draw_map.c \
