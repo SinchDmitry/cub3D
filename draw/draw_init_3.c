@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 13:49:10 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/23 13:53:37 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:26:23 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	init_all_doors(t_data_mlx *data, t_spr_tex *img)
 	while (++j < DOOR_NUM)
 	{
 		i = 0;
-		// while (++i < SPR_COSTUME)
-		// {
+		while (++i < DOOR_COSTUME)
+		{
 			img[j].costumes[i].img = img[0].costumes[i].img;
 			img[j].costumes[i].addr = img[0].costumes[i].addr;
 			img[j].costumes[i].img_h = img[0].costumes[i].img_h;
@@ -31,7 +31,7 @@ static void	init_all_doors(t_data_mlx *data, t_spr_tex *img)
 				img[0].costumes[i].bits_per_pixel;
 			img[j].costumes[i].line_length = img[0].costumes[i].line_length;
 			img[j].costumes[i].endian = img[0].costumes[i].endian;
-		// }
+		}
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/23 14:20:55 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:26:48 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@
 # define SPR_NUM			4
 # define DOOR_NUM			4
 # define SPR_COSTUME		11
+# define DOOR_COSTUME		11
 # define COMP_COSTUME		22
 # define FULL_SIZE			1
 # define AMONG_SIZE			0
