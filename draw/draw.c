@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/23 13:17:04 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/23 13:19:56 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ void	my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color)
 int	check_move(t_data_mlx *data)
 {
 	if (data->map->mapa[(int)data->map->play.y] \
-		[(int)data->map->play.x].sym == '1')
+		[(int)data->map->play.x].sym == '1' || \
+		data->map->mapa[(int)data->map->play.y] \
+		[(int)data->map->play.x].sym == 'e')
 		return (1);
 	else
 		return (0);

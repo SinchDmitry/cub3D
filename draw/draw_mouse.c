@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 18:39:35 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/23 13:13:38 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/23 13:29:50 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	ft_mouse(int keycode, int x, int y, t_data_mlx *data)
 {	
 	if (keycode == MOUSE_LEFT_KEY)
 		data->mouse_code[keycode] = PRESS;
-	// printf("mouse code : %d\n", keycode);
 	return (0);
 }
 

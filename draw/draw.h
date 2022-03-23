@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/03/23 13:14:19 by aarchiba         ###   ########.fr       */
-=======
-/*   Updated: 2022/03/22 21:38:28 by utygett          ###   ########.fr       */
->>>>>>> 48fa93f9598d81c6d66a11591dfd1579cc05cc2d
+/*   Updated: 2022/03/23 14:20:55 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +69,11 @@
 # define MAX_KEYS_NUM		260
 # define LASER_WIDTH		3
 # define SPR_NUM			4
+# define DOOR_NUM			4
 # define SPR_COSTUME		11
 # define COMP_COSTUME		22
+# define FULL_SIZE			1
+# define AMONG_SIZE			0
 
 struct					s_images;
 typedef struct s_images	t_images;
@@ -122,6 +121,7 @@ typedef struct s_spr
 	float		inv;
 	float		dist;
 	t_spr_tex	spr_img[SPR_NUM];
+	t_spr_tex	door_img[DOOR_NUM];
 	t_spr_tex	comp_img;
 }	t_spr;
 
