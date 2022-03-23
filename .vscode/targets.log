@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Wed Mar 23 15:49:08 2022
+# Make data base, printed on Wed Mar 23 17:05:42 2022
 
 # Variables
 
@@ -45,11 +45,11 @@ MAKEFILE_LIST :=  Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000236r000hsp/T/vscode-ipc-f87cc3d6-722a-4da0-8296-729544c17b27.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000236r000hsp/T/vscode-ipc-6a4d4b8a-55ea-4d68-ab7b-afe314f82fa3.sock
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.4ldIQ7fa0G/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.4EfLMUMVwF/Render
 # environment
 PATH = /Users/utygett/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/usr/local/munki:/opt/X11/bin:~/.dotnet/tools
 # makefile (from `Makefile', line 41)
@@ -65,13 +65,13 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.IPFpKhI02w/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.CjGsorJC7a/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
 HOMEBREW_TEMP = /tmp/utygett/Homebrew/Temp
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.tit17zKlsQ/org.xquartz:0
+DISPLAY = /private/tmp/com.apple.launchd.dLnHZzVoMW/org.xquartz:0
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -153,10 +153,9 @@ MAKEFILES :=
 # environment
 LC_ALL = C
 # environment
-SECURITYSESSIONID = 186a7
+SECURITYSESSIONID = 186a8
 # automatic
 ^F = $(notdir $^)
- 
 # default
 SUFFIXES := 
 # default
@@ -166,7 +165,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 9578
+VSCODE_PID = 20147
 # variable set hash-table stats:
 # Load=77/1024=8%, Rehash=0, Collisions=3/111=3%
 
@@ -315,6 +314,7 @@ cub3d: cub.o parser/p_main.o parser/p_par.o parser/p_map.o draw/draw.o draw/draw
 	@cp $(FTDIR)$(LIBFT) .
 	$(CC) $(CFLAGS) $(OBJ_M) libft.a -L$(MLX_PATH) -lmlx -framework \
 	OpenGL -framework AppKit -o $(NAME)
+ 
 	
 
 # Not a target:
@@ -477,7 +477,6 @@ clean:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
- 
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 68):
 	@make clean -C $(FTDIR)
@@ -546,6 +545,6 @@ draw/draw_door.d:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 3845 / max = 3845 / min = 3845 / avg = 3845
 
-# Finished Make data base on Wed Mar 23 15:49:08 2022
+# Finished Make data base on Wed Mar 23 17:05:42 2022
 
  
