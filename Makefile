@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
+#    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/03/24 18:27:23 by aarchiba         ###   ########.fr        #
+#    Updated: 2022/03/24 18:47:23 by utygett          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ SRC		=	cub.c	parser/p_main.c \
 					draw/draw.c \
 					draw/draw_init_1.c \
 					draw/draw_init_2.c \
-					draw/draw_minimap.c\
+					draw/draw_minimap_1.c\
+					draw/draw_minimap_2.c\
+					draw/draw_minimap_3.c\
 					draw/draw_scene.c \
 					draw/draw_map.c \
 					draw/draw_ray_init.c \
@@ -28,7 +30,8 @@ SRC		=	cub.c	parser/p_main.c \
 					draw/draw_mouse.c \
 					draw/draw_mlx.c \
 					draw/draw_slide.c \
-					draw/draw_door.c
+					draw/draw_door.c \
+					draw/draw_utils.c
 
 FTDIR	= 	./libft/
 

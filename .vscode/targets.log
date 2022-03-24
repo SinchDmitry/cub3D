@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Thu Mar 24 16:46:16 2022
+# Make data base, printed on Thu Mar 24 18:47:35 2022
 
 # Variables
 
@@ -18,7 +18,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 ?F = $(notdir $?)
 # makefile (from `Makefile', line 15)
-SRC = cub.c	parser/p_main.c parser/p_par.c parser/p_map.c draw/draw.c draw/draw_init_1.c draw/draw_init_2.c draw/draw_minimap.c draw/draw_scene.c draw/draw_map.c draw/draw_ray.c draw/draw_key.c draw/draw_sprite.c draw/draw_mouse.c draw/draw_mlx.c draw/draw_slide.c draw/draw_door.c
+SRC = cub.c	parser/p_main.c parser/p_par.c parser/p_map.c draw/draw.c draw/draw_init_1.c draw/draw_init_2.c draw/draw_minimap_1.c draw/draw_minimap_2.c draw/draw_minimap_3.c draw/draw_scene.c draw/draw_map.c draw/draw_ray_init.c draw/draw_ray.c draw/draw_key.c draw/draw_sprite.c draw/draw_mouse.c draw/draw_mlx.c draw/draw_slide.c draw/draw_door.c draw/draw_utils.c
 # environment
 VSCODE_LOG_NATIVE = false
 # automatic
@@ -31,15 +31,15 @@ VSCODE_LOG_NATIVE = false
 CURDIR := /Users/utygett/study/cub3d
 # makefile
 SHELL = /bin/sh
-# makefile (from `Makefile', line 53)
+# makefile (from `Makefile', line 57)
 RM = rm -f
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
-# makefile (from `Makefile', line 38)
+# makefile (from `Makefile', line 42)
 MLX = $(MLX_PATH)libmlx.a
 # environment
 _ = /usr/bin/make
-# makefile (from `Makefile', line 47)
+# makefile (from `Makefile', line 51)
 CFLAGS = -MD -Imlx -g 
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
@@ -53,11 +53,11 @@ VSCODE_CWD = /
 Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.DmBRHDX5Ix/Render
 # environment
 PATH = /Users/utygett/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/usr/local/munki:/opt/X11/bin:~/.dotnet/tools
-# makefile (from `Makefile', line 43)
+# makefile (from `Makefile', line 47)
 OBJ_M = $(SRC:%.c=%.o)
-# makefile (from `Makefile', line 45)
+# makefile (from `Makefile', line 49)
 DEP = $(SRC:%.c=%.d)
-# makefile (from `Makefile', line 36)
+# makefile (from `Makefile', line 40)
 MLX_PATH = mlx/
 # environment
 VSCODE_LOG_STACK = false
@@ -105,9 +105,9 @@ MAKECMDGOALS := all
 HOMEBREW_CACHE = /tmp/utygett/Homebrew/Caches
 # environment
 SHLVL = 1
-# makefile (from `Makefile', line 34)
+# makefile (from `Makefile', line 38)
 LIBFT = libft.a
-# makefile (from `Makefile', line 51)
+# makefile (from `Makefile', line 55)
 CC = gcc -O2
 # default
 MAKE_VERSION := 3.81
@@ -141,11 +141,12 @@ XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000004.Electron
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
-# makefile (from `Makefile', line 32)
+# makefile (from `Makefile', line 36)
 FTDIR = ./libft/
 # environment
 __CF_USER_TEXT_ENCODING = 0x4336:0x0:0x0
 # environment
+ 
 COMMAND_MODE = unix2003
 # default
 MAKEFILES := 
@@ -183,7 +184,7 @@ VSCODE_PID = 14773
 # Implicit Rules
 
 %.o: %.c
-#  commands to execute (from `Makefile', line 67):
+#  commands to execute (from `Makefile', line 71):
 	$(CC) $(CFLAGS) -c $< -o $@
 	
 
@@ -191,9 +192,18 @@ VSCODE_PID = 14773
 
 # Files
 
- 
 # Not a target:
 draw/draw_mouse.d:
+#  A default, MAKEFILES, or -include/sinclude makefile.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+draw/draw_minimap_1.d:
 #  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
 #  File does not exist.
@@ -256,7 +266,7 @@ libmake:
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/12=8%
-#  commands to execute (from `Makefile', line 63):
+#  commands to execute (from `Makefile', line 67):
 	@make -C $(FTDIR)
 	@make -C $(MLX_PATH)	
 	
@@ -291,12 +301,6 @@ draw/draw_ray.d:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-# Not a target:
-draw/draw_minimap.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
 .PHONY: all clean fclean re
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -318,11 +322,21 @@ draw/draw_scene.d:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-cub3d: cub.o parser/p_main.o parser/p_par.o parser/p_map.o draw/draw.o draw/draw_init_1.o draw/draw_init_2.o draw/draw_minimap.o draw/draw_scene.o draw/draw_map.o draw/draw_ray.o draw/draw_key.o draw/draw_sprite.o draw/draw_mouse.o draw/draw_mlx.o draw/draw_slide.o draw/draw_door.o
+# Not a target:
+draw/draw_minimap_2.d:
+#  A default, MAKEFILES, or -include/sinclude makefile.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+cub3d: cub.o parser/p_main.o parser/p_par.o parser/p_map.o draw/draw.o draw/draw_init_1.o draw/draw_init_2.o draw/draw_minimap_1.o draw/draw_minimap_2.o draw/draw_minimap_3.o draw/draw_scene.o draw/draw_map.o draw/draw_ray_init.o draw/draw_ray.o draw/draw_key.o draw/draw_sprite.o draw/draw_mouse.o draw/draw_mlx.o draw/draw_slide.o draw/draw_door.o draw/draw_utils.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 58):
+#  commands to execute (from `Makefile', line 62):
 	@cp $(FTDIR)$(LIBFT) .
 	$(CC) $(CFLAGS) $(OBJ_M) libft.a -L$(MLX_PATH) -lmlx -framework \
 	OpenGL -framework AppKit -o $(NAME)
@@ -341,9 +355,19 @@ draw/draw_door.o:
 #  File has not been updated.
 
 # Not a target:
+draw/draw_ray_init.d:
+#  A default, MAKEFILES, or -include/sinclude makefile.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-03-24 14:28:52
+#  Last modified 2022-03-24 18:47:23
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -351,6 +375,12 @@ Makefile:
 
 # Not a target:
 draw/draw_mouse.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+draw/draw_minimap_1.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -420,13 +450,20 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 75):
+#  commands to execute (from `Makefile', line 79):
 	$(RM) $(NAME) $(LIBFT) $(MLX)
 	
 
 # Not a target:
 draw/draw_scene.o:
 #  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+draw/draw_minimap_2.o:
+#  Implicit rule search has not been done.
+ 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -442,6 +479,22 @@ draw/draw_slide.d:
 
 # Not a target:
 draw/draw_init_2.d:
+#  A default, MAKEFILES, or -include/sinclude makefile.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+draw/draw_ray_init.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+draw/draw_minimap_3.d:
 #  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
 #  File does not exist.
@@ -498,15 +551,24 @@ re: fclean all
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
- 
 #  File has not been updated.
+
+# Not a target:
+draw/draw_utils.d:
+#  A default, MAKEFILES, or -include/sinclude makefile.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 clean:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 70):
+#  commands to execute (from `Makefile', line 74):
 	@make clean -C $(FTDIR)
 	@make clean -C $(MLX_PATH) 
 	$(RM) $(OBJ_M) $(DEP)
@@ -525,14 +587,10 @@ draw/draw_init_2.o:
 #  File has not been updated.
 
 # Not a target:
-draw/draw_minimap.d:
-#  A default, MAKEFILES, or -include/sinclude makefile.
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+draw/draw_minimap_3.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 draw/draw_key.d:
@@ -566,19 +624,25 @@ draw/draw_door.d:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
+# Not a target:
+draw/draw_utils.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # files hash-table stats:
-# Load=44/1024=4%, Rehash=0, Collisions=5/101=5%
+# Load=52/1024=5%, Rehash=0, Collisions=6/117=5%
 # VPATH Search Paths
 
 # No `vpath' search paths.
 
 # No general (`VPATH' variable) search path.
 
-# # of strings in strcache: 18
+# # of strings in strcache: 22
 # # of strcache buffers: 1
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
-# strcache free: total = 3811 / max = 3811 / min = 3811 / avg = 3811
+# strcache free: total = 3726 / max = 3726 / min = 3726 / avg = 3726
 
-# Finished Make data base on Thu Mar 24 16:46:16 2022
+# Finished Make data base on Thu Mar 24 18:47:35 2022
 
  
