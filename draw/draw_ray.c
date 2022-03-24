@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/22 21:36:25 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/24 14:24:07 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ void	ray_play(t_data_mlx *data, int flag)
 		else
 			data->sector[x] = (data->map->cam.side_dist_x - \
 				data->map->cam.delta_dir_x);
-		////////////////////// draw
+		// draw
 		int lineHeight = (int)(HEIGHT / data->sector[x]);
-		 // up and down cam
+		// up and down cam
 		float	abc = 2;
 		int drawStart = -lineHeight / abc + HEIGHT / abc + data->map->cam.vertilcal_pos;
 		
@@ -142,7 +142,7 @@ void	ray_play(t_data_mlx *data, int flag)
 		double texPos = (drawStart - data->map->cam.vertilcal_pos - HEIGHT / 2 + lineHeight / 2) * step;
 		unsigned int col;
 		// side of wall
-		//draw vertical line
+		// draw vertical line
      	for(int y = drawStart; y < drawEnd; y++)
      	{
 			int texY = (int)texPos & (data->wall[sym].img_h - 1);
