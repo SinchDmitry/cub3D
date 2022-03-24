@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:28:30 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/24 10:48:55 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/24 11:40:57 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ static void	calc_sprite_door_sector(t_data_mlx *data, t_spr_tex *img, int num)
 		img[num].dr_f_x = WIDTH - 1;
 
 	if(num == 1)
-	{
+	{	
 		printf("start : %d = img[num].w_spr(%d)/2+img[num].pos_spr_x(%d)\n", img[num].dr_st_x, -img[num].w_spr, img[num].pos_spr_x);
 		printf("img[num].w_spr(%d) = 700 / img[num].t_y(%f)\n", img[num].w_spr, img[num].t_y);
-		printf("img[num].pos_spr_x(%d = (int)((1000 / 2) * (1 +img[num].t_x(%f) / img[num].t_y(%f))\n", img[num].pos_spr_x, img[num].t_x, img[num].t_y);
+		printf("img[num].pos_spr_x(%d = (int)((1000 / 2) * (1 +img[num].t_x(%f) / img[num].t_y(%f))\n", img[num].pos_spr_x, img[num].t_x, img[num].t_y);//
 	}
 }
 
