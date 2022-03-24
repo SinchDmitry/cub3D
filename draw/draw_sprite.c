@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/23 16:58:50 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/23 19:00:25 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,9 +197,9 @@ void	check_door(t_data_mlx *data, t_spr_tex *img)
 		}
 		img[spr_n].c_num = i[spr_n];
 		if (!img[spr_n].dead)
-			draw_sprite(data, img, spr_n, img[spr_n].c_num);
+			draw_door_sprite(data, img, spr_n, img[spr_n].c_num);
 		else
-			draw_sprite(data, img, spr_n, img[0].num_of_cost - 1);
+			draw_door_sprite(data, img, spr_n, img[0].num_of_cost - 1);
 		if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
 			attack_weapon(data, img, spr_n, FULL_SIZE);
 		spr_n++;

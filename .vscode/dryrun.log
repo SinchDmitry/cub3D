@@ -4,11 +4,12 @@ make -C ./libft/
 make -C mlx/	
  
 gcc -O2 -MD -Imlx -g  -c cub.c -o cub.o
+ 
 gcc -O2 -MD -Imlx -g  -c parser/p_main.c -o parser/p_main.o
 gcc -O2 -MD -Imlx -g  -c parser/p_par.c -o parser/p_par.o
+ 
 gcc -O2 -MD -Imlx -g  -c parser/p_map.c -o parser/p_map.o
 gcc -O2 -MD -Imlx -g  -c draw/draw.c -o draw/draw.o
- 
 gcc -O2 -MD -Imlx -g  -c draw/draw_init_1.c -o draw/draw_init_1.o
 gcc -O2 -MD -Imlx -g  -c draw/draw_init_2.c -o draw/draw_init_2.o
 gcc -O2 -MD -Imlx -g  -c draw/draw_minimap.c -o draw/draw_minimap.o
@@ -17,7 +18,6 @@ gcc -O2 -MD -Imlx -g  -c draw/draw_map.c -o draw/draw_map.o
 gcc -O2 -MD -Imlx -g  -c draw/draw_ray.c -o draw/draw_ray.o
 gcc -O2 -MD -Imlx -g  -c draw/draw_key.c -o draw/draw_key.o
 gcc -O2 -MD -Imlx -g  -c draw/draw_sprite.c -o draw/draw_sprite.o
- 
 gcc -O2 -MD -Imlx -g  -c draw/draw_mouse.c -o draw/draw_mouse.o
 gcc -O2 -MD -Imlx -g  -c draw/draw_door.c -o draw/draw_door.o
 cp ./libft/libft.a .
