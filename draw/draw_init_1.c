@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:26:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/23 16:38:48 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/24 18:20:25 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,30 +93,3 @@ void	init_sprites(t_data_mlx *data)
 	init_sprite(data, &data->am_s->comp_img, xpm_path, "./textures/rick/");
 	init_sprite(data, data->am_s->door_img, xpm_path, "./textures/door/door");
 }
-
-// static void	init_computer(t_data_mlx *data, char *xpm_path)
-// {
-// 	int		i;
-// 	char	*img_num;
-// 	char	*comp_dir;
-
-// 	i = -1;
-// 	while (++i < COMP_COSTUME)
-// 	{
-// 		xpm_path[0] = '\0';
-// 		ft_strlcat(xpm_path, comp_dir, 1023);
-// 		img_num = ft_itoa(i);
-// 		ft_strlcat(xpm_path, img_num, 1023);
-// 		free(img_num);
-// 		ft_strlcat(xpm_path, ".xpm", 1023);
-// 		data->am_s->comp_img.costumes[i].img = \
-// 			mlx_xpm_file_to_image(data->mlx, xpm_path, \
-// 				&data->am_s->comp_img.costumes[i].img_h, \
-// 				&data->am_s->comp_img.costumes[i].img_w);
-// 		data->am_s->comp_img.costumes[i].addr = \
-// 			mlx_get_data_addr(data->am_s->comp_img.costumes[i].img, \
-// 				&data->am_s->comp_img.costumes[i].bits_per_pixel, \
-// 				&data->am_s->comp_img.costumes[i].line_length, \
-// 				&data->am_s->comp_img.costumes[i].endian);
-// 	}
-// }

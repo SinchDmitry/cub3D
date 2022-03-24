@@ -6,34 +6,34 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:26:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/23 16:47:55 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/24 18:19:54 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-static void	init_wall(t_data_mlx *data)
+static void	init_wall(t_data_mlx *data, t_wall_tex *img)
 {
-	data->wall[0].img = mlx_xpm_file_to_image(data->mlx, \
-		"./textures/wall0.xpm", &data->wall[0].img_h, &data->wall[0].img_w);
-	data->wall[0].addr = mlx_get_data_addr(data->wall[0].img, \
-		&data->wall[0].bits_per_pixel, &data->wall[0].line_length, \
-		&data->wall[0].endian);
-	data->wall[1].img = mlx_xpm_file_to_image(data->mlx, \
-		"./textures/wall1.xpm", &data->wall[1].img_h, &data->wall[1].img_w);
-	data->wall[1].addr = mlx_get_data_addr(data->wall[1].img, \
-		&data->wall[1].bits_per_pixel, &data->wall[1].line_length, \
-		&data->wall[1].endian);
-	data->wall[2].img = mlx_xpm_file_to_image(data->mlx, \
-		"./textures/wall2.xpm", &data->wall[2].img_h, &data->wall[2].img_w);
-	data->wall[2].addr = mlx_get_data_addr(data->wall[2].img, \
-		&data->wall[2].bits_per_pixel, &data->wall[2].line_length, \
-		&data->wall[2].endian);
-	data->wall[3].img = mlx_xpm_file_to_image(data->mlx, \
-		"./textures/wall3.xpm", &data->wall[3].img_h, &data->wall[3].img_w);
-	data->wall[3].addr = mlx_get_data_addr(data->wall[3].img, \
-		&data->wall[3].bits_per_pixel, &data->wall[3].line_length, \
-		&data->wall[3].endian);
+	img->wall[0].img = mlx_xpm_file_to_image(data->mlx, \
+		"./textures/wall0.xpm", &img->wall[0].img_h, &img->wall[0].img_w);
+	img->wall[0].addr = mlx_get_data_addr(img->wall[0].img, \
+		&img->wall[0].bits_per_pixel, \
+		&img->wall[0].line_length, &img->wall[0].endian);
+	img->wall[1].img = mlx_xpm_file_to_image(data->mlx, \
+		"./textures/wall1.xpm", &img->wall[1].img_h, &img->wall[1].img_w);
+	img->wall[1].addr = mlx_get_data_addr(img->wall[1].img, \
+		&img->wall[1].bits_per_pixel, \
+		&img->wall[1].line_length, &img->wall[1].endian);
+	img->wall[2].img = mlx_xpm_file_to_image(data->mlx, \
+		"./textures/wall2.xpm", &img->wall[2].img_h, &img->wall[2].img_w);
+	img->wall[2].addr = mlx_get_data_addr(img->wall[2].img, \
+		&img->wall[2].bits_per_pixel, \
+		&img->wall[2].line_length, &img->wall[2].endian);
+	img->wall[3].img = mlx_xpm_file_to_image(data->mlx, \
+		"./textures/wall3.xpm", &img->wall[3].img_h, &img->wall[3].img_w);
+	img->wall[3].addr = mlx_get_data_addr(img->wall[3].img, \
+		&img->wall[3].bits_per_pixel, \
+		&img->wall[3].line_length, &img->wall[3].endian);
 }
 
 static void	init_map_gun(t_data_mlx *data)
@@ -109,9 +109,13 @@ void	init_images(t_data_mlx *data)
 	if (!data->am_s)
 		error_end(3);
 	save_point(data->am_s, P_FRONT);
+	data->wall_img = malloc(sizeof(t_wall_tex));
+	if (!data->wall_img)
+		error_end(3);
+	save_point(data->wall_img, P_FRONT);
 	init_sprite_data(data);
 	init_door_data(data);
 	init_sprites(data);
-	init_wall(data);
+	init_wall(data, data->wall_img);
 	init_map_gun(data);
 }
