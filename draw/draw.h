@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/23 18:31:30 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/24 13:53:24 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,11 +201,16 @@ void			draw_aim(t_data_mlx *data);
 void			put_weapon_image(t_data_mlx *data);
 void			draw_door_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost);
 
-// image initiation
+/* image initiation */
 void			init_images(t_data_mlx *data);
 void			init_sprites(t_data_mlx *data);
 
-// mouse move
+/* mouse move */
 void			mouse_move(t_data_mlx *data);
+
+/* keyboard */
+void			wall_slide(t_data_mlx *data);
+int				check_move(t_data_mlx *data);
+void			map_exit_case(int keycode, t_data_mlx *data);
 
 #endif

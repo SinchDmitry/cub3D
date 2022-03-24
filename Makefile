@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
+#    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/03/23 18:28:53 by utygett          ###   ########.fr        #
+#    Updated: 2022/03/24 13:54:20 by aarchiba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ SRC		=	cub.c	parser/p_main.c \
 					draw/draw_key.c \
 					draw/draw_sprite.c \
 					draw/draw_mouse.c \
+					draw/draw_mlx.c \
+					draw/draw_slide.c \
 					draw/draw_door.c
 
 FTDIR	= 	./libft/

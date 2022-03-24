@@ -3,77 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   draw_key.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 22:43:17 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/21 22:21:34 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/24 13:49:31 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-void	wall_slide(t_data_mlx *data)
+static void	ws_case(t_data_mlx *data, float move_speed)
 {
-	float player_angle = data->map->play.a;
-
-	if (player_angle >= 0 && player_angle < 1.57f && data->map->play.side_for_move == 1)
-	{
-		data->map->play.y += MOVE_SPEED;
-		if (check_move(data))
-			data->map->play.y -= MOVE_SPEED;
-	}
-	if (player_angle >= 4.71f && player_angle < 6.28f && data->map->play.side_for_move == 1)
-	{
-		data->map->play.y -= MOVE_SPEED;
-		if (check_move(data))
-			data->map->play.y += MOVE_SPEED;
-	}
-	if (player_angle >= 1.57f && player_angle < 3.14f && data->map->play.side_for_move == 0)
-	{
-		data->map->play.y += MOVE_SPEED;
-		if (check_move(data))
-			data->map->play.y -= MOVE_SPEED;
-	}
-	if (player_angle >= 3.14f  && player_angle < 4.71f && data->map->play.side_for_move == 0)
-	{
-		data->map->play.y -= MOVE_SPEED;
-		if (check_move(data))
-			data->map->play.y += MOVE_SPEED;
-	}
-	if (player_angle >= 0 && player_angle < 1.57f && data->map->play.side_for_move == 3)
-	{
-		data->map->play.x += MOVE_SPEED;
-		if (check_move(data))
-			data->map->play.x -= MOVE_SPEED;
-	}
-	if (player_angle >= 1.57f && player_angle < 3.14f && data->map->play.side_for_move == 3)
-	{
-		data->map->play.x -= MOVE_SPEED;
-		if (check_move(data))
-			data->map->play.x += MOVE_SPEED;
-	}
-	if (player_angle >= 4.71f && player_angle < 6.28f && data->map->play.side_for_move == 2)
-	{
-		data->map->play.x += MOVE_SPEED;
-		if (check_move(data))
-			data->map->play.x -= MOVE_SPEED;
-	}
-	if (player_angle >= 3.14f && player_angle < 4.71f && data->map->play.side_for_move == 2)
-	{
-		data->map->play.x -= MOVE_SPEED;
-		if (check_move(data))
-			data->map->play.x += MOVE_SPEED;
-	}	
-}	
-
-
-static void	ws_case(t_data_mlx *data)
-{
-	float move_speed;
-
-	move_speed = MOVE_SPEED;
 	if (data->keycode[SHIFT_KEY] == PRESS)
-		move_speed *= 1.5f; 
+		move_speed *= 1.5f;
 	if (data->keycode[S_KEY] == PRESS)
 	{
 		data->map->play.x -= move_speed * data->map->play.dir_x;
@@ -121,63 +63,33 @@ static void	ad_case(t_data_mlx *data)
 	}
 }
 
-static void	rl_case(t_data_mlx *data)
+static void	rl_case(t_data_mlx *data, t_play *pl)
 {
 	float	dir_x;
 	float	plane_x;
-		
-	dir_x = data->map->play.dir_x;
+
+	dir_x = pl->dir_x;
 	plane_x = data->map->cam.pl_x;
 	if (data->keycode[LEFT_KEY] == PRESS)
 	{
-		data->map->play.dir_x = data->map->play.dir_x * cos(-MOVE_ANGLE) - \
-			data->map->play.dir_y * sin(-MOVE_ANGLE);
-		data->map->play.dir_y = dir_x * sin(-MOVE_ANGLE) + \
-			data->map->play.dir_y * cos(-MOVE_ANGLE);
+		pl->dir_x = pl->dir_x * cos(-MOVE_ANGLE) - pl->dir_y * sin(-MOVE_ANGLE);
+		pl->dir_y = dir_x * sin(-MOVE_ANGLE) + pl->dir_y * cos(-MOVE_ANGLE);
 		data->map->cam.pl_x = data->map->cam.pl_x * cos(-MOVE_ANGLE) - \
 			data->map->cam.pl_y * sin(-MOVE_ANGLE);
 		data->map->cam.pl_y = plane_x * sin(-MOVE_ANGLE) + \
 			data->map->cam.pl_y * cos(-MOVE_ANGLE);
-		data->map->play.a -= MOVE_ANGLE;
+		pl->a -= MOVE_ANGLE;
 	}
 	if (data->keycode[RIGHT_KEY] == PRESS)
 	{
-		data->map->play.dir_x = data->map->play.dir_x * cos(MOVE_ANGLE) - \
-			data->map->play.dir_y * sin(MOVE_ANGLE);
-		data->map->play.dir_y = dir_x * sin(MOVE_ANGLE) + \
-			data->map->play.dir_y * cos(MOVE_ANGLE);
+		pl->dir_x = pl->dir_x * cos(MOVE_ANGLE) - pl->dir_y * sin(MOVE_ANGLE);
+		pl->dir_y = dir_x * sin(MOVE_ANGLE) + pl->dir_y * cos(MOVE_ANGLE);
 		data->map->cam.pl_x = data->map->cam.pl_x * cos(MOVE_ANGLE) - \
 			data->map->cam.pl_y * sin(MOVE_ANGLE);
 		data->map->cam.pl_y = plane_x * sin(MOVE_ANGLE) + \
 			data->map->cam.pl_y * cos(MOVE_ANGLE);
-		data->map->play.a += MOVE_ANGLE;
+		pl->a += MOVE_ANGLE;
 	}
-}
-
-void	map_exit_case(int keycode, t_data_mlx *data)
-{
-	if (keycode == MINIMAP_KEY)
-	{
-		if (data->map->play.f_minimap)
-		{
-			mlx_clear_window(data->mlx, data->mlx_win);
-			data->map->play.f_minimap = 0;
-		}
-		else
-			data->map->play.f_minimap = 1;
-	}
-	if (keycode == MAP_KEY)
-	{
-		if (data->map->play.f_map)
-		{
-			mlx_clear_window(data->mlx, data->mlx_win);
-			data->map->play.f_map = 0;
-		}
-		else
-			data->map->play.f_map = 1;
-	}
-	if (keycode == 53)
-		exit(0);
 }
 
 static void	qe_case(t_data_mlx *data)
@@ -198,10 +110,9 @@ int	key_h(t_data_mlx *data)
 		data->map->play.a = 6.28f;
 	else if (data->map->play.a > 6.28f)
 		data->map->play.a = 0;
-	ws_case(data);
+	ws_case(data, MOVE_SPEED);
 	ad_case(data);
-	rl_case(data);
+	rl_case(data, &data->map->play);
 	qe_case(data);
-	// render_next_frame(data);
 	return (0);
 }
