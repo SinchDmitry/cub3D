@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/24 13:53:24 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/24 18:26:56 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@
 # define LASER_WIDTH		3
 # define SPR_NUM			4
 # define DOOR_NUM			4
+# define WALL_NUM			4
 # define SPR_COSTUME		11
 # define DOOR_COSTUME		11
 # define COMP_COSTUME		22
@@ -119,6 +120,21 @@ typedef struct s_spr_tex
 	t_tex		costumes[COMP_COSTUME];
 }	t_spr_tex;
 
+typedef struct s_wall_tex
+{
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	double			wall_x;
+	char			sym;
+	int				tex_x;
+	int				tex_y;
+	double			step;
+	double			tex_pos;
+	unsigned int	col;
+	t_tex			wall[4];
+}	t_wall_tex;
+
 typedef struct s_spr
 {
 	int			num;
@@ -149,11 +165,11 @@ typedef struct s_data_mlx
 	int			prev_mouse_x;
 	int			prev_mouse_y;
 	t_tex		weapon;
-	t_tex		wall[4];
 	t_tex		door;
 	t_images	image;
 	t_info		*map;
 	t_spr		*am_s;
+	t_wall_tex	*wall_img;
 }	t_data_mlx;
 
 typedef struct s_line
@@ -208,9 +224,8 @@ void			init_sprites(t_data_mlx *data);
 /* mouse move */
 void			mouse_move(t_data_mlx *data);
 
-/* keyboard */
-void			wall_slide(t_data_mlx *data);
-int				check_move(t_data_mlx *data);
-void			map_exit_case(int keycode, t_data_mlx *data);
+/* ray calculation */
+void			ray_init(t_data_mlx *data, int x);
+void			ray_draw_lines(t_data_mlx *data, int x);
 
 #endif
