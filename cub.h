@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/25 20:11:31 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/25 21:41:55 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include "libft/libft.h"
-// # include "parser/parser.h"
-// # include "draw/draw.h"
-// # include <mlx.h>
 # include "../mlx/mlx.h"
 # include <unistd.h>
 # include <stdlib.h>
@@ -63,7 +60,7 @@ typedef struct s_cam
 	float	delta_dir_x;
 	float	delta_dir_y;
 	float	correct_dist;
-	int		vertilcal_pos; // up and down cam
+	int		vertilcal_pos;
 }	t_cam;
 
 typedef struct s_images
