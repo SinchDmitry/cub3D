@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/24 18:27:41 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/25 21:47:08 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ static void	ray_length(t_data_mlx *data, int x)
 	while (++i < VIEW_RANGE)
 	{
 		ray_calc(data);
+		if (data->map->mapa[data->map->cam.ray_pos_y] \
+			[data->map->cam.ray_pos_x].door != 0)
+			init_door_pixels(data, x);  // try to draw door
 		if (data->map->mapa[data->map->cam.ray_pos_y] \
 			[data->map->cam.ray_pos_x].sym != '0')
 			break ;

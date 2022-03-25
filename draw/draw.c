@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/24 13:54:53 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/25 21:38:28 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	draw(t_info *map)
 	int			i;
 
 	i = 0;
+	data = (t_data_mlx){};
+	data.door_struct = ft_calloc(WIDTH, sizeof(t_door_st));
 	map->play.f_map = 0;
 	map->play.f_minimap = 0;
 	data.map = map;

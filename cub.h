@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/21 20:51:37 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/25 21:13:58 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 
 # define P_BACK 2
 # define P_FRONT 1
+
 
 typedef struct s_play
 {
@@ -74,6 +75,7 @@ typedef struct s_images
 
 typedef struct s_slot
 {
+	int		door;
 	char	sym;
 }	t_slot;
 

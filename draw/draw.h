@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/24 18:50:15 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/25 21:59:03 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,18 @@
 
 struct					s_images;
 typedef struct s_images	t_images;
+
+typedef struct s_door_struct
+{
+	short int	use;
+	short int	start;
+	short int	end;
+	short int	text_x;
+	short int	text_y;
+	short int	step;
+	double		tex_pos;
+} t_door_st;
+
 
 typedef struct s_tex
 {
@@ -164,8 +176,8 @@ typedef struct s_data_mlx
 	int			mouse_y;
 	int			prev_mouse_x;
 	int			prev_mouse_y;
+	t_door_st	*door_struct;
 	t_tex		weapon;
-	t_tex		door;
 	t_images	image;
 	t_info		*map;
 	t_spr		*am_s;
@@ -221,6 +233,10 @@ void			pixel_put_map_move(int x, int y, t_data_mlx *data, int color);
 void			draw_board(t_data_mlx *data);
 void			wall_slide(t_data_mlx *data);
 
+
+/* draw door*/
+void			init_door_pixels(t_data_mlx *data, int x);
+void			draw_door(t_data_mlx *data);
 
 /* image initiation */
 void			init_images(t_data_mlx *data);

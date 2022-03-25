@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/21 20:52:29 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/25 19:45:22 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ static void	map_create(t_info *map, char **map_str)
 			}
 			else
 				map->mapa[i][j].sym = map_str[i][j];
+			map->mapa[i][j].door = 0; // init zero doors
 		}
 	}
 	map_check(map, i, j);

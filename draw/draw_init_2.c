@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_init_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:26:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/24 18:19:54 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/25 20:22:03 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ static void	init_sprite_data(t_data_mlx *data)
 
 static void	init_door_data(t_data_mlx *data)
 {
+	data->map->mapa[12][5].door = 1;
+	data->map->mapa[12][8].door = 1;
 	data->am_s->door_img[0].x = 8;
 	data->am_s->door_img[0].y = 12.5;
 	data->am_s->door_img[1].x = 6;

@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/23 19:00:25 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/25 21:41:56 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,30 +181,30 @@ void	check_costume(t_data_mlx *data, t_spr_tex *img)
 	}
 }
 
-void	check_door(t_data_mlx *data, t_spr_tex *img)
-{
-	static int	i[DOOR_NUM];
-	int			spr_n;
+// void	check_door(t_data_mlx *data, t_spr_tex *img)
+// {
+// 	static int	i[DOOR_NUM];
+// 	int			spr_n;
 
-	spr_n = 0;
-	while (spr_n < img[0].num_of_spr)
-	{
-		if (img[spr_n].shot && !img[spr_n].dead)
-		{
-			++i[spr_n];
-			if (i[spr_n] == img[0].num_of_cost - 1)
-				img[spr_n].dead = 1;
-		}
-		img[spr_n].c_num = i[spr_n];
-		if (!img[spr_n].dead)
-			draw_door_sprite(data, img, spr_n, img[spr_n].c_num);
-		else
-			draw_door_sprite(data, img, spr_n, img[0].num_of_cost - 1);
-		if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
-			attack_weapon(data, img, spr_n, FULL_SIZE);
-		spr_n++;
-	}
-}
+// 	spr_n = 0;
+// 	while (spr_n < img[0].num_of_spr)
+// 	{
+// 		if (img[spr_n].shot && !img[spr_n].dead)
+// 		{
+// 			++i[spr_n];
+// 			if (i[spr_n] == img[0].num_of_cost - 1)
+// 				img[spr_n].dead = 1;
+// 		}
+// 		img[spr_n].c_num = i[spr_n];
+// 		if (!img[spr_n].dead)
+// 			draw_door_sprite(data, img, spr_n, img[spr_n].c_num);
+// 		else
+// 			draw_door_sprite(data, img, spr_n, img[0].num_of_cost - 1);
+// 		if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
+// 			attack_weapon(data, img, spr_n, FULL_SIZE);
+// 		spr_n++;
+// 	}
+// }
 
 void	check_computer(t_data_mlx *data)
 {
@@ -236,8 +236,9 @@ void	draw_objects(t_data_mlx *data)
 			&data->line_length, &data->endian);
 	draw_invis_background(data, WIDTH, HEIGHT);
 	check_costume(data, data->am_s->spr_img);
-	check_door(data, data->am_s->door_img); // + flag
+	// check_door(data, data->am_s->door_img); // + flag
 	check_computer(data);
+	draw_door(data);
 	// check_door(data);
 	draw_aim(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
