@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:47 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/25 20:24:00 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/25 21:55:38 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # define RGB 		101
 # define TEXTURE 	102
+# define SPRITE 	103
 # define FLOOR 		111
 # define SKY 		112
 # define NORTH 		113

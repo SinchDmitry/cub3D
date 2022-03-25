@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_par.c                                            :+:      :+:    :+:   */
+/*   parser_par.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:45:10 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/25 20:00:34 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/25 21:55:22 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,12 @@ static int	key_compare(t_info *map, char **arg, char *map_str)
 		param_parse(map, arg, TEXTURE, WEST);
 	else if (!ft_strcmp(arg[0], "EA"))
 		param_parse(map, arg, TEXTURE, EAST);
+	else if (!ft_strcmp(arg[0], "AM"))
+		param_parse(map, arg, SPRITE, EAST);
+	else if (!ft_strcmp(arg[0], "CP"))
+		param_parse(map, arg, SPRITE, EAST);
+	else if (!ft_strcmp(arg[0], "D"))
+		param_parse(map, arg, SPRITE, EAST);
 	else
 	{
 		flag = -2;
@@ -125,3 +131,27 @@ int	param_map(t_info *map, char **map_str)
 	}
 	return (i);
 }
+
+/*
+
+data->am_s->door_img[0].x = 8;
+data->am_s->door_img[0].y = 12.5;
+data->am_s->door_img[1].x = 6;
+data->am_s->door_img[1].y = 12.5;
+data->am_s->door_img[2].x = 14.5;
+data->am_s->door_img[2].y = 22;
+data->am_s->door_img[3].x = 24;
+data->am_s->door_img[3].y = 14.5;
+
+data->am_s->spr_img[0].x = 22.5;
+data->am_s->spr_img[0].y = 4.5;
+data->am_s->spr_img[1].x = 38.5;
+data->am_s->spr_img[1].y = 10.5;
+data->am_s->spr_img[2].x = 26.5;
+data->am_s->spr_img[2].y = 15.5;
+data->am_s->spr_img[3].y = 23.5;
+data->am_s->spr_img[3].x = 23.5;
+
+data->am_s->comp_img.x = 11;
+data->am_s->comp_img.y = 11;
+*/
