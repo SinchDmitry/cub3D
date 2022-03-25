@@ -6,15 +6,14 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:45:10 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/11 22:36:48 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/25 20:00:34 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static void	rgb_parse(t_rgb *str, char *arg)
+static void	rgb_parse(t_rgb *str, char *arg, int i)
 {
-	int		i;
 	char	**rgb;
 	char	*rgb_str;
 
@@ -35,8 +34,6 @@ static void	rgb_parse(t_rgb *str, char *arg)
 	i = -1;
 	while (rgb[++i])
 		save_point(rgb[i], P_FRONT);
-	if (i != 3)
-		error_end(2);
 	str->r = ft_atoi(rgb[0]);
 	str->g = ft_atoi(rgb[1]);
 	str->b = ft_atoi(rgb[2]);
@@ -44,15 +41,15 @@ static void	rgb_parse(t_rgb *str, char *arg)
 
 static void	param_parse(t_info *map, char **arg, int mode, int val)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	if (mode == RGB)
 	{
 		if (val == SKY)
-			rgb_parse(map->sky, *arg + 1);
+			rgb_parse(map->sky, *arg + 1, i);
 		else if (val == FLOOR)
-			rgb_parse(map->floor, *arg + 1);
+			rgb_parse(map->floor, *arg + 1, i);
 	}
 	else if (mode == TEXTURE)
 	{

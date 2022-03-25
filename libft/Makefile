@@ -32,7 +32,7 @@ CC = cc
 
 RM = rm -f
 
-FLAGS = -Wall -Wextra -Werror -MMD -g
+FLAGS = -Wall -Wextra -Werror -MMD -g #-fsanitize=address
 
 all: $(NAMES) 
 

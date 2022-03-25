@@ -6,18 +6,19 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:20 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/23 11:35:28 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/25 20:24:38 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+/* save_point(*map, P_BACK); front or back ? */
 static void	init_map_data(t_info **map, int fd)
 {
 	*map = malloc(sizeof(t_info));
 	if (!map)
 		error_end(3);
-	save_point(*map, P_BACK); // front or back ?
+	save_point(*map, P_BACK);
 	**map = (t_info){};
 	(*map)->texture = malloc(sizeof(t_texture));
 	if (!(*map)->texture)
@@ -32,6 +33,43 @@ static void	init_map_data(t_info **map, int fd)
 		error_end(3);
 	save_point((*map)->sky, P_FRONT);
 	(*map)->fd = fd;
+}
+
+void	map_struct(t_info *map, char **map_str)
+{
+	int	i;
+
+	i = -1;
+	map->mapa = malloc(sizeof(t_slot *) * (map->height + 1));
+	if (!map->mapa)
+		error_end(3);
+	save_point(map->mapa, P_FRONT);
+	while (++i < map->height)
+	{
+		map->mapa[i] = malloc(sizeof(t_slot) * (map->width));
+		if (!map->mapa[i])
+			error_end(3);
+		save_point(map->mapa[i], P_FRONT);
+	}
+	map_create(map, map_str);
+}
+
+void	map_info(t_info *map, char **map_str)
+{
+	int		i;
+	int		j;
+
+	while (map_str[map->height])
+	{
+		i = 0;
+		j = -1;
+		while (map_str[map->height][++j])
+			i++;
+		if (i > map->width)
+			map->width = i;
+		map->height++;
+	}
+	map_struct(map, map_str + (param_map(map, map_str)));
 }
 
 t_info	*parser(int argc, char **argv, int fd)

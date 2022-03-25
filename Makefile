@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
+#    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/03/24 18:47:23 by utygett          ###   ########.fr        #
+#    Updated: 2022/03/25 21:22:24 by aarchiba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	cub3d
 
-SRC		=	cub.c	parser/p_main.c \
-					parser/p_par.c	\
-					parser/p_map.c \
+SRC		=	cub.c	parser/parser_main.c \
+					parser/parser_par.c	\
+					parser/parser_map.c \
 					draw/draw.c \
 					draw/draw_init_1.c \
 					draw/draw_init_2.c \

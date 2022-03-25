@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/21 20:51:37 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/25 20:11:31 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,16 @@ typedef struct s_texture
 
 typedef struct s_info
 {
+	int			max_i;
+	int			max_j;
 	int			fd;
 	int			width;
 	int			height;
 	t_rgb		*sky;
 	t_rgb		*floor;
 	t_slot		**mapa;
-	t_play	play;
-	t_cam	cam;
+	t_play		play;
+	t_cam		cam;
 	t_texture	*texture;
 }	t_info;
 
