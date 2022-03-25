@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/25 21:13:58 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/25 22:00:25 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include "libft/libft.h"
-// # include "parser/parser.h"
-// # include "draw/draw.h"
-// # include <mlx.h>
 # include "../mlx/mlx.h"
 # include <unistd.h>
 # include <stdlib.h>
@@ -64,7 +61,7 @@ typedef struct s_cam
 	float	delta_dir_x;
 	float	delta_dir_y;
 	float	correct_dist;
-	int		vertilcal_pos; // up and down cam
+	int		vertilcal_pos;
 }	t_cam;
 
 typedef struct s_images
@@ -96,14 +93,16 @@ typedef struct s_texture
 
 typedef struct s_info
 {
+	int			max_i;
+	int			max_j;
 	int			fd;
 	int			width;
 	int			height;
 	t_rgb		*sky;
 	t_rgb		*floor;
 	t_slot		**mapa;
-	t_play	play;
-	t_cam	cam;
+	t_play		play;
+	t_cam		cam;
 	t_texture	*texture;
 }	t_info;
 

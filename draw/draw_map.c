@@ -6,12 +6,27 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:04:49 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/18 20:00:31 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/25 20:18:25 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
+// int	**init_play_arrow()
+// {
+// 	int	i;
+// 	int	**img;
+
+// 	i = -1;
+// 	img = malloc(sizeof(int *) * 10);
+// 	if (!img)
+// 		error_end(3);
+// 	save_point(img, P_BACK);
+// 	while (++i < 10)
+// 	{
+// 		img[i] = malloc
+// 	}
+// }
 void	draw_play(t_play *play, t_data_mlx *data)
 {
 	float	x;

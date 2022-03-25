@@ -3,18 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
+#    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/03/24 18:47:23 by utygett          ###   ########.fr        #
+#    Updated: 2022/03/25 21:43:02 by aarchiba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	cub3d
+NAME		=		cub3d
 
-SRC		=	cub.c	parser/p_main.c \
-					parser/p_par.c	\
-					parser/p_map.c \
+SRC			=		cub.c \
+					parser/parser_main.c \
+					parser/parser_par.c	\
+					parser/parser_map.c \
 					draw/draw.c \
 					draw/draw_init_1.c \
 					draw/draw_init_2.c \
@@ -33,9 +34,9 @@ SRC		=	cub.c	parser/p_main.c \
 					draw/draw_door.c \
 					draw/draw_utils.c
 
-FTDIR	= 	./libft/
+FTDIR		= 		./libft/
 
-LIBFT	= 	libft.a
+LIBFT		= 		libft.a
 
 MLX_PATH	=		mlx/
 
@@ -44,12 +45,12 @@ MLX			=		$(MLX_PATH)libmlx.a
 
 # LIBMLX
 		
-OBJ_M	=	$(SRC:%.c=%.o)
+OBJ_M		=		$(SRC:%.c=%.o)
 
-DEP		=	$(SRC:%.c=%.d)
+DEP			=		$(SRC:%.c=%.d)
 
-CFLAGS	=	-MD -Imlx -g 
-# -fsanitize=address
+CFLAGS		=	-MD -Imlx -g 
+-fsanitize=address
 #			-Werror -Wall -Wextra
 
 CC		=	gcc -O2
