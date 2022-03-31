@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:21:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/15 15:01:15 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/26 21:32:52 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int			ft_atoi(const char *str);
 void		ft_bzero(void	*s, size_t	n);
 
 void		*ft_calloc(size_t count, size_t size);
+
+void		*ft_calloc_error_end(size_t count, size_t size, int push);
 
 int			space(char sym);
 

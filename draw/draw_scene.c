@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/24 14:23:36 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/31 18:36:56 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ void	draw_fvp(t_data_mlx *data)
 		while (++x < WIDTH)
 		{
 			if (y < HEIGHT / 2 + data->map->cam.vertilcal_pos)
-				my_mlx_pixel_put(data, x, y, SKY_COL);
+				my_mlx_pixel_put(data, x, y, BLUE_COL);
 			else
-				my_mlx_pixel_put(data, x, y, GROUND_COL);
+				my_mlx_pixel_put(data, x, y, FLOORCOL);
 		}
 	}
 	ray_play(data, 1);

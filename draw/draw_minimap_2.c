@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:37:15 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/24 18:48:45 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/31 18:38:10 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ static void	draw_field_move(int x, int y, t_data_mlx *data)
 
 void	draw_map_with_move(t_data_mlx *data)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	float	a;
 
 	i = 0;

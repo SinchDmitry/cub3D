@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 11:50:19 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/24 18:48:08 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/31 18:38:24 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ static void	image_put_map_move(int x, int y, t_data_mlx *data, int num)
 // 	}
 // }
 
-static void mimimap_sym(t_data_mlx *data)
+static void	mimimap_sym(t_data_mlx *data)
 {
 	float	c;
 	float	ray_x;
 	float	ray_y;
-	
+
 	c = 0;
 	while (c < MMTEXSIZE / 4)
 	{
@@ -69,7 +69,7 @@ static void mimimap_sym(t_data_mlx *data)
 	image_put_map_move(ray_x, ray_y, data, 0);
 }
 
-void draw_minimap(t_data_mlx *data)
+void	draw_minimap(t_data_mlx *data)
 {
 	data->img = mlx_new_image(data->mlx, MINIMAPWIDTH, MINIMAPHEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \

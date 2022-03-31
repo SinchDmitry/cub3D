@@ -1,89 +1,102 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_main.c                                           :+:      :+:    :+:   */
+/*   parser_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:20 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/25 20:24:38 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/31 13:53:12 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-/* save_point(*map, P_BACK); front or back ? */
-static void	init_map_data(t_info **map, int fd)
+int	param_map(t_data_mlx *data, char **map_str)
 {
-	*map = malloc(sizeof(t_info));
-	if (!map)
-		error_end(3);
-	save_point(*map, P_BACK);
-	**map = (t_info){};
-	(*map)->texture = malloc(sizeof(t_texture));
-	if (!(*map)->texture)
-		error_end(3);
-	save_point((*map)->texture, P_FRONT);
-	(*map)->floor = malloc(sizeof(t_rgb));
-	if (!(*map)->floor)
-		error_end(3);
-	save_point((*map)->floor, P_FRONT);
-	(*map)->sky = malloc(sizeof(t_rgb));
-	if (!(*map)->sky)
-		error_end(3);
-	save_point((*map)->sky, P_FRONT);
-	(*map)->fd = fd;
+	char	**tmp;
+	int		prm;
+	int		i;
+	int		j;
+
+	i = -1;
+	prm = 0;
+	while (map_str[++i])
+	{
+		j = -1;
+		tmp = ft_space_split(map_str[i]);
+		if (!tmp)
+			error_end(3);
+		save_point(tmp, P_BACK);
+		while (tmp[++j])
+			save_point(tmp[j], P_FRONT);
+		prm = key_compare(data, tmp, map_str[i]);
+		if (prm == -1)
+			data->map->height--;
+		else if (!prm)
+			error_end(2);
+		else if (prm == -2)
+			break ;
+	}
+	return (i);
 }
 
-void	map_struct(t_info *map, char **map_str)
+/* check width && height && data 
+malloc height + 1, width */
+void	map_struct(t_data_mlx *data, char **map_str)
 {
 	int	i;
 
 	i = -1;
-	map->mapa = malloc(sizeof(t_slot *) * (map->height + 1));
-	if (!map->mapa)
-		error_end(3);
-	save_point(map->mapa, P_FRONT);
-	while (++i < map->height)
-	{
-		map->mapa[i] = malloc(sizeof(t_slot) * (map->width));
-		if (!map->mapa[i])
-			error_end(3);
-		save_point(map->mapa[i], P_FRONT);
-	}
-	map_create(map, map_str);
+	if (data->map->height > HEIGHT || data->map->width > WIDTH)
+		error_end(1);
+	if (data->map->flags.east + data->map->flags.west + data->map->flags.north \
+		+ data->map->flags.south + data->map->flags.floor + \
+		data->map->flags.sky != 0)
+		error_end(1);
+	data->map->mapa = ft_calloc_error_end(sizeof(t_par_slot *), \
+		data->map->height + 1, P_FRONT);
+	while (++i < data->map->height)
+		data->map->mapa[i] = ft_calloc_error_end(sizeof(t_par_slot), \
+			(data->map->width), P_FRONT);
+	map_create(data->map, map_str);
 }
 
-void	map_info(t_info *map, char **map_str)
+void	map_info(t_data_mlx *data, char **map_str)
 {
 	int		i;
 	int		j;
 
-	while (map_str[map->height])
+	while (map_str[data->map->height])
 	{
 		i = 0;
 		j = -1;
-		while (map_str[map->height][++j])
+		while (map_str[data->map->height][++j])
 			i++;
-		if (i > map->width)
-			map->width = i;
-		map->height++;
+		if (i > data->map->width)
+			data->map->width = i;
+		data->map->height++;
 	}
-	map_struct(map, map_str + (param_map(map, map_str)));
+	map_struct(data->map, map_str + (param_map(data->map, map_str)));
 }
 
-t_info	*parser(int argc, char **argv, int fd)
+/* front or back ? 
+save_point(NULL, 4); it was init before */
+t_map_info	*parser(t_data_mlx *data, int argc, char **argv, int fd)
 {
-	t_info	*map;
-	char	**map_str;
+	t_map_info	*map;
+	char		**map_str;
 
-	save_point(NULL, 4);
 	if (argc != 2 || ft_strcmp_rev(argv[1], ".cub") || fd < 2)
 		error_end(1);
-	init_map_data(&map, fd);
+	data->map = ft_calloc_error_end(sizeof(t_map_info), 1, P_BACK);
+	data->map->texture = ft_calloc_error_end(sizeof(t_par_tex), 1, P_FRONT);
+	data->map->fd = fd;
+	data->map->flags = (t_par_f){};
 	map_str = get_line_file(map->fd);
 	if (!map_str)
 		error_end(3);
-	map_info(map, map_str);
+	save_point(map_str, P_FRONT);
+	map_info(data, map_str);
 	return (map);
 }

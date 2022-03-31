@@ -6,7 +6,7 @@
 #    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/03/25 21:43:02 by aarchiba         ###   ########.fr        #
+#    Updated: 2022/03/31 15:48:00 by aarchiba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,7 @@ SRC			=		cub.c \
 					parser/parser_par.c	\
 					parser/parser_map.c \
 					draw/draw.c \
-					draw/draw_init_1.c \
-					draw/draw_init_2.c \
+					draw/draw_init.c \
 					draw/draw_minimap_1.c\
 					draw/draw_minimap_2.c\
 					draw/draw_minimap_3.c\

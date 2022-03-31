@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/24 18:50:15 by utygett          ###   ########.fr       */
+/*   Updated: 2022/03/31 18:44:39 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,18 @@
 # define DRAW_H
 
 # include "../cub.h"
-# define WIDTH 				1000
-# define HEIGHT				700
 # define WHITE_COL			0x00FFFFFF
-# define SKY_COL			0x0087CEEB
-# define GROUND_COL			0x00684132 
 # define RED_COL			0x00FF0000
 # define BLUE_COL			0x000000FF
 # define GREEN_COL 			0x0000FF00
-# define MINIMAPWIDTH		200
-# define MINIMAPHEIGHT		200
-# define STATUS_BAR_HEIGHT	100
 # define INVISIBLE_COL		0xFF000000
 # define PLAYERCOL			0x00FFFFFF
 # define WALLCOL			0x00708090
-# define FLOORCOL			0x00aab8c4
+# define FLOORCOL			0x00AAB8C4
 # define RAYCOL				0x0000000F
 # define MM_BOARD_COL		0x00FFFFF0
+# define MINIMAPWIDTH		200
+# define MINIMAPHEIGHT		200
 # define MM_BOARD_SIZE		5
 # define TEXSIZE			15 // need auto size map after parse file
 # define MMTEXSIZE			20
@@ -65,112 +60,16 @@
 # define MMANG_STEP			0.02f
 # define AIM_SIZE			40
 # define AIM_WIDTH			1
-# define AM_SPRITE_NUM		4
-# define MAX_KEYS_NUM		260
 # define LASER_WIDTH		3
-# define SPR_NUM			4
-# define DOOR_NUM			4
-# define WALL_NUM			4
-# define SPR_COSTUME		11
-# define DOOR_COSTUME		11
-# define COMP_COSTUME		22
-# define FULL_SIZE			1
-# define AMONG_SIZE			0
 
-struct					s_images;
-typedef struct s_images	t_images;
-
-typedef struct s_tex
-{
-	void		*img;
-	char		*addr;
-	int			img_h;
-	int			img_w;
-	int			endian;
-	int			line_length;
-	int			bits_per_pixel;
-}	t_tex;
-
-typedef struct s_spr_tex
-{
-	float		x;
-	float		y;
-	int			d;
-	float		t_x;
-	float		t_y;
-	int			shot;
-	int			size;
-	int			dead;
-	int			tex_x;
-	int			tex_y;
-	float		x_ray;
-	float		y_ray;
-	int			h_spr;
-	int			w_spr;
-	int			c_num;
-	int			dr_f_x;
-	int			dr_f_y;
-	int			dr_st_x;
-	int			dr_st_y;
-	int			fact_f_x;
-	int			fact_st_x;
-	int			pos_spr_x;
-	int			num_of_spr;
-	int			num_of_cost;
-	t_tex		costumes[COMP_COSTUME];
-}	t_spr_tex;
-
-typedef struct s_wall_tex
-{
-	int				line_height;
-	int				draw_start;
-	int				draw_end;
-	double			wall_x;
-	char			sym;
-	int				tex_x;
-	int				tex_y;
-	double			step;
-	double			tex_pos;
-	unsigned int	col;
-	t_tex			wall[4];
-}	t_wall_tex;
-
-typedef struct s_spr
-{
-	int			num;
-	float		inv;
-	float		dist;
-	t_spr_tex	spr_img[SPR_NUM];
-	t_spr_tex	door_img[DOOR_NUM];
-	t_spr_tex	comp_img;
-}	t_spr;
-
-typedef struct s_data_mlx
-{
-	void		*mlx;
-	void		*mlx_win;
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-	int			map_zoom;
-	float		ray_a;
-	float		sector[WIDTH];
-	int			keycode[MAX_KEYS_NUM];
-	int			mouse_code[10];
-	int			aim_size;
-	int			mouse_x;
-	int			mouse_y;
-	int			prev_mouse_x;
-	int			prev_mouse_y;
-	t_tex		weapon;
-	t_tex		door;
-	t_images	image;
-	t_info		*map;
-	t_spr		*am_s;
-	t_wall_tex	*wall_img;
-}	t_data_mlx;
+// struct							s_images;
+typedef struct s_images			t_images;
+typedef struct s_data_mlx		t_data_mlx;
+typedef struct s_door_struct	t_door_struct;
+typedef struct s_cost_tex		t_cost_tex;
+typedef struct s_data_tex		t_data_tex;
+typedef struct s_wall_tex		t_wall_tex;
+typedef struct s_spr_tex		t_spr_tex;
 
 typedef struct s_line
 {
@@ -196,9 +95,19 @@ typedef struct s_vls
 	float	y2;
 }	t_vls;
 
+typedef struct s_ref
+{
+	char	*among_dir;
+	char	*comp_dir;
+	char	*wall_dir;
+	char	*space_dir;
+	char	*weapon_dir;
+	char	*compas_dir;
+}	t_ref;
+
 void			draw_map_with_move(t_data_mlx *data);
 void			my_mlx_pixel_put(t_data_mlx *data, int x, int y, int color);
-unsigned int	my_mlx_get_pixel(t_tex costume, int x, int y);
+unsigned int	my_mlx_get_pixel(t_cost_tex costume, int x, int y);
 void			draw_fvp(t_data_mlx *data);
 int				key_h(t_data_mlx *data);
 void			draw_map(t_data_mlx *data);
@@ -215,12 +124,14 @@ void			map_exit_case(int keycode, t_data_mlx *data);
 void			draw_objects(t_data_mlx *data);
 void			draw_aim(t_data_mlx *data);
 void			put_weapon_image(t_data_mlx *data);
-void			draw_door_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost);
 void			draw_map_with_move(t_data_mlx *data);
 void			pixel_put_map_move(int x, int y, t_data_mlx *data, int color);
 void			draw_board(t_data_mlx *data);
 void			wall_slide(t_data_mlx *data);
 
+/* draw door*/
+void			init_door_pixels(t_data_mlx *data, int x);
+void			draw_door(t_data_mlx *data);
 
 /* image initiation */
 void			init_images(t_data_mlx *data);

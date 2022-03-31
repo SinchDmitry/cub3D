@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_map.c                                            :+:      :+:    :+:   */
+/*   parser_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/25 20:25:28 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/31 13:52:42 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ map->cam.pl_y = 0;
 map->play.dir_x = 0;
 map->play.dir_y = 0;
 map->play.a = 0; */
-static void	select_dir(t_info *map, char ch)
+static void	select_dir(t_map_info *map, char ch)
 {
 	if (ch == 'N')
 	{
@@ -45,81 +45,99 @@ static void	select_dir(t_info *map, char ch)
 	}
 }
 
-static int	ft_iscompas(t_info *map, char ch, int *first_in)
-{
-	if (ch == 'S' || ch == 'N' || ch == 'W' || ch == 'E')
-	{
-		if (*first_in)
-			error_end(2);
-		select_dir(map, ch);
-		*first_in += 1;
-		return (1);
-	}
-	else
-		return (0);
-}
-
-static void	neighbor(t_info *map, int i, int j)
-{
-	if (i > 0)
-		if (map->mapa[i - 1][j].sym == '0')
-			error_end(2);
-	if (i < map->max_i - 1)
-		if (map->mapa[i + 1][j].sym == '0')
-			error_end(2);
-	if (j > 0)
-		if (map->mapa[i][j - 1].sym == '0')
-			error_end(2);
-	if (j < map->max_j - 1)
-		if (map->mapa[i][j + 1].sym == '0')
-			error_end(2);
-}
-
-static void	map_check(t_info *map)
+static void	map_check(t_map_info *map)
 {
 	int	i;
 	int	j;
 
 	i = -1;
-	while (++i < map->max_i)
+	while (++i < map->height)
 	{
 		j = -1;
-		while (++j < map->max_j)
+		while (++j < map->width)
 		{
 			if (map->mapa[i][j].sym == 'e')
 				neighbor(map, i, j);
-			else if (((!i || i == (map->max_i - 1)) && \
-				map->mapa[i][j].sym == '0') || ((!j || j == (map->max_j - 1)) \
+			else if (((!i || i == (map->width - 1)) && \
+				map->mapa[i][j].sym == '0') || ((!j || j == (map->width - 1)) \
 				&& map->mapa[i][j].sym == '0'))
 				error_end(2);
 		}
 	}
 }
 
-void	map_create(t_info *map, char **map_str)
+static int	slot_check(t_data_mlx *data, char **map_str, int i, int j)
 {
 	int	f;
 
-	map->max_i = -1;
 	f = 0;
-	while (map_str[++map->max_i])
+	if (space(map_str[i][j]))
+		data->map->mapa[i][j].sym = 'e';
+	if (map_str[i][j] == '2' && BONUS_MODE)
 	{
-		map->max_j = -1;
-		while (map_str[map->max_i][++map->max_j])
-		{
-			if (space(map_str[map->max_i][map->max_j]))
-				map->mapa[map->max_i][map->max_j].sym = 'e';
-			else if (ft_iscompas(map, map_str[map->max_i][map->max_j], &f))
-			{
-					map->play.dir = map_str[map->max_i][map->max_j];
-					map->play.x = (float)map->max_j;
-					map->play.y = (float)map->max_i;
-					map->mapa[map->max_i][map->max_j].sym = '0';
-			}
-			else
-				map->mapa[map->max_i][map->max_j].sym = \
-				map_str[map->max_i][map->max_j];
-		}
+		data->map->mapa[i][j].sym = '0';
+		data->map->mapa[i][j].door = 1;
 	}
-	map_check(map);
+	else if (ft_iscompas(data->map, map_str[i][j], &f))
+	{
+		data->map->play.dir = map_str[i][j];
+		data->map->play.x = (float)j;
+		data->map->play.y = (float)i;
+		data->map->mapa[i][j].sym = '0';
+	}
+	else if (map_str[i][j] == '0' || map_str[i][j] == '1')
+		data->map->mapa[i][j].sym = map_str[i][j];
+	else
+		error_end(1);
+	return (f);
 }
+
+/* f - player on map flag */
+void	map_create(t_data_mlx *data, char **map_str)
+{
+	int	i;
+	int	j;
+	int	f;
+
+	i = -1;
+	f = 0;
+	while (map_str[++i])
+	{
+		j = -1;
+		while (map_str[i][++j])
+			f += slot_check(data, map_str, i, j);
+	}
+	if (f != 1)
+		error_end(1);
+	map_check(data->map);
+}
+
+// void	map_create(t_data_mlx *data, char **map_str, int f)
+// {
+// 	int	j;
+
+// 	data->map->max_i = -1;
+// 	data->map->max_j = -1;
+// 	while (map_str[++data->map->max_i])
+// 	{
+// 		j = -1;
+// 		while (map_str[data->map->max_i][++j])
+// 		{
+// 			if (space(map_str[data->map->max_i][j]))
+// 				data->map->mapa[data->map->max_i][j].sym = 'e';
+// 			else if (ft_iscompas(data->map, map_str[data->map->max_i][j], &f))
+// 			{
+// 				data->map->play.dir = map_str[data->map->max_i][j];
+// 				data->map->play.x = (float)j;
+// 				data->map->play.y = (float)data->map->max_i;
+// 				data->map->mapa[data->map->max_i][j].sym = '0';
+// 			}
+// 			else
+// 				data->map->mapa[data->map->max_i][j].sym = 
+// 					map_str[data->map->max_i][j];
+// 		}
+// 		if (j > data->map->max_j)
+// 			data->map->max_j = j;
+// 	}
+// 	map_check(data->map);
+// }

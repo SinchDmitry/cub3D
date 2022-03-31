@@ -6,13 +6,13 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:33:52 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/24 12:36:32 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/31 18:37:33 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-unsigned int	my_mlx_get_pixel(t_tex costume, int x, int y)
+unsigned int	my_mlx_get_pixel(t_cost_tex costume, int x, int y)
 {	
 	return (*(unsigned int *)(costume.addr + \
 		(x * costume.bits_per_pixel / 8 + y * costume.line_length)));

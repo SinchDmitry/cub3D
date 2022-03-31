@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_garbage_collector.c                             :+:      :+:    :+:   */
+/*   ft_garbage_c.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:47:26 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/12 14:48:21 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/03/27 16:43:36 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	save_type(t_malloc_c **head, t_malloc_c *new, int flag)
 	}
 }
 
-t_malloc_c	*save_point(void *mal_p, int flag)
+t_malloc_c	*xsave_point(void *mal_p, int flag)
 {
 	static t_malloc_c	*head;
 	t_malloc_c			*new;
