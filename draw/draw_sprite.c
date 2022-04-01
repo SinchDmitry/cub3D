@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 19:38:38 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/01 20:12:26 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -440,9 +440,8 @@ void	draw_objects(t_data_mlx *data)
 		SPR_COSTUME);
 	// check_door(data, data->am_s->door_img); // + flag
 	// check_computer(data);
-	// draw_door(data);
-	// check_door(data);
-	// draw_aim(data);
+	check_door(data);
+	draw_aim(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	// put_weapon_image(data);
 	mlx_destroy_image(data->mlx, data->img);
