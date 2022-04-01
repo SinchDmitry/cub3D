@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_ray_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:23:06 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 16:48:22 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/01 22:22:17 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ void	ray_draw_lines(t_data_mlx *data, int x)
 	while (++i < data->wall_img->draw_end)
 	{
 		data->wall_img->tex_y = (int)data->wall_img->tex_pos & \
-			(data->am_s->wall_textures[data->wall_img->sym].img_h - 1);
+			(data->am_s->wall_tex[(int)data->wall_img->sym].img_h - 1);
 		data->wall_img->tex_pos += data->wall_img->step;
 		data->wall_img->col = \
-			my_mlx_get_pixel(data->am_s->wall_textures[data->wall_img->sym], \
+			my_mlx_get_pixel(data->am_s->wall_tex[(int)data->wall_img->sym], \
 			data->wall_img->tex_x, data->wall_img->tex_y);
 		my_mlx_pixel_put(data, x, i, data->wall_img->col);
 	}

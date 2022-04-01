@@ -9,6 +9,6 @@ if [[ $2 == 1 ]]
 then
   git push
 else if
-  git pull
+  git pull origin $3
 fi
 

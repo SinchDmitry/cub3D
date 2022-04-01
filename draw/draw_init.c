@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:26:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 19:57:45 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 22:22:17 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	init_sprites(t_data_mlx *data)
 	t.weapon_dir = "./textures/blaster";
 	t.door_dir = "./textures/door/door";
 	t.compas_dir = "./textures/N";
-	init_sprite(data, data->am_s->wall_textures, t.wall_dir, WALL_TEXTURE);
+	init_sprite(data, data->am_s->wall_tex, t.wall_dir, WALL_TEXTURE);
 	init_sprite(data, data->am_s->am_costumes, t.among_dir, SPR_COSTUME);
 	init_sprite(data, data->am_s->comp_costumes, t.comp_dir, COMP_COSTUME);
 	init_sprite(data, data->am_s->space_textures, t.space_dir, SPACE_TEXTURE);

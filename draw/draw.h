@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/01 22:05:57 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 22:33:04 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void			draw_ray_cast(t_data_mlx *data, float x, float h, int w_pix);
 int				step_counter_texture(float step, float value);
 void			draw_line(t_data_mlx *data, t_vls xyz, int color);
 void			draw_minimap(t_data_mlx *data);
-int				ft_mouse(int keycode, t_data_mlx *data);
+int				ft_mouse(int keycode, int x, int y, t_data_mlx *data);
 void			map_exit_case(int keycode, t_data_mlx *data);
 void			draw_objects(t_data_mlx *data);
 void			draw_aim(t_data_mlx *data);
@@ -131,6 +131,7 @@ void			draw_board(t_data_mlx *data);
 void			wall_slide(t_data_mlx *data);
 void			ray_wall_data(t_data_mlx *data, int x);
 void			ray_texture_side(t_data_mlx *data, t_wall_tex *img, int x);
+void			check_door_state(t_data_mlx *data);
 
 /* draw door*/
 void			init_door_pixels(t_data_mlx *data, int x, int door_state);

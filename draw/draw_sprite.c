@@ -6,21 +6,11 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 22:06:06 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 22:24:14 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
-
-/*
-void	laser_width(t_data_mlx *data, t_vls *bullet, int width_step)
-{
-	bullet->x1 = 40 + (WIDTH / 2 + WIDTH / 20) + width_step;
-	bullet->y1 = 40 + (HEIGHT - data->weapon.img_h);
-	bullet->x2 = WIDTH / 2 + width_step;
-	bullet->y2 = HEIGHT / 2;
-}
-*/
 
 void	action_among(t_data_mlx *data, t_spr_tex *img, int flag)
 {
@@ -57,7 +47,6 @@ void	action_among(t_data_mlx *data, t_spr_tex *img, int spr_numm, int flag)
 	int		right_x;
 	int		tmp_x;
 	int		tmp_y;
-
 	tmp_x = img[spr_n].dr_st_x + (img[spr_n].dr_f_x - img[spr_n].dr_st_x) / 3;
 	if (flag == FULL_SIZE)
 		tmp_x = img[spr_n].dr_st_x;
@@ -88,7 +77,6 @@ void	attack_weapon(t_data_mlx *data, t_spr_tex *img, int size)
 	i = LASER_WIDTH;
 	while (i >= 0)
 	{
-		// laser_width(data, &bullet, i--);
 		bullet.x1 = 40 + (WIDTH / 2 + WIDTH / 20) + i;
 		bullet.y1 = 40 + (HEIGHT - data->am_s->weapon_textures->img_h);
 		bullet.x2 = WIDTH / 2 + i;
@@ -97,34 +85,7 @@ void	attack_weapon(t_data_mlx *data, t_spr_tex *img, int size)
 		draw_line(data, bullet, RED_COL);
 	}
 	action_among(data, img, size);
-	// action_among(data, img, spr_n, size);
 }
-
-/*
-static void	init_ray_param(t_data_mlx *data)
-{
-	data->am_s->spr_img[0].x_ray = data->am_s->spr_img[0].x - data->map->play.x;
-	data->am_s->spr_img[0].y_ray = data->am_s->spr_img[0].y - data->map->play.y;
-	data->am_s->spr_img[1].x_ray = data->am_s->spr_img[1].x - data->map->play.x;
-	data->am_s->spr_img[1].y_ray = data->am_s->spr_img[1].y - data->map->play.y;
-	data->am_s->spr_img[2].x_ray = data->am_s->spr_img[2].x - data->map->play.x;
-	data->am_s->spr_img[2].y_ray = data->am_s->spr_img[2].y - data->map->play.y;
-	data->am_s->spr_img[3].x_ray = data->am_s->spr_img[3].x - data->map->play.x;
-	data->am_s->spr_img[3].y_ray = data->am_s->spr_img[3].y - data->map->play.y;
-	data->am_s->comp_img.x_ray = data->am_s->comp_img.x - data->map->play.x;
-	data->am_s->comp_img.y_ray = data->am_s->comp_img.y - data->map->play.y;
-	data->am_s->door_img[0].x_ray = data->am_s->door_img[0].x - data->map->play.x;
-	data->am_s->door_img[0].y_ray = data->am_s->door_img[0].y - data->map->play.y;
-	data->am_s->door_img[1].x_ray = data->am_s->door_img[1].x - data->map->play.x;
-	data->am_s->door_img[1].y_ray = data->am_s->door_img[1].y - data->map->play.y;
-	data->am_s->door_img[2].x_ray = data->am_s->door_img[2].x - data->map->play.x;
-	data->am_s->door_img[2].y_ray = data->am_s->door_img[2].y - data->map->play.y;
-	data->am_s->door_img[3].x_ray = data->am_s->door_img[3].x - data->map->play.x;
-	data->am_s->door_img[3].y_ray = data->am_s->door_img[3].y - data->map->play.y;
-	data->am_s->inv = 1.0 / (data->map->cam.pl_x * data->map->play.dir_y - \
-		data->map->play.dir_x * data->map->cam.pl_y);
-}
-*/
 
 static void	calc_sprite_data(t_data_mlx *data, t_spr_tex *img)
 {
@@ -232,7 +193,6 @@ void	draw_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost)
 	int	i;
 	int	j;
 	int	f;
-
 	data->am_s->inv = 1.0 / (data->map->cam.pl_x * data->map->play.dir_y - \
 		data->map->play.dir_x * data->map->cam.pl_y);
 	init_ray_param(data, img);
@@ -302,7 +262,6 @@ void	check_costume(t_data_mlx *data, t_spr_tex *img, int num_of_cost)
 {
 	static int	i[SPR_NUM];
 	int			spr_n;
-
 	spr_n = 0;
 	while (spr_n < img[0].num_of_spr)
 	{
@@ -329,7 +288,6 @@ void	check_costume(t_data_mlx *data, t_spr_tex *img)
 {
 	static int	i[SPR_NUM];
 	int			spr_n;
-
 	spr_n = 0;
 	while (spr_n < img[0].num_of_spr)
 	{
@@ -404,7 +362,6 @@ void	check_computer(t_data_mlx *data)
 {
 	static int	i;
 	static int	j;
-
 	if (data->am_s->comp_img.shot)
 	{
 		if (!j)

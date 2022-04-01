@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/01 22:06:38 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 22:39:37 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	put_weapon_image(t_data_mlx *data)
 	}
 	a = frame % 25;
 	mlx_put_image_to_window(data->mlx, data->mlx_win, \
-		data->am_s->weapon_textures->img, (WIDTH / 2 + WIDTH / 20) + a, \
-		(HEIGHT - data->am_s->weapon_textures->img_h) + a);
+		data->am_s->weapon_textures->img, (WIDTH / 2 + WIDTH / 20), \
+		(HEIGHT - data->am_s->weapon_textures->img_h + 60));
 }
 
 /* ground and sky */

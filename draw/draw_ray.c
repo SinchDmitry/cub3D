@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/01 22:06:46 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 22:23:09 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,10 @@ void	ray_texture_side(t_data_mlx *data, t_wall_tex *img, int x)
 	}
 	if (x == WIDTH / 2)
 		data->map->play.side_for_move = img->sym;
-	img->tex_x = (int)(img->wall_x * (double)data->am_s->wall_textures[img->sym].img_w);
-	img->tex_x = data->am_s->wall_textures[img->sym].img_w - img->tex_x - 1;
-	img->step = 1.0 * data->am_s->wall_textures[img->sym].img_w / img->line_height;
+	img->tex_x = (int)(img->wall_x * \
+		(double)data->am_s->wall_tex[img->sym].img_w);
+	img->tex_x = data->am_s->wall_tex[img->sym].img_w - img->tex_x - 1;
+	img->step = 1.0 * data->am_s->wall_tex[img->sym].img_w / img->line_height;
 	img->tex_pos = (img->draw_start - data->map->cam.vertilcal_pos - \
 		HEIGHT / 2 + img->line_height / 2) * img->step;
 }
