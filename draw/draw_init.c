@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:26:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/31 19:32:51 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 17:39:35 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,24 @@ static void	init_sprites(t_data_mlx *data)
 	t.among_dir = "./texture/among/0";
 	t.comp_dir = "./texture/rick/";
 	t.weapon_dir = "./textures/blaster";
+	t.door_dir = "./textures/door/door";
 	t.compas_dir = "./textures/N";
+	init_sprite(data, data->am_s->wall_textures, t.wall_dir, WALL_TEXTURE);
+	init_sprite(data, data->am_s->am_costumes, t.among_dir, SPR_COSTUME);
+	init_sprite(data, data->am_s->comp_costumes, t.comp_dir, COMP_COSTUME);
+	init_sprite(data, data->am_s->space_textures, t.space_dir, SPACE_TEXTURE);
+	init_sprite(data, data->am_s->door_textures, t.door_dir, DOOR_TEXTURE);
+	init_sprite(data, data->am_s->weapon_textures, t.weapon_dir, WEAP_TEXTURE);
+	init_sprite(data, data->am_s->compas_textures, t.compas_dir, CMPS_TEXTURE);
 	// init_space(data, xpm_path);
-	// init_sprite(data, &data->am_s->space_textures, t.space_dir, SPACE_TEXTURE);
 	// init_sprite(data, &data->am_s->wall_textures, t.weapon_dir, 1);
 	// init_sprite(data, &data->am_s->wall_textures, t.compas_dir, 1);
-	init_sprite(data, &data->am_s->wall_textures, t.wall_dir, WALL_TEXTURE);
-	init_sprite(data, data->am_s->am_costumes, t.among_dir, SPR_COSTUME);
-	init_sprite(data, &data->am_s->comp_costumes, t.comp_dir, COMP_COSTUME);
 }
 
 void	init_images(t_data_mlx *data)
 {
-	char	xpm_path[1024];
+	// char	xpm_path[1024];
 
-	data->am_s = ft_calloc_error_end(sizeof(t_data_tex), 1, P_FRONT);
 	// if (!data->am_s)
 	// 	error_end(3);
 	// save_point(data->am_s, P_FRONT);

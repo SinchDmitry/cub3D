@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/31 13:52:42 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 17:20:10 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,32 +18,7 @@ map->cam.pl_y = 0;
 map->play.dir_x = 0;
 map->play.dir_y = 0;
 map->play.a = 0; */
-static void	select_dir(t_map_info *map, char ch)
-{
-	if (ch == 'N')
-	{
-		map->cam.pl_x = tan(FOV / 2);
-		map->play.dir_y = tan(-FOV / 2);
-		map->play.a = 4.7124f;
-	}
-	else if (ch == 'S')
-	{
-		map->cam.pl_x = tan(-FOV / 2);
-		map->play.dir_y = tan(FOV / 2);
-		map->play.a = 1.5708f;
-	}
-	else if (ch == 'E')
-	{
-		map->cam.pl_y = tan(FOV / 2);
-		map->play.dir_x = tan(FOV / 2);
-	}
-	else if (ch == 'W')
-	{
-		map->cam.pl_y = tan(-FOV / 2);
-		map->play.dir_x = tan(-FOV / 2);
-		map->play.a = 3.1415f;
-	}
-}
+
 
 static void	map_check(t_map_info *map)
 {

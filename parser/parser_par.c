@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_par.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:45:10 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/27 20:03:02 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 17:04:45 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ static void	param_parse(t_data_mlx *data, char **arg, int mode, int val)
 			i++;
 		if (i != 2)
 			error_end(2);
-		if (!texture_parse(data, arg, val))
-			texture_parse(data, arg, val);
+		if (!texture_parse_ew(data, arg, val))
+			texture_parse_ns(data, arg, val);
 	}
 }
 
@@ -81,6 +81,7 @@ static int	no_key(int flag, char **arg)
 	while (arg[0][++i])
 		if (arg[0][i] != '1')
 			return (0);
+	return (1); // what this need to return?
 }
 
 int	key_compare(t_data_mlx *data, char **arg, char *map_str)

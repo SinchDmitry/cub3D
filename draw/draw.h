@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/31 18:44:39 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 16:38:52 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_ref
 	char	*space_dir;
 	char	*weapon_dir;
 	char	*compas_dir;
+	char	*door_dir;
 }	t_ref;
 
 void			draw_map_with_move(t_data_mlx *data);
@@ -135,7 +136,7 @@ void			draw_door(t_data_mlx *data);
 
 /* image initiation */
 void			init_images(t_data_mlx *data);
-void			init_sprites(t_data_mlx *data);
+// void			init_sprites(t_data_mlx *data);
 
 /* mouse move */
 void			mouse_move(t_data_mlx *data);

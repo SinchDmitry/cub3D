@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 19:24:09 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/31 18:20:28 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 17:22:04 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,33 @@
 int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+static void	select_dir(t_map_info *map, char ch)
+{
+	if (ch == 'N')
+	{
+		map->cam.pl_x = tan(FOV / 2);
+		map->play.dir_y = tan(-FOV / 2);
+		map->play.a = 4.7124f;
+	}
+	else if (ch == 'S')
+	{
+		map->cam.pl_x = tan(-FOV / 2);
+		map->play.dir_y = tan(FOV / 2);
+		map->play.a = 1.5708f;
+	}
+	else if (ch == 'E')
+	{
+		map->cam.pl_y = tan(FOV / 2);
+		map->play.dir_x = tan(FOV / 2);
+	}
+	else if (ch == 'W')
+	{
+		map->cam.pl_y = tan(-FOV / 2);
+		map->play.dir_x = tan(-FOV / 2);
+		map->play.a = 3.1415f;
+	}
 }
 
 int	ft_iscompas(t_map_info *map, char ch, int *first_in)

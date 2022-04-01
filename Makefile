@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
+#    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/03/31 15:48:00 by aarchiba         ###   ########.fr        #
+#    Updated: 2022/04/01 17:22:45 by utygett          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ SRC			=		cub.c \
 					parser/parser_main.c \
 					parser/parser_par.c	\
 					parser/parser_map.c \
+					parser/parser_utils.c \
+					parser/parser_obj.c \
 					draw/draw.c \
 					draw/draw_init.c \
 					draw/draw_minimap_1.c\
@@ -48,7 +50,7 @@ OBJ_M		=		$(SRC:%.c=%.o)
 
 DEP			=		$(SRC:%.c=%.d)
 
-CFLAGS		=	-MD -Imlx -g 
+CFLAGS		=	-MD -Imlx -g -Wall
 -fsanitize=address
 #			-Werror -Wall -Wextra
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_door.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:28:30 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/31 18:39:43 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 17:09:33 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,10 @@ void	draw_door(t_data_mlx *data)
 			while (++data->door_struct[x].start < data->door_struct[x].end)
 			{
 				data->door_struct[x].text_y = (int)data->door_struct[x].tex_pos & \
-					(data->am_s->door_img[0].costumes[0].img_h - 1);
+					(data->am_s->door_textures[0].img_h - 1);
 				data->door_struct[x].tex_pos += data->door_struct[x].step;
 				
-				my_mlx_pixel_put(data, x, data->door_struct[x].start, my_mlx_get_pixel(data->am_s->door_img[0].costumes[0], \
+				my_mlx_pixel_put(data, x, data->door_struct[x].start, my_mlx_get_pixel(data->am_s->door_textures[0], \
 					data->door_struct[x].text_x, data->door_struct[x].text_y));
 			}
 			data->door_struct[x].use = 0;
@@ -134,9 +134,9 @@ static void	ray_door_side(t_data_mlx *data, t_wall_tex *img, int x)
 {
 	if (x == WIDTH / 2)
 		data->map->play.side_for_move = img->sym;
-	img->tex_x = (int)(img->wall_x * (double)img->wall[img->sym].img_w);
-	img->tex_x = img->wall[img->sym].img_w - img->tex_x - 1;
-	img->step = 1.0 * img->wall[img->sym].img_w / img->line_height;
+	img->tex_x = (int)(img->wall_x * (double)data->am_s->door_textures[img->sym].img_w);
+	img->tex_x = data->am_s->door_textures[img->sym].img_w - img->tex_x - 1;
+	img->step = 1.0 * data->am_s->door_textures[img->sym].img_w / img->line_height;
 	img->tex_pos = (img->draw_start - data->map->cam.vertilcal_pos - \
 		HEIGHT / 2 + img->line_height / 2) * img->step;
 }

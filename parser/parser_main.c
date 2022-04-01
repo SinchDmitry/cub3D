@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:20 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/31 13:53:12 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 17:39:57 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	map_struct(t_data_mlx *data, char **map_str)
 	while (++i < data->map->height)
 		data->map->mapa[i] = ft_calloc_error_end(sizeof(t_par_slot), \
 			(data->map->width), P_FRONT);
-	map_create(data->map, map_str);
+	map_create(data, map_str);
 }
 
 void	map_info(t_data_mlx *data, char **map_str)
@@ -77,26 +77,25 @@ void	map_info(t_data_mlx *data, char **map_str)
 			data->map->width = i;
 		data->map->height++;
 	}
-	map_struct(data->map, map_str + (param_map(data->map, map_str)));
+	map_struct(data, map_str + (param_map(data, map_str)));
 }
 
 /* front or back ? 
 save_point(NULL, 4); it was init before */
-t_map_info	*parser(t_data_mlx *data, int argc, char **argv, int fd)
+void	*parser(t_data_mlx *data, int argc, char **argv, int fd)
 {
-	t_map_info	*map;
 	char		**map_str;
 
+	data->am_s = ft_calloc_error_end(sizeof(t_data_tex), 1, P_FRONT);
 	if (argc != 2 || ft_strcmp_rev(argv[1], ".cub") || fd < 2)
 		error_end(1);
 	data->map = ft_calloc_error_end(sizeof(t_map_info), 1, P_BACK);
 	data->map->texture = ft_calloc_error_end(sizeof(t_par_tex), 1, P_FRONT);
 	data->map->fd = fd;
 	data->map->flags = (t_par_f){};
-	map_str = get_line_file(map->fd);
+	map_str = get_line_file(data->map->fd);
 	if (!map_str)
 		error_end(3);
 	save_point(map_str, P_FRONT);
 	map_info(data, map_str);
-	return (map);
 }

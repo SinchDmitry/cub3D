@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 18:13:00 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/27 16:19:28 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 17:31:59 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ int	main(int argc, char **argv)
 	res = NULL;
 	i = -1;
 	fd = open(argv[1], O_RDONLY);
-	data.map = parser(&data, argc, argv, fd);
-	save_point(data.map, P_BACK);
-	draw(data.map);
+	parser(&data, argc, argv, fd);
+	draw(&data);
 	error_end(4);
 	return (0);
 }

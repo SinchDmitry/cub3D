@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error_end.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:45:19 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/11 22:10:03 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 17:35:12 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	error_end(int flag)
 	t_malloc_c	*tmp;
 
 	tmp = save_point(NULL, 0);
-	clear_point(tmp);
+	// clear_point(tmp);
 	if (flag == 1)
 	{
 		printf ("Error: atoi/incorrect argument\n");

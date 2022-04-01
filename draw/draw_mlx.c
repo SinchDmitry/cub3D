@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:33:52 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/31 18:37:33 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 17:08:54 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	render_img(t_data_mlx *data)
 			&data->line_length, &data->endian);
 		draw_map(data);
 		mlx_put_image_to_window(data->mlx, data->mlx_win, \
-			data->image.mm_space[i_space], 0, 0);
+			data->am_s->space_textures[i_space].img, 0, 0);
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, \
 			WIDTH / 2 - data->map->width * TEXSIZE / 2, \
 			HEIGHT / 2 - data->map->height * TEXSIZE / 2);
@@ -54,9 +54,6 @@ static void	render_img(t_data_mlx *data)
 
 int	render_next_frame(t_data_mlx *data)
 {
-	int			img_h;
-	int			img_w;
-
 	if (data->map->play.f_map)
 	{
 		draw_fvp(data);
