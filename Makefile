@@ -6,7 +6,7 @@
 #    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/04/01 22:00:08 by aarchiba         ###   ########.fr        #
+#    Updated: 2022/04/01 22:08:53 by aarchiba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ OBJ_M		=		$(SRC:%.c=%.o)
 
 DEP			=		$(SRC:%.c=%.d)
 
-CFLAGS		=	-MD -Imlx -g -fsanitize=address 
+CFLAGS		=	-MD -Imlx -g 
+# -fsanitize=address 
 # -Werror -Wall -Wextra
 
 CC		=	gcc -O2
