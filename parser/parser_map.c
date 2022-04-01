@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 18:11:42 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 19:05:18 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,6 @@ static int	slot_check(t_data_mlx *data, char **map_str, int i, int j)
 	f = 0;
 	if (space(map_str[i][j]))
 		data->map->mapa[i][j].sym = 'e';
-	if (map_str[i][j] == '2' && BONUS_MODE)
-	{
-		data->map->mapa[i][j].sym = '0';
-		data->map->mapa[i][j].door = 1;
-	}
 	else if (ft_iscompas(data->map, map_str[i][j], &f))
 	{
 		data->map->play.dir = map_str[i][j];
