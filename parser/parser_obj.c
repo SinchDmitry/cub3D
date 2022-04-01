@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 19:38:39 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/31 18:21:54 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 18:29:17 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,16 @@ void	objects_parse(t_data_mlx *data, char **arg, int val)
 	{
 		if (data->map->flags.sky)
 			error_end(1);
-		spr_rgb_parse(data, NULL, *arg + 1, val);
+		spr_rgb_parse(data, NULL, *(arg + 1), val);
 	}
 	else if (val == FLOOR)
 	{
 		if (data->map->flags.floor)
 			error_end(1);
-		spr_rgb_parse(data, NULL, *arg + 1, val);
+		spr_rgb_parse(data, NULL, *(arg + 1), val);
 	}
 	else if (val == AMONG)
-		spr_rgb_parse(data, data->am_s->spr_img, *arg + 1, val);
+		spr_rgb_parse(data, data->am_s->spr_img, *(arg + 1), val);
 	else if (val == COMP)
-		spr_rgb_parse(data, data->am_s->comp_img, *arg + 1, val);
+		spr_rgb_parse(data, data->am_s->comp_img, *(arg + 1), val);
 }

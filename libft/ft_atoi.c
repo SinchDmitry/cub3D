@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:23:14 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 17:41:43 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/01 17:55:54 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	ft_atoi(const char *str)
 	int		a;
 	long	res;
 
-	
 	i = 0;
 	a = -1;
 	res = 0;

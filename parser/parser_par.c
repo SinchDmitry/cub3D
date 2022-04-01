@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_par.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:45:10 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 17:04:45 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/01 18:29:09 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,15 @@ static int	no_key(int flag, char **arg)
 	return (1); // what this need to return?
 }
 
-int	key_compare(t_data_mlx *data, char **arg, char *map_str)
+int	key_compare(t_data_mlx *data, char **arg)
 {
 	int	flag;
 
 	flag = -1;
 	if (!ft_strcmp(arg[0], "C"))
-		param_parse(data, &map_str, RGB, SKY);
+		param_parse(data, arg, RGB, SKY);
 	else if (!ft_strcmp(arg[0], "F"))
-		param_parse(data, &map_str, RGB, FLOOR);
+		param_parse(data, arg, RGB, FLOOR);
 	else if (!ft_strcmp(arg[0], "NO"))
 		param_parse(data, arg, TEXTURE, NORTH);
 	else if (!ft_strcmp(arg[0], "SO"))

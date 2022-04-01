@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:20 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 17:39:57 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/01 18:29:32 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	param_map(t_data_mlx *data, char **map_str)
 		save_point(tmp, P_BACK);
 		while (tmp[++j])
 			save_point(tmp[j], P_FRONT);
-		prm = key_compare(data, tmp, map_str[i]);
+		prm = key_compare(data, tmp);
 		if (prm == -1)
 			data->map->height--;
 		else if (!prm)
