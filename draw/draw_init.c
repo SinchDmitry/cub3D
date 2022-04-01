@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:26:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 17:39:35 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/01 19:27:30 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,12 @@ static void	init_space(t_data_mlx *data, char *xpm_path) // make union with init
 
 static void	init_sprites(t_data_mlx *data)
 {
-	char	xpm_path[1024];
 	t_ref	t;
 
 	t.space_dir = "./textures/space_fly/space2/space_fly";
 	t.wall_dir = "./textures/wall";
-	t.among_dir = "./texture/among/0";
-	t.comp_dir = "./texture/rick/";
+	t.among_dir = "./textures/among/0";
+	t.comp_dir = "./textures/rick/";
 	t.weapon_dir = "./textures/blaster";
 	t.door_dir = "./textures/door/door";
 	t.compas_dir = "./textures/N";

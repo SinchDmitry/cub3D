@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/31 19:01:05 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 19:38:38 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -439,11 +439,11 @@ void	draw_objects(t_data_mlx *data)
 	check_costume(data, data->am_s->spr_img, data->am_s->am_costumes, \
 		SPR_COSTUME);
 	// check_door(data, data->am_s->door_img); // + flag
-	check_computer(data);
-	draw_door(data);
+	// check_computer(data);
+	// draw_door(data);
 	// check_door(data);
-	draw_aim(data);
+	// draw_aim(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
-	put_weapon_image(data);
+	// put_weapon_image(data);
 	mlx_destroy_image(data->mlx, data->img);
 }
