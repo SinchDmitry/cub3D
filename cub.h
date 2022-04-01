@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 21:18:10 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 22:07:04 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ typedef struct s_cam
 
 typedef struct s_par_slot
 {
-	int		door;
+	short int	door_state;
+	short int	door;
 	char	sym;
 }	t_par_slot;
 
@@ -123,8 +124,9 @@ typedef struct s_door_struct
 	short int	end;
 	short int	text_x;
 	short int	text_y;
-	short int	step;
+	double		step;
 	double		tex_pos;
+	short int	door_state;
 }	t_door_st;
 
 typedef struct s_cost_tex
@@ -144,7 +146,7 @@ typedef struct s_wall_tex
 	int				draw_start;
 	int				draw_end;
 	double			wall_x;
-	char			sym;
+	short int		sym;
 	int				tex_x;
 	int				tex_y;
 	double			step;

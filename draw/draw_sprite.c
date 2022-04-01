@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 22:03:58 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 22:06:06 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -432,10 +432,8 @@ void	draw_objects(t_data_mlx *data)
 	draw_invis_background(data, WIDTH, HEIGHT);
 	check_costume(data, data->am_s->spr_img, data->am_s->am_costumes, \
 		SPR_COSTUME);
-	// check_door(data, data->am_s->door_img); // + flag
 	check_computer(data);
-	// draw_door(data);
-	// check_door(data);
+	check_door(data);
 	draw_aim(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	put_weapon_image(data);

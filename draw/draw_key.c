@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_key.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 22:43:17 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/24 13:49:31 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 20:50:28 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,18 +92,6 @@ static void	rl_case(t_data_mlx *data, t_play *pl)
 	}
 }
 
-static void	qe_case(t_data_mlx *data)
-{
-	if (data->keycode[Q_KEY] == PRESS)
-	{
-		data->map->cam.vertilcal_pos += 15;
-	}
-	if (data->keycode[E_KEY] == PRESS)
-	{
-		data->map->cam.vertilcal_pos -= 15;
-	}
-}
-
 int	key_h(t_data_mlx *data)
 {
 	if (data->map->play.a < 0)
@@ -113,6 +101,5 @@ int	key_h(t_data_mlx *data)
 	ws_case(data, MOVE_SPEED);
 	ad_case(data);
 	rl_case(data, &data->map->play);
-	qe_case(data);
 	return (0);
 }

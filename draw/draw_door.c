@@ -6,106 +6,67 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:28:30 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/01 17:09:33 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/01 20:55:11 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-// static void	calc_sprite_door_param(t_data_mlx *data, t_spr_tex *img, int num)
-// {
-// 	img[num].t_x = data->am_s->inv * (data->map->play.dir_y * \
-// 		img[num].x_ray - data->map->play.dir_x * img[num].y_ray);
-// 	img[num].t_y = data->am_s->inv * (-data->map->cam.pl_y * \
-// 		img[num].x_ray + data->map->cam.pl_x * img[num].y_ray);
-// 	img[num].pos_spr_x = (int)((WIDTH / 2) * (1 + \
-// 		img[num].t_x / img[num].t_y));
-// 	// img[num].pos_spr_x = (int)((WIDTH / 2); 
-// 	img[num].h_spr = abs((int)(HEIGHT / img[num].t_y));
-// 	img[num].dr_st_y = -(img[num].h_spr / 2) + HEIGHT / 2;
-// }
+void	check_player_in_door(t_data_mlx *data, int i, int j)
+{
+	if(i == (int)data->map->play.y && j == (int)data->map->play.x && data->map->mapa[i][j].door < 0)
+		data->map->mapa[i][j].door = -2;
+	else if (i + 1 == (int)data->map->play.y && j == (int)data->map->play.x && data->map->mapa[i][j].door < 0)
+		data->map->mapa[i][j].door = -2;
+	else if (i + -1 == (int)data->map->play.y && j == (int)data->map->play.x && data->map->mapa[i][j].door < 0)
+		data->map->mapa[i][j].door = -2;
+	else if (i == (int)data->map->play.y && j + 1 == (int)data->map->play.x && data->map->mapa[i][j].door < 0)
+		data->map->mapa[i][j].door = -2;
+	else if (i == (int)data->map->play.y && j - 1 == (int)data->map->play.x && data->map->mapa[i][j].door < 0)
+		data->map->mapa[i][j].door = -2;
+	else if (data->map->mapa[i][j].door == -2)
+		data->map->mapa[i][j].door = 2;
+}
 
-// static void	calc_sprite_door_sector(t_data_mlx *data, t_spr_tex *img, int num)
-// {
-// 	if (img[num].dr_st_y + data->map->cam.vertilcal_pos < 0)
-// 		img[num].dr_st_y = -data->map->cam.vertilcal_pos;
-// 	img[num].dr_f_y = img[num].h_spr / 2 + HEIGHT / 2;
-// 	if (img[num].dr_f_y > HEIGHT - data->map->cam.vertilcal_pos)
-// 		img[num].dr_f_y = HEIGHT - data->map->cam.vertilcal_pos - 1;
-// 	img[num].w_spr = abs((int)(HEIGHT / img[num].t_y));
-// 	img[num].dr_st_x = -img[num].w_spr / 2 + \
-// 		img[num].pos_spr_x;
-// 	if (img[num].dr_st_x < 0)
-// 		img[num].dr_st_x = 0;
-// 	img[num].dr_f_x = img[num].w_spr / 2 + \
-// 		img[num].pos_spr_x;
-// 	if (img[num].dr_f_x >= WIDTH)
-// 		img[num].dr_f_x = WIDTH - 1;
+void	check_door_state(t_data_mlx *data)
+{
+	int	i;
+	int	j;
 
-// 	if(num == 1)
-// 	{	
-// 		printf("start : %d = img[num].w_spr(%d)/2+img[num].pos_spr_x(%d)\n", img[num].dr_st_x, -img[num].w_spr, img[num].pos_spr_x);
-// 		printf("img[num].w_spr(%d) = 700 / img[num].t_y(%f)\n", img[num].w_spr, img[num].t_y);
-// 		printf("img[num].pos_spr_x(%d = (int)((1000 / 2) * (1 +img[num].t_x(%f) / img[num].t_y(%f))\n", img[num].pos_spr_x, img[num].t_x, img[num].t_y);//
-// 	}
-// }
+	i = -1;
+	while (++i < data->map->height)
+	{
+		j = -1;
+		while (++j < data->map->width)
+		{
+			if (data->map->mapa[i][j].door_state > 0 && data->map->mapa[i][j].door_state < 10 && data->map->mapa[i][j].door == 1)
+				++data->map->mapa[i][j].door_state;
+			if(data->map->mapa[i][j].door_state > 0 && data->map->mapa[i][j].door_state <= 10 && data->map->mapa[i][j].door == 2)
+				--data->map->mapa[i][j].door_state;
+			if (data->map->mapa[i][j].door_state >= 10)
+			{
+				if (data->map->mapa[i][j].door > 0)
+					data->map->mapa[i][j].door = -1;
+				check_player_in_door(data, i, j);
+			}
+			if (data->map->mapa[i][j].door_state == 0 && data->map->mapa[i][j].door == 2)
+				data->map->mapa[i][j].door = 1;
+		}
+	}
+}
 
-
-// static void	init_ray_door_param(t_data_mlx *data)
-// {
-// 	data->am_s->door_img[0].x_ray = data->am_s->door_img[0].x - data->map->play.x;
-// 	data->am_s->door_img[0].y_ray = data->am_s->door_img[0].y - data->map->play.y;
-// 	data->am_s->door_img[1].x_ray = data->am_s->door_img[1].x - data->map->play.x;
-// 	data->am_s->door_img[1].y_ray = data->am_s->door_img[1].y - data->map->play.y;
-// 	data->am_s->door_img[2].x_ray = data->am_s->door_img[2].x - data->map->play.x;
-// 	data->am_s->door_img[2].y_ray = data->am_s->door_img[2].y - data->map->play.y;
-// 	data->am_s->door_img[3].x_ray = data->am_s->door_img[3].x - data->map->play.x;
-// 	data->am_s->door_img[3].y_ray = data->am_s->door_img[3].y - data->map->play.y;
-// 	data->am_s->inv = 1.0 / (data->map->cam.pl_x * data->map->play.dir_y - \
-// 		data->map->play.dir_x * data->map->cam.pl_y);
-// }
-
-// void	draw_door_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	f;
-
-// 	init_ray_door_param(data);
-// 	calc_sprite_door_param(data, img, n);
-// 	calc_sprite_door_sector(data, img, n);
-// 	i = img[n].dr_st_x - 1;
-// 	f = 0;
-// 	// if(n == 1)
-// 	// 	printf(" i : %d dr_f_x : %d num : %d\n", i, img[n].dr_f_x, n);
-// 	img[n].fact_st_x = 0;
-// 	img[n].fact_f_x = 0;
-// 	while (++i < img[n].dr_f_x)
-// 	{
-// 		img[n].tex_x = ((int)(256 * (i - (-img[n].w_spr / 2 + \
-// 		img[n].pos_spr_x)) * img[n].costumes[cost].img_w / img[n].w_spr) / 256);
-// 		if (img[n].t_y > 0 && i > 0 && i < WIDTH && \
-// 			img[n].t_y < data->sector[i])
-// 		{
-// 			if (!f)
-// 			{
-// 				img[n].fact_st_x = i;
-// 				f = 1;
-// 			}
-// 			img[n].fact_f_x = i;
-// 			j = img[n].dr_st_y - 1;
-// 			while (++j < img[n].dr_f_y)
-// 			{
-// 				img[n].d = j * 256 - HEIGHT * 128 + img[n].h_spr * 128;
-// 				img[n].tex_y = (((img[n].d * img[n].costumes[cost].img_h) \
-// 				/ img[n].h_spr) / 256);
-// 				my_mlx_pixel_put(data, i, j + data->map->cam.vertilcal_pos, \
-// 					my_mlx_get_pixel(img[n].costumes[cost], img[n].tex_x, \
-// 						img[n].tex_y));
-// 			}
-// 		}
-// 	}
-// }
+void	check_door(t_data_mlx *data)
+{
+	if(data->map->mapa[(int)data->map->play.y + 1][(int)data->map->play.x].door == 1 && data->keycode[E_KEY] && data->map->mapa[(int)data->map->play.y + 1][(int)data->map->play.x].door_state == 0)
+		data->map->mapa[(int)data->map->play.y + 1][(int)data->map->play.x].door_state = 1;
+	else if(data->map->mapa[(int)data->map->play.y - 1][(int)data->map->play.x].door == 1 && data->keycode[E_KEY] && data->map->mapa[(int)data->map->play.y - 1][(int)data->map->play.x].door_state == 0)
+		data->map->mapa[(int)data->map->play.y - 1][(int)data->map->play.x].door_state = 1; 
+	else if(data->map->mapa[(int)data->map->play.y][(int)data->map->play.x + 1].door == 1 && data->keycode[E_KEY] && data->map->mapa[(int)data->map->play.y][(int)data->map->play.x + 1].door_state == 0)
+		data->map->mapa[(int)data->map->play.y][(int)data->map->play.x + 1].door_state = 1;
+	else if(data->map->mapa[(int)data->map->play.y][(int)data->map->play.x - 1].door == 1 && data->keycode[E_KEY] && data->map->mapa[(int)data->map->play.y][(int)data->map->play.x - 1].door_state == 0)
+		data->map->mapa[(int)data->map->play.y][(int)data->map->play.x - 1].door_state = 1;
+	draw_door(data);
+}
 
 void	draw_door(t_data_mlx *data)
 {
@@ -121,12 +82,11 @@ void	draw_door(t_data_mlx *data)
 				data->door_struct[x].text_y = (int)data->door_struct[x].tex_pos & \
 					(data->am_s->door_textures[0].img_h - 1);
 				data->door_struct[x].tex_pos += data->door_struct[x].step;
-				
-				my_mlx_pixel_put(data, x, data->door_struct[x].start, my_mlx_get_pixel(data->am_s->door_textures[0], \
+				my_mlx_pixel_put(data, x, data->door_struct[x].start, my_mlx_get_pixel(data->am_s->door_textures[data->door_struct[x].door_state], \
 					data->door_struct[x].text_x, data->door_struct[x].text_y));
 			}
-			data->door_struct[x].use = 0;
 		}
+		data->door_struct[x].use = 0;
 	}
 }
 
@@ -141,7 +101,25 @@ static void	ray_door_side(t_data_mlx *data, t_wall_tex *img, int x)
 		HEIGHT / 2 + img->line_height / 2) * img->step;
 }
 
-void init_door_pixels(t_data_mlx *data, int x)
+static void ray_door_draw_lines(t_data_mlx *data, int x)
+{
+	int	i;
+
+	data->door_struct[x].use = 2;
+	i = data->wall_img->draw_start - 1;
+	while (++i < data->wall_img->draw_end)
+	{
+		data->wall_img->tex_y = (int)data->wall_img->tex_pos & \
+			(data->am_s->door_textures[data->wall_img->sym].img_h - 1);
+		data->wall_img->tex_pos += data->wall_img->step;
+		data->wall_img->col = \
+			my_mlx_get_pixel(data->am_s->door_textures[0], \
+			data->wall_img->tex_x, data->wall_img->tex_y);
+		my_mlx_pixel_put(data, x, i, data->wall_img->col);
+	}
+}
+
+void	init_door_pixels(t_data_mlx *data, int x, int door_state)
 {
 	if (data->map->cam.wall_dir)
 		data->sector[x] = (data->map->cam.side_dist_y - \
@@ -150,44 +128,20 @@ void init_door_pixels(t_data_mlx *data, int x)
 		data->sector[x] = (data->map->cam.side_dist_x - \
 			data->map->cam.delta_dir_x);
 	data->wall_img->line_height = (int)(HEIGHT / data->sector[x]);
-
-	
-	data->wall_img->draw_start = -data->wall_img->line_height / 2 + \
-		HEIGHT / 2 + data->map->cam.vertilcal_pos;
-	if (data->wall_img->draw_start < 0)
-		data->wall_img->draw_start = 0;
-	data->wall_img->draw_end = data->wall_img->line_height / 2 + \
-		HEIGHT / 2 + data->map->cam.vertilcal_pos;
-	if (data->wall_img->draw_end >= HEIGHT)
-		data->wall_img->draw_end = HEIGHT - 1;
-	if (!data->map->cam.wall_dir)
-		data->wall_img->wall_x = data->map->play.y + data->sector[x] * \
-			data->map->cam.cam_dir_y;
-	else
-		data->wall_img->wall_x = data->map->play.x + data->sector[x] * \
-			data->map->cam.cam_dir_x;
-	data->wall_img->wall_x = data->wall_img->wall_x - \
-		floor(data->wall_img->wall_x);
+	ray_wall_data(data, x);
 	ray_door_side(data, data->wall_img, x);
-	int	i;
-	i = data->wall_img->draw_start - 1;
-	data->door_struct[x].start = i;
-	data->door_struct[x].use = 1;
-	data->door_struct[x].end = data->wall_img->draw_end;
-	data->door_struct[x].text_x = data->wall_img->tex_x;
-	data->door_struct[x].step = data->wall_img->step;
-	data->door_struct[x].tex_pos = data->wall_img->tex_pos;
-
-	// i = data->wall_img->draw_start - 1;
-	// while (++i < data->wall_img->draw_end)
-	// {
-	// 	data->wall_img->tex_y = (int)data->wall_img->tex_pos & \
-	// 		(data->wall_img->wall[data->wall_img->sym].img_h - 1);
-	// 	data->wall_img->tex_pos += data->wall_img->step;
-	// 	data->wall_img->col = \
-	// 		my_mlx_get_pixel(data->wall_img->wall[data->wall_img->sym], \
-	// 		data->wall_img->tex_x, data->wall_img->tex_y);
-	// 	my_mlx_pixel_put(data, x, i, data->wall_img->col);
-	// }
-	
+	if (data->door_struct[x].use == 1)
+		ray_door_draw_lines(data, x);
+	else if (data->door_struct[x].use == 0)
+	{
+		data->door_struct[x].start = data->wall_img->draw_start - 1;
+		data->door_struct[x].use = 1;
+		data->door_struct[x].end = data->wall_img->draw_end;
+		data->door_struct[x].text_x = data->wall_img->tex_x;
+		data->door_struct[x].text_y = (int)data->wall_img->tex_pos & \
+			(data->am_s->door_textures[data->wall_img->sym].img_h - 1);
+		data->door_struct[x].step = data->wall_img->step;
+		data->door_struct[x].tex_pos = data->wall_img->tex_pos;
+		data->door_struct[x].door_state = door_state;
+	}
 }

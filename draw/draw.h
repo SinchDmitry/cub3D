@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/01 22:00:28 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 22:05:57 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,13 @@ void			draw_map_with_move(t_data_mlx *data);
 void			pixel_put_map_move(int x, int y, t_data_mlx *data, int color);
 void			draw_board(t_data_mlx *data);
 void			wall_slide(t_data_mlx *data);
+void			ray_wall_data(t_data_mlx *data, int x);
+void			ray_texture_side(t_data_mlx *data, t_wall_tex *img, int x);
 
 /* draw door*/
-void			init_door_pixels(t_data_mlx *data, int x);
+void			init_door_pixels(t_data_mlx *data, int x, int door_state);
 void			draw_door(t_data_mlx *data);
+void			check_door(t_data_mlx *data);
 
 /* image initiation */
 void			init_images(t_data_mlx *data);
