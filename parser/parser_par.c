@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:45:10 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 18:41:03 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 19:09:44 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	no_key(int flag, char **arg)
 	while (arg[0][++i])
 		if (arg[0][i] != '1')
 			return (0);
-	return (flag); // what this need to return?
+	return (flag);
 }
 
 int	key_compare(t_data_mlx *data, char **arg)

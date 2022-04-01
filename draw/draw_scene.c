@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/31 18:36:56 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 21:04:14 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	put_weapon_image(t_data_mlx *data)
 			frame = 0;
 	}
 	a = frame % 25;
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->weapon.img, \
-		(WIDTH / 2 + WIDTH / 20) + a, (HEIGHT - data->weapon.img_h) + a);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->am_s->weapon_textures->img, \
+		(WIDTH / 2 + WIDTH / 20) + a, (HEIGHT - data->am_s->weapon_textures->img_h) + a);
 }
 
 /* ground and sky */

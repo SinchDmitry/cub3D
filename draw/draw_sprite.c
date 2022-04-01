@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 20:12:26 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/01 21:11:54 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	attack_weapon(t_data_mlx *data, t_spr_tex *img, int size)
 	{
 		// laser_width(data, &bullet, i--);
 		bullet.x1 = 40 + (WIDTH / 2 + WIDTH / 20) + i;
-		bullet.y1 = 40 + (HEIGHT - data->weapon.img_h);
+		bullet.y1 = 40 + (HEIGHT - data->am_s->weapon_textures->img_h);
 		bullet.x2 = WIDTH / 2 + i;
 		bullet.y2 = HEIGHT / 2;
 		i--;
@@ -98,11 +98,6 @@ void	attack_weapon(t_data_mlx *data, t_spr_tex *img, int size)
 	}
 	action_among(data, img, size);
 	// action_among(data, img, spr_n, size);
-}
-
-static void	init_ray_param(t_data_mlx *data, t_spr_tex *img)
-{
-	
 }
 
 /*
@@ -199,7 +194,6 @@ void	draw_sprite(t_data_mlx *data, t_spr_tex *img, t_cost_tex* costumes)
 	int	j;
 	int	f;
 
-	init_ray_param(data, img);
 	calc_sprite_data(data, img);
 	i = img->dr_st_x - 1;
 	f = 0;
@@ -285,7 +279,7 @@ void	check_costume(t_data_mlx *data, t_spr_tex *img, t_cost_tex* costumes, \
 	data->am_s->inv = 1.0 / (data->map->cam.pl_x * data->map->play.dir_y - \
 		data->map->play.dir_x * data->map->cam.pl_y);
 	while (tmp_img)
-	{
+	{	
 		if (tmp_img->shot && !tmp_img->dead)
 		{
 			++tmp_img->c_i;
@@ -438,11 +432,10 @@ void	draw_objects(t_data_mlx *data)
 	draw_invis_background(data, WIDTH, HEIGHT);
 	check_costume(data, data->am_s->spr_img, data->am_s->am_costumes, \
 		SPR_COSTUME);
-	// check_door(data, data->am_s->door_img); // + flag
-	// check_computer(data);
+	check_computer(data);
 	check_door(data);
 	draw_aim(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
-	// put_weapon_image(data);
+	put_weapon_image(data);
 	mlx_destroy_image(data->mlx, data->img);
 }

@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 19:05:18 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 19:50:18 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,33 +80,3 @@ void	map_create(t_data_mlx *data, char **map_str)
 		error_end(1);
 	map_check(data->map);
 }
-
-// void	map_create(t_data_mlx *data, char **map_str, int f)
-// {
-// 	int	j;
-
-// 	data->map->max_i = -1;
-// 	data->map->max_j = -1;
-// 	while (map_str[++data->map->max_i])
-// 	{
-// 		j = -1;
-// 		while (map_str[data->map->max_i][++j])
-// 		{
-// 			if (space(map_str[data->map->max_i][j]))
-// 				data->map->mapa[data->map->max_i][j].sym = 'e';
-// 			else if (ft_iscompas(data->map, map_str[data->map->max_i][j], &f))
-// 			{
-// 				data->map->play.dir = map_str[data->map->max_i][j];
-// 				data->map->play.x = (float)j;
-// 				data->map->play.y = (float)data->map->max_i;
-// 				data->map->mapa[data->map->max_i][j].sym = '0';
-// 			}
-// 			else
-// 				data->map->mapa[data->map->max_i][j].sym = 
-// 					map_str[data->map->max_i][j];
-// 		}
-// 		if (j > data->map->max_j)
-// 			data->map->max_j = j;
-// 	}
-// 	map_check(data->map);
-// }
