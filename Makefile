@@ -3,36 +3,35 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
+#    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/04/01 17:22:45 by utygett          ###   ########.fr        #
+#    Updated: 2022/04/01 22:00:08 by aarchiba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=		cub3d
 
-SRC			=		cub.c \
-					parser/parser_main.c \
-					parser/parser_par.c	\
-					parser/parser_map.c \
-					parser/parser_utils.c \
-					parser/parser_obj.c \
-					draw/draw.c \
-					draw/draw_init.c \
-					draw/draw_minimap_1.c\
-					draw/draw_minimap_2.c\
-					draw/draw_minimap_3.c\
-					draw/draw_scene.c \
-					draw/draw_map.c \
-					draw/draw_ray_init.c \
-					draw/draw_ray.c \
-					draw/draw_key.c \
-					draw/draw_sprite.c \
-					draw/draw_mouse.c \
-					draw/draw_mlx.c \
-					draw/draw_slide.c \
-					draw/draw_door.c \
+SRC			=		cub.c 					\
+					parser/parser_main.c	\
+					parser/parser_par.c		\
+					parser/parser_map.c		\
+					parser/parser_utils.c	\
+					parser/parser_obj.c		\
+					draw/draw.c				\
+					draw/draw_init.c		\
+					draw/draw_minimap_1.c	\
+					draw/draw_minimap_2.c	\
+					draw/draw_scene.c		\
+					draw/draw_map.c			\
+					draw/draw_key.c			\
+					draw/draw_sprite.c		\
+					draw/draw_mouse.c		\
+					draw/draw_mlx.c			\
+					draw/draw_slide.c		\
+					draw/draw_door.c		\
+					draw/draw_ray.c			\
+					draw/draw_ray_init.c	\
 					draw/draw_utils.c
 
 FTDIR		= 		./libft/
@@ -50,9 +49,8 @@ OBJ_M		=		$(SRC:%.c=%.o)
 
 DEP			=		$(SRC:%.c=%.d)
 
-CFLAGS		=	-MD -Imlx -g -Wall
--fsanitize=address
-#			-Werror -Wall -Wextra
+CFLAGS		=	-MD -Imlx -g -fsanitize=address 
+# -Werror -Wall -Wextra
 
 CC		=	gcc -O2
 

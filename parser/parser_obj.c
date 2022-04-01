@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 19:38:39 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 20:33:03 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 21:46:27 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	parse_res(t_data_mlx *data, t_spr_tex **img, char **res, int val)
 	else if (val == AMONG)
 		add_back_or_new(img, AMONG_SIZE, ft_atoi(res[0]), ft_atoi(res[1]));
 	else if (val == COMP)
+		add_back_or_new(img, FULL_SIZE, ft_atoi(res[0]), ft_atoi(res[1]));
+	else if (val == DOOR)
 		add_back_or_new(img, FULL_SIZE, ft_atoi(res[0]), ft_atoi(res[1]));
 }
 
@@ -76,4 +78,6 @@ void	objects_parse(t_data_mlx *data, char **arg, int val)
 		spr_rgb_parse(data, &data->am_s->spr_img, *(arg + 1), val);
 	else if (val == COMP)
 		spr_rgb_parse(data, &data->am_s->comp_img, *(arg + 1), val);
+	else if (val == DOOR)
+		spr_rgb_parse(data, &data->am_s->door_img, *(arg + 1), val);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 11:50:19 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/01 16:40:54 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/01 21:49:36 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-static void	image_put_map_move(int x, int y, t_data_mlx *data, int num)
+static void	image_put_map_move(int x, int y, t_data_mlx *data)
 {
 	float	x1;
 	float	y1;
@@ -33,24 +33,6 @@ static void	image_put_map_move(int x, int y, t_data_mlx *data, int num)
 			data->am_s->compas_textures->img, x + MOVEX - 4, y + MOVEY - 4);
 }
 
-// void	draw_invis_square(int x, int y, t_data_mlx *data, int color)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	while (x + i < x + MMTEXSIZE)
-// 	{
-// 		j = 0;
-// 		while (y + j < y + MMTEXSIZE)
-// 		{	
-// 			my_mlx_pixel_put(data, y, x, color);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-
 static void	mimimap_sym(t_data_mlx *data)
 {
 	float	c;
@@ -66,7 +48,7 @@ static void	mimimap_sym(t_data_mlx *data)
 		ray_y *= MMTEXSIZE;
 		c = c + 0.1f;
 	}
-	image_put_map_move(ray_x, ray_y, data, 0);
+	image_put_map_move(ray_x, ray_y, data);
 }
 
 void	draw_minimap(t_data_mlx *data)
@@ -78,4 +60,41 @@ void	draw_minimap(t_data_mlx *data)
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	mimimap_sym(data);
 	mlx_destroy_image(data->mlx, data->img);
+}
+
+int	in_circle(float x, float y, int r)
+{
+	float	distance;
+
+	distance = sqrtf(powf(x - MOVEX, 2.0f) + powf(y - MOVEY, 2.0f));
+	if (distance <= r)
+	{
+		if ((r - distance) < 1.0f)
+			return (2);
+		return (1);
+	}
+	return (0);
+}
+
+void	draw_board(t_data_mlx *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < MINIMAPHEIGHT)
+	{
+		j = 0;
+		while (j < MINIMAPWIDTH)
+		{	
+			if (!in_circle(j, i, 100))
+				my_mlx_pixel_put(data, i, j, INVISIBLE_COL);
+			if (in_circle(j, i, 100) == 2)
+				my_mlx_pixel_put(data, i, j, WHITE_COL);
+			if (in_circle(j, i, MMTEXSIZE / 4) == 1)
+				my_mlx_pixel_put(data, i, j, WHITE_COL);
+			j++;
+		}
+		i++;
+	}
 }

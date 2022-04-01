@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:04:49 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/25 20:18:25 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 21:51:52 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void	draw_map(t_data_mlx *data)
 {
 	int		i;
 	int		j;
-	float	a;
 
 	i = 0;
 	draw_invis_background(data, WIDTH, HEIGHT);

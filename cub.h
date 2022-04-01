@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 20:04:07 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 21:18:10 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ typedef struct s_data_tex
 	int			len_comp;
 	t_spr_tex	*spr_img;
 	t_spr_tex	*comp_img;
+	t_spr_tex	*door_img;
 	t_cost_tex	am_costumes[SPR_COSTUME];
 	t_cost_tex	comp_costumes[COMP_COSTUME];
 	t_cost_tex	wall_textures[WALL_TEXTURE];
@@ -218,7 +219,6 @@ typedef struct s_data_mlx
 	int			prev_mouse_x;
 	int			prev_mouse_y;
 	t_door_st	*door_struct;
-	t_cost_tex	weapon;
 	t_map_info	*map;
 	t_data_tex	*am_s;
 	t_wall_tex	*wall_img;

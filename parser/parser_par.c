@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:45:10 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 19:09:44 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 21:45:37 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	param_parse(t_data_mlx *data, char **arg, int mode, int val)
 	int	i;
 
 	i = 0;
-	if (mode == RGB || mode == SPRITE)
+	if (mode == RGB || mode == SPRITE || mode == DOOR)
 		objects_parse(data, arg, val);
 	else if (mode == TEXTURE)
 	{

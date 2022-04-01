@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/31 18:36:56 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 22:00:51 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,6 @@ static void	aim_paint(t_data_mlx *data, int tar, int other, int side)
 
 void	draw_aim(t_data_mlx *data)
 {
-	int	x;
-	int	y;
-	int	aim_size;
-	int	aim_width;
-
 	if (data->keycode[SHIFT_KEY] == PRESS && (data->keycode[W_KEY] == PRESS || \
 		data->keycode[S_KEY] == PRESS))
 		data->aim_size = AIM_SIZE + 10;
@@ -69,14 +64,14 @@ void	put_weapon_image(t_data_mlx *data)
 			frame = 0;
 	}
 	a = frame % 25;
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->weapon.img, \
-		(WIDTH / 2 + WIDTH / 20) + a, (HEIGHT - data->weapon.img_h) + a);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, \
+		data->am_s->weapon_textures->img, (WIDTH / 2 + WIDTH / 20) + a, \
+		(HEIGHT - data->am_s->weapon_textures->img_h) + a);
 }
 
 /* ground and sky */
 void	draw_fvp(t_data_mlx *data)
 {
-	int	i;
 	int	x;
 	int	y;
 
@@ -95,7 +90,7 @@ void	draw_fvp(t_data_mlx *data)
 				my_mlx_pixel_put(data, x, y, FLOORCOL);
 		}
 	}
-	ray_play(data, 1);
+	ray_play(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img);
 }

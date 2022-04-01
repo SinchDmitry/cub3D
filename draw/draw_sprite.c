@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 20:56:15 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 22:03:58 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	attack_weapon(t_data_mlx *data, t_spr_tex *img, int size)
 	{
 		// laser_width(data, &bullet, i--);
 		bullet.x1 = 40 + (WIDTH / 2 + WIDTH / 20) + i;
-		bullet.y1 = 40 + (HEIGHT - data->weapon.img_h);
+		bullet.y1 = 40 + (HEIGHT - data->am_s->weapon_textures->img_h);
 		bullet.x2 = WIDTH / 2 + i;
 		bullet.y2 = HEIGHT / 2;
 		i--;

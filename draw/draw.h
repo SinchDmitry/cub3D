@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/01 20:40:09 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 22:00:28 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,13 @@ int				key_h(t_data_mlx *data);
 void			draw_map(t_data_mlx *data);
 int				check_move(t_data_mlx *data);
 int				render_next_frame(t_data_mlx *data);
-void			ray_play(t_data_mlx *data, int flag);
+void			ray_play(t_data_mlx *data);
 void			draw_invis_background(t_data_mlx *data, int height, int width);
 void			draw_ray_cast(t_data_mlx *data, float x, float h, int w_pix);
 int				step_counter_texture(float step, float value);
 void			draw_line(t_data_mlx *data, t_vls xyz, int color);
 void			draw_minimap(t_data_mlx *data);
-int				ft_mouse(int keycode, int x, int y, t_data_mlx *data);
+int				ft_mouse(int keycode, t_data_mlx *data);
 void			map_exit_case(int keycode, t_data_mlx *data);
 void			draw_objects(t_data_mlx *data);
 void			draw_aim(t_data_mlx *data);

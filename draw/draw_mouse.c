@@ -6,13 +6,13 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 18:39:35 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/23 13:29:50 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 21:57:33 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-int	ft_mouse(int keycode, int x, int y, t_data_mlx *data)
+int	ft_mouse(int keycode, t_data_mlx *data)
 {	
 	if (keycode == MOUSE_LEFT_KEY)
 		data->mouse_code[keycode] = PRESS;

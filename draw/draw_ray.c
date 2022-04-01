@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/01 16:49:17 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/01 21:55:58 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,9 @@ static void	ray_texture_side(t_data_mlx *data, t_wall_tex *img, int x)
 		HEIGHT / 2 + img->line_height / 2) * img->step;
 }
 
-void	ray_play(t_data_mlx *data, int flag)
+void	ray_play(t_data_mlx *data)
 {
-	int				x;
-	int				i;
+	int	x;
 
 	x = -1;
 	while (++x < WIDTH)
