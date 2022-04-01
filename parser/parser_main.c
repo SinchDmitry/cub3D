@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:20 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 18:58:51 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 20:12:55 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ void	parser(t_data_mlx *data, int argc, char **argv, int fd)
 {
 	char		**map_str;
 
-	data->am_s = ft_calloc_error_end(sizeof(t_data_tex), 1, P_FRONT);
 	if (argc != 2 || ft_strcmp_rev(argv[1], ".cub") || fd < 2)
 		error_end(1);
+	data->am_s = ft_calloc_error_end(sizeof(t_data_tex), 1, P_FRONT);
 	data->map = ft_calloc_error_end(sizeof(t_map_info), 1, P_BACK);
 	data->map->texture = ft_calloc_error_end(sizeof(t_par_tex), 1, P_FRONT);
 	data->map->fd = fd;

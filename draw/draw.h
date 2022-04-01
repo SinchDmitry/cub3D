@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/01 16:38:52 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/01 20:40:09 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../cub.h"
 # define WHITE_COL			0x00FFFFFF
 # define RED_COL			0x00FF0000
-# define BLUE_COL			0x000000FF
+# define BLUE_COL			0x0000BFFF
 # define GREEN_COL 			0x0000FF00
 # define INVISIBLE_COL		0xFF000000
 # define PLAYERCOL			0x00FFFFFF

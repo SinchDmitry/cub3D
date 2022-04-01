@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 18:55:08 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/01 20:04:07 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,6 @@ typedef struct s_cam
 	int		vertilcal_pos;
 }	t_cam;
 
-typedef struct s_images
-{
-	void	*mm_space[40];
-	void	*compas;
-}	t_images;
-
 typedef struct s_par_slot
 {
 	int		door;
@@ -156,7 +150,6 @@ typedef struct s_wall_tex
 	double			step;
 	double			tex_pos;
 	unsigned int	col;
-	// t_tex			wall[4];
 }	t_wall_tex;
 
 typedef struct s_spr_tex
@@ -164,8 +157,10 @@ typedef struct s_spr_tex
 	float				x;
 	float				y;
 	int					d;
+	int					c_i;
 	float				t_y;
 	float				t_x;
+	int					size;
 	int					shot;
 	int					dead;
 	int					tex_x;
@@ -182,14 +177,9 @@ typedef struct s_spr_tex
 	int					fact_st_x;
 	int					pos_spr_x;
 	int					num_of_spr;
-	int					size;
-	int					c_i;
 	struct s_spr_tex	*next;
 }	t_spr_tex;
 
-/*	t_spr_tex	spr_img[SPR_NUM];
-	t_spr_tex	door_img[DOOR_NUM];
-	t_spr_tex	comp_img;	*/
 typedef struct s_data_tex
 {
 	int			num;
@@ -197,22 +187,16 @@ typedef struct s_data_tex
 	float		dist;
 	int			len_am;
 	int			len_comp;
+	t_spr_tex	*spr_img;
+	t_spr_tex	*comp_img;
 	t_cost_tex	am_costumes[SPR_COSTUME];
 	t_cost_tex	comp_costumes[COMP_COSTUME];
 	t_cost_tex	wall_textures[WALL_TEXTURE];
-	t_cost_tex	space_textures[SPACE_TEXTURE];
 	t_cost_tex	door_textures[DOOR_TEXTURE];
+	t_cost_tex	space_textures[SPACE_TEXTURE];
 	t_cost_tex	weapon_textures[WEAP_TEXTURE];
 	t_cost_tex	compas_textures[CMPS_TEXTURE];
-
-	t_spr_tex	*spr_img;
-	t_spr_tex	*comp_img;
-	//t_xxx_xxx	*wall_img;
-	//t_xxx_xxx	*space_img;
 }	t_data_tex;
-
-/* t_tex		costumes[COMP_COSTUME] */	
-
 
 typedef struct s_data_mlx
 {
@@ -235,7 +219,6 @@ typedef struct s_data_mlx
 	int			prev_mouse_y;
 	t_door_st	*door_struct;
 	t_cost_tex	weapon;
-	t_images	image;
 	t_map_info	*map;
 	t_data_tex	*am_s;
 	t_wall_tex	*wall_img;

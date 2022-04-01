@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser_obj.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 19:38:39 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 18:31:18 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/01 20:33:03 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static void	parse_res(t_data_mlx *data, t_spr_tex *img, char **res, int val)
+static void	parse_res(t_data_mlx *data, t_spr_tex **img, char **res, int val)
 {
 	if (val == FLOOR)
 	{
@@ -26,13 +26,13 @@ static void	parse_res(t_data_mlx *data, t_spr_tex *img, char **res, int val)
 			ft_atoi(res[0]), ft_atoi(res[1]), ft_atoi(res[2]));
 		data->map->flags.sky = 1;
 	}
-	else if (val == SPRITE)
-		add_back_or_new(&img, AMONG_SIZE, ft_atoi(res[0]), ft_atoi(res[1]));
+	else if (val == AMONG)
+		add_back_or_new(img, AMONG_SIZE, ft_atoi(res[0]), ft_atoi(res[1]));
 	else if (val == COMP)
-		add_back_or_new(&img, FULL_SIZE, ft_atoi(res[0]), ft_atoi(res[1]));
+		add_back_or_new(img, FULL_SIZE, ft_atoi(res[0]), ft_atoi(res[1]));
 }
 
-static void	spr_rgb_parse(t_data_mlx *data, t_spr_tex *img, char *arg, int val)
+static void	spr_rgb_parse(t_data_mlx *data, t_spr_tex **img, char *arg, int val)
 {
 	char	**res;
 	char	*res_str;
@@ -73,7 +73,7 @@ void	objects_parse(t_data_mlx *data, char **arg, int val)
 		spr_rgb_parse(data, NULL, *(arg + 1), val);
 	}
 	else if (val == AMONG)
-		spr_rgb_parse(data, data->am_s->spr_img, *(arg + 1), val);
+		spr_rgb_parse(data, &data->am_s->spr_img, *(arg + 1), val);
 	else if (val == COMP)
-		spr_rgb_parse(data, data->am_s->comp_img, *(arg + 1), val);
+		spr_rgb_parse(data, &data->am_s->comp_img, *(arg + 1), val);
 }
