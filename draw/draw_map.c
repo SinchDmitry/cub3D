@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:04:49 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/01 21:51:52 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 23:12:23 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	draw_play(t_play *play, t_data_mlx *data)
 	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
 	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0}
 	};
+
 	play->x_textu = play->x * TEXSIZE;
 	play->y_textu = play->y * TEXSIZE;
 	x = play->x_textu;

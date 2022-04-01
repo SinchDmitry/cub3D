@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/01 22:23:09 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 23:11:36 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static void	ray_length(t_data_mlx *data, int x)
 		ray_calc(data);
 		if (data->map->mapa[data->map->cam.ray_pos_y] \
 			[data->map->cam.ray_pos_x].door > 0)
-				init_door_pixels(data, x, data->map->mapa[data->map->cam.ray_pos_y][data->map->cam.ray_pos_x].door_state);
+			init_door_pix(data, x, data->map->mapa[data->map->cam.ray_pos_y] \
+				[data->map->cam.ray_pos_x].door_state);
 		if (data->map->mapa[data->map->cam.ray_pos_y] \
 			[data->map->cam.ray_pos_x].sym != '0')
 			break ;
@@ -113,8 +114,8 @@ void	ray_play(t_data_mlx *data)
 	{
 		ray_init(data, x);
 		ray_length(data, x);
-		if(data->door_struct[x].use == 2)
-			continue;
+		if (data->door_str[x].use == 2)
+			continue ;
 		ray_wall_data(data, x);
 		ray_texture_side(data, data->wall_img, x);
 		ray_draw_lines(data, x);

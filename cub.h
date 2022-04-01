@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 22:22:17 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 23:01:54 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct s_par_slot
 {
 	short int	door_state;
 	short int	door;
-	char	sym;
+	char		sym;
 }	t_par_slot;
 
 typedef struct s_par_tex
@@ -117,7 +117,7 @@ typedef struct s_map_info
 	t_par_tex	*texture;
 }	t_map_info;
 
-typedef struct s_door_struct
+typedef struct s_door_str
 {
 	short int	use;
 	short int	start;
@@ -195,7 +195,7 @@ typedef struct s_data_tex
 	t_cost_tex	am_costumes[SPR_COSTUME];
 	t_cost_tex	comp_costumes[COMP_COSTUME];
 	t_cost_tex	wall_tex[WALL_TEXTURE];
-	t_cost_tex	door_textures[DOOR_TEXTURE];
+	t_cost_tex	door_tex[DOOR_TEXTURE];
 	t_cost_tex	space_textures[SPACE_TEXTURE];
 	t_cost_tex	weapon_textures[WEAP_TEXTURE];
 	t_cost_tex	compas_textures[CMPS_TEXTURE];
@@ -220,7 +220,7 @@ typedef struct s_data_mlx
 	int			mouse_y;
 	int			prev_mouse_x;
 	int			prev_mouse_y;
-	t_door_st	*door_struct;
+	t_door_st	*door_str;
 	t_map_info	*map;
 	t_data_tex	*am_s;
 	t_wall_tex	*wall_img;

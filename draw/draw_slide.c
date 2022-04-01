@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_slide.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:42:15 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 20:04:05 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/01 23:10:47 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ int	check_move(t_data_mlx *data)
 	if (data->map->mapa[(int)data->map->play.y] \
 		[(int)data->map->play.x].sym == '1' || \
 		data->map->mapa[(int)data->map->play.y] \
-		[(int)data->map->play.x].sym == 'e' || data->map->mapa[(int)data->map->play.y] \
-		[(int)data->map->play.x].door > 0)
+			[(int)data->map->play.x].sym == 'e' || \
+			data->map->mapa[(int)data->map->play.y] \
+			[(int)data->map->play.x].door > 0)
 		return (1);
 	else
 		return (0);

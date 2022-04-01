@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:26:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 22:22:17 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 23:05:13 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	init_sprite(t_data_mlx *data, t_cost_tex *img, char *dir, \
 	}
 }
 
-static void	init_sprites(t_data_mlx *data)
+void	init_sprites(t_data_mlx *data)
 {
 	t_ref	t;
 
@@ -50,23 +50,7 @@ static void	init_sprites(t_data_mlx *data)
 	init_sprite(data, data->am_s->am_costumes, t.among_dir, SPR_COSTUME);
 	init_sprite(data, data->am_s->comp_costumes, t.comp_dir, COMP_COSTUME);
 	init_sprite(data, data->am_s->space_textures, t.space_dir, SPACE_TEXTURE);
-	init_sprite(data, data->am_s->door_textures, t.door_dir, DOOR_TEXTURE);
+	init_sprite(data, data->am_s->door_tex, t.door_dir, DOOR_TEXTURE);
 	init_sprite(data, data->am_s->weapon_textures, t.weapon_dir, WEAP_TEXTURE);
 	init_sprite(data, data->am_s->compas_textures, t.compas_dir, CMPS_TEXTURE);
-}
-
-void	init_images(t_data_mlx *data)
-{
-	// if (!data->am_s)
-	// 	error_end(3);
-	// save_point(data->am_s, P_FRONT);
-	// *data->am_s = (t_data_tex){};
-	data->wall_img = ft_calloc_error_end(sizeof(t_wall_tex), 1, P_FRONT);
-	// if (!data->wall_img)
-	// 	error_end(3);
-	// *data->wall_img = (t_wall_tex){};
-	// save_point(data->wall_img, P_FRONT);
-	init_sprites(data);
-	// init_wall(data, data->wall_img);
-	// init_map_gun(data);
 }

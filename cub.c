@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 18:13:00 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 20:27:10 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 22:56:29 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int argc, char **argv)
 	i = -1;
 	fd = open(argv[1], O_RDONLY);
 	parser(&data, argc, argv, fd);
-	// printf ("addr : %p\n", data.am_s->spr_img);
 	draw(&data);
 	error_end(4);
 	return (0);

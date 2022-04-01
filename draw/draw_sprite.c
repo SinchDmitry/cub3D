@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 22:24:14 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 23:09:20 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,16 @@ void	attack_weapon(t_data_mlx *data, t_spr_tex *img, int size)
 	action_among(data, img, size);
 }
 
+/*
+static void	init_ray_param(t_data_mlx *data, t_spr_tex *img)
+static void	calc_sprite_param(t_data_mlx *data, t_spr_tex *img)
+static void	calc_sprite_sector(t_data_mlx *data, t_spr_tex *img)
+*/
+
 static void	calc_sprite_data(t_data_mlx *data, t_spr_tex *img)
 {
-	// static void	init_ray_param(t_data_mlx *data, t_spr_tex *img)
 	img->x_ray = img->x - data->map->play.x;
 	img->y_ray = img->y - data->map->play.y;
-	// static void	calc_sprite_param(t_data_mlx *data, t_spr_tex *img)
 	img->t_x = data->am_s->inv * (data->map->play.dir_y * \
 		img->x_ray - data->map->play.dir_x * img->y_ray);
 	img->t_y = data->am_s->inv * (-data->map->cam.pl_y * \
@@ -100,7 +104,6 @@ static void	calc_sprite_data(t_data_mlx *data, t_spr_tex *img)
 	img->pos_spr_x = (int)((WIDTH / 2) * (1 + img->t_x / img->t_y));
 	img->h_spr = abs((int)(HEIGHT / img->t_y));
 	img->dr_st_y = -(img->h_spr / 2) + HEIGHT / 2;
-	// static void	calc_sprite_sector(t_data_mlx *data, t_spr_tex *img)
 	if (img->dr_st_y + data->map->cam.vertilcal_pos < 0)
 		img->dr_st_y = -data->map->cam.vertilcal_pos;
 	img->dr_f_y = img->h_spr / 2 + HEIGHT / 2;
@@ -127,9 +130,7 @@ static void	calc_sprite_param(t_data_mlx *data, t_spr_tex *img, int num)
 	img[num].h_spr = abs((int)(HEIGHT / img[num].t_y));
 	img[num].dr_st_y = -(img[num].h_spr / 2) + HEIGHT / 2;
 }
-*/
 
-/*
 static void	calc_sprite_sector(t_data_mlx *data, t_spr_tex *img, int num)
 {
 	if (img[num].dr_st_y + data->map->cam.vertilcal_pos < 0)
@@ -142,8 +143,7 @@ static void	calc_sprite_sector(t_data_mlx *data, t_spr_tex *img, int num)
 		img[num].pos_spr_x;
 	if (img[num].dr_st_x < 0)
 		img[num].dr_st_x = 0;
-	img[num].dr_f_x = img[num].w_spr / 2 + \
-		img[num].pos_spr_x;
+	img[num].dr_f_x = img[num].w_spr / 2 + img[num].pos_spr_x;
 	if (img[num].dr_f_x >= WIDTH)
 		img[num].dr_f_x = WIDTH - 1;
 }
@@ -246,11 +246,7 @@ void	check_costume(t_data_mlx *data, t_spr_tex *img, t_cost_tex* costumes, \
 			if (tmp_img->c_i == num_of_cost - 1)
 				tmp_img->dead = 1;
 		}
-		// if (!tmp_img->dead)
-		//	draw_sprite(data, tmp_img, costumes, tmp_img->c_i);
 		draw_sprite(data, tmp_img, costumes);
-		// else
-		// 	draw_sprite(data, tmp_img, costumes, num_of_cost - 1);
 		if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
 			attack_weapon(data, tmp_img, AMONG_SIZE);
 		tmp_img = tmp_img->next;
@@ -309,30 +305,32 @@ void	check_costume(t_data_mlx *data, t_spr_tex *img)
 }
 */
 
-// void	check_door(t_data_mlx *data, t_spr_tex *img)
-// {
-// 	static int	i[DOOR_NUM];
-// 	int			spr_n;
+/*
+void	check_door(t_data_mlx *data, t_spr_tex *img)
+{
+	static int	i[DOOR_NUM];
+	int			spr_n;
 
-// 	spr_n = 0;
-// 	while (spr_n < img[0].num_of_spr)
-// 	{
-// 		if (img[spr_n].shot && !img[spr_n].dead)
-// 		{
-// 			++i[spr_n];
-// 			if (i[spr_n] == img[0].num_of_cost - 1)
-// 				img[spr_n].dead = 1;
-// 		}
-// 		img[spr_n].c_num = i[spr_n];
-// 		if (!img[spr_n].dead)
-// 			draw_door_sprite(data, img, spr_n, img[spr_n].c_num);
-// 		else
-// 			draw_door_sprite(data, img, spr_n, img[0].num_of_cost - 1);
-// 		if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
-// 			attack_weapon(data, img, spr_n, FULL_SIZE);
-// 		spr_n++;
-// 	}
-// }
+	spr_n = 0;
+	while (spr_n < img[0].num_of_spr)
+	{
+		if (img[spr_n].shot && !img[spr_n].dead)
+		{
+			++i[spr_n];
+			if (i[spr_n] == img[0].num_of_cost - 1)
+				img[spr_n].dead = 1;
+		}
+		img[spr_n].c_num = i[spr_n];
+		if (!img[spr_n].dead)
+			draw_door_sprite(data, img, spr_n, img[spr_n].c_num);
+		else
+			draw_door_sprite(data, img, spr_n, img[0].num_of_cost - 1);
+		if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
+			attack_weapon(data, img, spr_n, FULL_SIZE);
+		spr_n++;
+	}
+}
+*/
 
 void	check_computer(t_data_mlx *data)
 {

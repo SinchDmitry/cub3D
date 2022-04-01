@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/01 20:50:03 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/01 23:04:37 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	draw(t_data_mlx	*data)
 	int			i;
 
 	i = 0;
-	data->door_struct = ft_calloc(WIDTH, sizeof(t_door_st));
+	data->door_str = ft_calloc(WIDTH, sizeof(t_door_st));
 	data->map->play.f_map = 0;
 	data->map->play.f_minimap = 0;
 	data->map->cam.vertilcal_pos = 0;
@@ -47,7 +47,8 @@ int	draw(t_data_mlx	*data)
 	data->mlx = mlx_init();
 	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Hello world!");
 	mlx_mouse_move(data->mlx_win, WIDTH / 2, HEIGHT / 2);
-	init_images(data);
+	data->wall_img = ft_calloc_error_end(sizeof(t_wall_tex), 1, P_FRONT);
+	init_sprites(data);
 	mlx_hook(data->mlx_win, 2, 0, &key_press, data);
 	mlx_hook(data->mlx_win, 3, 0, &key_unpress, data);
 	mlx_mouse_hook(data->mlx_win, &ft_mouse, data);

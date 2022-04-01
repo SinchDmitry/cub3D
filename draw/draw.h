@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/01 22:33:04 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 23:15:25 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@
 // struct							s_images;
 typedef struct s_images			t_images;
 typedef struct s_data_mlx		t_data_mlx;
-typedef struct s_door_struct	t_door_struct;
+typedef struct s_door_str	t_door_str;
 typedef struct s_cost_tex		t_cost_tex;
 typedef struct s_data_tex		t_data_tex;
 typedef struct s_wall_tex		t_wall_tex;
@@ -131,16 +131,16 @@ void			draw_board(t_data_mlx *data);
 void			wall_slide(t_data_mlx *data);
 void			ray_wall_data(t_data_mlx *data, int x);
 void			ray_texture_side(t_data_mlx *data, t_wall_tex *img, int x);
-void			check_door_state(t_data_mlx *data);
+void			check_door_state(t_data_mlx *data, t_par_slot **mapa);
 
 /* draw door*/
-void			init_door_pixels(t_data_mlx *data, int x, int door_state);
+void			init_door_pix(t_data_mlx *data, int x, int door_state);
 void			draw_door(t_data_mlx *data);
 void			check_door(t_data_mlx *data);
 
 /* image initiation */
-void			init_images(t_data_mlx *data);
-// void			init_sprites(t_data_mlx *data);
+// void			init_images(t_data_mlx *data);
+void			init_sprites(t_data_mlx *data);
 
 /* mouse move */
 void			mouse_move(t_data_mlx *data);

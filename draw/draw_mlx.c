@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:33:52 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 20:54:39 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/01 23:20:01 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	render_img(t_data_mlx *data)
 
 int	render_next_frame(t_data_mlx *data)
 {
-	check_door_state(data);
+	check_door_state(data, data->map->mapa);
 	if (data->map->play.f_map)
 	{
 		draw_fvp(data);
