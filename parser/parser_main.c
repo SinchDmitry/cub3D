@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:20 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 18:43:38 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 18:51:12 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	map_info(t_data_mlx *data, char **map_str)
 
 /* front or back ? 
 save_point(NULL, 4); it was init before */
-void	*parser(t_data_mlx *data, int argc, char **argv, int fd)
+void	parser(t_data_mlx *data, int argc, char **argv, int fd)
 {
 	char		**map_str;
 
