@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:20 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 18:29:32 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/01 18:43:38 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	map_struct(t_data_mlx *data, char **map_str)
 		error_end(1);
 	if (data->map->flags.east + data->map->flags.west + data->map->flags.north \
 		+ data->map->flags.south + data->map->flags.floor + \
-		data->map->flags.sky != 0)
+		data->map->flags.sky != 6)
 		error_end(1);
 	data->map->mapa = ft_calloc_error_end(sizeof(t_par_slot *), \
 		data->map->height + 1, P_FRONT);
