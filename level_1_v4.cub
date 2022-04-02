@@ -4,6 +4,7 @@ SO ./textures/wall1.xpm
 WE ./textures/wall2.xpm
 EA ./textures/wall3.xpm
 
+4
 AM 22,4
 AM 38,10
 AM 26,23
