@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_move_sprite.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 14:09:14 by utygett           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/04/02 17:19:42 by aarchiba         ###   ########.fr       */
+=======
+/*   Updated: 2022/04/02 17:14:55 by utygett          ###   ########.fr       */
+>>>>>>> develop
 /*                                                                            */
 /* ************************************************************************** */
 

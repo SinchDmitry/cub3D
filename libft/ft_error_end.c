@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error_end.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:45:19 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 23:18:44 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 18:22:30 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,3 @@ void	error_end(int flag)
 		exit (1);
 	}
 }
- 
