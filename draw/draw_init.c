@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:26:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 16:33:36 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 17:07:39 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	init_sprite(t_data_mlx *data, t_cost_tex *img, char *dir, \
 static void	init_doors(t_data_mlx *data)
 {
 	t_spr_tex	*tmp_img;
+
 	tmp_img = data->am_s->door_img;
 	while (tmp_img)
 	{	
@@ -59,8 +60,8 @@ void	init_sprites(t_data_mlx *data)
 	t.door_dir = "./textures/door/door";
 	t.compas_dir = "./textures/N";
 	init_sprite(data, data->am_s->wall_tex, t.wall_dir, WALL_TEXTURE);
-	init_sprite(data, data->am_s->am_costumes, t.among_dir, SPR_COSTUME);
-	init_sprite(data, data->am_s->comp_costumes, t.comp_dir, COMP_COSTUME);
+	init_sprite(data, data->am_s->am_cost, t.among_dir, SPR_COSTUME);
+	init_sprite(data, data->am_s->comp_cost, t.comp_dir, COMP_COSTUME);
 	init_sprite(data, data->am_s->space_textures, t.space_dir, SPACE_TEXTURE);
 	init_sprite(data, data->am_s->door_tex, t.door_dir, DOOR_TEXTURE);
 	init_sprite(data, data->am_s->weapon_textures, t.weapon_dir, WEAP_TEXTURE);

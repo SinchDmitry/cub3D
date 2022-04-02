@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 16:33:51 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 16:56:16 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	draw(t_data_mlx	*data)
 	data->map->play.f_minimap = 0;
 	data->map->cam.vertilcal_pos = 0;
 	while (i < MAX_KEYS_NUM)
-		data->keycode[i++] = UNPRESS; //init unpress keys
+		data->keycode[i++] = UNPRESS;
 	data->mouse_x = WIDTH / 2;
 	data->mouse_y = HEIGHT / 2;
 	data->mlx = mlx_init();
