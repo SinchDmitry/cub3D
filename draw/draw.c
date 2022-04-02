@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/01 23:04:37 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 13:07:03 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	draw(t_data_mlx	*data)
 
 	i = 0;
 	data->door_str = ft_calloc(WIDTH, sizeof(t_door_st));
+	data->frame_num = 0;
 	data->map->play.f_map = 0;
 	data->map->play.f_minimap = 0;
 	data->map->cam.vertilcal_pos = 0;

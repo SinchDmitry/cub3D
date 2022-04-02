@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 23:09:20 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 13:46:52 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	attack_weapon(t_data_mlx *data, t_spr_tex *img, int size)
 	i = LASER_WIDTH;
 	while (i >= 0)
 	{
-		bullet.x1 = 40 + (WIDTH / 2 + WIDTH / 20) + i;
+		bullet.x1 = 40 + WIDTH - data->am_s->weapon_textures->img_w - WIDTH / 11 + i;
 		bullet.y1 = 40 + (HEIGHT - data->am_s->weapon_textures->img_h);
 		bullet.x2 = WIDTH / 2 + i;
 		bullet.y2 = HEIGHT / 2;
@@ -154,6 +154,7 @@ void	draw_sprite(t_data_mlx *data, t_spr_tex *img, t_cost_tex* costumes)
 	int	i;
 	int	j;
 	int	f;
+	unsigned int	col;
 
 	calc_sprite_data(data, img);
 	i = img->dr_st_x - 1;
@@ -179,9 +180,11 @@ void	draw_sprite(t_data_mlx *data, t_spr_tex *img, t_cost_tex* costumes)
 				img->d = j * 256 - HEIGHT * 128 + img->h_spr * 128;
 				img->tex_y = (((img->d * costumes[img->c_i].img_h) \
 				/ img->h_spr) / 256);
-				my_mlx_pixel_put(data, i, j + data->map->cam.vertilcal_pos, \
-					my_mlx_get_pixel(costumes[img->c_i], img->tex_x, \
-						img->tex_y));
+				col = my_mlx_get_pixel(costumes[img->c_i], img->tex_x, \
+						img->tex_y);
+				if(col != 0xFF000000)
+					my_mlx_pixel_put(data, i, j + data->map->cam.vertilcal_pos,\
+					col);
 			}
 		}
 	}
@@ -230,6 +233,78 @@ void	draw_sprite(t_data_mlx *data, t_spr_tex *img, int n, int cost)
 }
 */
 
+#define MOVE_STEP_SPRITE 0.05f
+#define WALL_COLLISION 0.2f
+
+
+
+
+int	check_move_sprite(t_data_mlx *data, int x, int y)
+{
+	if (data->map->mapa[y][x].sym == '1' || \
+		data->map->mapa[y][x].sym == 'e' || \
+		data->map->mapa[y][x].door > 0)
+		return (1);
+	else
+		return (0);
+}
+
+void move_sprite(t_data_mlx *data, t_spr_tex *tmp_img)
+{
+	if((data->frame_num * 3) % 200 == 0)
+		tmp_img->move_flag = data->frame_num % 4;
+	else if(tmp_img->move_flag == 0)
+	{
+		tmp_img->x += MOVE_STEP_SPRITE;
+		if(check_move_sprite(data, tmp_img->x + WALL_COLLISION, tmp_img->y))
+		{
+			tmp_img->x -= MOVE_STEP_SPRITE;
+			tmp_img->move_flag = data->frame_num % 4;
+		}
+	}
+	else if(tmp_img->move_flag == 1)
+	{
+		tmp_img->y -= MOVE_STEP_SPRITE;
+		if(check_move_sprite(data, tmp_img->x, tmp_img->y - WALL_COLLISION))
+		{
+			tmp_img->y += MOVE_STEP_SPRITE;
+			tmp_img->move_flag = data->frame_num % 4;
+		}
+	}
+	else if(tmp_img->move_flag == 2)
+	{
+		tmp_img->x -= MOVE_STEP_SPRITE;
+		if(check_move_sprite(data, tmp_img->x - WALL_COLLISION, tmp_img->y))
+		{
+			tmp_img->x += MOVE_STEP_SPRITE;
+			tmp_img->move_flag = data->frame_num % 4;
+		}
+	}
+	else if(tmp_img->move_flag == 3)
+	{
+		tmp_img->y += MOVE_STEP_SPRITE;
+		if(check_move_sprite(data, tmp_img->x, tmp_img->y + WALL_COLLISION))
+		{
+			tmp_img->y -= MOVE_STEP_SPRITE;
+			tmp_img->move_flag = data->frame_num % 4;
+		}
+	}
+	printf("frame : %zu\n", data->frame_num);
+
+}
+
+void	check_sprite_position(t_data_mlx *data)
+{
+	t_spr_tex	*tmp_img;
+	tmp_img = data->am_s->spr_img;
+	while (tmp_img)
+	{	
+		if(!tmp_img->dead)
+			move_sprite(data, tmp_img);
+		tmp_img = tmp_img->next;
+	}
+}
+
 void	check_costume(t_data_mlx *data, t_spr_tex *img, t_cost_tex* costumes, \
 	int num_of_cost)
 {
@@ -246,6 +321,7 @@ void	check_costume(t_data_mlx *data, t_spr_tex *img, t_cost_tex* costumes, \
 			if (tmp_img->c_i == num_of_cost - 1)
 				tmp_img->dead = 1;
 		}
+		
 		draw_sprite(data, tmp_img, costumes);
 		if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
 			attack_weapon(data, tmp_img, AMONG_SIZE);

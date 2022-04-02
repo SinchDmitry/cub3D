@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:26:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 23:05:13 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 11:53:27 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	init_sprite(t_data_mlx *data, t_cost_tex *img, char *dir, \
 		free(img_num);
 		ft_strlcat(xpm_path, ".xpm", 1023);
 		img[i].img = mlx_xpm_file_to_image(data->mlx, xpm_path, \
-			&img[i].img_h, &img[i].img_w);
+			&img[i].img_w, &img[i].img_h);
 		img[i].addr = mlx_get_data_addr(img[i].img, \
 			&img[i].bits_per_pixel, &img[i].line_length, &img[i].endian);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/01 23:15:25 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 13:35:26 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void			wall_slide(t_data_mlx *data);
 void			ray_wall_data(t_data_mlx *data, int x);
 void			ray_texture_side(t_data_mlx *data, t_wall_tex *img, int x);
 void			check_door_state(t_data_mlx *data, t_par_slot **mapa);
+void			check_sprite_position(t_data_mlx *data); 
 
 /* draw door*/
 void			init_door_pix(t_data_mlx *data, int x, int door_state);

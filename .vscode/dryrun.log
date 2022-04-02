@@ -1,8 +1,33 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/utygett/study/cub3d_dev'
 make -C ./libft/
 make -C mlx/	
  
+gcc -O2 -MD -Imlx -g -Wall -c cub.c -o cub.o
+gcc -O2 -MD -Imlx -g -Wall -c parser/parser_main.c -o parser/parser_main.o
+gcc -O2 -MD -Imlx -g -Wall -c parser/parser_par.c -o parser/parser_par.o
+gcc -O2 -MD -Imlx -g -Wall -c parser/parser_map.c -o parser/parser_map.o
+gcc -O2 -MD -Imlx -g -Wall -c parser/parser_utils.c -o parser/parser_utils.o
+gcc -O2 -MD -Imlx -g -Wall -c parser/parser_obj.c -o parser/parser_obj.o
+ 
+gcc -O2 -MD -Imlx -g -Wall -c draw/draw.c -o draw/draw.o
+gcc -O2 -MD -Imlx -g -Wall -c draw/draw_init.c -o draw/draw_init.o
+ 
+gcc -O2 -MD -Imlx -g -Wall -c draw/draw_minimap_1.c -o draw/draw_minimap_1.o
+gcc -O2 -MD -Imlx -g -Wall -c draw/draw_minimap_2.c -o draw/draw_minimap_2.o
+gcc -O2 -MD -Imlx -g -Wall -c draw/draw_minimap_3.c -o draw/draw_minimap_3.o
+gcc -O2 -MD -Imlx -g -Wall -c draw/draw_scene.c -o draw/draw_scene.o
+gcc -O2 -MD -Imlx -g -Wall -c draw/draw_map.c -o draw/draw_map.o
+gcc -O2 -MD -Imlx -g -Wall -c draw/draw_ray_init.c -o draw/draw_ray_init.o
+gcc -O2 -MD -Imlx -g -Wall -c draw/draw_ray.c -o draw/draw_ray.o
+ 
+gcc -O2 -MD -Imlx -g -Wall -c draw/draw_key.c -o draw/draw_key.o
+gcc -O2 -MD -Imlx -g -Wall -c draw/draw_sprite.c -o draw/draw_sprite.o
+gcc -O2 -MD -Imlx -g -Wall -c draw/draw_mouse.c -o draw/draw_mouse.o
+gcc -O2 -MD -Imlx -g -Wall -c draw/draw_mlx.c -o draw/draw_mlx.o
+gcc -O2 -MD -Imlx -g -Wall -c draw/draw_slide.c -o draw/draw_slide.o
+gcc -O2 -MD -Imlx -g -Wall -c draw/draw_door.c -o draw/draw_door.o
+gcc -O2 -MD -Imlx -g -Wall -c draw/draw_utils.c -o draw/draw_utils.o
 cp ./libft/libft.a .
 gcc -O2 -MD -Imlx -g -Wall cub.o parser/parser_main.o parser/parser_par.o parser/parser_map.o parser/parser_utils.o parser/parser_obj.o draw/draw.o draw/draw_init.o draw/draw_minimap_1.o draw/draw_minimap_2.o draw/draw_minimap_3.o draw/draw_scene.o draw/draw_map.o draw/draw_ray_init.o draw/draw_ray.o draw/draw_key.o draw/draw_sprite.o draw/draw_mouse.o draw/draw_mlx.o draw/draw_slide.o draw/draw_door.o draw/draw_utils.o libft.a -Lmlx/ -lmlx -framework \
 				OpenGL -framework AppKit -o cub3d

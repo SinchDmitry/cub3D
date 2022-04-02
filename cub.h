@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 23:01:54 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 13:04:36 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ typedef struct s_wall_tex
 
 typedef struct s_spr_tex
 {
+	short int			move_flag;
 	float				x;
 	float				y;
 	int					d;
@@ -203,6 +204,7 @@ typedef struct s_data_tex
 
 typedef struct s_data_mlx
 {
+	size_t		frame_num;
 	void		*mlx;
 	void		*mlx_win;
 	void		*img;

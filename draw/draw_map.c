@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:04:49 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/01 23:12:23 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 13:48:00 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,19 @@ void	draw_square(int x, int y, t_data_mlx *data, int color)
 
 void	draw_field(int x, int y, t_data_mlx *data)
 {
+	t_spr_tex	*tmp_img;
 	if (data->map->mapa[x][y].sym == '1')
 		draw_square(y * TEXSIZE, x * TEXSIZE, data, WALLCOL);
 	else if (data->map->mapa[x][y].sym == '0')
 		draw_square(y * TEXSIZE, x * TEXSIZE, data, FLOORCOL);
+	if (data->map->mapa[x][y].door == 1)
+		draw_square(y * TEXSIZE, x * TEXSIZE, data, BLUE_COL);
+	tmp_img = data->am_s->spr_img;
+	while (tmp_img)
+	{	
+		draw_square((int)tmp_img->x * TEXSIZE, (int)tmp_img->y * TEXSIZE, data, RED_COL);
+		tmp_img = tmp_img->next;
+	}
 }
 
 void	draw_map(t_data_mlx *data)

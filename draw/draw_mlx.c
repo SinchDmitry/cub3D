@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:33:52 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 23:20:01 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 13:38:10 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ static void	render_img(t_data_mlx *data)
 		mlx_destroy_image(data->mlx, data->img);
 	}
 }
-
 int	render_next_frame(t_data_mlx *data)
 {
+	data->frame_num++;
+	check_sprite_position(data);
 	check_door_state(data, data->map->mapa);
 	if (data->map->play.f_map)
 	{
