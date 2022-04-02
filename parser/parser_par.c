@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:45:10 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 20:48:05 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 21:32:37 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ static int	no_key(int flag, char **arg)
 	flag = -2;
 	while (arg[0][++i])
 	{
-		if (arg[0][i] != '1' && arg[0][i] != '0')
-			error_end(1);
 		if (arg[0][i] != '1')
 			return (0);
 	}

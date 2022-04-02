@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 19:24:09 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 20:29:28 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 21:37:23 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	ft_iscompas(t_map_info *map, char ch, int *first_in)
 		return (0);
 }
 
-/* front or back ? */
 void	add_back_or_new(t_spr_tex **img, int size, int x, int y)
 {
 	t_spr_tex	*last;

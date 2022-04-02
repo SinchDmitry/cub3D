@@ -6,36 +6,38 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 19:38:39 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 20:17:56 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 21:31:31 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static void	parse_res(t_data_mlx *data, t_spr_tex **img, char **res, int val)
+static void	parse_res(t_data_mlx *data, t_spr_tex **img, char **r, int val)
 {
-	if ((val == FLOOR || val == SKY) && (!res[0] || !res[1] || !res[2]))
-		error_end(2);
-	if ((val == AMONG || val == COMP || val == DOOR) && (!res[0] || !res[1]))
-		error_end(2);
+	if (val == FLOOR || val == SKY)
+		if ((!r[0] || !r[1] || !r[2]) || \
+		(ft_atoi(r[0]) > 255 || ft_atoi(r[1]) > 255 || ft_atoi(r[2]) > 255))
+			error_end(2);
+	if (val == AMONG || val == COMP || val == DOOR)
+		if ((!r[0] || !r[1]) || (ft_atoi(r[0]) > data->map->width || \
+		ft_atoi(r[1]) > data->map->height))
+			error_end(2);
 	if (val == FLOOR)
 	{
 		data->map->floor_color = create_trgb(data->map->floor_color, \
-			ft_atoi(res[0]), ft_atoi(res[1]), ft_atoi(res[2]));
+			ft_atoi(r[0]), ft_atoi(r[1]), ft_atoi(r[2]));
 		data->map->flags.floor = 1;
 	}
 	else if (val == SKY)
 	{
 		data->map->sky_color = create_trgb(data->map->sky_color, \
-			ft_atoi(res[0]), ft_atoi(res[1]), ft_atoi(res[2]));
+			ft_atoi(r[0]), ft_atoi(r[1]), ft_atoi(r[2]));
 		data->map->flags.sky = 1;
 	}
 	else if (val == AMONG)
-		add_back_or_new(img, AMONG_SIZE, ft_atoi(res[0]), ft_atoi(res[1]));
-	else if (val == COMP)
-		add_back_or_new(img, FULL_SIZE, ft_atoi(res[0]), ft_atoi(res[1]));
-	else if (val == DOOR)
-		add_back_or_new(img, FULL_SIZE, ft_atoi(res[0]), ft_atoi(res[1]));
+		add_back_or_new(img, AMONG_SIZE, ft_atoi(r[0]), ft_atoi(r[1]));
+	else if (val == COMP || val == DOOR)
+		add_back_or_new(img, FULL_SIZE, ft_atoi(r[0]), ft_atoi(r[1]));
 }
 
 static void	spr_rgb_parse(t_data_mlx *data, t_spr_tex **img, char *arg, int val)
@@ -47,17 +49,14 @@ static void	spr_rgb_parse(t_data_mlx *data, t_spr_tex **img, char *arg, int val)
 	res_str = NULL;
 	i = -1;
 	while (arg[++i])
-	{
-		if ((arg[i] < 48 || arg[i] > 57) && arg[i] != ',')
-			error_end(1);
 		if (!space(arg[i]))
 			res_str = ft_chrjoin(res_str, arg[i]);
-	}
 	save_point(res_str, P_FRONT);
 	i = -1;
-	while (res_str[++i + 1])
-		if (res_str[i] == ',' && res_str[i + 1] == ',')
-			error_end(2);
+	while (res_str[++i])
+		if (((res_str[i] < 48 || res_str[i] > 57) && res_str[i] != ',') \
+		|| (res_str[i + 1] && (res_str[i] == ',' && res_str[i + 1] == ',')))
+			error_end(1);
 	res = ft_split((const char *)arg, ',');
 	if (!res)
 		error_end(3);
@@ -95,7 +94,7 @@ void	objects_parse(t_data_mlx *data, char **arg, int val)
 		error_end(2);
 }
 
-void check_valid_file(char *str)
+void	check_valid_file(char *str)
 {
 	int		id;
 	int		read_byte;

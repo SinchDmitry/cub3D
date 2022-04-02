@@ -6,18 +6,11 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 19:50:18 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 21:38:46 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-/* needed? 
-map->cam.pl_x = 0;
-map->cam.pl_y = 0;
-map->play.dir_x = 0;
-map->play.dir_y = 0;
-map->play.a = 0; */
 
 static void	map_check(t_map_info *map)
 {
@@ -50,8 +43,8 @@ static int	slot_check(t_data_mlx *data, char **map_str, int i, int j)
 	else if (ft_iscompas(data->map, map_str[i][j], &f))
 	{
 		data->map->play.dir = map_str[i][j];
-		data->map->play.x = (float)j;
-		data->map->play.y = (float)i;
+		data->map->play.x = (float)j + 0.5;
+		data->map->play.y = (float)i + 0.5;
 		data->map->mapa[i][j].sym = '0';
 	}
 	else if (map_str[i][j] == '0' || map_str[i][j] == '1')
