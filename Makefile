@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
+#    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/04/01 22:34:21 by aarchiba         ###   ########.fr        #
+#    Updated: 2022/04/02 14:10:19 by utygett          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRC			=		cub.c 					\
 					draw/draw_door.c		\
 					draw/draw_ray.c			\
 					draw/draw_ray_init.c	\
-					draw/draw_utils.c
+					draw/draw_utils.c		\
+					draw/draw_move_sprite.c \
 
 FTDIR		= 		./libft/
 

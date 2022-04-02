@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 13:07:03 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 16:33:51 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,6 @@ int	draw(t_data_mlx	*data)
 	data->map->play.f_map = 0;
 	data->map->play.f_minimap = 0;
 	data->map->cam.vertilcal_pos = 0;
-	data->map->mapa[12][5].door = 1; //del
-	data->map->mapa[12][5].door_state = 0; //del
-	data->map->mapa[12][8].door = 1; //del
-	data->map->mapa[12][8].door_state = 0; //del
 	while (i < MAX_KEYS_NUM)
 		data->keycode[i++] = UNPRESS; //init unpress keys
 	data->mouse_x = WIDTH / 2;

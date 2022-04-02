@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 13:04:36 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 16:14:16 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,7 @@ typedef struct s_data_mlx
 	int			mouse_y;
 	int			prev_mouse_x;
 	int			prev_mouse_y;
+	short int	mouse_f;
 	t_door_st	*door_str;
 	t_map_info	*map;
 	t_data_tex	*am_s;

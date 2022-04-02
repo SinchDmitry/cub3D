@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:04:49 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 13:48:00 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 14:29:14 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,10 @@ void	draw_field(int x, int y, t_data_mlx *data)
 	tmp_img = data->am_s->spr_img;
 	while (tmp_img)
 	{	
-		draw_square((int)tmp_img->x * TEXSIZE, (int)tmp_img->y * TEXSIZE, data, RED_COL);
+		if(!tmp_img->dead)
+			draw_square((int)tmp_img->x * TEXSIZE, (int)tmp_img->y * TEXSIZE, data, RED_COL);
+		else
+			draw_square((int)tmp_img->x * TEXSIZE, (int)tmp_img->y * TEXSIZE, data, GREEN_COL);
 		tmp_img = tmp_img->next;
 	}
 }
