@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 18:50:34 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 21:24:47 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ typedef struct s_map_info
 	int			height;
 	int			sky_color;
 	int			floor_color;
+	int			texture_size;
 	t_cam		cam;
 	t_play		play;
 	t_par_f		flags;

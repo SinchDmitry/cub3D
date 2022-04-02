@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
+#    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/04/02 17:05:18 by aarchiba         ###   ########.fr        #
+#    Updated: 2022/04/02 20:20:22 by utygett          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=		cub3d
+NAME		=		cub3D
 
 SRC			=		cub.c 						\
 					parser/parser_main.c		\

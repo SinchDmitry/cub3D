@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_par.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:45:10 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 18:25:16 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 20:26:09 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,12 @@ static int	no_key(int flag, char **arg)
 	i = -1;
 	flag = -2;
 	while (arg[0][++i])
+	{
+		if (arg[0][i] != '1' && arg[0][i] != '0')
+			error_end(1);
 		if (arg[0][i] != '1')
 			return (0);
+	}
 	return (flag);
 }
 
@@ -93,25 +97,30 @@ int	key_compare(t_data_mlx *data, char **arg)
 	int	flag;
 
 	flag = -1;
-	if (!ft_strcmp(arg[0], "C"))
-		param_parse(data, arg, RGB, SKY);
-	else if (!ft_strcmp(arg[0], "F"))
-		param_parse(data, arg, RGB, FLOOR);
-	else if (!ft_strcmp(arg[0], "NO"))
-		param_parse(data, arg, TEXTURE, NORTH);
-	else if (!ft_strcmp(arg[0], "SO"))
-		param_parse(data, arg, TEXTURE, SOUTH);
-	else if (!ft_strcmp(arg[0], "WE"))
-		param_parse(data, arg, TEXTURE, WEST);
-	else if (!ft_strcmp(arg[0], "EA"))
-		param_parse(data, arg, TEXTURE, EAST);
-	else if (!ft_strcmp(arg[0], "AM"))
-		param_parse(data, arg, SPRITE, AMONG);
-	else if (!ft_strcmp(arg[0], "CP"))
-		param_parse(data, arg, SPRITE, COMP);
-	else if (!ft_strcmp(arg[0], "D"))
-		param_parse(data, arg, SPRITE, DOOR);
+	if (arg[0])
+	{
+		if (!ft_strcmp(arg[0], "C"))
+			param_parse(data, arg, RGB, SKY);
+		else if (!ft_strcmp(arg[0], "F"))
+			param_parse(data, arg, RGB, FLOOR);
+		else if (!ft_strcmp(arg[0], "NO"))
+			param_parse(data, arg, TEXTURE, NORTH);
+		else if (!ft_strcmp(arg[0], "SO"))
+			param_parse(data, arg, TEXTURE, SOUTH);
+		else if (!ft_strcmp(arg[0], "WE"))
+			param_parse(data, arg, TEXTURE, WEST);
+		else if (!ft_strcmp(arg[0], "EA"))
+			param_parse(data, arg, TEXTURE, EAST);
+		else if (!ft_strcmp(arg[0], "AM"))
+			param_parse(data, arg, SPRITE, AMONG);
+		else if (!ft_strcmp(arg[0], "CP"))
+			param_parse(data, arg, SPRITE, COMP);
+		else if (!ft_strcmp(arg[0], "D"))
+			param_parse(data, arg, SPRITE, DOOR);
+		else
+			flag = no_key(flag, arg);
+	}
 	else
-		flag = no_key(flag, arg);
+		error_end(1);
 	return (flag);
 }

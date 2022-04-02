@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:37:15 by utygett           #+#    #+#             */
-/*   Updated: 2022/03/31 18:38:10 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 21:33:26 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static void	line_math_minimap(t_data_mlx *data, float rad)
 	{
 		ray_x = data->map->play.x + c * cos(ang);
 		ray_y = data->map->play.y + c * sin(ang);
-		if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0')
+		if (data->map->mapa[(int)ray_y][(int)ray_x].sym != '0'
+			|| data->map->mapa[(int)ray_y][(int)ray_x].door == 1)
 			break ;
 		ray_x *= MMTEXSIZE;
 		ray_y *= MMTEXSIZE;
@@ -58,6 +59,8 @@ static void	draw_field_move(int x, int y, t_data_mlx *data)
 		draw_square_move(y * MMTEXSIZE, x * MMTEXSIZE, data, WALLCOL);
 	else if (data->map->mapa[x][y].sym == '0')
 		draw_square_move(y * MMTEXSIZE, x * MMTEXSIZE, data, FLOORCOL);
+	if (data->map->mapa[x][y].door == 1)
+		draw_square_move(y * MMTEXSIZE, x * MMTEXSIZE, data, BLUE_COL);
 }
 
 void	draw_map_with_move(t_data_mlx *data)

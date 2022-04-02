@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 18:53:51 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 21:35:36 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # define MINIMAPWIDTH		200
 # define MINIMAPHEIGHT		200
 # define MM_BOARD_SIZE		5
-# define TEXSIZE			15
 # define MMTEXSIZE			20
 # define MOVEX				100
 # define MOVEY				100
