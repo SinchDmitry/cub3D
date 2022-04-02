@@ -6,13 +6,13 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 14:09:14 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 17:12:09 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 17:19:42 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-int	check_move_sprite(t_data_mlx *data, int x, int y)
+static int	check_move_sprite(t_data_mlx *data, int x, int y)
 {
 	if (data->map->mapa[y][x].sym == '1' || \
 		data->map->mapa[y][x].sym == 'e' || data->map->mapa[y][x].door > 0)
@@ -21,7 +21,7 @@ int	check_move_sprite(t_data_mlx *data, int x, int y)
 		return (0);
 }
 
-void	move_sprite_a(t_data_mlx *data, t_spr_tex *tmp_img)
+static void	move_sprite_a(t_data_mlx *data, t_spr_tex *tmp_img)
 {
 	if (tmp_img->move_flag == 0)
 	{
@@ -43,7 +43,7 @@ void	move_sprite_a(t_data_mlx *data, t_spr_tex *tmp_img)
 	}
 }
 
-void	move_sprite_b(t_data_mlx *data, t_spr_tex *tmp_img)
+static void	move_sprite_b(t_data_mlx *data, t_spr_tex *tmp_img)
 {
 	if (tmp_img->move_flag == 2)
 	{

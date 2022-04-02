@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/01 23:11:36 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 17:24:41 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ray_wall_data(t_data_mlx *data, int x)
 }
 
 /* side of wall */
-void	ray_texture_side(t_data_mlx *data, t_wall_tex *img, int x)
+static void	ray_texture_side(t_data_mlx *data, t_wall_tex *img, int x)
 {
 	img->sym = 0;
 	if (!data->map->cam.wall_dir)

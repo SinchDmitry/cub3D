@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:47 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 18:28:41 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 17:19:07 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # define FOV		1.571f
 
 /* general */
-// t_info	*parser(t_data_mlx *data, int argc, char **argv, int fd);
 void	map_info(t_data_mlx *data, char **map_str);
 int		param_map(t_data_mlx *data, char **map_str);
 void	map_create(t_data_mlx *data, char **map_str);
