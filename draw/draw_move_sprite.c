@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 14:09:14 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 14:11:28 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 16:52:56 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ int	check_move_sprite(t_data_mlx *data, int x, int y)
 
 void move_sprite(t_data_mlx *data, t_spr_tex *tmp_img)
 {
-	if((data->frame_num * 3) % 200 == 0)
-		tmp_img->move_flag = data->frame_num % 4;
-	else if(tmp_img->move_flag == 0)
+	
+	if(tmp_img->move_flag == 0)
 	{
 		tmp_img->x += MOVE_STEP_SPRITE;
 		if(check_move_sprite(data, tmp_img->x + WALL_COLLISION, tmp_img->y))

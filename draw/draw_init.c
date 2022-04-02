@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:26:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 16:33:36 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 16:50:29 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	init_doors(t_data_mlx *data)
 	t_spr_tex	*tmp_img;
 	tmp_img = data->am_s->door_img;
 	while (tmp_img)
-	{	
+	{
 		data->map->mapa[(int)tmp_img->x][(int)tmp_img->y].door = 1;
 		data->map->mapa[(int)tmp_img->x][(int)tmp_img->y].door_state = 0;
 		tmp_img = tmp_img->next;
