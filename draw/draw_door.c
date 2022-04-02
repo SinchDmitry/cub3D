@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:28:30 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 17:23:23 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 18:12:25 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static void	draw_door(t_data_mlx *data)
 						.door_state], data->door_str[x].text_x, \
 						data->door_str[x].text_y));
 			}
+			data->door_str[x].use = 0;
 		}
 		data->door_str[x].use = 0;
 	}
