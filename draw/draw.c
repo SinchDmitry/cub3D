@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 21:34:41 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 23:12:35 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	end_program(int keycode, t_data_mlx *data)
 {
 	(void) keycode;
 	(void) data;
-	exit(0); // close with RED CROSS
+	error_end(0);
 	return (0);
 }
 
@@ -53,7 +53,7 @@ int	draw(t_data_mlx	*data)
 	int			i;
 
 	i = 0;
-	data->door_str = ft_calloc(WIDTH, sizeof(t_door_st));
+	data->door_str = ft_calloc_error_end(WIDTH * sizeof(t_door_st), 1, P_FRONT);
 	while (i < MAX_KEYS_NUM)
 		data->keycode[i++] = UNPRESS;
 	data->mouse_x = WIDTH / 2;

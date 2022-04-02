@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:58:02 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/14 20:25:45 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 20:46:15 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	**to_malloc_str(char **res, char const *s, long i)
 
 	i = -1;
 	a = 0;
-	while (s[++i] && s[i + 1])
+	while (s[++i])
 	{
 		if ((space(s[i]) && !space(s[i + 1])) || (s[i] && !space(s[i]) && !i))
 		{

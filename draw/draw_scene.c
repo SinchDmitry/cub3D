@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:03:12 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 16:47:39 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 21:55:26 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ void	draw_fvp(t_data_mlx *data)
 		while (++x < WIDTH)
 		{
 			if (y < HEIGHT / 2 + data->map->cam.vertilcal_pos)
-				my_mlx_pixel_put(data, x, y, BLUE_COL);
+				my_mlx_pixel_put(data, x, y, data->map->sky_color);
 			else
-				my_mlx_pixel_put(data, x, y, FLOORCOL);
+				my_mlx_pixel_put(data, x, y,data->map->floor_color);
 		}
 	}
 	ray_play(data);

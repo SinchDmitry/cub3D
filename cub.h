@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 21:24:47 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 22:55:47 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,5 +234,6 @@ typedef struct s_data_mlx
 
 int			draw(t_data_mlx	*data);
 void		parser(t_data_mlx *data, int argc, char **argv, int fd);
+void		check_valid_file(char *str);
 
 #endif

@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:23:14 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 17:55:54 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 23:08:54 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static void	check_overflow_int(long res, int sign)
+{
+	if (res > 2147483647 && sign == -1)
+		error_end (1);
+	else if (res > 2147483648 && sign == 1)
+		error_end (1);
+}
 
 int	ft_atoi(const char *str)
 {
@@ -37,5 +45,6 @@ int	ft_atoi(const char *str)
 	}
 	else
 		error_end (1);
+	check_overflow_int(res, a);
 	return (a * (int)res);
 }
