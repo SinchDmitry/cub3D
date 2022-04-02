@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:33:52 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 13:38:10 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 16:16:21 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,23 @@ static void	render_img(t_data_mlx *data)
 		mlx_destroy_image(data->mlx, data->img);
 	}
 }
+
+void	check_mouse(t_data_mlx *data)
+{
+	if (data->mouse_f)
+		mouse_move(data);
+	if(data->keycode[18])
+	{
+		mlx_mouse_hide();
+		data->mouse_f = 1;
+	}
+	if(data->keycode[19])
+	{
+		data->mouse_f = 0;
+		mlx_mouse_show();
+	}
+}
+
 int	render_next_frame(t_data_mlx *data)
 {
 	data->frame_num++;
@@ -64,8 +81,7 @@ int	render_next_frame(t_data_mlx *data)
 			draw_minimap(data);
 	}
 	render_img(data);
-	mouse_move(data);
+	check_mouse(data);
 	key_h(data);
-	mlx_mouse_hide();
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 18:13:00 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 22:56:29 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 16:10:47 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char **argv)
 	int			fd;
 	int			i;
 
+	data = (t_data_mlx){};
 	res = NULL;
 	i = -1;
 	fd = open(argv[1], O_RDONLY);

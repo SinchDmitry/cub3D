@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 16:34:34 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 16:37:46 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define BONUS_MODE			1
 # define FULL_SIZE			1
 # define AMONG_SIZE			0
+# define MOUSE_NUM			10
 
 typedef struct s_par_f
 {
@@ -212,6 +213,7 @@ typedef struct s_data_mlx
 	int			endian;
 	int			mouse_x;
 	int			mouse_y;
+	short int	mouse_f;
 	void		*mlx_win;
 	int			aim_size;
 	int			map_zoom;
@@ -220,8 +222,8 @@ typedef struct s_data_mlx
 	int			prev_mouse_x;
 	int			prev_mouse_y;
 	float		sector[WIDTH];
-	int			mouse_code[10]; // ?
 	int			bits_per_pixel;
+	int			mouse_code[MOUSE_NUM];
 	int			keycode[MAX_KEYS_NUM];
 	t_map_info	*map;
 	t_data_tex	*am_s;

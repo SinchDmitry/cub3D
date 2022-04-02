@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 13:35:26 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 14:00:07 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@
 # define AIM_SIZE			40
 # define AIM_WIDTH			1
 # define LASER_WIDTH		3
+# define MOVE_STEP_SPRITE 0.05f
+# define WALL_COLLISION 0.2f
 
 // struct							s_images;
 typedef struct s_images			t_images;
