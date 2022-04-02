@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:26:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 17:40:10 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 23:13:38 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void	init_sprites(t_data_mlx *data)
 	t.weapon_dir = "./textures/blaster";
 	t.door_dir = "./textures/door/door";
 	t.compas_dir = "./textures/N";
-
-
 	init_wall_sprite(data, &data->am_s->wall_tex[0], data->map->texture->east);
 	init_wall_sprite(data, &data->am_s->wall_tex[1], data->map->texture->west);
 	init_wall_sprite(data, &data->am_s->wall_tex[2], data->map->texture->north);

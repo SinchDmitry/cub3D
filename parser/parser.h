@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:47 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 18:37:32 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 23:21:26 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@
 void	map_info(t_data_mlx *data, char **map_str);
 int		param_map(t_data_mlx *data, char **map_str);
 void	map_create(t_data_mlx *data, char **map_str);
-void	map_struct(t_data_mlx *data, char **map_str);
-int		key_compare(t_data_mlx *data, char **arg);
+int		key_compare(t_data_mlx *data, char **arg, char *map_str);
 
 /* utils */
 int		ft_iscompas(t_map_info *map, char ch, int *first_in);
@@ -44,6 +43,6 @@ void	neighbor(t_map_info *map, int i, int j);
 void	check_valid_file(char *str);
 
 /* objects */
-void	objects_parse(t_data_mlx *data, char **arg, int val);
+void	objects_parse(t_data_mlx *data, char *arg, int val);
 
 #endif

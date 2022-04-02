@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:20 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 20:46:44 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 23:41:21 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	param_map(t_data_mlx *data, char **map_str)
 		if (!tmp)
 			error_end(3);
 		save_point(tmp, P_BACK);
-		while (tmp[++j])
-			save_point(tmp[j], P_FRONT);
-		prm = key_compare(data, tmp);
+		// while (tmp[++j])
+		// 	save_point(tmp[j], P_FRONT);
+		prm = key_compare(data, tmp, map_str[i]);
 		if (prm == -1)
 			data->map->height--;
 		else if (!prm)
@@ -43,7 +43,7 @@ int	param_map(t_data_mlx *data, char **map_str)
 
 /* check width && height && data 
 malloc height + 1, width */
-void	map_struct(t_data_mlx *data, char **map_str)
+static void	map_struct(t_data_mlx *data, char **map_str)
 {
 	int	i;
 
@@ -94,6 +94,6 @@ void	parser(t_data_mlx *data, int argc, char **argv, int fd)
 	map_str = get_line_file(data->map->fd);
 	if (!map_str)
 		error_end(3);
-	save_point(map_str, P_FRONT);
+	// save_point(map_str, P_BACK);
 	map_info(data, map_str);
 }

@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:23:14 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 17:55:54 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 00:00:09 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@ int	ft_atoi(const char *str)
 	if (str[i] == '-' || str[i] == '+')
 		if (str[i++] == '-')
 			a = -a;
-	while (str[i] == '0')
-		i++;
 	if (str[i] >= 48 && str[i] <= 57)
 	{
-		while (str[i] >= 48 && str[i] <= 57)
+		while (str[i] >= 48 && str[i] <= 57 && str[i] != 32)
 			res = res * 10 - (str[i++] - '0');
-		if (str[i])
+		if (str[i] && str[i] != 32)
 			error_end (1);
 	}
 	else

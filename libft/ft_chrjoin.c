@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 20:49:32 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/02/15 13:07:08 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 23:45:48 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_chrjoin(char *s1, char s2)
 	{
 		tmp = malloc(sizeof(char) * ((ft_strlen(s1) + 2)));
 		if (!tmp)
-			return (NULL);
+			error_end(3);
 		while (s1[++i])
 			tmp[i] = s1[i];
 		tmp[i] = s2;
@@ -33,6 +33,8 @@ char	*ft_chrjoin(char *s1, char s2)
 	else
 	{
 		tmp = malloc(sizeof(char) * 2);
+		if (!tmp)
+			error_end(3);
 		tmp[0] = s2;
 		tmp[1] = '\0';
 	}
@@ -49,9 +51,7 @@ char	*ft_chrjoin_f(char *s1, char s2)
 	a = -1;
 	if (s1)
 	{
-		tmp = malloc(sizeof(char) * ((ft_strlen(s1) + 2)));
-		if (!tmp)
-			return (NULL);
+		tmp = ft_calloc(sizeof(char), (ft_strlen(s1) + 2));
 		tmp[i] = s2;
 		while (s1[++a] && ++i)
 			tmp[i] = s1[a];
@@ -61,6 +61,8 @@ char	*ft_chrjoin_f(char *s1, char s2)
 	else
 	{
 		tmp = malloc(sizeof(char) * 2);
+		if (!tmp)
+			error_end(3);
 		tmp[0] = s2;
 		tmp[1] = '\0';
 	}

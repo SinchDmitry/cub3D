@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 17:21:30 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/26 21:29:32 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 23:42:31 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_calloc(size_t count, size_t size)
 
 	tmp = malloc(size * count);
 	if (tmp == NULL)
-		return (NULL);
+		error_end(3);
 	ft_bzero(tmp, size * count);
 	return (tmp);
 }
