@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:47 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 18:28:41 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 18:30:16 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		ft_iscompas(t_map_info *map, char ch, int *first_in);
 int		create_trgb(int t, int r, int g, int b);
 void	add_back_or_new(t_spr_tex **img, int size, int x, int y);
 void	neighbor(t_map_info *map, int i, int j);
+void	check_valid_file(char *str);
 
 /* objects */
 void	objects_parse(t_data_mlx *data, char **arg, int val);

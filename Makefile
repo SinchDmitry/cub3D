@@ -3,37 +3,39 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
+#    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/04/02 14:10:19 by utygett          ###   ########.fr        #
+#    Updated: 2022/04/02 17:05:18 by aarchiba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=		cub3d
 
-SRC			=		cub.c 					\
-					parser/parser_main.c	\
-					parser/parser_par.c		\
-					parser/parser_map.c		\
-					parser/parser_utils.c	\
-					parser/parser_obj.c		\
-					draw/draw.c				\
-					draw/draw_init.c		\
-					draw/draw_minimap_1.c	\
-					draw/draw_minimap_2.c	\
-					draw/draw_scene.c		\
-					draw/draw_map.c			\
-					draw/draw_key.c			\
-					draw/draw_sprite.c		\
-					draw/draw_mouse.c		\
-					draw/draw_mlx.c			\
-					draw/draw_slide.c		\
-					draw/draw_door.c		\
-					draw/draw_ray.c			\
-					draw/draw_ray_init.c	\
-					draw/draw_utils.c		\
-					draw/draw_move_sprite.c \
+SRC			=		cub.c 						\
+					parser/parser_main.c		\
+					parser/parser_par.c			\
+					parser/parser_map.c			\
+					parser/parser_utils.c		\
+					parser/parser_obj.c			\
+					draw/draw.c					\
+					draw/draw_init.c			\
+					draw/draw_minimap_1.c		\
+					draw/draw_minimap_2.c		\
+					draw/draw_scene.c			\
+					draw/draw_map.c				\
+					draw/draw_key.c				\
+					draw/draw_sprite.c			\
+					draw/draw_sprite_check.c	\
+					draw/draw_mouse.c			\
+					draw/draw_mlx.c				\
+					draw/draw_slide.c			\
+					draw/draw_door.c			\
+					draw/draw_door_init.c		\
+					draw/draw_ray.c				\
+					draw/draw_ray_init.c		\
+					draw/draw_utils.c			\
+					draw/draw_move_sprite.c 	\
 
 FTDIR		= 		./libft/
 

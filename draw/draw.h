@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 17:11:14 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 17:15:01 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@
 // struct							s_images;
 typedef struct s_images			t_images;
 typedef struct s_data_mlx		t_data_mlx;
-typedef struct s_door_str	t_door_str;
+typedef struct s_door_str		t_door_str;
 typedef struct s_cost_tex		t_cost_tex;
 typedef struct s_data_tex		t_data_tex;
 typedef struct s_wall_tex		t_wall_tex;
@@ -134,7 +134,7 @@ void			wall_slide(t_data_mlx *data);
 void			ray_wall_data(t_data_mlx *data, int x);
 void			ray_texture_side(t_data_mlx *data, t_wall_tex *img, int x);
 void			check_door_state(t_data_mlx *data, t_par_slot **mapa);
-void			check_sprite_position(t_data_mlx *data); 
+void			check_sprite_position(t_data_mlx *data);
 
 /* draw door*/
 void			init_door_pix(t_data_mlx *data, int x, int door_state);
@@ -144,6 +144,7 @@ void			check_door(t_data_mlx *data);
 /* image initiation */
 // void			init_images(t_data_mlx *data);
 void			init_sprites(t_data_mlx *data);
+void			draw_sprite(t_data_mlx *data, t_spr_tex *img, t_cost_tex *cost);
 
 /* mouse move */
 void			mouse_move(t_data_mlx *data);

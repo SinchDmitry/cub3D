@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:33:52 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 16:16:21 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 16:51:47 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ void	check_mouse(t_data_mlx *data)
 {
 	if (data->mouse_f)
 		mouse_move(data);
-	if(data->keycode[18])
+	if (data->keycode[18])
 	{
 		mlx_mouse_hide();
 		data->mouse_f = 1;
 	}
-	if(data->keycode[19])
+	if (data->keycode[19])
 	{
 		data->mouse_f = 0;
 		mlx_mouse_show();
