@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:20 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 20:12:55 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 18:31:30 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ void	map_info(t_data_mlx *data, char **map_str)
 	map_struct(data, map_str + (param_map(data, map_str)));
 }
 
-/* front or back ? 
-save_point(NULL, 4); it was init before */
 void	parser(t_data_mlx *data, int argc, char **argv, int fd)
 {
 	char		**map_str;
