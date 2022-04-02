@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 13:04:36 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 16:34:34 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_play
 	float		x_textu;
 	float		y_textu;
 	short int	f_minimap;
+	int			**pl_arrow;
 	short int	side_for_move;
 }	t_play;
 
@@ -90,9 +91,9 @@ typedef struct s_cam
 
 typedef struct s_par_slot
 {
-	short int	door_state;
-	short int	door;
 	char		sym;
+	short int	door;
+	short int	door_state;
 }	t_par_slot;
 
 typedef struct s_par_tex
@@ -120,11 +121,11 @@ typedef struct s_map_info
 typedef struct s_door_str
 {
 	short int	use;
-	short int	start;
 	short int	end;
+	double		step;
+	short int	start;
 	short int	text_x;
 	short int	text_y;
-	double		step;
 	double		tex_pos;
 	short int	door_state;
 }	t_door_st;
@@ -142,21 +143,20 @@ typedef struct s_cost_tex
 
 typedef struct s_wall_tex
 {
-	int				line_height;
-	int				draw_start;
-	int				draw_end;
-	double			wall_x;
 	short int		sym;
+	unsigned int	col;
+	double			step;
 	int				tex_x;
 	int				tex_y;
-	double			step;
+	double			wall_x;
 	double			tex_pos;
-	unsigned int	col;
+	int				draw_end;
+	int				draw_start;
+	int				line_height;
 }	t_wall_tex;
 
 typedef struct s_spr_tex
 {
-	short int			move_flag;
 	float				x;
 	float				y;
 	int					d;
@@ -177,6 +177,7 @@ typedef struct s_spr_tex
 	int					dr_st_x;
 	int					dr_st_y;
 	int					fact_f_x;
+	short int			move_flag;
 	int					fact_st_x;
 	int					pos_spr_x;
 	int					num_of_spr;
@@ -193,10 +194,10 @@ typedef struct s_data_tex
 	t_spr_tex	*spr_img;
 	t_spr_tex	*comp_img;
 	t_spr_tex	*door_img;
-	t_cost_tex	am_costumes[SPR_COSTUME];
-	t_cost_tex	comp_costumes[COMP_COSTUME];
 	t_cost_tex	wall_tex[WALL_TEXTURE];
 	t_cost_tex	door_tex[DOOR_TEXTURE];
+	t_cost_tex	am_costumes[SPR_COSTUME];
+	t_cost_tex	comp_costumes[COMP_COSTUME];
 	t_cost_tex	space_textures[SPACE_TEXTURE];
 	t_cost_tex	weapon_textures[WEAP_TEXTURE];
 	t_cost_tex	compas_textures[CMPS_TEXTURE];
@@ -204,27 +205,27 @@ typedef struct s_data_tex
 
 typedef struct s_data_mlx
 {
-	size_t		frame_num;
 	void		*mlx;
-	void		*mlx_win;
 	void		*img;
 	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-	int			map_zoom;
 	float		ray_a;
-	float		sector[WIDTH];
-	int			keycode[MAX_KEYS_NUM];
-	int			mouse_code[10]; // ?
-	int			aim_size;
+	int			endian;
 	int			mouse_x;
 	int			mouse_y;
+	void		*mlx_win;
+	int			aim_size;
+	int			map_zoom;
+	size_t		frame_num;
+	int			line_length;
 	int			prev_mouse_x;
 	int			prev_mouse_y;
-	t_door_st	*door_str;
+	float		sector[WIDTH];
+	int			mouse_code[10]; // ?
+	int			bits_per_pixel;
+	int			keycode[MAX_KEYS_NUM];
 	t_map_info	*map;
 	t_data_tex	*am_s;
+	t_door_st	*door_str;
 	t_wall_tex	*wall_img;
 }	t_data_mlx;
 

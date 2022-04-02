@@ -3,50 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:04:49 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 13:48:00 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 16:16:04 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-// int	**init_play_arrow()
-// {
-// 	int	i;
-// 	int	**img;
+/* "./textures/player_arrow.cub" */
+int	**init_play_arrow(char *arrow)
+{
+	int		i;
+	int		j;
+	int		fd;
+	int		**img;
+	char	**file;
 
-// 	i = -1;
-// 	img = malloc(sizeof(int *) * 10);
-// 	if (!img)
-// 		error_end(3);
-// 	save_point(img, P_BACK);
-// 	while (++i < 10)
-// 	{
-// 		img[i] = malloc
-// 	}
-// }
+	fd = open(arrow, O_RDONLY);
+	file = get_line_file(fd);
+	i = -1;
+	img = ft_calloc_error_end(sizeof(int *), 10, P_FRONT);
+	while (++i < 10)
+		img[i] = ft_calloc_error_end(sizeof(int), 10, P_FRONT);
+	i = -1;
+	while (++i < 10)
+	{
+		j = -1;
+		while (++j < 10)
+			img[i][j] = (int)file[i][j] - 48;
+	}
+	return (img);
+}
+
 void	draw_play(t_play *play, t_data_mlx *data)
 {
 	float	x;
 	float	y;
 	float	point_x;
 	float	point_y;
-	int		play_draw[10][10] =
-	{
-	{1, 1, 0, 0, 0, 0, 0, 0, 1, 1},
-	{0, 1, 1, 0, 0, 0, 0, 1, 1, 0},
-	{0, 1, 1, 1, 0, 0, 1, 1, 1, 0},
-	{0, 0, 1, 1, 1, 1, 1, 1, 0, 0},
-	{0, 0, 1, 1, 1, 1, 1, 1, 0, 0},
-	{0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
-	{0, 0, 0, 1, 1, 1, 1, 0, 0, 0},
-	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
-	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0}
-	};
 
+	play->pl_arrow = init_play_arrow("./textures/player_arrow.cub");
 	play->x_textu = play->x * TEXSIZE;
 	play->y_textu = play->y * TEXSIZE;
 	x = play->x_textu;
@@ -60,7 +58,7 @@ void	draw_play(t_play *play, t_data_mlx *data)
 				(y - play->y_textu - 5) * sin(data->map->play.a);
 			point_y = (x - play->x_textu - 5) * sin(data->map->play.a) + \
 				(y - play->y_textu - 5) * cos(data->map->play.a);
-			if (play_draw[(int)(x - play->x_textu)] \
+			if (play->pl_arrow[(int)(x - play->x_textu)] \
 				[(int)(y - play->y_textu)] == 1)
 				my_mlx_pixel_put(data, point_x + play->x_textu, point_y + \
 					play->y_textu, GREEN_COL);
