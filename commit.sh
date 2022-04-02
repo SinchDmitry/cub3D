@@ -10,4 +10,4 @@ then
   git push origin $3;
 else if
   git pull;
-fi
+fi;
