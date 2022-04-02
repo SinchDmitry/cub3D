@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_obj.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 19:38:39 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 18:31:45 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 20:12:33 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,12 @@ static void	spr_rgb_parse(t_data_mlx *data, t_spr_tex **img, char *arg, int val)
 	res_str = NULL;
 	i = -1;
 	while (arg[++i])
+	{
+		if (arg[i] < 60 || arg[i] > 71)
+			error_end(1);
 		if (!space(arg[i]))
 			res_str = ft_chrjoin(res_str, arg[i]);
+	}
 	save_point(res_str, P_FRONT);
 	i = -1;
 	while (res_str[++i + 1])
