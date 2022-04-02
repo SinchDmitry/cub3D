@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:42:15 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 17:13:27 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 22:14:43 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	map_exit_case(int keycode, t_data_mlx *data)
 	{
 		if (data->map->play.f_minimap)
 		{
-			mlx_clear_window(data->mlx, data->mlx_win);
+			// mlx_clear_window(data->mlx, data->mlx_win);
 			data->map->play.f_minimap = 0;
 		}
 		else
@@ -89,12 +89,15 @@ void	map_exit_case(int keycode, t_data_mlx *data)
 	{
 		if (data->map->play.f_map)
 		{
-			mlx_clear_window(data->mlx, data->mlx_win);
+			// mlx_clear_window(data->mlx, data->mlx_win);
 			data->map->play.f_map = 0;
 		}
 		else
 			data->map->play.f_map = 1;
 	}
 	if (keycode == 53)
-		exit(0);
+	{
+		mlx_destroy_window(data->mlx, data->mlx_win);
+		error_end(0);
+	}
 }

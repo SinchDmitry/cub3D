@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 18:37:52 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 23:12:35 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,21 @@ int	end_program(int keycode, t_data_mlx *data)
 {
 	(void) keycode;
 	(void) data;
-	exit(0); // close with RED CROSS
+	error_end(0);
 	return (0);
+}
+
+void	init_map_texture_size(t_data_mlx *data)
+{
+	int	tmp;
+	int i;
+
+	i = 0;
+	tmp = data->map->width;
+	if (data->map->width < data->map->height)
+		tmp = data->map->height;
+	while (++i * tmp < HEIGHT)
+		data->map->texture_size = i;
 }
 
 int	draw(t_data_mlx	*data)
@@ -40,7 +53,7 @@ int	draw(t_data_mlx	*data)
 	int			i;
 
 	i = 0;
-	data->door_str = ft_calloc(WIDTH, sizeof(t_door_st));
+	data->door_str = ft_calloc_error_end(WIDTH * sizeof(t_door_st), 1, P_FRONT);
 	while (i < MAX_KEYS_NUM)
 		data->keycode[i++] = UNPRESS;
 	data->mouse_x = WIDTH / 2;
@@ -49,6 +62,7 @@ int	draw(t_data_mlx	*data)
 	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Cub3d");
 	mlx_mouse_move(data->mlx_win, WIDTH / 2, HEIGHT / 2);
 	data->wall_img = ft_calloc_error_end(sizeof(t_wall_tex), 1, P_FRONT);
+	init_map_texture_size(data);
 	init_sprites(data);
 	mlx_hook(data->mlx_win, 2, 0, &key_press, data);
 	mlx_hook(data->mlx_win, 3, 0, &key_unpress, data);

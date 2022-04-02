@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 18:37:35 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 21:35:36 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,14 @@
 # define MINIMAPWIDTH		200
 # define MINIMAPHEIGHT		200
 # define MM_BOARD_SIZE		5
-# define TEXSIZE			15
 # define MMTEXSIZE			20
 # define MOVEX				100
 # define MOVEY				100
 # define ROTATE_MOV			3.1415f
 # define FOV				1.571f
-# define MMFOV				0.55f
-# define MMANG_START		-0.55f
-# define MMANG_STEP			0.02f
+# define MMFOV				0.80f
+# define MMANG_START		-0.80f
+# define MMANG_STEP			0.05f
 
 /* move */
 # define MOVE_SPEED			0.05

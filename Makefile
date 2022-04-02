@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+         #
+#    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/04/02 17:05:18 by aarchiba         ###   ########.fr        #
+#    Updated: 2022/04/02 23:25:31 by utygett          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=		cub3d
+NAME		=		cub3D
 
 SRC			=		cub.c 						\
 					parser/parser_main.c		\
@@ -44,16 +44,12 @@ LIBFT		= 		libft.a
 MLX_PATH	=		mlx/
 
 MLX			=		$(MLX_PATH)libmlx.a
-# MLXDIR
-
-# LIBMLX
 		
 OBJ_M		=		$(SRC:%.c=%.o)
 
 DEP			=		$(SRC:%.c=%.d)
 
-CFLAGS		=		-MD -Imlx -g -Werror -Wall -Wextra 
-#-fsanitize=address 
+CFLAGS		=		-MD -Imlx -g -Werror -Wall -Wextra #-fsanitize=address 
 
 
 CC		=	gcc -O2
@@ -62,9 +58,8 @@ RM		=	rm -f
 
 all		:	libmake $(NAME)
 
-$(NAME)	:	$(OBJ_M)
-			@cp $(FTDIR)$(LIBFT) .
-			$(CC) $(CFLAGS) $(OBJ_M) libft.a -L$(MLX_PATH) -lmlx -framework \
+$(NAME)	:	$(OBJ_M) $(FTDIR)$(LIBFT)
+			$(CC) $(CFLAGS) $(OBJ_M) $(FTDIR)$(LIBFT) -L$(MLX_PATH) -lmlx -framework \
 				OpenGL -framework AppKit -o $(NAME)
 
 libmake	:	
@@ -80,7 +75,8 @@ clean	:
 			$(RM) $(OBJ_M) $(DEP)
 
 fclean	:	clean
-			$(RM) $(NAME) $(LIBFT) $(MLX)
+			@make fclean -C $(FTDIR)
+			$(RM) $(NAME)
 	
 re		:	fclean all
 

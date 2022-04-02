@@ -6,11 +6,19 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:23:14 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/03 00:00:09 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 00:06:06 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static void	check_overflow_int(long res, int sign)
+{
+	if (res > 2147483647 && sign == -1)
+		error_end (1);
+	else if (res > 2147483648 && sign == 1)
+		error_end (1);
+}
 
 int	ft_atoi(const char *str)
 {
@@ -35,5 +43,6 @@ int	ft_atoi(const char *str)
 	}
 	else
 		error_end (1);
+	check_overflow_int(res, a);
 	return (a * (int)res);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:57:59 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 18:11:48 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 22:55:47 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ typedef struct s_map_info
 	int			height;
 	int			sky_color;
 	int			floor_color;
+	int			texture_size;
 	t_cam		cam;
 	t_play		play;
 	t_par_f		flags;
@@ -233,5 +234,6 @@ typedef struct s_data_mlx
 
 int			draw(t_data_mlx	*data);
 void		parser(t_data_mlx *data, int argc, char **argv, int fd);
+void		check_valid_file(char *str);
 
 #endif

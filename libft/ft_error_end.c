@@ -6,18 +6,20 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:45:19 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 23:36:14 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 00:05:55 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* clear_point(tmp); after tmp init ??*/
 void	error_end(int flag)
 {
 	t_malloc_c	*tmp;
 
 	tmp = save_point(NULL, 0);
+	clear_point(tmp); //after tmp init???
+	if (flag == 0)
+		exit (0);
 	if (flag == 1)
 	{
 		printf ("Error: atoi/incorrect argument\n");

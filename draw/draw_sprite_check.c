@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprite_check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:58:06 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 17:07:39 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 18:49:43 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static void	attack_weapon(t_data_mlx *data, t_spr_tex *img, int size)
 		i--;
 		draw_line(data, bullet, RED_COL);
 	}
-	action_among(data, img, size);
+	if(img)
+		action_among(data, img, size);
 }
 
 static void	check_costume(t_data_mlx *data, t_spr_tex *img, \
@@ -87,7 +88,8 @@ static void	check_computer(t_data_mlx *data)
 	static int	i;
 	static int	j;
 
-	if (data->am_s->comp_img->shot)
+	
+	if (data->am_s->comp_img && data->am_s->comp_img->shot)
 	{
 		if (!j)
 		{
@@ -99,8 +101,11 @@ static void	check_computer(t_data_mlx *data)
 		if (j == 4)
 			j = 0;
 	}
-	data->am_s->comp_img->c_i = i;
-	draw_sprite(data, data->am_s->comp_img, data->am_s->comp_cost);
+	if (data->am_s->comp_img)
+	{
+		data->am_s->comp_img->c_i = i;
+		draw_sprite(data, data->am_s->comp_img, data->am_s->comp_cost);
+	}
 	if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
 		attack_weapon(data, data->am_s->comp_img, FULL_SIZE);
 }

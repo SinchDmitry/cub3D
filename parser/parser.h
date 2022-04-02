@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:47 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 23:21:26 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 00:05:43 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int		ft_iscompas(t_map_info *map, char ch, int *first_in);
 int		create_trgb(int t, int r, int g, int b);
 void	add_back_or_new(t_spr_tex **img, int size, int x, int y);
 void	neighbor(t_map_info *map, int i, int j);
-void	check_valid_file(char *str);
 
 /* objects */
 void	objects_parse(t_data_mlx *data, char *arg, int val);

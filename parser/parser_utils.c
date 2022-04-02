@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 19:24:09 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 21:37:23 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 21:44:21 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ static void	select_dir(t_map_info *map, char ch)
 		map->play.dir_y = tan(FOV / 2);
 		map->play.a = 1.5708f;
 	}
-	else if (ch == 'E')
+	else if (ch == 'W')
 	{
 		map->cam.pl_y = tan(FOV / 2);
 		map->play.dir_x = tan(FOV / 2);
 	}
-	else if (ch == 'W')
+	else if (ch == 'E')
 	{
 		map->cam.pl_y = tan(-FOV / 2);
 		map->play.dir_x = tan(-FOV / 2);
