@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:26:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 17:07:39 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 17:40:10 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,19 @@ static void	init_doors(t_data_mlx *data)
 
 	tmp_img = data->am_s->door_img;
 	while (tmp_img)
-	{	
+	{
 		data->map->mapa[(int)tmp_img->x][(int)tmp_img->y].door = 1;
 		data->map->mapa[(int)tmp_img->x][(int)tmp_img->y].door_state = 0;
 		tmp_img = tmp_img->next;
 	}
+}
+
+static void	init_wall_sprite(t_data_mlx *data, t_cost_tex *img, char *dir)
+{
+	img->img = mlx_xpm_file_to_image(data->mlx, dir, \
+		&img->img_w, &img->img_h);
+	img->addr = mlx_get_data_addr(img->img, \
+		&img->bits_per_pixel, &img->line_length, &img->endian);
 }
 
 void	init_sprites(t_data_mlx *data)
@@ -59,7 +67,12 @@ void	init_sprites(t_data_mlx *data)
 	t.weapon_dir = "./textures/blaster";
 	t.door_dir = "./textures/door/door";
 	t.compas_dir = "./textures/N";
-	init_sprite(data, data->am_s->wall_tex, t.wall_dir, WALL_TEXTURE);
+
+
+	init_wall_sprite(data, &data->am_s->wall_tex[0], data->map->texture->east);
+	init_wall_sprite(data, &data->am_s->wall_tex[1], data->map->texture->west);
+	init_wall_sprite(data, &data->am_s->wall_tex[2], data->map->texture->north);
+	init_wall_sprite(data, &data->am_s->wall_tex[3], data->map->texture->south);
 	init_sprite(data, data->am_s->am_cost, t.among_dir, SPR_COSTUME);
 	init_sprite(data, data->am_s->comp_cost, t.comp_dir, COMP_COSTUME);
 	init_sprite(data, data->am_s->space_textures, t.space_dir, SPACE_TEXTURE);

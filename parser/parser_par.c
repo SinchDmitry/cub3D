@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_par.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:45:10 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/01 21:45:37 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 18:25:16 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int	texture_parse_ew(t_data_mlx *data, char **arg, int val)
 		if (data->map->flags.west)
 			error_end(1);
 		data->map->texture->west = ft_strdup_error_end(arg[1]);
+		check_valid_file(data->map->texture->west);
 		data->map->flags.west = 1;
 		return (1);
 	}
@@ -27,6 +28,7 @@ static int	texture_parse_ew(t_data_mlx *data, char **arg, int val)
 		if (data->map->flags.east)
 			error_end(1);
 		data->map->texture->east = ft_strdup_error_end(arg[1]);
+		check_valid_file(data->map->texture->east);
 		data->map->flags.east = 1;
 		return (1);
 	}
@@ -40,6 +42,7 @@ static int	texture_parse_ns(t_data_mlx *data, char **arg, int val)
 		if (data->map->flags.north)
 			error_end(1);
 		data->map->texture->north = ft_strdup_error_end(arg[1]);
+		check_valid_file(data->map->texture->north);
 		data->map->flags.north = 1;
 		return (1);
 	}
@@ -48,6 +51,7 @@ static int	texture_parse_ns(t_data_mlx *data, char **arg, int val)
 		if (data->map->flags.south)
 			error_end(1);
 		data->map->texture->south = ft_strdup_error_end(arg[1]);
+		check_valid_file(data->map->texture->south);
 		data->map->flags.south = 1;
 		return (1);
 	}

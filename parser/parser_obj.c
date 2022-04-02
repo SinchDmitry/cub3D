@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 19:38:39 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 20:11:07 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 20:12:33 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,22 @@ void	objects_parse(t_data_mlx *data, char **arg, int val)
 	}
 	else
 		error_end(2);
+}
+
+void check_valid_file(char *str)
+{
+	int		id;
+	int		read_byte;
+	char	buf[2];
+
+	id = open(str, O_RDONLY);
+	if (id < 1)
+		error_end(2);
+	read_byte = read(id, buf, 1);
+	if (read_byte < 0)
+	{
+		close(id);
+		error_end(2);
+	}
+	close(id);
 }
