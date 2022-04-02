@@ -7,7 +7,7 @@ git add .
 git commit -m "$VAR1 $1"
 if [[ $2 == 1 ]]
 then
-  git push origin
+  git push origin develop
 else if
-  git pull;
+  git pull
 fi
