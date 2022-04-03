@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 17:21:30 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/03/26 21:29:32 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 23:37:25 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*ft_calloc(size_t count, size_t size)
 void	*ft_calloc_error_end(size_t count, size_t size, int push)
 {
 	void	*tmp;
-
+	(void) push;
 	tmp = malloc(size * count);
 	if (tmp == NULL)
 		error_end(3);

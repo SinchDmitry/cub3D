@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:20 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 23:33:23 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/02 23:40:38 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	param_map(t_data_mlx *data, char **map_str)
 		if (!tmp)
 			error_end(3);
 		save_point(tmp, P_BACK);
-		while (tmp[++j])
-			save_point(tmp[j], P_FRONT);
+		// while (tmp[++j])
+		// 	save_point(tmp[j], P_FRONT);
 		prm = key_compare(data, tmp);
 		if (prm == -1)
 			data->map->height--;
@@ -94,6 +94,6 @@ void	parser(t_data_mlx *data, int argc, char **argv, int fd)
 	map_str = get_line_file(data->map->fd);
 	if (!map_str)
 		error_end(3);
-	save_point(map_str, P_FRONT);
+	// save_point(map_str, P_FRONT);
 	map_info(data, map_str);
 }
