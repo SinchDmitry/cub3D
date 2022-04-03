@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:58:50 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 23:45:18 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 17:48:19 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_strtrim(char *s1, char const *set)
 	res = malloc(sizeof(char) * ((i - tmp) + 1));
 	if (!res)
 		return (NULL);
-	while (tmp <= i)
+	while (tmp < i)
 		res[++a] = s1[++tmp];
 	res[a] = '\0';
 	free(s1);
@@ -47,7 +47,7 @@ char	*ft_isspace_strtrim(char *s1)
 
 	i = 0;
 	a = -1;
-	while (space(s1[i]))
+	while (s1[i] && space(s1[i]))
 		i++;
 	tmp = i - 1;
 	while (s1[i])
@@ -56,8 +56,8 @@ char	*ft_isspace_strtrim(char *s1)
 		i--;
 	res = malloc(sizeof(char) * ((i - tmp) + 1));
 	if (!res)
-		return (NULL);
-	while (tmp <= i)
+		error_end(3);
+	while (tmp < i)
 		res[++a] = s1[++tmp];
 	res[a] = '\0';
 	return (res);

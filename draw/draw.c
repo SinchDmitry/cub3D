@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/03 17:35:41 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 17:40:36 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	init_map_texture_size(t_data_mlx *data)
 
 int	draw(t_data_mlx	*data)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	data->door_str = ft_calloc_error_end(WIDTH * sizeof(t_door_st), 1, P_FRONT);

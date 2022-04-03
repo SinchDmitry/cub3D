@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:20 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/03 15:40:54 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 17:41:46 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int	param_map(t_data_mlx *data, char **map_str)
 	return (i);
 }
 
-// check width && height && data 
-// malloc height + 1, width 
 static void	map_struct(t_data_mlx *data, char **map_str)
 {
 	int	i;

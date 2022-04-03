@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 18:11:01 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 17:39:59 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	ray_calc(t_data_mlx *data)
 	}
 }
 
-/* draw */
 static void	ray_length(t_data_mlx *data, int x)
 {
 	int	i;
@@ -54,9 +53,6 @@ static void	ray_length(t_data_mlx *data, int x)
 	data->wall_img->line_height = (int)(HEIGHT / data->sector[x]);
 }
 
-/* up and down camera */
-/* x cordinate for wall side or front */
-/* x coordinate on the texture */
 void	ray_wall_data(t_data_mlx *data, int x)
 {
 	data->wall_img->draw_start = -data->wall_img->line_height / 2 + \
@@ -77,7 +73,6 @@ void	ray_wall_data(t_data_mlx *data, int x)
 		floor(data->wall_img->wall_x);
 }
 
-/* side of wall */
 static void	ray_texture_side(t_data_mlx *data, t_wall_tex *img, int x)
 {
 	img->sym = 0;

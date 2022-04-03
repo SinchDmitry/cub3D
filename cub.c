@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 18:13:00 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/03 00:05:46 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 17:42:18 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,3 @@ int	main(int argc, char **argv)
 	error_end(4);
 	return (0);
 }
-
-/*
-void	print_addr(void)
-{
-	t_malloc_c	*tmp;
-	int			i;
-
-	tmp = save_point(NULL, 0);
-	i = 0;
-	printf ("\n******************************\n");
-	while (tmp)
-	{
-		printf("%2d : %p\n", i++, tmp->point);
-		tmp = tmp->next;
-	}
-	printf ("\n******************************\n");
-}
-*/
