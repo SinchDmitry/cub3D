@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:45:10 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 21:32:37 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/02 23:30:56 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	param_parse(t_data_mlx *data, char **arg, int mode, int val)
 
 	i = 0;
 	if (mode == RGB || mode == SPRITE || mode == DOOR)
-		objects_parse(data, arg, val);
+		objects_parse(data, *arg, val);
 	else if (mode == TEXTURE)
 	{
 		while (arg[i])
@@ -90,15 +90,15 @@ static int	no_key(int flag, char **arg)
 	return (flag);
 }
 
-int	key_compare(t_data_mlx *data, char **arg)
+int	key_compare(t_data_mlx *data, char **arg, char *map_str)
 {
 	int	flag;
 
 	flag = -1;
 	if (!ft_strcmp(arg[0], "C"))
-		param_parse(data, arg, RGB, SKY);
+		param_parse(data, &map_str, RGB, SKY);
 	else if (!ft_strcmp(arg[0], "F"))
-		param_parse(data, arg, RGB, FLOOR);
+		param_parse(data, &map_str, RGB, FLOOR);
 	else if (!ft_strcmp(arg[0], "NO"))
 		param_parse(data, arg, TEXTURE, NORTH);
 	else if (!ft_strcmp(arg[0], "SO"))
@@ -108,11 +108,11 @@ int	key_compare(t_data_mlx *data, char **arg)
 	else if (!ft_strcmp(arg[0], "EA"))
 		param_parse(data, arg, TEXTURE, EAST);
 	else if (!ft_strcmp(arg[0], "AM"))
-		param_parse(data, arg, SPRITE, AMONG);
+		param_parse(data, &map_str, SPRITE, AMONG);
 	else if (!ft_strcmp(arg[0], "CP"))
-		param_parse(data, arg, SPRITE, COMP);
+		param_parse(data, &map_str, SPRITE, COMP);
 	else if (!ft_strcmp(arg[0], "D"))
-		param_parse(data, arg, SPRITE, DOOR);
+		param_parse(data, &map_str, SPRITE, DOOR);
 	else
 		flag = no_key(flag, arg);
 	return (flag);

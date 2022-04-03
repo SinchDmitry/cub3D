@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:20 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 23:40:38 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/03 15:11:00 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	param_map(t_data_mlx *data, char **map_str)
 		if (!tmp)
 			error_end(3);
 		save_point(tmp, P_BACK);
-		// while (tmp[++j])
-		// 	save_point(tmp[j], P_FRONT);
-		prm = key_compare(data, tmp);
+		while (tmp[++j])
+			save_point(tmp[j], P_FRONT);
+		prm = key_compare(data, tmp, map_str[i]);
 		if (prm == -1)
 			data->map->height--;
 		else if (!prm)
@@ -41,9 +41,9 @@ int	param_map(t_data_mlx *data, char **map_str)
 	return (i);
 }
 
-/* check width && height && data 
-malloc height + 1, width */
-void	map_struct(t_data_mlx *data, char **map_str)
+// check width && height && data 
+// malloc height + 1, width 
+static void	map_struct(t_data_mlx *data, char **map_str)
 {
 	int	i;
 
@@ -72,7 +72,9 @@ void	map_info(t_data_mlx *data, char **map_str)
 		i = 0;
 		j = -1;
 		while (map_str[data->map->height][++j])
+		{
 			i++;
+		}
 		if (i > data->map->width)
 			data->map->width = i;
 		data->map->height++;
@@ -94,6 +96,5 @@ void	parser(t_data_mlx *data, int argc, char **argv, int fd)
 	map_str = get_line_file(data->map->fd);
 	if (!map_str)
 		error_end(3);
-	// save_point(map_str, P_FRONT);
 	map_info(data, map_str);
 }

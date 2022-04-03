@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 19:38:39 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 23:40:19 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/03 13:45:04 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,12 @@ static void	spr_rgb_parse(t_data_mlx *data, t_spr_tex **img, char *arg, int val)
 		if (!space(arg[i]))
 			res_str = ft_chrjoin(res_str, arg[i]);
 	save_point(res_str, P_FRONT);
+	while (res_str[i + 1])
+		if (res_str[i] == ',' && res_str[i + 1] == ',')
+			error_end(1);
 	i = -1;
 	while (res_str[++i])
-		if (((res_str[i] < 48 || res_str[i] > 57) && res_str[i] != ',') \
-		|| (res_str[i + 1] && (res_str[i] == ',' && res_str[i + 1] == ',')))
+		if ((res_str[i] < 48 || res_str[i] > 57) && res_str[i] != ',')
 			error_end(1);
 	res = ft_split((const char *)arg, ',');
 	if (!res)
@@ -67,29 +69,30 @@ static void	spr_rgb_parse(t_data_mlx *data, t_spr_tex **img, char *arg, int val)
 	parse_res(data, img, res, val);
 }
 
-void	objects_parse(t_data_mlx *data, char **arg, int val)
+void	objects_parse(t_data_mlx *data, char *arg, int val)
 {
-	if (*(arg + 1))
+	while (*arg++ != 32)
+		if (*arg == '\n' || !*arg)
+			error_end(2);
+	arg = ft_isspace_strtrim(arg);
+	if (val == SKY)
 	{
-		if (val == SKY)
-		{
-			if (data->map->flags.sky)
-				error_end(1);
-			spr_rgb_parse(data, NULL, *(arg + 1), val);
-		}
-		else if (val == FLOOR)
-		{
-			if (data->map->flags.floor)
-				error_end(1);
-			spr_rgb_parse(data, NULL, *(arg + 1), val);
-		}
-		else if (val == AMONG)
-			spr_rgb_parse(data, &data->am_s->spr_img, *(arg + 1), val);
-		else if (val == COMP)
-			spr_rgb_parse(data, &data->am_s->comp_img, *(arg + 1), val);
-		else if (val == DOOR)
-			spr_rgb_parse(data, &data->am_s->door_img, *(arg + 1), val);
+		if (data->map->flags.sky)
+			error_end(1);
+		spr_rgb_parse(data, NULL, arg, val);
 	}
+	else if (val == FLOOR)
+	{
+		if (data->map->flags.floor)
+			error_end(1);
+		spr_rgb_parse(data, NULL, arg, val);
+	}
+	else if (val == AMONG)
+		spr_rgb_parse(data, &data->am_s->spr_img, arg, val);
+	else if (val == COMP)
+		spr_rgb_parse(data, &data->am_s->comp_img, arg, val);
+	else if (val == DOOR)
+		spr_rgb_parse(data, &data->am_s->door_img, arg, val);
 	else
 		error_end(2);
 }
