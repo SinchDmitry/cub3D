@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:20 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/03 00:05:40 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 13:41:19 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,9 @@ void	map_info(t_data_mlx *data, char **map_str)
 		i = 0;
 		j = -1;
 		while (map_str[data->map->height][++j])
+		{
 			i++;
+		}
 		if (i > data->map->width)
 			data->map->width = i;
 		data->map->height++;

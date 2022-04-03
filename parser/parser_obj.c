@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 19:38:39 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/03 00:05:36 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 13:21:51 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static void	spr_rgb_parse(t_data_mlx *data, t_spr_tex **img, char *arg, int val)
 	while (res_str[i + 1])
 		if (res_str[i] == ',' && res_str[i + 1] == ',')
 			error_end(1);
-	printf("%s\n", res_str);
 	i = -1;
 	while (res_str[++i])
 		if ((res_str[i] < 48 || res_str[i] > 57) && res_str[i] != ',')
