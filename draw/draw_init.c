@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:26:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 23:13:38 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 16:39:55 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	init_sprite(t_data_mlx *data, t_cost_tex *img, char *dir, \
 		xpm_path[0] = '\0';
 		ft_strlcat(xpm_path, dir, 1023);
 		img_num = ft_itoa(i);
+		if(!img_num)
+			error_end(3);
 		ft_strlcat(xpm_path, img_num, 1023);
 		free(img_num);
 		ft_strlcat(xpm_path, ".xpm", 1023);

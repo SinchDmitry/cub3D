@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 19:38:39 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/03 13:45:04 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/03 16:17:48 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static void	spr_rgb_parse(t_data_mlx *data, t_spr_tex **img, char *arg, int val)
 		if (!space(arg[i]))
 			res_str = ft_chrjoin(res_str, arg[i]);
 	save_point(res_str, P_FRONT);
-	while (res_str[i + 1])
+	i = -1;
+	while (res_str[++i + 1])
 		if (res_str[i] == ',' && res_str[i + 1] == ',')
 			error_end(1);
 	i = -1;
@@ -75,6 +76,7 @@ void	objects_parse(t_data_mlx *data, char *arg, int val)
 		if (*arg == '\n' || !*arg)
 			error_end(2);
 	arg = ft_isspace_strtrim(arg);
+	save_point(arg, 1);
 	if (val == SKY)
 	{
 		if (data->map->flags.sky)

@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:20 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/03 15:11:00 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/03 16:43:08 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int	param_map(t_data_mlx *data, char **map_str)
 	return (i);
 }
 
-// check width && height && data 
-// malloc height + 1, width 
 static void	map_struct(t_data_mlx *data, char **map_str)
 {
 	int	i;
@@ -64,22 +62,18 @@ static void	map_struct(t_data_mlx *data, char **map_str)
 
 void	map_info(t_data_mlx *data, char **map_str)
 {
-	int		i;
-	int		j;
+	int	j;
 
 	while (map_str[data->map->height])
 	{
-		i = 0;
-		j = -1;
-		while (map_str[data->map->height][++j])
-		{
-			i++;
-		}
-		if (i > data->map->width)
-			data->map->width = i;
+		j = 0;
+		while (map_str[data->map->height][j])
+			j++;
+		if (j > data->map->width)
+			data->map->width = j;
 		data->map->height++;
 	}
-	map_struct(data, map_str + (param_map(data, map_str)));
+	map_struct(data, map_str + param_map(data, map_str));
 }
 
 void	parser(t_data_mlx *data, int argc, char **argv, int fd)
@@ -94,7 +88,5 @@ void	parser(t_data_mlx *data, int argc, char **argv, int fd)
 	data->map->fd = fd;
 	data->map->flags = (t_par_f){};
 	map_str = get_line_file(data->map->fd);
-	if (!map_str)
-		error_end(3);
 	map_info(data, map_str);
 }
