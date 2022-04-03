@@ -6,7 +6,7 @@
 #    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/04/03 16:47:05 by utygett          ###   ########.fr        #
+#    Updated: 2022/04/03 17:53:34 by utygett          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ OBJ_M		=		$(SRC:%.c=%.o)
 
 DEP			=		$(SRC:%.c=%.d)
 
-CFLAGS		=		-MD -Imlx -g -Werror -Wall -Wextra #-fsanitize=address 
+CFLAGS		=		-MD -Imlx -g -Werror -Wall -Wextra 
+# -fsanitize=address 
 
 
 CC		=	gcc -O2

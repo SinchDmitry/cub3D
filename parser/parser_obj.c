@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 19:38:39 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/03 16:17:48 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/03 18:02:34 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,20 @@ static void	parse_res(t_data_mlx *data, t_spr_tex **img, char **r, int val)
 		add_back_or_new(img, FULL_SIZE, ft_atoi(r[0]), ft_atoi(r[1]));
 }
 
+static void	spr_rgb_check(char *res_str)
+{
+	int		i;
+
+	i = -1;
+	while (res_str[++i + 1])
+		if (res_str[i] == ',' && res_str[i + 1] == ',')
+			error_end(1);
+	i = -1;
+	while (res_str[++i])
+		if ((res_str[i] < 48 || res_str[i] > 57) && res_str[i] != ',')
+			error_end(1);
+}
+
 static void	spr_rgb_parse(t_data_mlx *data, t_spr_tex **img, char *arg, int val)
 {
 	char	**res;
@@ -52,14 +66,7 @@ static void	spr_rgb_parse(t_data_mlx *data, t_spr_tex **img, char *arg, int val)
 		if (!space(arg[i]))
 			res_str = ft_chrjoin(res_str, arg[i]);
 	save_point(res_str, P_FRONT);
-	i = -1;
-	while (res_str[++i + 1])
-		if (res_str[i] == ',' && res_str[i + 1] == ',')
-			error_end(1);
-	i = -1;
-	while (res_str[++i])
-		if ((res_str[i] < 48 || res_str[i] > 57) && res_str[i] != ',')
-			error_end(1);
+	spr_rgb_check(res_str);
 	res = ft_split((const char *)arg, ',');
 	if (!res)
 		error_end(3);

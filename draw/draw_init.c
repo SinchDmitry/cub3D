@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:26:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/03 16:39:55 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/03 18:03:45 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	init_sprite(t_data_mlx *data, t_cost_tex *img, char *dir, \
 		xpm_path[0] = '\0';
 		ft_strlcat(xpm_path, dir, 1023);
 		img_num = ft_itoa(i);
-		if(!img_num)
+		if (!img_num)
 			error_end(3);
 		ft_strlcat(xpm_path, img_num, 1023);
 		free(img_num);
@@ -44,6 +44,9 @@ static void	init_doors(t_data_mlx *data)
 	tmp_img = data->am_s->door_img;
 	while (tmp_img)
 	{
+		if (data->map->mapa[(int)tmp_img->x][(int)tmp_img->y].sym == 'e' || \
+			data->map->mapa[(int)tmp_img->x][(int)tmp_img->y].sym == '1')
+			error_end(2);
 		data->map->mapa[(int)tmp_img->x][(int)tmp_img->y].door = 1;
 		data->map->mapa[(int)tmp_img->x][(int)tmp_img->y].door_state = 0;
 		tmp_img = tmp_img->next;

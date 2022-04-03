@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:33:52 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/03 15:50:58 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/03 17:49:33 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static void	render_img(t_data_mlx *data)
 		mlx_put_image_to_window(data->mlx, data->mlx_win, \
 			data->am_s->space_textures[i_space].img, 0, 0);
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, \
-			WIDTH / 2 - data->map->width *data->map->texture_size / 2, \
-			HEIGHT / 2 - data->map->height *data->map->texture_size / 2);
+			WIDTH / 2 - data->map->width * data->map->texture_size / 2, \
+			HEIGHT / 2 - data->map->height * data->map->texture_size / 2);
 		mlx_destroy_image(data->mlx, data->img);
 	}
 }
