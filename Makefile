@@ -6,7 +6,7 @@
 #    By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/05 11:40:33 by utygett           #+#    #+#              #
-#    Updated: 2022/04/03 17:53:34 by utygett          ###   ########.fr        #
+#    Updated: 2022/04/03 18:35:18 by utygett          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,4 +84,4 @@ re		:	fclean all
 
 -include $(DEP)
 
-.PHONY	:	all clean fclean re 
+.PHONY	:	all clean fclean re bonus

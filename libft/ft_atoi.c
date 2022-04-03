@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:23:14 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/03 00:06:06 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 18:46:36 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	check_overflow_int(long res, int sign)
 {
-	if (res > 2147483647 && sign == -1)
+	if (res > 2147483648 && sign == -1)
 		error_end (1);
-	else if (res > 2147483648 && sign == 1)
+	else if (res > 2147483647 && sign == 1)
 		error_end (1);
 }
 
