@@ -6,30 +6,39 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 21:38:46 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 15:26:58 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+// if (!ft_isalnum(map_str[i][j]) && !space(map_str[i][j]))
+// 	error_end(2);
+		
 static void	map_check(t_map_info *map)
 {
 	int	i;
 	int	j;
+	int	f;
 
 	i = -1;
 	while (++i < map->height)
 	{
+		f = 0;
 		j = -1;
 		while (++j < map->width)
 		{
+			if (map->mapa[i][j].sym == '1')
+				f = 1;
 			if (map->mapa[i][j].sym == 'e')
 				neighbor(map, i, j);
-			else if (((!i || i == (map->width - 1)) && \
+			else if (((!i || i == (map->height - 1)) && \
 				map->mapa[i][j].sym == '0') || ((!j || j == (map->width - 1)) \
 				&& map->mapa[i][j].sym == '0'))
 				error_end(2);
 		}
+		if (!f)
+			error_end(1);
 	}
 }
 
