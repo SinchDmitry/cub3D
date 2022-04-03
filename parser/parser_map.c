@@ -6,15 +6,12 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/03 15:26:58 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 16:05:13 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-// if (!ft_isalnum(map_str[i][j]) && !space(map_str[i][j]))
-// 	error_end(2);
-		
 static void	map_check(t_map_info *map)
 {
 	int	i;
@@ -63,7 +60,6 @@ static int	slot_check(t_data_mlx *data, char **map_str, int i, int j)
 	return (f);
 }
 
-/* f - player on map flag */
 void	map_create(t_data_mlx *data, char **map_str)
 {
 	int	i;

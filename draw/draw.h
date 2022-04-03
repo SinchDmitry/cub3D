@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:55:55 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 21:35:36 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/03 17:13:40 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void			init_door_pix(t_data_mlx *data, int x, int door_state);
 void			init_sprites(t_data_mlx *data);
 void			put_weapon_image(t_data_mlx *data);
 void			check_sprite_position(t_data_mlx *data);
+void			check_obj_in_map(t_data_mlx *data, t_spr_tex *tmp_img);
 void			draw_sprite(t_data_mlx *data, t_spr_tex *img, t_cost_tex *cost);
 
 /* textures */

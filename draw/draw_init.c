@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:26:13 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 23:13:38 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 17:32:22 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ static void	init_doors(t_data_mlx *data)
 	tmp_img = data->am_s->door_img;
 	while (tmp_img)
 	{
+		if (data->map->mapa[(int)tmp_img->x][(int)tmp_img->y].sym == 'e' || \
+			data->map->mapa[(int)tmp_img->x][(int)tmp_img->y].sym == '1')
+			error_end(2);
 		data->map->mapa[(int)tmp_img->x][(int)tmp_img->y].door = 1;
 		data->map->mapa[(int)tmp_img->x][(int)tmp_img->y].door_state = 0;
 		tmp_img = tmp_img->next;

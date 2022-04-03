@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprite_check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:58:06 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/03 15:33:29 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/03 17:35:04 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	attack_weapon(t_data_mlx *data, t_spr_tex *img, int size)
 		i--;
 		draw_line(data, bullet, RED_COL);
 	}
-	if(img)
+	if (img)
 		action_among(data, img, size);
 }
 
@@ -103,8 +103,7 @@ static void	check_computer(t_data_mlx *data)
 			if (j == 4)
 				j = 0;
 		}
-		
-			draw_sprite(data,tmp_img, data->am_s->comp_cost);
+		draw_sprite(data, tmp_img, data->am_s->comp_cost);
 		if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
 			attack_weapon(data, tmp_img, FULL_SIZE);
 		tmp_img = tmp_img->next;

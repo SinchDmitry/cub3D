@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:04:49 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 21:35:34 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/03 16:09:20 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	draw_play(t_play *play, t_data_mlx *data)
 	float	point_y;
 
 	play->pl_arrow = init_play_arrow("./textures/player_arrow.cub");
-	play->x_textu = play->x *data->map->texture_size;
-	play->y_textu = play->y *data->map->texture_size;
+	play->x_textu = play->x * data->map->texture_size;
+	play->y_textu = play->y * data->map->texture_size;
 	x = play->x_textu -1;
 	while (++x < play->x_textu + 10)
 	{
@@ -71,10 +71,10 @@ void	draw_square(int x, int y, t_data_mlx *data, int color)
 	int	j;
 
 	i = 0;
-	while (x + i < x +data->map->texture_size)
+	while (x + i < x + data->map->texture_size)
 	{
 		j = 0;
-		while (y + j < y +data->map->texture_size)
+		while (y + j < y + data->map->texture_size)
 		{
 			my_mlx_pixel_put(data, x + i, y + j, color);
 			j++;
@@ -88,19 +88,24 @@ void	draw_field(int x, int y, t_data_mlx *data)
 	t_spr_tex	*tmp_img;
 
 	if (data->map->mapa[x][y].sym == '1')
-		draw_square(y *data->map->texture_size, x *data->map->texture_size, data, WALLCOL);
+		draw_square(y * data->map->texture_size, x * \
+			data->map->texture_size, data, WALLCOL);
 	else if (data->map->mapa[x][y].sym == '0')
-		draw_square(y *data->map->texture_size, x *data->map->texture_size, data, FLOORCOL);
+		draw_square(y * data->map->texture_size, x * \
+			data->map->texture_size, data, FLOORCOL);
 	if (data->map->mapa[x][y].door == 1)
-		draw_square(y *data->map->texture_size, x *data->map->texture_size, data, BLUE_COL);
+		draw_square(y * data->map->texture_size, x * \
+			data->map->texture_size, data, BLUE_COL);
 	tmp_img = data->am_s->spr_img;
 	while (tmp_img)
 	{	
 		if (!tmp_img->dead)
-			draw_square((int)tmp_img->x *data->map->texture_size, (int)tmp_img->y *data->map->texture_size, \
+			draw_square((int)tmp_img->x * data->map->texture_size, \
+				(int)tmp_img->y * data->map->texture_size, \
 				data, RED_COL);
 		else
-			draw_square((int)tmp_img->x *data->map->texture_size, (int)tmp_img->y *data->map->texture_size, \
+			draw_square((int)tmp_img->x * data->map->texture_size, \
+				(int)tmp_img->y * data->map->texture_size, \
 				data, GREEN_COL);
 		tmp_img = tmp_img->next;
 	}

@@ -6,11 +6,22 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 18:43:08 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 18:09:20 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 17:33:23 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
+
+void	check_obj_in_map(t_data_mlx *data, t_spr_tex *tmp_img)
+{
+	while (tmp_img)
+	{
+		if (data->map->mapa[(int)tmp_img->y][(int)tmp_img->x].sym == 'e' || \
+			data->map->mapa[(int)tmp_img->y][(int)tmp_img->x].sym == '1')
+			error_end(2);
+		tmp_img = tmp_img->next;
+	}
+}
 
 static void	calc_sprite_data(t_data_mlx *data, t_spr_tex *img)
 {

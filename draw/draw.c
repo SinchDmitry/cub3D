@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:19:11 by utygett           #+#    #+#             */
-/*   Updated: 2022/04/02 23:12:35 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/03 17:35:41 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	end_program(int keycode, t_data_mlx *data)
 void	init_map_texture_size(t_data_mlx *data)
 {
 	int	tmp;
-	int i;
+	int	i;
 
 	i = 0;
 	tmp = data->map->width;
@@ -59,11 +59,13 @@ int	draw(t_data_mlx	*data)
 	data->mouse_x = WIDTH / 2;
 	data->mouse_y = HEIGHT / 2;
 	data->mlx = mlx_init();
-	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Cub3d");
+	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Cub3D");
 	mlx_mouse_move(data->mlx_win, WIDTH / 2, HEIGHT / 2);
 	data->wall_img = ft_calloc_error_end(sizeof(t_wall_tex), 1, P_FRONT);
 	init_map_texture_size(data);
 	init_sprites(data);
+	check_obj_in_map(data, data->am_s->spr_img);
+	check_obj_in_map(data, data->am_s->comp_img);
 	mlx_hook(data->mlx_win, 2, 0, &key_press, data);
 	mlx_hook(data->mlx_win, 3, 0, &key_unpress, data);
 	mlx_hook(data->mlx_win, 17, 0, &end_program, data);
