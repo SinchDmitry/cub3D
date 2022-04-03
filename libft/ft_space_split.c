@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_space_split.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
+/*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:58:02 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 20:46:15 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 15:12:18 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	delall(char	**res, size_t a)
 	free (res);
 }
 
-static char	**to_malloc_str(char **res, char const *s, long i)
+static char	**to_malloc_str(char **res, char const *s, long i, size_t size)
 {
 	size_t	a;
 	long	j;
@@ -51,8 +51,8 @@ static char	**to_malloc_str(char **res, char const *s, long i)
 
 	i = -1;
 	a = 0;
-	while (s[++i])
-	{
+	while (s[++i] && a != size)
+	{	
 		if ((space(s[i]) && !space(s[i + 1])) || (s[i] && !space(s[i]) && !i))
 		{
 			j = i++;
@@ -86,7 +86,7 @@ char	**ft_space_split(char const *s)
 		if (!res)
 			return (NULL);
 		res[f - 1] = NULL;
-		return (to_malloc_str(res, s, i));
+		return (to_malloc_str(res, s, i, f - 1));
 	}
 	res = malloc(sizeof(char *));
 	if (!res)

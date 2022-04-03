@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:54:20 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/03 15:29:00 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 15:40:54 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	param_map(t_data_mlx *data, char **map_str)
 		if (!tmp)
 			error_end(3);
 		save_point(tmp, P_BACK);
-		// while (tmp[++j])
-		// 	save_point(tmp[j], P_FRONT);
+		while (tmp[++j])
+			save_point(tmp[j], P_FRONT);
 		prm = key_compare(data, tmp, map_str[i]);
 		if (prm == -1)
 			data->map->height--;
@@ -41,8 +41,8 @@ int	param_map(t_data_mlx *data, char **map_str)
 	return (i);
 }
 
-/* check width && height && data 
-malloc height + 1, width */
+// check width && height && data 
+// malloc height + 1, width 
 static void	map_struct(t_data_mlx *data, char **map_str)
 {
 	int	i;
@@ -90,6 +90,5 @@ void	parser(t_data_mlx *data, int argc, char **argv, int fd)
 	data->map->fd = fd;
 	data->map->flags = (t_par_f){};
 	map_str = get_line_file(data->map->fd);
-	// save_point(map_str, P_BACK);
 	map_info(data, map_str);
 }

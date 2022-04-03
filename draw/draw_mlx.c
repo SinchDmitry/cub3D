@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:33:52 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 21:35:34 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/03 15:14:36 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,10 @@ int	render_next_frame(t_data_mlx *data)
 	data->frame_num++;
 	check_sprite_position(data);
 	check_door_state(data, data->map->mapa);
-	if (data->map->play.f_map)
-	{
-		draw_fvp(data);
-		draw_objects(data);
-		if (data->map->play.f_minimap)
-			draw_minimap(data);
-	}
+	draw_fvp(data);
+	draw_objects(data);
+	if (data->map->play.f_minimap)
+		draw_minimap(data);
 	render_img(data);
 	check_mouse(data);
 	key_h(data);

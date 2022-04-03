@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:58:06 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/02 18:49:43 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/03 15:33:29 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	check_costume(t_data_mlx *data, t_spr_tex *img, \
 	data->am_s->inv = 1.0 / (data->map->cam.pl_x * data->map->play.dir_y - \
 		data->map->play.dir_x * data->map->cam.pl_y);
 	while (tmp_img)
-	{	
+	{
 		if (tmp_img->shot && !tmp_img->dead)
 		{
 			++tmp_img->c_i;
@@ -85,29 +85,30 @@ static void	check_costume(t_data_mlx *data, t_spr_tex *img, \
 
 static void	check_computer(t_data_mlx *data)
 {
-	static int	i;
 	static int	j;
+	t_spr_tex	*tmp_img;
 
-	
-	if (data->am_s->comp_img && data->am_s->comp_img->shot)
+	tmp_img = data->am_s->comp_img;
+	while (tmp_img)
 	{
-		if (!j)
+		if (tmp_img->shot)
 		{
-			if (i == COMP_COSTUME - 1)
-				i = 0;
-			++i;
+			if (!j)
+			{
+				if (tmp_img->c_i == COMP_COSTUME - 1)
+					tmp_img->c_i = 0;
+				++tmp_img->c_i;
+			}
+			j++;
+			if (j == 4)
+				j = 0;
 		}
-		j++;
-		if (j == 4)
-			j = 0;
+		
+			draw_sprite(data,tmp_img, data->am_s->comp_cost);
+		if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
+			attack_weapon(data, tmp_img, FULL_SIZE);
+		tmp_img = tmp_img->next;
 	}
-	if (data->am_s->comp_img)
-	{
-		data->am_s->comp_img->c_i = i;
-		draw_sprite(data, data->am_s->comp_img, data->am_s->comp_cost);
-	}
-	if (data->mouse_code[MOUSE_LEFT_KEY] == PRESS)
-		attack_weapon(data, data->am_s->comp_img, FULL_SIZE);
 }
 
 void	draw_objects(t_data_mlx *data)
