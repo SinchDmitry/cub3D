@@ -6,7 +6,7 @@
 /*   By: utygett <utygett@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:33:52 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/03 15:14:36 by utygett          ###   ########.fr       */
+/*   Updated: 2022/04/03 15:50:58 by utygett          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	render_img(t_data_mlx *data)
 {
 	static int	i_space;
 
-	if (!data->map->play.f_map)
+	if (data->map->play.f_map)
 	{	
 		++i_space;
 		if (i_space > 39)
