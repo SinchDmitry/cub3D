@@ -6,7 +6,7 @@
 /*   By: aarchiba < aarchiba@student.21-school.r    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 22:21:04 by aarchiba          #+#    #+#             */
-/*   Updated: 2022/04/03 16:05:13 by aarchiba         ###   ########.fr       */
+/*   Updated: 2022/04/03 18:28:08 by aarchiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	map_create(t_data_mlx *data, char **map_str)
 		j = -1;
 		while (map_str[i][++j])
 			f += slot_check(data, map_str, i, j);
+		while (j < data->map->width)
+			data->map->mapa[i][j++].sym = 'e';
 	}
 	if (f != 1)
 		error_end(1);
